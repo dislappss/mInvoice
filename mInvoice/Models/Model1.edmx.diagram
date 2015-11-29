@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1">
-        <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="myinvoice_dbModel.FK_Customers_ToTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="0.75" PointY="1.375" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Customers_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

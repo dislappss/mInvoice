@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mInvoice.Models
 {
@@ -9,13 +11,12 @@ namespace mInvoice.Models
 
     public class ClientsMetadata
     {
-        [ScaffoldColumn(false)]
-        [LocalizedDisplayName("clientsysid")]
+        //[ScaffoldColumn(false)]
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("clientsysid")]
-        public string clientname { get; set; }
+        [LocalizedDisplayName("client")]
+        public int clientname { get; set; }
 
         [Required]
         [LocalizedDisplayName("email")]

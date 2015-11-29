@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace mInvoice.Models
 {
@@ -9,7 +10,8 @@ namespace mInvoice.Models
 
     public class CustomerseMetadata
     {
-    
+        //private DateTime _date = DateTime.Now;
+
         [Editable(false)]
         public int Id { get; set; }
 
@@ -18,7 +20,7 @@ namespace mInvoice.Models
         public string customer_name { get; set; }
 
         [Required]
-        [LocalizedDisplayName("clientsysid")]
+        [LocalizedDisplayName("client")]
         public int clientsysid { get; set; }
 
         [Required]
@@ -27,27 +29,44 @@ namespace mInvoice.Models
         public string email { get; set; }
 
         //[ScaffoldColumn(false)]
-        //[Editable(false)]
-        //[System.Web.Mvc.HiddenInput(DisplayValue = false)]
-        //public byte[] Version { get; set; }
+        [Editable(false)]
+        //[UIHint("Hidden")]
+        private DateTime? _CreatedAt;
+        public DateTime? CreatedAt
+        {
+            get
+            {
+                if (_CreatedAt == null)
+                    _CreatedAt = DateTime.Now;
+                return _CreatedAt;
+            }
+            set
+            {
+                _CreatedAt = value;
+            }
+        }
+        //public System.DateTimeOffset CreatedAt { get { return CreatedAt; } set { CreatedAt = DateTime.Now; } } = DateTime.Now;
 
         //[ScaffoldColumn(false)]
-        //[Editable(false)]
-        //[System.Web.Mvc.HiddenInput(DisplayValue = false)]
-        //public System.DateTimeOffset CreatedAt { get; set; }
-
-        //[ScaffoldColumn(false)]
-        //[Editable(false)]
-        //[System.Web.Mvc.HiddenInput(DisplayValue = false)]
-        //public Nullable<System.DateTimeOffset> UpdatedAt { get; set; }
-
-        //[ScaffoldColumn(false)]
-        //[Editable(false)]
-        //[System.Web.Mvc.HiddenInput(DisplayValue = false)]
-        //public bool Deleted { get; set; }
+        [Editable(false)]
+        //[UIHint("Hidden")]
+        private DateTime? _UpdatedAt;
+        public DateTime? UpdatedAt
+        {
+            get
+            {
+                if (_UpdatedAt == null)
+                    _UpdatedAt = DateTime.Now;
+                return _UpdatedAt;
+            }
+            set
+            {
+                _UpdatedAt = value;
+            }
+        }
     }
 
-   
 
-    
+
+
 }

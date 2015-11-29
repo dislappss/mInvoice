@@ -63,9 +63,9 @@ namespace Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Client ähnelt.
         /// </summary>
-        internal static string clientsysid {
+        internal static string client {
             get {
-                return ResourceManager.GetString("clientsysid", resourceCulture);
+                return ResourceManager.GetString("client", resourceCulture);
             }
         }
         
@@ -75,6 +75,15 @@ namespace Resources {
         internal static string customer {
             get {
                 return ResourceManager.GetString("customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
+        /// </summary>
+        internal static string edit_h2 {
+            get {
+                return ResourceManager.GetString("edit_h2", resourceCulture);
             }
         }
         

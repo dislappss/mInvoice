@@ -14,14 +14,12 @@ namespace mInvoice.Models
     
     public partial class Customers
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string customer_name { get; set; }
         public int clientsysid { get; set; }
         public string email { get; set; }
-        public byte[] Version { get; set; }
-        public System.DateTimeOffset CreatedAt { get; set; }
-        public Nullable<System.DateTimeOffset> UpdatedAt { get; set; }
-        public bool Deleted { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Clients Clients { get; set; }
     }

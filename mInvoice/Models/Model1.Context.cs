@@ -25,7 +25,7 @@ namespace mInvoice.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
     }
 }

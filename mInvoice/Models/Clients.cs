@@ -22,6 +22,8 @@ namespace mInvoice.Models
         public int Id { get; set; }
         public string clientname { get; set; }
         public string email { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual ICollection<Customers> Customers { get; set; }
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,19 +12,19 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clientname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customer_name" Type="nvarchar" MaxLength="100" />
           <Property Name="clientsysid" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
-          <Property Name="Version" Type="binary" MaxLength="8" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
-          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
-          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
         <Association Name="FK_Customers_ToTable">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
@@ -46,37 +46,44 @@
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="myinvoice_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="myinvoice_dbEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="myinvoice_dbModel.Customers" />
+          <EntitySet Name="Clients" EntityType="myinvoice_dbModel.Clients" />
+          <AssociationSet Name="FK_Customers_ToTable" Association="myinvoice_dbModel.FK_Customers_ToTable">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="clientsysid" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Customers" ToRole="Clients" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToTable" FromRole="Clients" ToRole="Customers" />
-        </EntityType>
-        <EntityType Name="Customers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="clientsysid" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
-          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Customers_ToTable" FromRole="Customers" ToRole="Clients" />
+          <Property Name="clientname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Clients" ToRole="Customers" />
         </EntityType>
         <Association Name="FK_Customers_ToTable">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="Id" />
@@ -86,40 +93,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="myinvoice_dbEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="Customers" EntityType="Self.Customers" />
-          <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="myinvoice_dbEntities3">
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
-              <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="clientname" ColumnName="clientname" />
-                <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

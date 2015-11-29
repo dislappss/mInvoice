@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using mInvoice.Models;
 
-namespace mInvoice.Models
+namespace mInvoice.Controllers
 {
     public class CustomersController : Controller
     {
@@ -21,7 +22,7 @@ namespace mInvoice.Models
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -47,10 +48,10 @@ namespace mInvoice.Models
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,Version,CreatedAt,UpdatedAt,Deleted")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt")] Customers customers)
         {
             if (ModelState.IsValid)
-            {
+            {            
                 db.Customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,7 +62,7 @@ namespace mInvoice.Models
         }
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -81,7 +82,7 @@ namespace mInvoice.Models
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,customer_name,clientsysid,email,Version,CreatedAt,UpdatedAt,Deleted")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt")] Customers customers)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +95,7 @@ namespace mInvoice.Models
         }
 
         // GET: Customers/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -111,7 +112,7 @@ namespace mInvoice.Models
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Customers customers = db.Customers.Find(id);
             db.Customers.Remove(customers);
