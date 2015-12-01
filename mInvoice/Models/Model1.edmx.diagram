@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="3" PointY="1.25" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="0.75" PointY="1.375" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_ToTable" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Countries" Width="1.5" PointX="5.375" PointY="1.25" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Customers_Countries" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

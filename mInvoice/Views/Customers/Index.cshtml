@@ -24,7 +24,19 @@
             @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.street)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Clients.clientname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Countries.code)
         </th>
         <th></th>
     </tr>
@@ -44,7 +56,19 @@
             @Html.DisplayFor(modelItem => item.UpdatedAt)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.street)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Clients.clientname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Countries.code)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

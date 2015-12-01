@@ -61,11 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Active ähnelt.
+        /// </summary>
+        internal static string active {
+            get {
+                return ResourceManager.GetString("active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Client ähnelt.
         /// </summary>
         internal static string client {
             get {
                 return ResourceManager.GetString("client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code ähnelt.
+        /// </summary>
+        internal static string code {
+            get {
+                return ResourceManager.GetString("code", resourceCulture);
             }
         }
         
@@ -102,6 +120,15 @@ namespace Resources {
         internal static string err_email {
             get {
                 return ResourceManager.GetString("err_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name ähnelt.
+        /// </summary>
+        internal static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
             }
         }
     }

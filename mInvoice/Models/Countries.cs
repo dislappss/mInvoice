@@ -12,20 +12,18 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customers
+    public partial class Countries
     {
-        public int Id { get; set; }
-        public string customer_name { get; set; }
-        public int clientsysid { get; set; }
-        public string email { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public string zip { get; set; }
-        public string city { get; set; }
-        public string street { get; set; }
-        public int countriesid { get; set; }
+        public Countries()
+        {
+            this.Customers = new HashSet<Customers>();
+        }
     
-        public virtual Clients Clients { get; set; }
-        public virtual Countries Countries { get; set; }
+        public int Id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public bool active { get; set; }
+    
+        public virtual ICollection<Customers> Customers { get; set; }
     }
 }

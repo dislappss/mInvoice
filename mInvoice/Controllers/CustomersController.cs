@@ -17,7 +17,7 @@ namespace mInvoice.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.Clients);
+            var customers = db.Customers.Include(c => c.Clients).Include(c => c.Countries);
             return View(customers.ToList());
         }
 
@@ -40,6 +40,7 @@ namespace mInvoice.Controllers
         public ActionResult Create()
         {
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname");
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt,zip,city,street,countriesid")] Customers customers)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +59,7 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
             return View(customers);
         }
 
@@ -74,6 +76,7 @@ namespace mInvoice.Controllers
                 return HttpNotFound();
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
             return View(customers);
         }
 
@@ -82,7 +85,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt,zip,city,street,countriesid")] Customers customers)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
             return View(customers);
         }
 
