@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mInvoice.Models
 {
@@ -10,8 +12,6 @@ namespace mInvoice.Models
 
     public class CustomerseMetadata
     {
-        //private DateTime _date = DateTime.Now;
-
         [Editable(false)]
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace mInvoice.Models
         public string customer_name { get; set; }
 
         [Required]
-        [LocalizedDisplayName("client")]
+        [LocalizedDisplayName("client")]       
         public int clientsysid { get; set; }
 
         [Required]
@@ -28,7 +28,7 @@ namespace mInvoice.Models
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessageResourceType = typeof(Resources.Resource), ErrorMessageResourceName = "err_email")]
         public string email { get; set; }
 
-        //[ScaffoldColumn(false)]
+        [ScaffoldColumn(false)]
         [Editable(false)]
         //[UIHint("Hidden")]
         private DateTime? _CreatedAt;
@@ -44,10 +44,9 @@ namespace mInvoice.Models
             {
                 _CreatedAt = value;
             }
-        }
-        //public System.DateTimeOffset CreatedAt { get { return CreatedAt; } set { CreatedAt = DateTime.Now; } } = DateTime.Now;
+        }   
 
-        //[ScaffoldColumn(false)]
+        [ScaffoldColumn(false)]
         [Editable(false)]
         //[UIHint("Hidden")]
         private DateTime? _UpdatedAt;

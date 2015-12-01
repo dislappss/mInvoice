@@ -11,7 +11,7 @@ namespace mInvoice.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Clients
     {
         public Clients()
@@ -24,7 +24,7 @@ namespace mInvoice.Models
         public string email { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-    
+         
         public virtual ICollection<Customers> Customers { get; set; }
     }
 }

@@ -11,11 +11,12 @@ namespace mInvoice.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Customers
     {
         public int Id { get; set; }
-        public string customer_name { get; set; }
+        public string customer_name { get; set; }   
         public int clientsysid { get; set; }
         public string email { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }

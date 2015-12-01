@@ -51,7 +51,7 @@ namespace mInvoice.Controllers
         public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt")] Customers customers)
         {
             if (ModelState.IsValid)
-            {            
+            {
                 db.Customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Index");
