@@ -15,15 +15,15 @@ namespace mInvoice.Models
     public partial class Customers
     {
         public int Id { get; set; }
-        public string customer_name { get; set; }
         public int clientsysid { get; set; }
+        public string customer_name { get; set; }
+        public int countriesid { get; set; }
         public string email { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string zip { get; set; }
         public string city { get; set; }
         public string street { get; set; }
-        public int countriesid { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Countries Countries { get; set; }

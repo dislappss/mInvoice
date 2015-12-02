@@ -20,8 +20,8 @@ namespace mInvoice.Models
         }
     
         public int Id { get; set; }
-        public string code { get; set; }
         public string name { get; set; }
+        public string code { get; set; }
         public bool active { get; set; }
     
         public virtual ICollection<Customers> Customers { get; set; }

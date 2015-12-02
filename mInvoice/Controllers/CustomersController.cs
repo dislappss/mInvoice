@@ -39,8 +39,8 @@ namespace mInvoice.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname");
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code");
+            ViewBag.clientsysid = new SelectList(db.Clients.OrderByDescending(s => s.clientname), "Id", "clientname");
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
             return View(customers);
         }
 
@@ -76,7 +76,7 @@ namespace mInvoice.Controllers
                 return HttpNotFound();
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
             return View(customers);
         }
 
@@ -94,7 +94,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "code", customers.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
             return View(customers);
         }
 

@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die City ähnelt.
+        /// </summary>
+        internal static string city {
+            get {
+                return ResourceManager.GetString("city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Client ähnelt.
         /// </summary>
         internal static string client {
@@ -79,11 +88,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Code ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Country Code ähnelt.
         /// </summary>
-        internal static string code {
+        internal static string country_code {
             get {
-                return ResourceManager.GetString("code", resourceCulture);
+                return ResourceManager.GetString("country_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Country Name ähnelt.
+        /// </summary>
+        internal static string country_name {
+            get {
+                return ResourceManager.GetString("country_name", resourceCulture);
             }
         }
         
@@ -124,11 +142,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Street ähnelt.
         /// </summary>
-        internal static string name {
+        internal static string street {
             get {
-                return ResourceManager.GetString("name", resourceCulture);
+                return ResourceManager.GetString("street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ZIP ähnelt.
+        /// </summary>
+        internal static string zip {
+            get {
+                return ResourceManager.GetString("zip", resourceCulture);
             }
         }
     }

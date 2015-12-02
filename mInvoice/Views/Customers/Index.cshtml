@@ -18,12 +18,6 @@
             @Html.DisplayNameFor(model => model.email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.zip)
         </th>
         <th>
@@ -32,11 +26,17 @@
         <th>
             @Html.DisplayNameFor(model => model.street)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Clients.clientname)
+        @*<th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Countries.code)
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Clients.clientname)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Countries.name)
         </th>
         <th></th>
     </tr>
@@ -50,12 +50,6 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.zip)
         </td>
         <td>
@@ -64,11 +58,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.street)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Clients.clientname)
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Countries.code)
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Clients.clientname)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Countries.name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -20,8 +20,29 @@ namespace mInvoice.Models
         public string customer_name { get; set; }
 
         [Required]
-        [LocalizedDisplayName("client")]       
+        [LocalizedDisplayName("client")]
         public int clientsysid { get; set; }
+
+        [Required]
+        [LocalizedDisplayName("country_name")]
+        public int countriesid { get; set; }
+
+
+
+        [Required]
+        [LocalizedDisplayName("zip")]
+        public int zip { get; set; }
+
+        [Required]
+        [LocalizedDisplayName("city")]
+        public int city { get; set; }
+
+        [Required]
+        [LocalizedDisplayName("street")]
+        public int street { get; set; }
+
+
+
 
         [Required]
         [LocalizedDisplayName("email")]

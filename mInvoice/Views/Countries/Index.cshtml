@@ -13,10 +13,10 @@
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.code)*@            
-            @Html.ActionLink(@Resources.Resource.code, "Index", new { sortOrder = ViewBag.CodeSortParm })
+            @Html.ActionLink(@Resources.Resource.country_code, "Index", new { sortOrder = ViewBag.CodeSortParm })
         </th>
         <th>
-            @Html.ActionLink(@Resources.Resource.name, "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink(@Resources.Resource.country_name , "Index", new { sortOrder = ViewBag.NameSortParm })
             @*@Html.Raw(string.Format(Resources.Resource.name, Html.ActionLink(@Resources.Resource.name, "Index", new { sortOrder = ViewBag.NameSortParm })))*@
         </th>
         <th>

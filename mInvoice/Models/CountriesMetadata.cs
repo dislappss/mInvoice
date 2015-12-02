@@ -15,11 +15,11 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("code")]
+        [LocalizedDisplayName("country_code")]
         public int code { get; set; }
 
         [Required]
-        [LocalizedDisplayName("name")]       
+        [LocalizedDisplayName("country_name")]       
         public string name { get; set; }
 
         [Required]

@@ -120,11 +120,17 @@
   <data name="active" xml:space="preserve">
     <value>Aktiv</value>
   </data>
+  <data name="city" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
   <data name="client" xml:space="preserve">
     <value>Mandant</value>
   </data>
-  <data name="code" xml:space="preserve">
-    <value>Kode</value>
+  <data name="country_code" xml:space="preserve">
+    <value>Landekode</value>
+  </data>
+  <data name="country_name" xml:space="preserve">
+    <value>Landname</value>
   </data>
   <data name="customer" xml:space="preserve">
     <value>Kunde</value>
@@ -138,7 +144,10 @@
   <data name="err_email" xml:space="preserve">
     <value>Das ist keine gültige E-Mail Adresse.</value>
   </data>
-  <data name="name" xml:space="preserve">
-    <value>Name</value>
+  <data name="street" xml:space="preserve">
+    <value>Strasse</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>PLZ</value>
   </data>
 </root>

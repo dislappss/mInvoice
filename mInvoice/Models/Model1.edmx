@@ -20,8 +20,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Customers">
@@ -29,12 +29,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="customer_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="clientsysid" Type="int" Nullable="false" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="countriesid" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="countriesid" Type="int" Nullable="false" />
           <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
@@ -81,35 +81,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="myinvoice_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="myinvoice_dbEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="myinvoice_dbModel.Customers" />
           <EntitySet Name="Clients" EntityType="myinvoice_dbModel.Clients" />
+          <EntitySet Name="Countries" EntityType="myinvoice_dbModel.Countries" />
+          <EntitySet Name="Customers" EntityType="myinvoice_dbModel.Customers" />
           <AssociationSet Name="FK_Customers_ToTable" Association="myinvoice_dbModel.FK_Customers_ToTable">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <EntitySet Name="Countries" EntityType="myinvoice_dbModel.Countries" />
           <AssociationSet Name="FK_Customers_Countries" Association="myinvoice_dbModel.FK_Customers_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Customers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="clientsysid" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Customers" ToRole="Clients" />
-          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="countriesid" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
-        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="Id" />
@@ -120,6 +103,33 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Clients" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientsysid" Type="Int32" Nullable="false" />
+          <Property Name="customer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="countriesid" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="zip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Customers" ToRole="Clients" />
+          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
         </EntityType>
         <Association Name="FK_Customers_ToTable">
           <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
@@ -133,16 +143,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Countries">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
-        </EntityType>
         <Association Name="FK_Customers_Countries">
           <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="1" />
           <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
@@ -161,22 +161,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="myinvoice_dbEntities3">
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
@@ -192,8 +176,24 @@
             <EntityTypeMapping TypeName="myinvoice_dbModel.Countries">
               <MappingFragment StoreEntitySet="Countries">
                 <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
