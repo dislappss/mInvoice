@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account no. ähnelt.
+        /// </summary>
+        internal static string account_number {
+            get {
+                return ResourceManager.GetString("account_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Active ähnelt.
         /// </summary>
         internal static string active {
@@ -142,11 +151,74 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fax ähnelt.
+        /// </summary>
+        internal static string fax {
+            get {
+                return ResourceManager.GetString("fax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Finance office ähnelt.
+        /// </summary>
+        internal static string finance_office {
+            get {
+                return ResourceManager.GetString("finance_office", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method code ähnelt.
+        /// </summary>
+        internal static string payment_method_code {
+            get {
+                return ResourceManager.GetString("payment_method_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method name ähnelt.
+        /// </summary>
+        internal static string payment_method_name {
+            get {
+                return ResourceManager.GetString("payment_method_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Telefon ähnelt.
+        /// </summary>
+        internal static string phone {
+            get {
+                return ResourceManager.GetString("phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Telefon 2 ähnelt.
+        /// </summary>
+        internal static string phone_2 {
+            get {
+                return ResourceManager.GetString("phone_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Street ähnelt.
         /// </summary>
         internal static string street {
             get {
                 return ResourceManager.GetString("street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die VAT-No. ähnelt.
+        /// </summary>
+        internal static string vat {
+            get {
+                return ResourceManager.GetString("vat", resourceCulture);
             }
         }
         

@@ -23,14 +23,50 @@
         <th>
             @Html.DisplayNameFor(model => model.city)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.street)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedAt)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.customer_no)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.www)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ustd_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finance_office)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.account_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.blz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bank_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bic)
         </th>*@
         @*<th>
             @Html.DisplayNameFor(model => model.Clients.clientname)
@@ -38,6 +74,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Countries.name)
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Payment_method.name)
+        </th>*@
         <th></th>
     </tr>
 
@@ -55,14 +94,50 @@
         <td>
             @Html.DisplayFor(modelItem => item.city)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.street)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_no)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.www)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ustd_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.finance_office)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.account_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.blz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bank_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bic)
         </td>*@
         @*<td>
             @Html.DisplayFor(modelItem => item.Clients.clientname)
@@ -70,6 +145,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Countries.name)
         </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Payment_method.name)
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

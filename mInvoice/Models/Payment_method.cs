@@ -12,22 +12,19 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Countries
+    public partial class Payment_method
     {
-        public Countries()
+        public Payment_method()
         {
             this.Customers = new HashSet<Customers>();
-            this.Clients = new HashSet<Clients>();
         }
     
         public int Id { get; set; }
         public string name { get; set; }
         public string code { get; set; }
-        public bool active { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual ICollection<Customers> Customers { get; set; }
-        public virtual ICollection<Clients> Clients { get; set; }
     }
 }

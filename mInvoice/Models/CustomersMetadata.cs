@@ -6,9 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace mInvoice.Models
 {
     [MetadataType(typeof(CustomerseMetadata))]
-    public partial class Customers
-    {
-    }
+    public partial class Customers  { }
 
     public class CustomerseMetadata
     {
@@ -27,8 +25,6 @@ namespace mInvoice.Models
         [LocalizedDisplayName("country_name")]
         public int countriesid { get; set; }
 
-
-
         [Required]
         [LocalizedDisplayName("zip")]
         public int zip { get; set; }
@@ -40,9 +36,6 @@ namespace mInvoice.Models
         [Required]
         [LocalizedDisplayName("street")]
         public int street { get; set; }
-
-
-
 
         [Required]
         [LocalizedDisplayName("email")]

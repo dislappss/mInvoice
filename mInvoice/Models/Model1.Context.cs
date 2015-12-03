@@ -28,5 +28,6 @@ namespace mInvoice.Models
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Payment_method> Payment_method { get; set; }
     }
 }

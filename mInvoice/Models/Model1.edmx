@@ -12,6 +12,22 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clientname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="countriesid" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="www" Type="nvarchar" MaxLength="250" />
+          <Property Name="ustd_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="finance_office" Type="nvarchar" MaxLength="50" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="blz" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="bic" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture" Type="image" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -23,6 +39,8 @@
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -30,15 +48,49 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clientsysid" Type="int" Nullable="false" />
+          <Property Name="payment_methodid" Type="int" />
+          <Property Name="customer_no" Type="nvarchar" MaxLength="50" />
           <Property Name="customer_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="countriesid" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="www" Type="nvarchar" MaxLength="100" />
+          <Property Name="ustd_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="finance_office" Type="nvarchar" MaxLength="50" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="bic" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="Payment_method">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK_Clients_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customers_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
           <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
@@ -48,6 +100,18 @@
             </Principal>
             <Dependent Role="Customers">
               <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_payment_method">
+          <End Role="Payment_method" Type="Self.Payment_method" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_method">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_methodid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -67,8 +131,17 @@
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customers_Countries" Association="Self.FK_Customers_Countries">
             <End Role="Countries" EntitySet="Countries" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_payment_method" Association="Self.FK_Customers_payment_method">
+            <End Role="Payment_method" EntitySet="Payment_method" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
@@ -92,6 +165,15 @@
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="Payment_method" EntityType="myinvoice_dbModel.Payment_method" />
+          <AssociationSet Name="FK_Clients_Countries" Association="myinvoice_dbModel.FK_Clients_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_payment_method" Association="myinvoice_dbModel.FK_Customers_payment_method">
+            <End Role="Payment_method" EntitySet="Payment_method" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Clients">
           <Key>
@@ -103,6 +185,22 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Clients" ToRole="Customers" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countriesid" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="www" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -113,6 +211,9 @@
           <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Countries" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -130,6 +231,19 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Customers" ToRole="Clients" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
+          <Property Name="payment_methodid" Type="Int32" />
+          <Property Name="customer_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="www" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payment_method" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Customers" ToRole="Payment_method" />
         </EntityType>
         <Association Name="FK_Customers_ToTable">
           <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
@@ -155,6 +269,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Payment_method">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Payment_method" ToRole="Customers" />
+        </EntityType>
+        <Association Name="FK_Clients_Countries">
+          <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_payment_method">
+          <End Type="myinvoice_dbModel.Payment_method" Role="Payment_method" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_method">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_methodid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -164,6 +313,21 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="bic" ColumnName="bic" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
+                <ScalarProperty Name="www" ColumnName="www" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -175,6 +339,8 @@
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Countries">
               <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -185,6 +351,18 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="bic" ColumnName="bic" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
+                <ScalarProperty Name="www" ColumnName="www" />
+                <ScalarProperty Name="phone_2" ColumnName="phone_2" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="customer_no" ColumnName="customer_no" />
+                <ScalarProperty Name="payment_methodid" ColumnName="payment_methodid" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="street" ColumnName="street" />
@@ -194,6 +372,17 @@
                 <ScalarProperty Name="countriesid" ColumnName="countriesid" />
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_method">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_method">
+              <MappingFragment StoreEntitySet="Payment_method">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

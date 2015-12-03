@@ -127,10 +127,10 @@
     <value>Mandant</value>
   </data>
   <data name="country_code" xml:space="preserve">
-    <value>Landekode</value>
+    <value>Landescode</value>
   </data>
   <data name="country_name" xml:space="preserve">
-    <value>Landname</value>
+    <value>Landesname</value>
   </data>
   <data name="customer" xml:space="preserve">
     <value>Kunde</value>
@@ -143,6 +143,12 @@
   </data>
   <data name="err_email" xml:space="preserve">
     <value>Das ist keine gültige E-Mail Adresse.</value>
+  </data>
+  <data name="payment_method_code" xml:space="preserve">
+    <value>Zahlungsartencode</value>
+  </data>
+  <data name="payment_method_name" xml:space="preserve">
+    <value>Zahlungsart</value>
   </data>
   <data name="street" xml:space="preserve">
     <value>Strasse</value>

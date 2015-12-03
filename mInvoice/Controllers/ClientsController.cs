@@ -17,7 +17,8 @@ namespace mInvoice.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            return View(db.Clients.ToList());
+            var clients = db.Clients.Include(c => c.Countries);
+            return View(clients.ToList());
         }
 
         // GET: Clients/Details/5
@@ -38,6 +39,7 @@ namespace mInvoice.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clientname,email")] Clients clients)
+        public ActionResult Create([Bind(Include = "Id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
             return View(clients);
         }
 
@@ -70,6 +73,7 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
             return View(clients);
         }
 
@@ -78,7 +82,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clientname,email")] Clients clients)
+        public ActionResult Edit([Bind(Include = "Id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
             return View(clients);
         }
 

@@ -24,7 +24,23 @@ namespace mInvoice.Models
         public string email { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string owner { get; set; }
+        public string street { get; set; }
+        public string zip { get; set; }
+        public string city { get; set; }
+        public Nullable<int> countriesid { get; set; }
+        public string phone { get; set; }
+        public string fax { get; set; }
+        public string www { get; set; }
+        public string ustd_id { get; set; }
+        public string finance_office { get; set; }
+        public string account_number { get; set; }
+        public string bank_name { get; set; }
+        public string iban { get; set; }
+        public string bic { get; set; }
+        public byte[] picture { get; set; }
     
         public virtual ICollection<Customers> Customers { get; set; }
+        public virtual Countries Countries { get; set; }
     }
 }

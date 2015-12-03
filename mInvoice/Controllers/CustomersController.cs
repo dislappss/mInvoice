@@ -17,7 +17,7 @@ namespace mInvoice.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.Clients).Include(c => c.Countries);
+            var customers = db.Customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method);
             return View(customers.ToList());
         }
 
@@ -39,8 +39,9 @@ namespace mInvoice.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.clientsysid = new SelectList(db.Clients.OrderByDescending(s => s.clientname), "Id", "clientname");
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
+            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname");
+            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name");
+            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt,zip,city,street,countriesid")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +61,7 @@ namespace mInvoice.Controllers
 
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
             ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }
 
@@ -77,6 +79,7 @@ namespace mInvoice.Controllers
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
             ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }
 
@@ -85,7 +88,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,customer_name,clientsysid,email,CreatedAt,UpdatedAt,zip,city,street,countriesid")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +98,7 @@ namespace mInvoice.Controllers
             }
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
             ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }
 

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="account_number" xml:space="preserve">
+    <value>Account no.</value>
+  </data>
   <data name="active" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -144,8 +147,29 @@
   <data name="err_email" xml:space="preserve">
     <value>The Email field is not a valid e-mail address.</value>
   </data>
+  <data name="fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="finance_office" xml:space="preserve">
+    <value>Finance office</value>
+  </data>
+  <data name="payment_method_code" xml:space="preserve">
+    <value>Payment method code</value>
+  </data>
+  <data name="payment_method_name" xml:space="preserve">
+    <value>Payment method name</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="phone_2" xml:space="preserve">
+    <value>Telefon 2</value>
+  </data>
   <data name="street" xml:space="preserve">
     <value>Street</value>
+  </data>
+  <data name="vat" xml:space="preserve">
+    <value>VAT-No.</value>
   </data>
   <data name="zip" xml:space="preserve">
     <value>ZIP</value>
