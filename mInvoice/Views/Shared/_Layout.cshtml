@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
@@ -20,19 +20,23 @@
                 </button>
                 @Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            @*<div class="navbar-collapse collapse">*@
+            <nav>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("Info", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>*@
-
-                    <li>@Html.ActionLink("Mandanten", "Index", "Clients")</li>
-                    <li>@Html.ActionLink("Kunden","Index", "Customers")</li>
-                    <li>@Html.ActionLink("Länder", "Index", "Countries")</li>
-                    <li>@Html.ActionLink("Zahlungsart", "Index", "Payment_method")</li>
+                    <li>
+                        <a href="#">Stammdaten</a>
+                        <ul>
+                            <li>@Html.ActionLink("Mandanten", "Index", "Clients")</li>
+                            <li>@Html.ActionLink("Kunden", "Index", "Customers")</li>
+                            <li>@Html.ActionLink("Länder", "Index", "Countries")</li>
+                            <li>@Html.ActionLink("Zahlungsart", "Index", "Payment_method")</li>
+                        </ul>
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            </nav>
+            @Html.Partial("_LoginPartial")
+            @*</div>*@
         </div>
     </div>
     <div class="container body-content">
@@ -46,5 +50,28 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(function () {
+            $("body nav li").each(function () {
+                if ($(this).find("ul").length > 0) {
+
+                    //show subnav on hover
+                    $(this).mouseenter(function () {
+                        $(this).find("ul").stop(true, true).slideDown();
+                    });
+
+                    //hide submenus on exit
+                    $(this).mouseleave(function () {
+                        $(this).find("ul").stop(true, true).slideUp();
+                    });
+
+                    $(this).find("ul").mousemove(function () {
+                        $(this).stop(true, true).show();
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
