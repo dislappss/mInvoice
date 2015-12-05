@@ -1,4 +1,8 @@
-﻿@model IEnumerable<mInvoice.Models.Countries>
+﻿@*@model IEnumerable<mInvoice.Models.Countries>*@
+@model PagedList.IPagedList<mInvoice.Models.Countries>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
     ViewBag.Title = "Index";
@@ -9,14 +13,24 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Countries", FormMethod.Get))
+
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.code)*@            
-            @Html.ActionLink(@Resources.Resource.country_code, "Index", new { sortOrder = ViewBag.CodeSortParm })
+            @Html.ActionLink(@Resources.Resource.country_code, "Index", new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(@Resources.Resource.country_name , "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink(@Resources.Resource.country_name, "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
             @*@Html.Raw(string.Format(Resources.Resource.name, Html.ActionLink(@Resources.Resource.name, "Index", new { sortOrder = ViewBag.NameSortParm })))*@
         </th>
         <th>
@@ -46,3 +60,9 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
+using PagedList;
 
 namespace mInvoice.Controllers
 {
@@ -15,16 +16,38 @@ namespace mInvoice.Controllers
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 
         // GET: Countries
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(  string sortOrder, string currentFilter, string searchString, int? page)
         {
-           // return View(db.Countries.ToList().OrderBy(p=>p.active));
-
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.CodeSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NameSortParm = sortOrder == "Code" ? "code_desc" : "Code";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "active_desc" : "Active";
 
+           //ViewBag.CurrentSort = sortOrder;
+           //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+           //ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+           if (searchString != null)
+           {
+              page = 1;
+           }
+           else
+           {
+              searchString = currentFilter;
+           }
+
+           ViewBag.CurrentFilter = searchString;
+
+
             var _countries = from s in db.Countries
                            select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                _countries = _countries.Where(s => s.name.Contains(searchString)
+                                       || s.code.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -47,7 +70,12 @@ namespace mInvoice.Controllers
                     _countries = _countries.OrderByDescending(s => s.active);
                     break;
             }
-            return View(_countries.ToList());
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(_countries.ToPagedList(pageNumber, pageSize));
+
+            //return View(_countries.ToList());
         }
 
         // GET: Countries/Details/5
