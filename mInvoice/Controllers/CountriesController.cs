@@ -13,6 +13,10 @@ namespace mInvoice.Controllers
 {
     public class CountriesController : Controller
     {
+        /*         
+         http://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application 
+         */
+
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 
         // GET: Countries

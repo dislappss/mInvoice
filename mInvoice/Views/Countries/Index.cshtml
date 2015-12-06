@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<mInvoice.Models.Countries>*@
+﻿@*@model IEnumerable<mInvoice.Models.Countries>*@ 
 @model PagedList.IPagedList<mInvoice.Models.Countries>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -11,30 +11,27 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Resources.Resource.create_new, "Create")
 </p>
 
 @using (Html.BeginForm("Index", "Countries", FormMethod.Get))
 
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
+        @Resources.Resource.find_by_name @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value=@Resources.Resource.search  />
     </p>
 }
 
 <table class="table">
     <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.code)*@            
+        <th>         
             @Html.ActionLink(@Resources.Resource.country_code, "Index", new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink(@Resources.Resource.country_name, "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-            @*@Html.Raw(string.Format(Resources.Resource.name, Html.ActionLink(@Resources.Resource.name, "Index", new { sortOrder = ViewBag.NameSortParm })))*@
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.active)*@
             @Html.ActionLink(@Resources.Resource.active, "Index", new { sortOrder = ViewBag.ActiveSortParm })
         </th>
         <th></th>
@@ -52,9 +49,9 @@
             @Html.DisplayFor(modelItem => item.active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink(@Resources.Resource.delete, "Edit", new { id=item.Id }) |
+            @Html.ActionLink(@Resources.Resource.details, "Details", new { id=item.Id }) |
+            @Html.ActionLink(@Resources.Resource.delete, "Delete", new { id=item.Id })
         </td>
     </tr>
 }

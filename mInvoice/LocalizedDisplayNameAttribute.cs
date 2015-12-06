@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using mInvoice.App_GlobalResources;
 
 namespace mInvoice
 {
@@ -12,7 +13,7 @@ namespace mInvoice
 
         public static string GetMessageFromResource(string resourceId)
         {
-            return Resources.Resource.ResourceManager.GetString(resourceId);           
+            return Resource.ResourceManager.GetString(resourceId);           
         }
     }
 
@@ -20,7 +21,7 @@ namespace mInvoice
     {
         public static string GetMessageFromResource(string resourceId)
         {
-            return Resources.Resource.ResourceManager.GetString(resourceId);           
+            return Resource.ResourceManager.GetString(resourceId);           
         }
     }
 }

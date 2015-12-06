@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Resources.Resource.create_new, "Create")
 </p>
 <table class="table">
     <tr>
@@ -137,9 +137,9 @@
             @Html.DisplayFor(modelItem => item.Countries.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink(@Resources.Resource.delete, "Edit", new { id=item.Id }) |
+            @Html.ActionLink(@Resources.Resource.details, "Details", new { id=item.Id }) |
+            @Html.ActionLink(@Resources.Resource.delete, "Delete", new { id=item.Id })
         </td>
     </tr>
 }

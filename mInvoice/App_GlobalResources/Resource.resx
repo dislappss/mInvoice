@@ -135,8 +135,20 @@
   <data name="country_name" xml:space="preserve">
     <value>Country Name</value>
   </data>
+  <data name="create_new" xml:space="preserve">
+    <value>Create New</value>
+  </data>
   <data name="customer" xml:space="preserve">
     <value>Customer</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="edit_h2" xml:space="preserve">
     <value>Edit</value>
@@ -153,6 +165,9 @@
   <data name="finance_office" xml:space="preserve">
     <value>Finance office</value>
   </data>
+  <data name="find_by_name" xml:space="preserve">
+    <value>Find by name</value>
+  </data>
   <data name="payment_method_code" xml:space="preserve">
     <value>Payment method code</value>
   </data>
@@ -164,6 +179,9 @@
   </data>
   <data name="phone_2" xml:space="preserve">
     <value>Telefon 2</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="street" xml:space="preserve">
     <value>Street</value>
