@@ -23,12 +23,22 @@ textarea {
     max-width: 280px;
 }
 
+body nav ul:hover {
+    border-bottom: 5px solid #5C87B2;
+}
+
+body nav ul: {
+    border-bottom: 5px solid #5C87B2;
+}
+
+
+
 body nav ul ul {
     display: none;
     position: absolute;
     width: 130%;
-    background: #808080;
-    border-top: 5px solid #5C87B2;
+    background: black;
+    /*border-top: 5px solid #5C87B2;*/
     filter: alpha(opacity=70);
     -moz-opacity: 0.9;
     -khtml-opacity: 0.9;
@@ -39,7 +49,7 @@ body nav ul ul {
 }
 
     body nav ul ul li a {
-        color: white;
+        color: gray;
         display: block;
         line-height: 2em;
         text-decoration: none;       
@@ -51,7 +61,8 @@ body nav ul ul {
     body nav ul ul li:hover > a {
         /*background: #4eb1ff;*/
         color:white;
-        text-decoration:underline;
+        /*text-decoration:underline;*/
+        text-decoration:none;
         text-align: left;
     }
 

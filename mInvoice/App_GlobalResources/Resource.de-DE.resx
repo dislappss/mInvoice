@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="account_number" xml:space="preserve">
+    <value>Konto-Nr.</value>
+  </data>
   <data name="active" xml:space="preserve">
     <value>Aktiv</value>
+  </data>
+  <data name="bank_name" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="bic" xml:space="preserve">
+    <value>BIC</value>
   </data>
   <data name="city" xml:space="preserve">
     <value>Stadt</value>
@@ -138,6 +147,9 @@
   <data name="customer" xml:space="preserve">
     <value>Kunde</value>
   </data>
+  <data name="customer_no" xml:space="preserve">
+    <value>Kunden-Nr.</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
@@ -156,20 +168,44 @@
   <data name="err_email" xml:space="preserve">
     <value>Das ist keine gültige E-Mail Adresse.</value>
   </data>
+  <data name="fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="finance_office" xml:space="preserve">
+    <value>Finanzamt</value>
+  </data>
   <data name="find_by_name" xml:space="preserve">
     <value>Suchen nach Name:</value>
+  </data>
+  <data name="iban" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="owner" xml:space="preserve">
+    <value>Besitzer</value>
+  </data>
+  <data name="payment_methodid" xml:space="preserve">
+    <value>Zahlungsart</value>
   </data>
   <data name="payment_method_code" xml:space="preserve">
     <value>Zahlungsartencode</value>
   </data>
-  <data name="payment_method_name" xml:space="preserve">
-    <value>Zahlungsart</value>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="phone_2" xml:space="preserve">
+    <value>Telefon 2</value>
+  </data>
+  <data name="picture" xml:space="preserve">
+    <value>Bild</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Suchen</value>
   </data>
   <data name="street" xml:space="preserve">
     <value>Strasse</value>
+  </data>
+  <data name="ustd_id" xml:space="preserve">
+    <value>Ust.-Id.</value>
   </data>
   <data name="zip" xml:space="preserve">
     <value>PLZ</value>

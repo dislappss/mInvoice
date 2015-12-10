@@ -43,6 +43,30 @@ namespace mInvoice.Models
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "err_email")]
         public string email { get; set; }
 
+        [LocalizedDisplayName("payment_methodid")]
+        public int payment_methodid { get; set; }
+
+        [LocalizedDisplayName("customer_no")]
+        public int customer_no { get; set; }
+
+        [LocalizedDisplayName("phone")]
+        public int phone { get; set; }
+
+        [LocalizedDisplayName("phone_2")]
+        public int phone_2 { get; set; }
+
+        [LocalizedDisplayName("ustd_id")]
+        public int ustd_id { get; set; }
+
+        [LocalizedDisplayName("finance_office")]
+        public int finance_office { get; set; }
+
+        [LocalizedDisplayName("bank_name")]
+        public int bank_name { get; set; }
+
+        [LocalizedDisplayName("account_number")]
+        public int account_number { get; set; }
+
         [ScaffoldColumn(false)]
         [Editable(false)]
         //[UIHint("Hidden")]
