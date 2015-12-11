@@ -79,6 +79,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Article-No. ähnelt.
+        /// </summary>
+        public static string article_id {
+            get {
+                return ResourceManager.GetString("article_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bank name ähnelt.
         /// </summary>
         public static string bank_name {
@@ -111,6 +120,15 @@ namespace mInvoice.App_GlobalResources {
         public static string client {
             get {
                 return ResourceManager.GetString("client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code ähnelt.
+        /// </summary>
+        public static string code {
+            get {
+                return ResourceManager.GetString("code", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Customer-No. ähnelt.
+        /// </summary>
+        public static string customer_reference {
+            get {
+                return ResourceManager.GetString("customer_reference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
         /// </summary>
         public static string delete {
@@ -169,11 +196,38 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delivery date ähnelt.
+        /// </summary>
+        public static string delivery_date {
+            get {
+                return ResourceManager.GetString("delivery_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
+        /// </summary>
+        public static string description {
+            get {
+                return ResourceManager.GetString("description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Details ähnelt.
         /// </summary>
         public static string details {
             get {
                 return ResourceManager.GetString("details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount ähnelt.
+        /// </summary>
+        public static string discount {
+            get {
+                return ResourceManager.GetString("discount", resourceCulture);
             }
         }
         
@@ -250,11 +304,38 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoice-No. ähnelt.
+        /// </summary>
+        public static string invoice_no {
+            get {
+                return ResourceManager.GetString("invoice_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoice date ähnelt.
+        /// </summary>
+        public static string order_date {
+            get {
+                return ResourceManager.GetString("order_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Owner ähnelt.
         /// </summary>
         public static string owner {
             get {
                 return ResourceManager.GetString("owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method ähnelt.
+        /// </summary>
+        public static string payment_method {
+            get {
+                return ResourceManager.GetString("payment_method", resourceCulture);
             }
         }
         
@@ -304,6 +385,51 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Price ähnelt.
+        /// </summary>
+        public static string price {
+            get {
+                return ResourceManager.GetString("price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Price (netto) ähnelt.
+        /// </summary>
+        public static string price_netto {
+            get {
+                return ResourceManager.GetString("price_netto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity ähnelt.
+        /// </summary>
+        public static string quantity {
+            get {
+                return ResourceManager.GetString("quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity (2) ähnelt.
+        /// </summary>
+        public static string quantity_2 {
+            get {
+                return ResourceManager.GetString("quantity_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity (3) ähnelt.
+        /// </summary>
+        public static string quantity_3 {
+            get {
+                return ResourceManager.GetString("quantity_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Search ähnelt.
         /// </summary>
         public static string search {
@@ -322,11 +448,29 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tax rate ähnelt.
+        /// </summary>
+        public static string tax_rate {
+            get {
+                return ResourceManager.GetString("tax_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die TaxId-No. ähnelt.
         /// </summary>
         public static string ustd_id {
             get {
                 return ResourceManager.GetString("ustd_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Value ähnelt.
+        /// </summary>
+        public static string value {
+            get {
+                return ResourceManager.GetString("value", resourceCulture);
             }
         }
         

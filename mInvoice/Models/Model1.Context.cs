@@ -25,9 +25,13 @@ namespace mInvoice.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Articles> Articles { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Invoice_header> Invoice_header { get; set; }
         public virtual DbSet<Payment_method> Payment_method { get; set; }
+        public virtual DbSet<Tax_rates> Tax_rates { get; set; }
+        public virtual DbSet<Iinvoice_details> Iinvoice_details { get; set; }
     }
 }

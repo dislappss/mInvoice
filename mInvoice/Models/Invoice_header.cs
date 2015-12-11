@@ -12,35 +12,28 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Clients
+    public partial class Invoice_header
     {
-        public Clients()
+        public Invoice_header()
         {
-            this.Customers = new HashSet<Customers>();
+            this.Iinvoice_details = new HashSet<Iinvoice_details>();
         }
     
         public int Id { get; set; }
-        public string clientname { get; set; }
-        public string email { get; set; }
-        public string owner { get; set; }
-        public string street { get; set; }
+        public string invoice_no { get; set; }
+        public System.DateTime order_date { get; set; }
+        public System.DateTime delivery_date { get; set; }
+        public int customers_id { get; set; }
+        public string customer_reference { get; set; }
+        public int countriesid { get; set; }
         public string zip { get; set; }
         public string city { get; set; }
-        public Nullable<int> countriesid { get; set; }
-        public string phone { get; set; }
-        public string fax { get; set; }
-        public string www { get; set; }
-        public string ustd_id { get; set; }
-        public string finance_office { get; set; }
-        public string account_number { get; set; }
-        public string bank_name { get; set; }
-        public string iban { get; set; }
-        public string bic { get; set; }
-        public byte[] picture { get; set; }
+        public string street { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Countries Countries { get; set; }
-        public virtual ICollection<Customers> Customers { get; set; }
+        public virtual Customers Customers { get; set; }
+        public virtual ICollection<Iinvoice_details> Iinvoice_details { get; set; }
     }
 }

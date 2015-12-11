@@ -210,4 +210,49 @@
   <data name="zip" xml:space="preserve">
     <value>PLZ</value>
   </data>
+  <data name="article_id" xml:space="preserve">
+    <value>Artikel-Nr.</value>
+  </data>
+  <data name="customer_reference" xml:space="preserve">
+    <value>Kunden-Nr.</value>
+  </data>
+  <data name="delivery_date" xml:space="preserve">
+    <value>Leistungsdatum</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="discount" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="invoice_no" xml:space="preserve">
+    <value>Rechnungs-Nr.</value>
+  </data>
+  <data name="order_date" xml:space="preserve">
+    <value>Rechn.-Datum</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="price_netto" xml:space="preserve">
+    <value>Preis (netto)</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="quantity_2" xml:space="preserve">
+    <value>Menge (2)</value>
+  </data>
+  <data name="quantity_3" xml:space="preserve">
+    <value>Menge (3)</value>
+  </data>
+  <data name="tax_rate" xml:space="preserve">
+    <value>Tax rate</value>
+  </data>
+  <data name="value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="code" xml:space="preserve">
+    <value>Kürzel</value>
+  </data>
 </root>

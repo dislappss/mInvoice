@@ -65,23 +65,6 @@ namespace mInvoice.Models
         [LocalizedDisplayName("picture")]
         public byte[] picture { get; set; }
 
-
-    //    [email] [nvarchar](50) NOT NULL,
-    //[owner] [nvarchar](50) NULL,
-    //[street] [nvarchar](50) NULL,
-    //[zip] [nvarchar](50) NULL,
-    //[city] [nvarchar](50) NULL,
-    //[countriesid] [int] NULL,
-    //[phone] [nvarchar](50) NULL,
-    //[fax] [nvarchar](50) NULL,
-    //[www] [nvarchar](250) NULL,
-    //[ustd_id] [nvarchar](50) NULL,
-    //[finance_office] [nvarchar](50) NULL,
-    //[account_number] [nvarchar](50) NULL,
-    //[bank_name] [nvarchar](50) NULL,
-    //[iban] [nvarchar](50) NULL,
-    //[bic] [nvarchar](50) NULL,
-    //[picture]
     }
 
    

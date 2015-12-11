@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -17,6 +18,8 @@ namespace mInvoice
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
         }
 
         private void Application_BeginRequest(Object source, EventArgs e)
@@ -31,6 +34,43 @@ namespace mInvoice
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");//culture);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             //}
+        }
+
+
+
+
+    }
+
+
+    public class DecimalModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+            ModelBindingContext bindingContext)
+        {
+            ValueProviderResult valueResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
+            ModelState modelState = new ModelState { Value = valueResult };
+            object actualValue = null;
+            try
+            {
+                if (CultureInfo.CurrentCulture.Name == "de-DE")
+                {
+                    actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
+                }
+                else
+                {
+                    actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+                }
+
+                //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+            }
+            catch (FormatException e)
+            {
+                modelState.Errors.Add(e);
+            }
+
+            bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+            return actualValue;
         }
     }
 }

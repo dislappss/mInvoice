@@ -12,26 +12,22 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Countries
+    public partial class Tax_rates
     {
-        public Countries()
+        public Tax_rates()
         {
-            this.Clients = new HashSet<Clients>();
-            this.Customers = new HashSet<Customers>();
-            this.Customers1 = new HashSet<Customers>();
-            this.Invoice_header = new HashSet<Invoice_header>();
+            this.Articles = new HashSet<Articles>();
+            this.Iinvoice_details = new HashSet<Iinvoice_details>();
         }
     
         public int Id { get; set; }
-        public string name { get; set; }
+        public string description { get; set; }
         public string code { get; set; }
-        public bool active { get; set; }
+        public decimal value { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual ICollection<Clients> Clients { get; set; }
-        public virtual ICollection<Customers> Customers { get; set; }
-        public virtual ICollection<Customers> Customers1 { get; set; }
-        public virtual ICollection<Invoice_header> Invoice_header { get; set; }
+        public virtual ICollection<Articles> Articles { get; set; }
+        public virtual ICollection<Iinvoice_details> Iinvoice_details { get; set; }
     }
 }

@@ -123,6 +123,9 @@
   <data name="active" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="article_id" xml:space="preserve">
+    <value>Article-No.</value>
+  </data>
   <data name="bank_name" xml:space="preserve">
     <value>Bank name</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="client" xml:space="preserve">
     <value>Client</value>
+  </data>
+  <data name="code" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="country_code" xml:space="preserve">
     <value>Country Code</value>
@@ -150,11 +156,23 @@
   <data name="customer_no" xml:space="preserve">
     <value>Customer no.</value>
   </data>
+  <data name="customer_reference" xml:space="preserve">
+    <value>Customer-No.</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="delivery_date" xml:space="preserve">
+    <value>Delivery date</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="discount" xml:space="preserve">
+    <value>Discount</value>
   </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
@@ -180,8 +198,17 @@
   <data name="iban" xml:space="preserve">
     <value>IBAN</value>
   </data>
+  <data name="invoice_no" xml:space="preserve">
+    <value>Invoice-No.</value>
+  </data>
+  <data name="order_date" xml:space="preserve">
+    <value>Invoice date</value>
+  </data>
   <data name="owner" xml:space="preserve">
     <value>Owner</value>
+  </data>
+  <data name="payment_method" xml:space="preserve">
+    <value>Payment method</value>
   </data>
   <data name="payment_method_code" xml:space="preserve">
     <value>Payment method code</value>
@@ -198,14 +225,35 @@
   <data name="picture" xml:space="preserve">
     <value>Picture</value>
   </data>
+  <data name="price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="price_netto" xml:space="preserve">
+    <value>Price (netto)</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="quantity_2" xml:space="preserve">
+    <value>Quantity (2)</value>
+  </data>
+  <data name="quantity_3" xml:space="preserve">
+    <value>Quantity (3)</value>
+  </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="street" xml:space="preserve">
     <value>Street</value>
   </data>
+  <data name="tax_rate" xml:space="preserve">
+    <value>Tax rate</value>
+  </data>
   <data name="ustd_id" xml:space="preserve">
     <value>TaxId-No.</value>
+  </data>
+  <data name="value" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="vat" xml:space="preserve">
     <value>VAT-No.</value>
