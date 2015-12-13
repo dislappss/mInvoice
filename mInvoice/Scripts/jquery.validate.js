@@ -1046,8 +1046,13 @@ $.extend($.validator, {
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/number
-		number: function( value, element ) {
-			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
+		number: function (value, element) {
+
+		    //return true;
+
+		    return this.optional(element) || /^-?\d{1,3}(?:\.\d{3})*(?:,\d+)?$/.test(value) || /^(?:\d*\.\d{1,2}|\d+)$/.test(value);
+
+			//return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/digits
@@ -1189,6 +1194,9 @@ $.extend($.validator, {
 	}
 
 });
+
+
+
 
 // deprecated, use $.validator.format instead
 $.format = $.validator.format;

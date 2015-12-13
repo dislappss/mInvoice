@@ -136,7 +136,7 @@
     <value>Mandant</value>
   </data>
   <data name="country_code" xml:space="preserve">
-    <value>Landescode</value>
+    <value>Land</value>
   </data>
   <data name="country_name" xml:space="preserve">
     <value>Landesname</value>
@@ -214,7 +214,7 @@
     <value>Artikel-Nr.</value>
   </data>
   <data name="customer_reference" xml:space="preserve">
-    <value>Kunden-Nr.</value>
+    <value>Kunden-Ref.-Nr.</value>
   </data>
   <data name="delivery_date" xml:space="preserve">
     <value>Leistungsdatum</value>
@@ -254,5 +254,29 @@
   </data>
   <data name="code" xml:space="preserve">
     <value>Kürzel</value>
+  </data>
+  <data name="basic_claims_data" xml:space="preserve">
+    <value>Stammdaten</value>
+  </data>
+  <data name="clients" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="countries" xml:space="preserve">
+    <value>Länder</value>
+  </data>
+  <data name="customers" xml:space="preserve">
+    <value>Kunden</value>
+  </data>
+  <data name="home_site" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="invoices" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
+  <data name="method_of_payment" xml:space="preserve">
+    <value>Zahlungsarten</value>
+  </data>
+  <data name="rates_of_taxes" xml:space="preserve">
+    <value>Steuersätze</value>
   </data>
 </root>

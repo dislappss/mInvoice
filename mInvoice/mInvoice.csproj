@@ -187,6 +187,7 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Invoice_headerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Payment_methodController.cs" />
     <Compile Include="Controllers\Tax_ratesController.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Models\Invoice_header.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Invoice_headerMetadata.cs" />
     <Compile Include="Models\Tax_rates.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -262,6 +264,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Images\invoice_32_32.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\Model1.edmx">
@@ -344,6 +347,11 @@
     <Content Include="Views\Tax_rates\Details.cshtml" />
     <Content Include="Views\Tax_rates\Edit.cshtml" />
     <Content Include="Views\Tax_rates\Index.cshtml" />
+    <Content Include="Views\Invoice_header\Create.cshtml" />
+    <Content Include="Views\Invoice_header\Delete.cshtml" />
+    <Content Include="Views\Invoice_header\Details.cshtml" />
+    <Content Include="Views\Invoice_header\Edit.cshtml" />
+    <Content Include="Views\Invoice_header\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

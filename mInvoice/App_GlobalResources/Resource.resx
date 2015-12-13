@@ -129,6 +129,9 @@
   <data name="bank_name" xml:space="preserve">
     <value>Bank name</value>
   </data>
+  <data name="basic_claims_data" xml:space="preserve">
+    <value>Basic claims data</value>
+  </data>
   <data name="bic" xml:space="preserve">
     <value>BIC</value>
   </data>
@@ -138,11 +141,17 @@
   <data name="client" xml:space="preserve">
     <value>Client</value>
   </data>
+  <data name="clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
   <data name="code" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
   <data name="country_code" xml:space="preserve">
-    <value>Country Code</value>
+    <value>Country</value>
   </data>
   <data name="country_name" xml:space="preserve">
     <value>Country Name</value>
@@ -153,11 +162,14 @@
   <data name="customer" xml:space="preserve">
     <value>Customer</value>
   </data>
+  <data name="customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
   <data name="customer_no" xml:space="preserve">
     <value>Customer no.</value>
   </data>
   <data name="customer_reference" xml:space="preserve">
-    <value>Customer-No.</value>
+    <value>Customer-Ref.-No.</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
@@ -195,11 +207,20 @@
   <data name="find_by_name" xml:space="preserve">
     <value>Find by name</value>
   </data>
+  <data name="home_site" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="iban" xml:space="preserve">
     <value>IBAN</value>
   </data>
+  <data name="invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
   <data name="invoice_no" xml:space="preserve">
     <value>Invoice-No.</value>
+  </data>
+  <data name="method_of_payment" xml:space="preserve">
+    <value>Methods of payment</value>
   </data>
   <data name="order_date" xml:space="preserve">
     <value>Invoice date</value>
@@ -239,6 +260,9 @@
   </data>
   <data name="quantity_3" xml:space="preserve">
     <value>Quantity (3)</value>
+  </data>
+  <data name="rates_of_taxes" xml:space="preserve">
+    <value>Rates of taxes</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<mInvoice.Models.Invoice_header>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.invoice_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customers.customer_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customers.customer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.delivery_date)
+        </th>
+       
+        @*<th>
+            @Html.DisplayNameFor(model => model.customer_reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zip)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Countries.name)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.invoice_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customers.customer_no)            
+        </td>
+        <td>
+           @Html.DisplayFor(modelItem => item.Customers.customer_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.delivery_date)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.customer_reference)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.zip)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.street)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Countries.name)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

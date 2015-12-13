@@ -1,0 +1,106 @@
+﻿@model mInvoice.Models.Invoice_header
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice_header</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.invoice_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invoice_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.order_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.order_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delivery_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delivery_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer_reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer_reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.street)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Countries.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Countries.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customers.customer_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customers.customer_no)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
