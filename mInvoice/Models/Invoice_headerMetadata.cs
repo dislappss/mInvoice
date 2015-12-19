@@ -1,13 +1,67 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace mInvoice.Models
 {
     [MetadataType(typeof(Invoice_headerMetadata))]
     public partial class Invoice_header
     {
+        public int BirthdateDay { get; set; }
+        public int BirthdateMonth { get; set; }
+        public int BirthdateYear { get; set; }
+
+        public IEnumerable<SelectListItem>order_dateDaySelectList 
+        {
+            get
+            {
+                for (int i = 1; i < 32; i++)
+                {
+                    yield return new SelectListItem
+                    {
+                        Value = i.ToString(),
+                        Text = i.ToString(),
+                        Selected = BirthdateDay == i
+                    };
+                }
+            }
+        }
+
+        public IEnumerable<SelectListItem> order_dateMonthSelectList
+        {
+            get
+            {
+                for (int i = 1; i < 13; i++)
+                {
+                    yield return new SelectListItem
+                    {
+                        Value = i.ToString(),
+                        Text = new DateTime(2000, i, 1).ToString("MMMM"),
+                        Selected = BirthdateMonth == i
+                    };
+                }
+            }
+        }
+
+        public IEnumerable<SelectListItem> order_dateYearSelectList
+        {
+            get
+            {
+                for (int i = 1910; i < DateTime.Now.Year; i++)
+                {
+                    yield return new SelectListItem
+                    {
+                        Value = i.ToString(),
+                        Text = i.ToString(),
+                        Selected = BirthdateYear == i
+                    };
+                }
+            }
+        }
+
     }
 
     public class Invoice_headerMetadata
@@ -19,24 +73,32 @@ namespace mInvoice.Models
         [LocalizedDisplayName("invoice_no")]
         public string invoice_no { get; set; }
 
+
         [Required]
         [LocalizedDisplayName("order_date")]
-        public DateTime order_date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime order_date  { get; set;}
+
+ //public string order_dateDay { get; set; }
+ //public string order_dateMonth { get; set; }
+ //public string order_dateYear { get; set; }
+
 
         [Required]
         [LocalizedDisplayName("delivery_date")]
-        public string delivery_date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime delivery_date { get; set; }
 
         [Required]
         [LocalizedDisplayName("customer")]
         public int customers_id { get; set; }
-      
+
         [LocalizedDisplayName("customer_reference")]
         public string customer_reference { get; set; }
 
         [Required]
         [LocalizedDisplayName("country_code")]
-        public string countriesid { get; set; }
+        public int countriesid { get; set; }
 
         [Required]
         [LocalizedDisplayName("zip")]
@@ -49,9 +111,11 @@ namespace mInvoice.Models
         [Required]
         [LocalizedDisplayName("street")]
         public string street { get; set; }
+
+        
     }
+}
 
    
 
     
-}

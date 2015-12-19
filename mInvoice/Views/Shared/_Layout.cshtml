@@ -63,7 +63,10 @@
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 
+
+
 <script>
+  
     $(function () {
         $("body nav li").each(function () {
             if ($(this).find("ul").length > 0) {
@@ -84,6 +87,10 @@
             }
         });
     });
+
 </script>
+
+
+
 </body>
 </html>

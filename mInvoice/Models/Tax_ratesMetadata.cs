@@ -25,6 +25,7 @@ namespace mInvoice.Models
 
         [Required]
         [LocalizedDisplayName("value")]
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal value { get; set; }
 
         [ScaffoldColumn(false)]

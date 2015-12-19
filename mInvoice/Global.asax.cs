@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using mInvoice.Models;
 
 namespace mInvoice
 {
@@ -20,7 +21,27 @@ namespace mInvoice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal), new mInvoice.DateTimeModelBinder.DecimalModelBinder());
+
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(
+               typeof(DateRequiredAttribute), typeof(SplittedDateRequiredValidator));
+
+            ModelBinders.Binders[typeof(DateTime?)] = new DateTimeModelBinder()
+            {
+                Date = new DateTime(1900, 1, 1), // Date parts are not splitted in the View
+                // (e.g. the whole date is held by a TextBox  with id “xxx_Date”)
+                Time = new DateTime(), // Time parts are not  splitted in the View
+                // (e.g. the whole time  is held by a TextBox with id “xxx_Time”)
+                Day = 1,
+                Month = 1,
+                Year = 1900
+                //,
+                //Hour = 0,
+                //Minute = 0,
+                //Second = 0
+            };
+
+           
         }
 
         private void Application_BeginRequest(Object source, EventArgs e)
@@ -35,74 +56,118 @@ namespace mInvoice
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             //}
-        }
 
 
-
-
-    }
-
-
-    public class PropertyModelBinder : DefaultModelBinder
-    {
-        protected override object GetPropertyValue(ControllerContext controllerContext, ModelBindingContext bindingContext, System.ComponentModel.PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
-        {
-            if (propertyDescriptor.ComponentType == typeof(PropertyModel))
-            {
-                if (propertyDescriptor.Name == "Tax_rates")
-                {
-                    var obj = bindingContext.ValueProvider.GetValue("Price");
-                    return Convert.ToInt32(obj.AttemptedValue.ToString().Replace(",", ""));
-                }
-            }
-            return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
         }
     }
 
-
-    public class DecimalModelBinder :  IModelBinder
+    public class DateTimeModelBinder : IModelBinder
     {
+        public DateTime? Date;
+        public DateTime? Time;
+        public int Day;
+        public int Month;
+        public int Year;
+        public int Hour = 0;
+        public int Minute = 0;
+        public int Second = 0;
+
+
         public object BindModel(ControllerContext controllerContext,
             ModelBindingContext bindingContext)
         {
-            ValueProviderResult valueResult = bindingContext.ValueProvider
-                .GetValue(bindingContext.ModelName);
+            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             ModelState modelState = new ModelState { Value = valueResult };
             object actualValue = null;
-            decimal _tmp_val_dec = -1;
-            NumberStyles style;
-
-            style = NumberStyles.AllowDecimalPoint;
 
             try
             {
                 if (CultureInfo.CurrentCulture.Name == "de-DE" ||
                     CultureInfo.CurrentCulture.Name == "en-US")
                 {
-                    //actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
-                    if (Decimal.TryParse(valueResult.AttemptedValue, style, CultureInfo.CurrentCulture, out _tmp_val_dec))
-                    {
-                        actualValue = _tmp_val_dec;
-                    }
-                    else
-                    {
-                        throw new FormatException(); 
-                    }                    
-                }
-                else
-                {
-                    actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+
+                    actualValue = new DateTime(Year, Month, Day, Hour, Minute, Second);
                 }
 
-                //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
             }
             catch (FormatException e)
+            {
+                modelState.Errors.Add(e);
+            }
+            catch (Exception e)
             {
                 modelState.Errors.Add(e);
             }
 
             bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
             return actualValue;
+        }
+
+
+
+
+        public class PropertyModelBinder : DefaultModelBinder
+        {
+            protected override object GetPropertyValue(ControllerContext controllerContext, ModelBindingContext bindingContext, System.ComponentModel.PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
+            {
+                if (propertyDescriptor.ComponentType == typeof(PropertyModel))
+                {
+                    if (propertyDescriptor.Name == "Tax_rates")
+                    {
+                        var obj = bindingContext.ValueProvider.GetValue("Price");
+                        return Convert.ToInt32(obj.AttemptedValue.ToString().Replace(",", ""));
+                    }
+                }
+                return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
+
+
+            }
+        }
+
+        public class DecimalModelBinder : IModelBinder
+        {
+            public object BindModel(ControllerContext controllerContext,
+                ModelBindingContext bindingContext)
+            {
+                ValueProviderResult valueResult = bindingContext.ValueProvider
+                    .GetValue(bindingContext.ModelName);
+                ModelState modelState = new ModelState { Value = valueResult };
+                object actualValue = null;
+                decimal _tmp_val_dec = -1;
+                NumberStyles style;
+
+                style = NumberStyles.AllowDecimalPoint;
+
+                try
+                {
+                    if (CultureInfo.CurrentCulture.Name == "de-DE" ||
+                        CultureInfo.CurrentCulture.Name == "en-US")
+                    {
+                        //actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
+                        if (Decimal.TryParse(valueResult.AttemptedValue, style, CultureInfo.CurrentCulture, out _tmp_val_dec))
+                        {
+                            actualValue = _tmp_val_dec;
+                        }
+                        else
+                        {
+                            throw new FormatException();
+                        }
+                    }
+                    else
+                    {
+                        actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+                    }
+
+                    //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+                }
+                catch (FormatException e)
+                {
+                    modelState.Errors.Add(e);
+                }
+
+                bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+                return actualValue;
+            }
         }
     }
 }
