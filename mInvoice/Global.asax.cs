@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations.Model;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -21,7 +19,7 @@ namespace mInvoice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());          
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder()
             {
                 Date = DateTime.Now, // Date parts are not splitted in the View
@@ -29,11 +27,11 @@ namespace mInvoice
                 Time = DateTime.Now, // Time parts are not  splitted in the View
                 // (e.g. the whole time  is held by a TextBox with id “xxx_Time”)
                 Day = DateTime.Now.Day,
-                Month = DateTime.Now.Month ,
+                Month = DateTime.Now.Month,
                 Year = DateTime.Now.Year,
-                Hour = DateTime.Now.Hour ,
-                Minute = DateTime.Now.Minute ,
-                Second = DateTime.Now.Second 
+                Hour = DateTime.Now.Hour,
+                Minute = DateTime.Now.Minute,
+                Second = DateTime.Now.Second
             });
 
             DataAnnotationsModelValidatorProvider.RegisterAdapter(

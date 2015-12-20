@@ -52,7 +52,7 @@ body nav ul ul {
         color: gray;
         display: block;
         line-height: 2em;
-        text-decoration: none;       
+        text-decoration: none;
         text-align: left;
         list-style: none;
     }
@@ -60,14 +60,14 @@ body nav ul ul {
 
     body nav ul ul li:hover > a {
         /*background: #4eb1ff;*/
-        color:white;
+        color: white;
         /*text-decoration:underline;*/
-        text-decoration:none;
+        text-decoration: none;
         text-align: left;
     }
 
     body nav ul ul li {
         list-style: none;
-        width:100%
+        width: 100%;
         /*width:200px;*/
     }

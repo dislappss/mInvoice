@@ -73,19 +73,13 @@ namespace mInvoice.Models
         [LocalizedDisplayName("invoice_no")]
         public string invoice_no { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [LocalizedDisplayName("order_date")]
-        public DateTime? order_date
-        {
-            get;
-            set;
-        }
+        public DateTime? order_date   {   get;  set;   }
 
         [LocalizedDisplayName("delivery_date")]
-        public DateTime? delivery_date
-        {
-            get;
-            set;
-        }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        public DateTime? delivery_date  {  get;  set; }
 
         [Required]
         [LocalizedDisplayName("customer")]
