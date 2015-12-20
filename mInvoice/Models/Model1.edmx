@@ -516,8 +516,8 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="invoice_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="delivery_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="order_date" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="customers_id" Type="Int32" Nullable="false" />
           <Property Name="customer_reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="countriesid" Type="Int32" Nullable="false" />

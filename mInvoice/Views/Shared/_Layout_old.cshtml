@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+     <title>@ViewBag.Title - m-Invoices</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        a.logo {
+            background: url(../Images/invoice_32_32.png) no-repeat bottom center;
+            display: block;
+            width: 32px;
+            height: 32px;
+            text-indent: -9999px; /* hides the link text */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "logo" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <nav>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
+                        <li>@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
+                        <li>
+                            <a href="#">@Resources.Resource.basic_claims_data</a>
+                            <ul>
+                                <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - m-Invoices</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+
+        $(function () {
+            $("body nav li").each(function () {
+                if ($(this).find("ul").length > 0) {
+
+                    //show subnav on hover
+                    $(this).mouseenter(function () {
+                        $(this).find("ul").stop(true, true).slideDown();
+                    });
+
+                    //hide submenus on exit
+                    $(this).mouseleave(function () {
+                        $(this).find("ul").stop(true, true).slideUp();
+                    });
+
+                    $(this).find("ul").mousemove(function () {
+                        $(this).stop(true, true).show();
+                    });
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>

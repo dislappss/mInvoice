@@ -21,29 +21,26 @@ namespace mInvoice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ModelBinders.Binders.Add(typeof(decimal), new mInvoice.DateTimeModelBinder.DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());          
+            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder()
+            {
+                Date = DateTime.Now, // Date parts are not splitted in the View
+                // (e.g. the whole date is held by a TextBox  with id “xxx_Date”)
+                Time = DateTime.Now, // Time parts are not  splitted in the View
+                // (e.g. the whole time  is held by a TextBox with id “xxx_Time”)
+                Day = DateTime.Now.Day,
+                Month = DateTime.Now.Month ,
+                Year = DateTime.Now.Year,
+                Hour = DateTime.Now.Hour ,
+                Minute = DateTime.Now.Minute ,
+                Second = DateTime.Now.Second 
+            });
 
             DataAnnotationsModelValidatorProvider.RegisterAdapter(
-               typeof(DateRequiredAttribute), typeof(SplittedDateRequiredValidator));
-
-            ModelBinders.Binders[typeof(DateTime?)] = new DateTimeModelBinder()
-            {
-                Date = new DateTime(1900, 1, 1), // Date parts are not splitted in the View
-                // (e.g. the whole date is held by a TextBox  with id “xxx_Date”)
-                Time = new DateTime(), // Time parts are not  splitted in the View
-                // (e.g. the whole time  is held by a TextBox with id “xxx_Time”)
-                Day = 1,
-                Month = 1,
-                Year = 1900
-                //,
-                //Hour = 0,
-                //Minute = 0,
-                //Second = 0
-            };
-
-           
+                typeof(DateRequiredAttribute), typeof(SplittedDateRequiredValidator));
         }
 
+        
         private void Application_BeginRequest(Object source, EventArgs e)
         {
             HttpApplication application = (HttpApplication)source;
@@ -61,10 +58,56 @@ namespace mInvoice
         }
     }
 
+    public class DecimalModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+            ModelBindingContext bindingContext)
+        {
+            ValueProviderResult valueResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
+            ModelState modelState = new ModelState { Value = valueResult };
+            object actualValue = null;
+            decimal _tmp_val_dec = -1;
+            NumberStyles style;
+
+            style = NumberStyles.AllowDecimalPoint;
+
+            try
+            {
+                if (CultureInfo.CurrentCulture.Name == "de-DE" ||
+                    CultureInfo.CurrentCulture.Name == "en-US")
+                {
+                    //actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
+                    if (Decimal.TryParse(valueResult.AttemptedValue, style, CultureInfo.CurrentCulture, out _tmp_val_dec))
+                    {
+                        actualValue = _tmp_val_dec;
+                    }
+                    else
+                    {
+                        throw new FormatException();
+                    }
+                }
+                else
+                {
+                    actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+                }
+
+                //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
+            }
+            catch (FormatException e)
+            {
+                modelState.Errors.Add(e);
+            }
+
+            bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+            return actualValue;
+        }
+    }
+
     public class DateTimeModelBinder : IModelBinder
     {
-        public DateTime? Date;
-        public DateTime? Time;
+        public DateTime Date ;
+        public DateTime Time;
         public int Day;
         public int Month;
         public int Year;
@@ -76,6 +119,10 @@ namespace mInvoice
         public object BindModel(ControllerContext controllerContext,
             ModelBindingContext bindingContext)
         {
+            var _day = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + ".Day");
+            var _month = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + ".Month");
+            var _year = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + ".Year");
+
             ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             ModelState modelState = new ModelState { Value = valueResult };
             object actualValue = null;
@@ -85,8 +132,19 @@ namespace mInvoice
                 if (CultureInfo.CurrentCulture.Name == "de-DE" ||
                     CultureInfo.CurrentCulture.Name == "en-US")
                 {
-
-                    actualValue = new DateTime(Year, Month, Day, Hour, Minute, Second);
+                    if (!string.IsNullOrEmpty(_year.AttemptedValue)
+                        && !string.IsNullOrEmpty(_month.AttemptedValue)
+                        && !string.IsNullOrEmpty(_day.AttemptedValue))
+                    {
+                        actualValue = new DateTime(
+                            Convert.ToInt32(_year.AttemptedValue),
+                            Convert.ToInt32(_month.AttemptedValue),
+                            Convert.ToInt32(_day.AttemptedValue), Hour, Minute, Second);
+                    }
+                    else
+                    {
+                        actualValue = DateTime.Now; 
+                    }
                 }
 
             }
@@ -124,50 +182,6 @@ namespace mInvoice
             }
         }
 
-        public class DecimalModelBinder : IModelBinder
-        {
-            public object BindModel(ControllerContext controllerContext,
-                ModelBindingContext bindingContext)
-            {
-                ValueProviderResult valueResult = bindingContext.ValueProvider
-                    .GetValue(bindingContext.ModelName);
-                ModelState modelState = new ModelState { Value = valueResult };
-                object actualValue = null;
-                decimal _tmp_val_dec = -1;
-                NumberStyles style;
-
-                style = NumberStyles.AllowDecimalPoint;
-
-                try
-                {
-                    if (CultureInfo.CurrentCulture.Name == "de-DE" ||
-                        CultureInfo.CurrentCulture.Name == "en-US")
-                    {
-                        //actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
-                        if (Decimal.TryParse(valueResult.AttemptedValue, style, CultureInfo.CurrentCulture, out _tmp_val_dec))
-                        {
-                            actualValue = _tmp_val_dec;
-                        }
-                        else
-                        {
-                            throw new FormatException();
-                        }
-                    }
-                    else
-                    {
-                        actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
-                    }
-
-                    //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
-                }
-                catch (FormatException e)
-                {
-                    modelState.Errors.Add(e);
-                }
-
-                bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
-                return actualValue;
-            }
-        }
+       
     }
 }

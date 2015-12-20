@@ -223,6 +223,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Day ähnelt.
+        /// </summary>
+        public static string day {
+            get {
+                return ResourceManager.GetString("day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
         /// </summary>
         public static string delete {
@@ -372,6 +381,15 @@ namespace mInvoice.App_GlobalResources {
         public static string method_of_payment {
             get {
                 return ResourceManager.GetString("method_of_payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Month ähnelt.
+        /// </summary>
+        public static string month {
+            get {
+                return ResourceManager.GetString("month", resourceCulture);
             }
         }
         
@@ -552,6 +570,15 @@ namespace mInvoice.App_GlobalResources {
         public static string vat {
             get {
                 return ResourceManager.GetString("vat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Year ähnelt.
+        /// </summary>
+        public static string year {
+            get {
+                return ResourceManager.GetString("year", resourceCulture);
             }
         }
         

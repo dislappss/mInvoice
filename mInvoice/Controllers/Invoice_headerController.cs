@@ -39,9 +39,17 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Create
         public ActionResult Create()
         {
+            DateTime _now = DateTime.Now;
+
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
             ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no");
-            return View();
+
+            var _new_item = new Invoice_header ();
+
+            _new_item.order_date = _now;
+            _new_item.delivery_date = _now;
+
+            return View(_new_item);
         }
 
         // POST: Invoice_header/Create
@@ -53,6 +61,8 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
                 db.Invoice_header.Add(invoice_header);
                 db.SaveChanges();
                 return RedirectToAction("Index");

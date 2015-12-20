@@ -6,10 +6,11 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+   
     
     <div class="form-horizontal">
         <h4>Invoice_header</h4>
@@ -28,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.order_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.order_date, "Date")
+                @Html.EditorFor(model => model.order_date, "Date", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.order_date, "", new { @class = "text-danger" })
 
 
@@ -38,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.delivery_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.delivery_date, "Date")
+                @Html.EditorFor(model => model.delivery_date, "Date", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.delivery_date, "", new { @class = "text-danger" })
             </div>
         </div>

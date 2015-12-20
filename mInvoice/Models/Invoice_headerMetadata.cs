@@ -73,21 +73,19 @@ namespace mInvoice.Models
         [LocalizedDisplayName("invoice_no")]
         public string invoice_no { get; set; }
 
-
-        [Required]
         [LocalizedDisplayName("order_date")]
-        [DataType(DataType.Date)]
-        public DateTime order_date  { get; set;}
+        public DateTime? order_date
+        {
+            get;
+            set;
+        }
 
- //public string order_dateDay { get; set; }
- //public string order_dateMonth { get; set; }
- //public string order_dateYear { get; set; }
-
-
-        [Required]
         [LocalizedDisplayName("delivery_date")]
-        [DataType(DataType.Date)]
-        public DateTime delivery_date { get; set; }
+        public DateTime? delivery_date
+        {
+            get;
+            set;
+        }
 
         [Required]
         [LocalizedDisplayName("customer")]

@@ -279,4 +279,13 @@
   <data name="rates_of_taxes" xml:space="preserve">
     <value>Steuersätze</value>
   </data>
+  <data name="day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="month" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="year" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
 </root>
