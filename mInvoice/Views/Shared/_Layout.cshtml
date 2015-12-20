@@ -37,58 +37,60 @@
                         <li>@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
                         <li>
                             <a href="#">@Resources.Resource.basic_claims_data</a>
-                        <ul>
-                            <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
-                            <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
-                            <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                            <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
-                            <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            @Html.Partial("_LoginPartial")
+                            <ul>
+                                <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
+                                <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - m-Invoices</p>
-    </footer>
-</div>
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - m-Invoices</p>
+        </footer>
+    </div>
 
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
-<script>
-  
-    $(function () {
-        $("body nav li").each(function () {
-            if ($(this).find("ul").length > 0) {
 
-                //show subnav on hover
-                $(this).mouseenter(function () {
-                    $(this).find("ul").stop(true, true).slideDown();
-                });
+    <script>
 
-                //hide submenus on exit
-                $(this).mouseleave(function () {
-                    $(this).find("ul").stop(true, true).slideUp();
-                });
+        $(function () {
+            $("body nav li").each(function () {
+                if ($(this).find("ul").length > 0) {
 
-                $(this).find("ul").mousemove(function () {
-                    $(this).stop(true, true).show();
-                });
-            }
+                    //show subnav on hover
+                    $(this).mouseenter(function () {
+                        $(this).find("ul").stop(true, true).slideDown();
+                    });
+
+                    //hide submenus on exit
+                    $(this).mouseleave(function () {
+                        $(this).find("ul").stop(true, true).slideUp();
+                    });
+
+                    $(this).find("ul").mousemove(function () {
+                        $(this).stop(true, true).show();
+                    });
+                }
+            });
         });
-    });
 
-</script>
+    </script>
+
+
 
 
 
