@@ -1,0 +1,71 @@
+﻿@model IEnumerable<mInvoice.Models.Invoice_details>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Articles.article_no)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.quantity_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity_3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        
+        @*<th>
+            @Html.DisplayNameFor(model => model.Invoice_header.invoice_no)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Tax_rates.description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Articles.article_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity_3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discount)
+        </td>    
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Invoice_header.invoice_no)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tax_rates.description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

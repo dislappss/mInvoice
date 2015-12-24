@@ -24,11 +24,11 @@ textarea {
 }
 
 body nav ul:hover {
-    border-bottom: 5px solid #5C87B2;
+    /*border-bottom: 5px solid #5C87B2;*/
 }
 
 body nav ul: {
-    border-bottom: 5px solid #5C87B2;
+    /*border-bottom: 5px solid #5C87B2;*/
 }
 
 
@@ -38,7 +38,7 @@ body nav ul ul {
     position: absolute;
     width: 130%;
     background: black;
-    /*border-top: 5px solid #5C87B2;*/
+    border-top: 5px solid #5C87B2;
     filter: alpha(opacity=70);
     -moz-opacity: 0.9;
     -khtml-opacity: 0.9;

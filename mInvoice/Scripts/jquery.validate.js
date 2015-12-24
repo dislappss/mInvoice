@@ -1048,16 +1048,19 @@ $.extend($.validator, {
 		// http://docs.jquery.com/Plugins/Validation/Methods/number
 		number: function (value, element) {
 
-		    //return true;
+		    return true;
 
-		    return this.optional(element) || /^-?\d{1,3}(?:\.\d{3})*(?:,\d+)?$/.test(value) || /^(?:\d*\.\d{1,2}|\d+)$/.test(value);
+            // disl, 24.12.15
+		   // return this.optional(element) || /^-?\d{1,3}(?:\.\d{3})*(?:,\d+)?$/.test(value) || /^(?:\d*\.\d{1,2}|\d+)$/.test(value);
 
 			//return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/digits
 		digits: function( value, element ) {
-			return this.optional(element) || /^\d+$/.test(value);
+		    //return this.optional(element) || /^\d+$/.test(value);
+
+		    return true;
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/creditcard

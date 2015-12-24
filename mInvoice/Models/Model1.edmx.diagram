@@ -12,9 +12,7 @@
         <EntityTypeShape EntityType="myinvoice_dbModel.Invoice_header" Width="1.5" PointX="7.5" PointY="2.875" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Payment_method" Width="1.5" PointX="3" PointY="9.625" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Tax_rates" Width="1.5" PointX="5.25" PointY="9.5" />
-        <EntityTypeShape EntityType="myinvoice_dbModel.Iinvoice_details" Width="1.5" PointX="9.75" PointY="2.875" />
         <AssociationConnector Association="myinvoice_dbModel.FK_articles_tax_rates" />
-        <AssociationConnector Association="myinvoice_dbModel.FK_invoice_details_articles" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Clients_Countries" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_ToTable" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_Countries" />
@@ -22,6 +20,8 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_invoice_header_Countries" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_payment_method" />
         <AssociationConnector Association="myinvoice_dbModel.FK_invoice_header_Customers" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Invoice_details" Width="1.5" PointX="9.75" PointY="5.5" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_invoice_details_articles" />
         <AssociationConnector Association="myinvoice_dbModel.FK_invoice_details_invoice_header" />
         <AssociationConnector Association="myinvoice_dbModel.FK_invoice_details_tax_rates" />
       </Diagram>

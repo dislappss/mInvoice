@@ -79,11 +79,29 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Article ähnelt.
+        /// </summary>
+        public static string article {
+            get {
+                return ResourceManager.GetString("article", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Article-No. ähnelt.
         /// </summary>
         public static string article_id {
             get {
                 return ResourceManager.GetString("article_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Article-no. ähnelt.
+        /// </summary>
+        public static string article_no {
+            get {
+                return ResourceManager.GetString("article_no", resourceCulture);
             }
         }
         

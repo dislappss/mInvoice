@@ -86,8 +86,8 @@
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
-        <EntityType Name="Iinvoice_details">
+Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="Invoice_details">
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="invoice_header_id" />
@@ -231,36 +231,36 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
         </Association>
         <Association Name="FK_invoice_details_articles">
           <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
-          <End Role="Iinvoice_details" Type="Self.Iinvoice_details" Multiplicity="*" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Articles">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Iinvoice_details">
+            <Dependent Role="Invoice_details">
               <PropertyRef Name="article_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_invoice_details_invoice_header">
           <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="1" />
-          <End Role="Iinvoice_details" Type="Self.Iinvoice_details" Multiplicity="*" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Invoice_header">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Iinvoice_details">
+            <Dependent Role="Invoice_details">
               <PropertyRef Name="invoice_header_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_invoice_details_tax_rates">
           <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
-          <End Role="Iinvoice_details" Type="Self.Iinvoice_details" Multiplicity="*" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tax_rates">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Iinvoice_details">
+            <Dependent Role="Invoice_details">
               <PropertyRef Name="tax_rate_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -298,21 +298,21 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Iinvoice_details" EntityType="Self.Iinvoice_details" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Iinvoice_details].[Id] AS [Id], 
-    [Iinvoice_details].[invoice_header_id] AS [invoice_header_id], 
-    [Iinvoice_details].[article_id] AS [article_id], 
-    [Iinvoice_details].[description] AS [description], 
-    [Iinvoice_details].[tax_rate_id] AS [tax_rate_id], 
-    [Iinvoice_details].[quantity] AS [quantity], 
-    [Iinvoice_details].[quantity_2] AS [quantity_2], 
-    [Iinvoice_details].[quantity_3] AS [quantity_3], 
-    [Iinvoice_details].[price_netto] AS [price_netto], 
-    [Iinvoice_details].[discount] AS [discount], 
-    [Iinvoice_details].[CreatedAt] AS [CreatedAt], 
-    [Iinvoice_details].[UpdatedAt] AS [UpdatedAt]
-    FROM [dbo].[Iinvoice_details] AS [Iinvoice_details]</DefiningQuery>
+    [Invoice_details].[Id] AS [Id], 
+    [Invoice_details].[invoice_header_id] AS [invoice_header_id], 
+    [Invoice_details].[article_id] AS [article_id], 
+    [Invoice_details].[description] AS [description], 
+    [Invoice_details].[tax_rate_id] AS [tax_rate_id], 
+    [Invoice_details].[quantity] AS [quantity], 
+    [Invoice_details].[quantity_2] AS [quantity_2], 
+    [Invoice_details].[quantity_3] AS [quantity_3], 
+    [Invoice_details].[price_netto] AS [price_netto], 
+    [Invoice_details].[discount] AS [discount], 
+    [Invoice_details].[CreatedAt] AS [CreatedAt], 
+    [Invoice_details].[UpdatedAt] AS [UpdatedAt]
+    FROM [dbo].[Invoice_details] AS [Invoice_details]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
@@ -340,15 +340,15 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_articles" Association="Self.FK_invoice_details_articles">
             <End Role="Articles" EntitySet="Articles" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_invoice_header" Association="Self.FK_invoice_details_invoice_header">
             <End Role="Invoice_header" EntitySet="Invoice_header" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_tax_rates" Association="Self.FK_invoice_details_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_header_Countries" Association="Self.FK_invoice_header_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -371,14 +371,9 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           <EntitySet Name="Invoice_header" EntityType="myinvoice_dbModel.Invoice_header" />
           <EntitySet Name="Payment_method" EntityType="myinvoice_dbModel.Payment_method" />
           <EntitySet Name="Tax_rates" EntityType="myinvoice_dbModel.Tax_rates" />
-          <EntitySet Name="Iinvoice_details" EntityType="myinvoice_dbModel.Iinvoice_details" />
           <AssociationSet Name="FK_articles_tax_rates" Association="myinvoice_dbModel.FK_articles_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Articles" EntitySet="Articles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_invoice_details_articles" Association="myinvoice_dbModel.FK_invoice_details_articles">
-            <End Role="Articles" EntitySet="Articles" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_Clients_Countries" Association="myinvoice_dbModel.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -408,15 +403,20 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
+          <EntitySet Name="Invoice_details" EntityType="myinvoice_dbModel.Invoice_details" />
+          <AssociationSet Name="FK_invoice_details_articles" Association="myinvoice_dbModel.FK_invoice_details_articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
           <AssociationSet Name="FK_invoice_details_invoice_header" Association="myinvoice_dbModel.FK_invoice_details_invoice_header">
             <End Role="Invoice_header" EntitySet="Invoice_header" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_tax_rates" Association="myinvoice_dbModel.FK_invoice_details_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
-            <End Role="Iinvoice_details" EntitySet="Iinvoice_details" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Articles">
           <Key>
             <PropertyRef Name="Id" />
@@ -429,7 +429,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Articles" ToRole="Tax_rates" />
-          <NavigationProperty Name="Iinvoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Iinvoice_details" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -528,7 +528,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Invoice_header" ToRole="Customers" />
-          <NavigationProperty Name="Iinvoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_header" ToRole="Iinvoice_details" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_header" ToRole="Invoice_details" />
         </EntityType>
         <EntityType Name="Payment_method">
           <Key>
@@ -552,32 +552,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Tax_rates" ToRole="Articles" />
-          <NavigationProperty Name="Iinvoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Tax_rates" ToRole="Iinvoice_details" />
-        </EntityType>
-        <EntityType Name="Iinvoice_details">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="invoice_header_id" />
-            <PropertyRef Name="article_id" />
-            <PropertyRef Name="tax_rate_id" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="price_netto" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="invoice_header_id" Type="Int32" Nullable="false" />
-          <Property Name="article_id" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
-          <Property Name="quantity_2" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="quantity_3" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="price_netto" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
-          <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Iinvoice_details" ToRole="Articles" />
-          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Iinvoice_details" ToRole="Invoice_header" />
-          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Iinvoice_details" ToRole="Tax_rates" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Tax_rates" ToRole="Invoice_details" />
         </EntityType>
         <Association Name="FK_articles_tax_rates">
           <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
@@ -588,18 +563,6 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
             </Principal>
             <Dependent Role="Articles">
               <PropertyRef Name="tax_rate_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_invoice_details_articles">
-          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Iinvoice_details" Role="Iinvoice_details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Iinvoice_details">
-              <PropertyRef Name="article_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -687,26 +650,63 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Invoice_details">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="invoice_header_id" />
+            <PropertyRef Name="article_id" />
+            <PropertyRef Name="tax_rate_id" />
+            <PropertyRef Name="quantity" />
+            <PropertyRef Name="price_netto" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_header_id" Type="Int32" Nullable="false" />
+          <Property Name="article_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="quantity_2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="quantity_3" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="price_netto" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Invoice_details" ToRole="Articles" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_details" ToRole="Invoice_header" />
+          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Invoice_details" ToRole="Tax_rates" />
+        </EntityType>
+        <Association Name="FK_invoice_details_articles">
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_invoice_details_invoice_header">
           <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Iinvoice_details" Role="Iinvoice_details" Multiplicity="*" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Invoice_header">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Iinvoice_details">
+            <Dependent Role="Invoice_details">
               <PropertyRef Name="invoice_header_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_invoice_details_tax_rates">
           <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Iinvoice_details" Role="Iinvoice_details" Multiplicity="*" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tax_rates">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Iinvoice_details">
+            <Dependent Role="Invoice_details">
               <PropertyRef Name="tax_rate_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -842,9 +842,9 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Iinvoice_details' ist kein Pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Iinvoice_details">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Iinvoice_details">
-              <MappingFragment StoreEntitySet="Iinvoice_details">
+          <EntitySetMapping Name="Invoice_details">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_details">
+              <MappingFragment StoreEntitySet="Invoice_details">
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="discount" ColumnName="discount" />

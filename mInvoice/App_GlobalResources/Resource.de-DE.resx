@@ -247,7 +247,7 @@
     <value>Menge (3)</value>
   </data>
   <data name="tax_rate" xml:space="preserve">
-    <value>Tax rate</value>
+    <value>Steuersatz</value>
   </data>
   <data name="value" xml:space="preserve">
     <value>Wert</value>
@@ -287,5 +287,11 @@
   </data>
   <data name="year" xml:space="preserve">
     <value>Jahr</value>
+  </data>
+  <data name="article" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="article_no" xml:space="preserve">
+    <value>Artikel-Nr.</value>
   </data>
 </root>

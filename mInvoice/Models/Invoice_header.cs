@@ -16,7 +16,7 @@ namespace mInvoice.Models
     {
         public Invoice_header()
         {
-            this.Iinvoice_details = new HashSet<Iinvoice_details>();
+            this.Invoice_details = new HashSet<Invoice_details>();
         }
     
         public int Id { get; set; }
@@ -34,6 +34,6 @@ namespace mInvoice.Models
     
         public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }
-        public virtual ICollection<Iinvoice_details> Iinvoice_details { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
     }
 }

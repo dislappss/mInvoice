@@ -197,10 +197,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Invoice_detailsController.cs" />
     <Compile Include="Controllers\Invoice_headerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Payment_methodController.cs" />
@@ -217,10 +219,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\cDate.cs" />
+    <Compile Include="Models\ArticlesMetadata.cs" />
     <Compile Include="Models\DateRequiredAttribute.cs" />
-    <Compile Include="Models\Iinvoice_details.cs">
+    <Compile Include="Models\Invoice_details.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Invoice_detailsMetadata.cs" />
     <Compile Include="Models\Invoice_header.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -297,7 +301,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -374,6 +377,16 @@
     <Content Include="Views\Invoice_header\Edit.cshtml" />
     <Content Include="Views\Invoice_header\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Invoice_details\Create.cshtml" />
+    <Content Include="Views\Invoice_details\Delete.cshtml" />
+    <Content Include="Views\Invoice_details\Details.cshtml" />
+    <Content Include="Views\Invoice_details\Edit.cshtml" />
+    <Content Include="Views\Invoice_details\Index.cshtml" />
+    <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Articles\Details.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

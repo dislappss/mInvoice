@@ -12,7 +12,7 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Iinvoice_details
+    public partial class Invoice_details
     {
         public int Id { get; set; }
         public int invoice_header_id { get; set; }

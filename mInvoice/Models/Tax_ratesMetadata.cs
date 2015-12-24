@@ -16,7 +16,7 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("description")]
+        [LocalizedDisplayName("tax_rate")]
         public string description { get; set; }
 
         [Required]
