@@ -14,7 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Articles.article_no)
         </th>
-        
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.quantity_2)
         </th>
@@ -41,6 +43,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Articles.article_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.quantity_2)

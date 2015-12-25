@@ -1,6 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
 
@@ -35,7 +39,7 @@ namespace mInvoice.Controllers
         // GET: Invoice_details/Create
         public ActionResult Create()
         {
-            ViewBag.article_id = new SelectList(db.Articles, "Id", "description");
+            ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no");
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no");
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description");
             return View();

@@ -96,7 +96,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Pri
             <PropertyRef Name="quantity" />
             <PropertyRef Name="price_netto" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="invoice_header_id" Type="int" Nullable="false" />
           <Property Name="article_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="100" />
@@ -659,7 +659,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Pri
             <PropertyRef Name="quantity" />
             <PropertyRef Name="price_netto" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="invoice_header_id" Type="Int32" Nullable="false" />
           <Property Name="article_id" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />

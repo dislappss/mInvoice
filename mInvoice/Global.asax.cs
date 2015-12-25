@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations.Model;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -82,7 +84,7 @@ namespace mInvoice
                     }
                     else
                     {
-                        throw new FormatException();
+                        throw new FormatException();                        
                     }
                 }
                 else
@@ -93,6 +95,10 @@ namespace mInvoice
                 //actualValue = Convert.ToDecimal(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
             }
             catch (FormatException e)
+            {
+                modelState.Errors.Add(e);
+            }
+            catch (Exception e)
             {
                 modelState.Errors.Add(e);
             }
@@ -182,4 +188,6 @@ namespace mInvoice
 
        
     }
+    
+    
 }

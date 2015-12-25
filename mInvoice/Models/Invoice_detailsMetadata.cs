@@ -13,7 +13,12 @@ namespace mInvoice.Models
     {
         public int Id { get; set; }
         public int invoice_header_id { get; set; }
-        //public int article_id { get; set; }
+
+        [LocalizedDisplayName("article")]
+        public int article_id { get; set; }
+
+        [LocalizedDisplayName("tax_rate")]
+        public int tax_rate_id { get; set; }
 
         [LocalizedDisplayName("description")]
         public string description { get; set; }
