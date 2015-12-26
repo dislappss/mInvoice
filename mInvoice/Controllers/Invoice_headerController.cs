@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
+using PagedList;
 
 namespace mInvoice.Controllers
 {
@@ -15,10 +16,98 @@ namespace mInvoice.Controllers
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 
         // GET: Invoice_header
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var invoice_header = db.Invoice_header.Include(i => i.Countries).Include(i => i.Customers);
-            return View(invoice_header.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.invoice_noSortParm = sortOrder == "invoice_no" ? "invoice_no_desc" : "invoice_no";
+            ViewBag.customers_idSortParm = sortOrder == "customers_id" ? "customers_id_desc" : "customers_id";
+            ViewBag.customerSortParm = sortOrder == "customer" ? "customer_desc" : "customer";
+            ViewBag.order_dateSortParm = sortOrder == "order_date" ? "order_date_desc" : "order_date";
+            ViewBag.delivery_dateSortParm = sortOrder == "delivery_date" ? "delivery_date_desc" : "delivery_date";
+            ViewBag.citySortParm = sortOrder == "city" ? "city_desc" : "city";
+            ViewBag.country_codeSortParm = sortOrder == "country_code" ? "country_code_desc" : "country_code";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            var _headers = from s in db.Invoice_header 
+                             select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                _headers = _headers.Where(s => 
+                    s.invoice_no.Contains(searchString)
+                 || s.customers_id.ToString ().Contains(searchString)
+                 || s.order_date.ToString().Contains(searchString)
+                 || s.delivery_date.ToString().Contains(searchString)
+                 || s.city.ToString().Contains(searchString)
+                 );
+            }
+
+            switch (sortOrder)
+            {
+                case "invoice_no_desc":
+                    _headers = _headers.OrderByDescending(s => s.invoice_no);
+                    break;
+                case "customers_id_desc":
+                    _headers = _headers.OrderByDescending(s => s.customers_id );
+                    break;
+                case "customer_desc":
+                    _headers = _headers.OrderByDescending(s => s.customers_id  );
+                    break;
+                case "order_date_desc":
+                    _headers = _headers.OrderByDescending(s => s.order_date);
+                    break;
+                case "delivery_date_desc":
+                    _headers = _headers.OrderByDescending(s => s.delivery_date);
+                    break;
+                case "city_desc":
+                    _headers = _headers.OrderByDescending(s => s.city);
+                    break;
+
+                case "invoice_no":
+                    _headers = _headers.OrderBy(s => s.invoice_no);
+                    break;
+                case "customer":
+                    _headers = _headers.OrderBy(s => s.customers_id);
+                    break;
+                case "order_date":
+                    _headers = _headers.OrderBy(s => s.order_date);
+                    break;
+                case "delivery_date":
+                    _headers = _headers.OrderBy(s => s.delivery_date);
+                    break;
+                case "city":
+                    _headers = _headers.OrderBy(s => s.city);
+                    break;
+                default:
+                    //_countries = _countries.OrderBy(s => s.name);
+                    _headers = _headers.OrderByDescending(s => s.invoice_no);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(_headers.ToPagedList(pageNumber, pageSize));
+
+
+
+
+
+            //var invoice_header = db.Invoice_header.Include(i => i.Countries).Include(i => i.Customers);
+
+
+
+            //return View(invoice_header.ToList());
         }
 
         // GET: Invoice_header/Details/5

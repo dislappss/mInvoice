@@ -1,4 +1,8 @@
-﻿@model IEnumerable<mInvoice.Models.Invoice_header>
+﻿@model PagedList.IPagedList<mInvoice.Models.Invoice_header>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@*@model IEnumerable<mInvoice.Models.Invoice_header>*@
 
 @{
     ViewBag.Title = "Index";
@@ -9,48 +13,48 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Invoice_header", FormMethod.Get))
+{
+    <p>
+        @Resources.Resource.find_by_name @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value=@Resources.Resource.search />
+    </p>
+}
+
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.invoice_no)
+            @Html.ActionLink(@Resources.Resource.invoice_no, "Index",
+                new { sortOrder = ViewBag.invoice_noSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customers.customer_no)
+            @Html.ActionLink(@Resources.Resource.customer_no, "Index",
+                new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customers.customer_name)
+            @Html.ActionLink(@Resources.Resource.customer, "Index",
+                new { sortOrder = ViewBag.customerSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.order_date)
+            @Html.ActionLink(@Resources.Resource.order_date, "Index",
+                new { sortOrder = ViewBag.order_dateSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.delivery_date)
-        </th>
-       
-        @*<th>
-            @Html.DisplayNameFor(model => model.customer_reference)
+            @Html.ActionLink(@Resources.Resource.delivery_date, "Index",
+                new { sortOrder = ViewBag.delivery_dateSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.zip)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.street)
+            @Html.ActionLink(@Resources.Resource.city, "Index",
+                new { sortOrder = ViewBag.citySortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
+           @Html.ActionLink(@Resources.Resource.country_code, "Index",
+                new { sortOrder = ViewBag.country_codeSortParm })
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Countries.name)
-        </th>
-        
-        <th></th>
     </tr>
+
 
 @foreach (var item in Model) {
     <tr>        

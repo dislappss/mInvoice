@@ -12,6 +12,9 @@ namespace mInvoice.Models
     public partial class Invoice_detailsMetadata
     {
         public int Id { get; set; }
+
+         [LocalizedDisplayName("invoice_no")]
+         [Editable(false)]
         public int invoice_header_id { get; set; }
 
         [LocalizedDisplayName("article")]

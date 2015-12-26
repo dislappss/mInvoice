@@ -85,16 +85,9 @@
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
         <EntityType Name="Invoice_details">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="invoice_header_id" />
-            <PropertyRef Name="article_id" />
-            <PropertyRef Name="tax_rate_id" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="price_netto" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="invoice_header_id" Type="int" Nullable="false" />
@@ -294,26 +287,11 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Pri
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_header" EntityType="Self.Invoice_header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Invoice_details].[Id] AS [Id], 
-    [Invoice_details].[invoice_header_id] AS [invoice_header_id], 
-    [Invoice_details].[article_id] AS [article_id], 
-    [Invoice_details].[description] AS [description], 
-    [Invoice_details].[tax_rate_id] AS [tax_rate_id], 
-    [Invoice_details].[quantity] AS [quantity], 
-    [Invoice_details].[quantity_2] AS [quantity_2], 
-    [Invoice_details].[quantity_3] AS [quantity_3], 
-    [Invoice_details].[price_netto] AS [price_netto], 
-    [Invoice_details].[discount] AS [discount], 
-    [Invoice_details].[CreatedAt] AS [CreatedAt], 
-    [Invoice_details].[UpdatedAt] AS [UpdatedAt]
-    FROM [dbo].[Invoice_details] AS [Invoice_details]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Articles" EntitySet="Articles" />
@@ -653,11 +631,6 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.Invoice_details' ist kein Pri
         <EntityType Name="Invoice_details">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="invoice_header_id" />
-            <PropertyRef Name="article_id" />
-            <PropertyRef Name="tax_rate_id" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="price_netto" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="invoice_header_id" Type="Int32" Nullable="false" />

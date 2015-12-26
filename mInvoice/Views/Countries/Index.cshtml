@@ -1,8 +1,6 @@
-﻿@*@model IEnumerable<mInvoice.Models.Countries>*@ 
-@model PagedList.IPagedList<mInvoice.Models.Countries>
+﻿@model PagedList.IPagedList<mInvoice.Models.Countries>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +13,6 @@
 </p>
 
 @using (Html.BeginForm("Index", "Countries", FormMethod.Get))
-
 {
     <p>
         @Resources.Resource.find_by_name @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -26,13 +23,16 @@
 <table class="table">
     <tr>
         <th>         
-            @Html.ActionLink(@Resources.Resource.country_code, "Index", new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
+            @Html.ActionLink(@Resources.Resource.country_code, "Index", 
+                new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(@Resources.Resource.country_name, "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(@Resources.Resource.country_name, "Index", 
+                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(@Resources.Resource.active, "Index", new { sortOrder = ViewBag.ActiveSortParm })
+            @Html.ActionLink(@Resources.Resource.active, "Index", 
+                new { sortOrder = ViewBag.ActiveSortParm })
         </th>
         <th></th>
     </tr>
