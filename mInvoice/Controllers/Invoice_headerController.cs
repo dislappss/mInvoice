@@ -46,7 +46,8 @@ namespace mInvoice.Controllers
             {
                 _headers = _headers.Where(s => 
                     s.invoice_no.Contains(searchString)
-                 || s.customers_id.ToString ().Contains(searchString)
+                 || s.Customers.customer_no.Contains(searchString)
+                 || s.Customers.customer_name.Contains(searchString)
                  || s.order_date.ToString().Contains(searchString)
                  || s.delivery_date.ToString().Contains(searchString)
                  || s.city.ToString().Contains(searchString)
@@ -91,7 +92,7 @@ namespace mInvoice.Controllers
                     break;
                 default:
                     //_countries = _countries.OrderBy(s => s.name);
-                    _headers = _headers.OrderByDescending(s => s.invoice_no);
+                    _headers = _headers.OrderBy(s => s.invoice_no);
                     break;
             }
 
@@ -99,14 +100,7 @@ namespace mInvoice.Controllers
             int pageNumber = (page ?? 1);
             return View(_headers.ToPagedList(pageNumber, pageSize));
 
-
-
-
-
             //var invoice_header = db.Invoice_header.Include(i => i.Countries).Include(i => i.Customers);
-
-
-
             //return View(invoice_header.ToList());
         }
 

@@ -17,7 +17,7 @@
 @using (Html.BeginForm("Index", "Invoice_header", FormMethod.Get))
 {
     <p>
-        @Resources.Resource.find_by_name @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        @Resources.Resource.search @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value=@Resources.Resource.search />
     </p>
 }
@@ -105,3 +105,9 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
