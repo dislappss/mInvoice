@@ -15,8 +15,8 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("payment_method_code")]
-        public int code { get; set; }
+        [LocalizedDisplayName("payment_method")]
+        public string code { get; set; }
 
         [Required]
         [LocalizedDisplayName("payment_method_name")]       

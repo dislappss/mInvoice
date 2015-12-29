@@ -1,5 +1,5 @@
-﻿<%@ Control Language= "C#" Inherits="System.Web.Mvc.ViewUserControl<System.DateTime>"%>
-<%@ Import Namespace="System.Threading" %> 
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.DateTime>" %>
+<%@ Import Namespace="System.Threading" %>
 <%@ Import Namespace=" System.Web.Mvc" %>
 <%@ Import Namespace=" System.Web.Mvc.Html" %>
 
@@ -12,44 +12,57 @@
         display: table-cell;
     }*/
     .horizontal-style-cell-day {
-       display: table-cell ;
-       width:70px;
+       padding: 5px 6px;
+       /*width:70%;*/
        text-align: center;
     }
     .horizontal-style-cell-month {
-       display: table-cell ;
-       width:120px;
+    padding: 5px 6px;
+       /*width:45%;*/
        text-align: center;
     }
     .horizontal-style-cell-year {
-       display: table-cell ;
-       width:90px;
+        padding: 5px 6px;
+       /*width:90%;*/
        text-align: center;
     }
     
 
-    .
+    
 </style>
 
-<div class="horizontal-style">
-    <%= @Html.DropDownListFor(dateTime => dateTime.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem                          
+<table >
+    <%--<colgroup>
+        <col style="width: 10%">
+        <col style="width: 30%">
+        <col style="width: 15%">
+    </colgroup>--%>
+    <tr>
+        <td><%= @Html.DropDownListFor(dateTime => dateTime.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem                          
     {                              
       Value = i.ToString(),                              
       Text = i.ToString(),                             
       Selected = (i == Model.Day && Model != DateTime.MinValue && Model != DateTime.MaxValue)                         
     }), "-- " + @Resources.Resource.day + " --", htmlAttributes: new { @class = "horizontal-style-cell-day form-control" } ) %>
-
-    <%= @Html.DropDownListFor(dateTime => dateTime.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem                          
+        </td>
+        <td><%= @Html.DropDownListFor(dateTime => dateTime.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem                          
     {                              
       Value = i.ToString(),                              
       Text = Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetMonthName(i),                             
       Selected = (i == Model.Month && Model != DateTime.MinValue && Model != DateTime.MaxValue)
     }), "-- " + @Resources.Resource.month + " --",  htmlAttributes: new { @class = "horizontal-style-cell-month form-control" }) %>
-
-    <%= @Html.DropDownListFor(dateTime => dateTime.Year, Enumerable.Range(DateTime.Now.Year-100, 200).Select(i => new SelectListItem                           
+        </td>
+        <td><%= @Html.DropDownListFor(dateTime => dateTime.Year, Enumerable.Range(DateTime.Now.Year-100, 200).Select(i => new SelectListItem                           
     {                                                             
       Value = i.ToString(),                               
       Text = i.ToString(),                              
       Selected = (i == Model.Year && Model != DateTime.MinValue && Model != DateTime.MaxValue)
-    }), "-- " + @Resources.Resource.year + " --",  htmlAttributes: new { @class = "horizontal-style-cell-year form-control"}) %>
-</div>
+    }), "-- " + @Resources.Resource.year + " --",  htmlAttributes: new { @class = "horizontal-style-cell-year form-control"}) %></td>
+    </tr>
+</table>
+
+<%--<div class="horizontal-style">
+  
+   
+   
+</div>--%>

@@ -63,7 +63,7 @@ namespace mInvoice.Controllers
                     _headers = _headers.OrderByDescending(s => s.customers_id );
                     break;
                 case "customer_desc":
-                    _headers = _headers.OrderByDescending(s => s.customers_id  );
+                    _headers = _headers.OrderByDescending(s => s.Customers.customer_name );
                     break;
                 case "order_date_desc":
                     _headers = _headers.OrderByDescending(s => s.order_date);
@@ -79,6 +79,9 @@ namespace mInvoice.Controllers
                     _headers = _headers.OrderBy(s => s.invoice_no);
                     break;
                 case "customer":
+                    _headers = _headers.OrderBy(s => s.Customers.customer_name);
+                    break;
+                case "customers_id":
                     _headers = _headers.OrderBy(s => s.customers_id);
                     break;
                 case "order_date":

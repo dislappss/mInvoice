@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -11,10 +12,42 @@ namespace mInvoice.Controllers
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 
         // GET: Invoice_details
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+        //    return View(invoice_details.ToList());
+        //}
+
+        public ActionResult Index(int? id)
         {
-            var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
-            return View(invoice_details.ToList());
+            Session["invoice_header_id"] = null;
+
+            if (id >= 0)
+            {
+                Session["invoice_header_id"] = id;
+
+                var result = GetData();               
+
+                return View(result.ToList());
+            }
+            else
+            {
+                var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+                return View(invoice_details.ToList());
+            }
+        }
+
+        private IQueryable<Invoice_details> GetData()
+        {
+            int _invoice_header_id = (int)Session["invoice_header_id"]; 
+                 
+            var invoice_details =
+                from cust in db.Invoice_details
+                where cust.invoice_header_id == _invoice_header_id
+                //orderby cust.Name ascending
+                select cust;
+            var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+            return result;
         }
 
         // GET: Invoice_details/Details/5
@@ -36,7 +69,7 @@ namespace mInvoice.Controllers
         public ActionResult Create()
         {
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no");
-            ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no");
+            ViewBag.invoice_header_id = Session["invoice_header_id"]; // new SelectList(db.Invoice_header, "Id", "invoice_no");
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description");
             return View();
         }
@@ -50,9 +83,14 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+                invoice_details.invoice_header_id = Convert.ToInt32 (Session["invoice_header_id"])  ;
+
                 db.Invoice_details.Add(invoice_details);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                var result = GetData();
+
+                return RedirectToAction("Index", new { id = Session["invoice_header_id"] });
             }
 
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
@@ -90,7 +128,7 @@ namespace mInvoice.Controllers
             {
                 db.Entry(invoice_details).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = Session["invoice_header_id"]} );
             }
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
@@ -121,7 +159,7 @@ namespace mInvoice.Controllers
             Invoice_details invoice_details = db.Invoice_details.Find(id);
             db.Invoice_details.Remove(invoice_details);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = Session["invoice_header_id"] });
         }
 
         protected override void Dispose(bool disposing)

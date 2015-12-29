@@ -1,10 +1,10 @@
 ﻿@model mInvoice.Models.Invoice_details
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = @Resources.Resource.edit;
 }
 
-<h2>Edit</h2>
+<h2>@Resources.Resource.edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Invoice_details</h4>
+        <h4>@Resources.Resource.positions </h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -109,7 +109,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index", new { id = Session["invoice_header_id"] })
 </div>
 
 @section Scripts {

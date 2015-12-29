@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<mInvoice.Models.Customers>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = @Resources.Resource.customers ;
 }
 
-<h2>Index</h2>
+<h2>@Resources.Resource.customers</h2>
 
 <p>
-    @Html.ActionLink(@Resources.Resource.create_new, "Create")
+    @Html.ActionLink(@Resources.Resource.create_new, "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -149,9 +149,13 @@
             @Html.DisplayFor(modelItem => item.Payment_method.name)
         </td>*@
         <td>
-            @Html.ActionLink(@Resources.Resource.edit, "Edit", new { id=item.Id }) |
+            @*@Html.ActionLink(@Resources.Resource.edit, "Edit", new { id=item.Id }) |
             @Html.ActionLink(@Resources.Resource.details, "Details", new { id=item.Id }) |
-            @Html.ActionLink(@Resources.Resource.delete, "Delete", new { id=item.Id })
+            @Html.ActionLink(@Resources.Resource.delete, "Delete", new { id=item.Id })*@
+
+            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) &nbsp;*@
+            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash" })
         </td>
     </tr>
 }

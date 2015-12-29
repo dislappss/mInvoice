@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<mInvoice.Models.Articles>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = @Resources.Resource.article;
 }
 
-<h2>Index</h2>
+<h2>@Resources.Resource.article</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Resources.Resource.create_new, "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.Tax_rates.description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
+           @*@Html.ActionLink("Details", "Details", new { id=item.Id }) &nbsp;*@
+            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash" })
         </td>
     </tr>
 }

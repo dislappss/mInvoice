@@ -1,10 +1,10 @@
 ﻿@model mInvoice.Models.Invoice_header
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = @Resources.Resource.create_new;
 }
 
-<h2>Create</h2>
+<h2>@Resources.Resource.create_new</h2>
 
 
 
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Invoice_header</h4>
+        <h4>@Resources.Resource.invoices </h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -114,7 +114,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index")
 </div>
 
 @section Scripts {

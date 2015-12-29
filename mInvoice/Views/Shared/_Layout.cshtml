@@ -55,13 +55,14 @@
         </footer>
     </div>
 
-   
-
-
-
     @Scripts.Render("~/bundles/jquery")
 
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+   
     <script language="javascript">
+
     $(function () {
         $("body nav li").each(function () {
             if ($(this).find("ul").length > 0) {
@@ -82,13 +83,8 @@
             }
         });
     });
+
     </script>
-
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
-    
 
 </body>
 </html>

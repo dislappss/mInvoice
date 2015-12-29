@@ -1,4 +1,4 @@
-﻿function OnloadForm() {
+﻿$(function () {
     $("body nav li").each(function () {
         if ($(this).find("ul").length > 0) {
 

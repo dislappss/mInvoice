@@ -106,6 +106,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back to List ähnelt.
+        /// </summary>
+        public static string back_to_list {
+            get {
+                return ResourceManager.GetString("back_to_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Bank name ähnelt.
         /// </summary>
         public static string bank_name {
@@ -439,7 +448,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method code ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Method code ähnelt.
         /// </summary>
         public static string payment_method_code {
             get {
@@ -448,7 +457,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment method ähnelt.
         /// </summary>
         public static string payment_method_name {
             get {
@@ -480,6 +489,15 @@ namespace mInvoice.App_GlobalResources {
         public static string picture {
             get {
                 return ResourceManager.GetString("picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Positions ähnelt.
+        /// </summary>
+        public static string positions {
+            get {
+                return ResourceManager.GetString("positions", resourceCulture);
             }
         }
         

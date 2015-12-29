@@ -1,11 +1,10 @@
 ﻿@model mInvoice.Models.Tax_rates
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = @Resources.Resource.edit;
 }
 
-<h2>Edit</h2>
-
+<h2>@Resources.Resource.edit</h2>
 
 @using (Html.BeginForm())
 {
@@ -64,7 +63,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index")
 </div>
 
 @section Scripts {

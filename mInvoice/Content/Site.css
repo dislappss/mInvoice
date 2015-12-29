@@ -71,3 +71,25 @@ body nav ul ul {
         width: 100%;
         /*width:200px;*/
     }
+
+
+.button_icon_add {
+    /*padding-left: 36px;*/
+    background: url('../Images/add_48.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button_icon_delete {
+    /*padding-left: 36px;*/
+    background: url('../Images/delete_48.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button_icon_edit {
+    /*padding-left: 36px;*/
+    background: url('../Images/edit_48.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}

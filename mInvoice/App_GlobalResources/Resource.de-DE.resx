@@ -187,7 +187,7 @@
     <value>Zahlungsart</value>
   </data>
   <data name="payment_method_code" xml:space="preserve">
-    <value>Zahlungsartencode</value>
+    <value>Zahlungscode</value>
   </data>
   <data name="phone" xml:space="preserve">
     <value>Telefon</value>
@@ -293,5 +293,14 @@
   </data>
   <data name="article_no" xml:space="preserve">
     <value>Artikel-Nr.</value>
+  </data>
+  <data name="back_to_list" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="positions" xml:space="preserve">
+    <value>Positionen</value>
+  </data>
+  <data name="payment_method" xml:space="preserve">
+    <value>Zahlungsmethoden</value>
   </data>
 </root>

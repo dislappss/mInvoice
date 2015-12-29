@@ -232,10 +232,10 @@
     <value>Payment method</value>
   </data>
   <data name="payment_method_code" xml:space="preserve">
-    <value>Payment method code</value>
+    <value>Method code</value>
   </data>
   <data name="payment_method_name" xml:space="preserve">
-    <value>Payment method name</value>
+    <value>Payment method</value>
   </data>
   <data name="phone" xml:space="preserve">
     <value>Phone</value>
@@ -299,5 +299,11 @@
   </data>
   <data name="article_no" xml:space="preserve">
     <value>Article-no.</value>
+  </data>
+  <data name="back_to_list" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="positions" xml:space="preserve">
+    <value>Positions</value>
   </data>
 </root>

@@ -102,6 +102,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })&nbsp;
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index", new { id = Session["invoice_header_id"] })
 </p>
