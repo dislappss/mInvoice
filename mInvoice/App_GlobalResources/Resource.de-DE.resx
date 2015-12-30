@@ -303,4 +303,10 @@
   <data name="payment_method" xml:space="preserve">
     <value>Zahlungsmethoden</value>
   </data>
+  <data name="are_you_sure_delete" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie Daten löschen möchten?</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
 </root>

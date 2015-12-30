@@ -79,6 +79,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure you want to delete this? ähnelt.
+        /// </summary>
+        public static string are_you_sure_delete {
+            get {
+                return ResourceManager.GetString("are_you_sure_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Article ähnelt.
         /// </summary>
         public static string article {
@@ -552,6 +561,15 @@ namespace mInvoice.App_GlobalResources {
         public static string rates_of_taxes {
             get {
                 return ResourceManager.GetString("rates_of_taxes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save ähnelt.
+        /// </summary>
+        public static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
             }
         }
         

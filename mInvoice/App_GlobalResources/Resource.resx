@@ -306,4 +306,10 @@
   <data name="positions" xml:space="preserve">
     <value>Positions</value>
   </data>
+  <data name="are_you_sure_delete" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

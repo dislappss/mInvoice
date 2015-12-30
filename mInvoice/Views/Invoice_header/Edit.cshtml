@@ -110,14 +110,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value=@Resources.Resource.save class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(@Resources.Resource.back_to_list, "Index")
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
