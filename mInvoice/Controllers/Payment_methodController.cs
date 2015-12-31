@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
 
 namespace mInvoice.Controllers
 {
-    public class Payment_methodController : Controller
+    public class Payment_methodController : BaseController
     {
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 

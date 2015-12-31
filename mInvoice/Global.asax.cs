@@ -50,8 +50,8 @@ namespace mInvoice
             //if (context.Request.UserLanguages != null && Request.UserLanguages.Length > 0)
             //{
             // culture = Request.UserLanguages[0];
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
-            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+            //Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
+            //Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             //}
 
 

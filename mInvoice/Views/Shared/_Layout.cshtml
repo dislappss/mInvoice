@@ -1,11 +1,29 @@
-﻿<!DOCTYPE html>
+﻿@*@model MvcInternationalization.Models.Person*@
+
+@{
+    //ViewBag.Title = Resources.AddPerson;
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@helper selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked="checked"
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title - m-Invoices</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Styles.Render("~/Content/css")
+
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/css" + (mInvoice.Helpers.CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
     @Scripts.Render("~/bundles/modernizr")
     <style>
         a.logo {
@@ -16,9 +34,8 @@
             text-indent: -9999px; /* hides the link text */
         }
     </style>
-   
-   
 </head>
+
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -26,6 +43,7 @@
                 @Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "logo" })
             </div>
             <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav"></ul>*@
                 <nav>
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
@@ -43,7 +61,26 @@
                         </li>
                     </ul>
                 </nav>
-                @Html.Partial("_LoginPartial")
+
+                @using (Html.BeginForm("SetCulture", "Home"))
+                {
+                    <div class="control-group" style="text-align :right; color:gray; font:small; font-weight:normal; vertical-align:middle">
+                        @*<div class="controls">*@
+                            <label for="en-us">
+                                <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
+                            </label>
+                            <label for="es">
+                                <input name="culture" id="de" value="de-DE" type="radio" @selected("de", culture) /> Deutsch
+                            </label>
+
+                            @Html.Partial("_LoginPartial")
+                        @*</div>*@
+                    </div>
+
+    
+                }
+
+              
             </div>
         </div>
     </div>
@@ -57,32 +94,46 @@
 
     @Scripts.Render("~/bundles/jquery")
 
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/bootstrap" + (mInvoice.Helpers.CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+
     @RenderSection("scripts", required: false)
 
-   
+
     <script language="javascript">
 
-    $(function () {
-        $("body nav li").each(function () {
-            if ($(this).find("ul").length > 0) {
+        $(function () {
+            $("body nav li").each(function () {
+                if ($(this).find("ul").length > 0) {
 
-                //show subnav on hover
-                $(this).mouseenter(function () {
-                    $(this).find("ul").stop(true, true).slideDown();
-                });
+                    //show subnav on hover
+                    $(this).mouseenter(function () {
+                        $(this).find("ul").stop(true, true).slideDown();
+                    });
 
-                //hide submenus on exit
-                $(this).mouseleave(function () {
-                    $(this).find("ul").stop(true, true).slideUp();
-                });
+                    //hide submenus on exit
+                    $(this).mouseleave(function () {
+                        $(this).find("ul").stop(true, true).slideUp();
+                    });
 
-                $(this).find("ul").mousemove(function () {
-                    $(this).stop(true, true).show();
-                });
-            }
+                    $(this).find("ul").mousemove(function () {
+                        $(this).stop(true, true).show();
+                    });
+                }
+            });
+
+
+
+
         });
-    });
+
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
 
     </script>
 

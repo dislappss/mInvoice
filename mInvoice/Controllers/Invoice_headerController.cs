@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
 using PagedList;
 
 namespace mInvoice.Controllers
 {
-    public class Invoice_headerController : Controller
+    public class Invoice_headerController : BaseController
     {
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 

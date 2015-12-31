@@ -6,7 +6,7 @@ using mInvoice.Models;
 
 namespace mInvoice.Controllers
 {
-    public class ArticlesController : Controller
+    public class ArticlesController : BaseController
     {
         private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
 

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using mInvoice.Models;
 using PagedList;
 
 namespace mInvoice.Controllers
 {
-    public class CountriesController : Controller
+    public class CountriesController : BaseController
     {
         /*         
          http://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application 
