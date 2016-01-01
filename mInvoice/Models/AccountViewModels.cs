@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using mInvoice.App_GlobalResources;
 
 namespace mInvoice.Models
 {
@@ -29,11 +30,11 @@ namespace mInvoice.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "code", ResourceType = typeof(Resource))]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Diesen Browser merken?")]
+        [Display(Name = "remember_this_browser", ResourceType = typeof(Resource))]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -42,23 +43,23 @@ namespace mInvoice.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "E-Mail")]
+        [Display(Name = "email", ResourceType = typeof(Resource))]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "E-Mail")]
+        [Display(Name = "email", ResourceType = typeof(Resource))]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Kennwort")]
+        [Display(Name = "password", ResourceType = typeof(Resource))]
         public string Password { get; set; }
 
-        [Display(Name = "Speichern?")]
+        [Display(Name = "is_save", ResourceType = typeof(Resource))]
         public bool RememberMe { get; set; }
     }
 
@@ -66,18 +67,18 @@ namespace mInvoice.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "E-Mail")]
+        [Display(Name = "email", ResourceType = typeof(Resource))]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "\"{0}\" muss mindestens {2} Zeichen lang sein.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Kennwort")]
+        [Display(Name = "password", ResourceType = typeof(Resource))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Kennwort bestätigen")]
-        [Compare("Password", ErrorMessage = "Das Kennwort entspricht nicht dem Bestätigungskennwort.")]
+        [Display(Name = "confirm_password", ResourceType = typeof(Resource))]
+        [Compare("Password", ErrorMessageResourceName = "password_does_not_match", ErrorMessageResourceType = typeof(Resource))]
         public string ConfirmPassword { get; set; }
     }
 
@@ -89,14 +90,14 @@ namespace mInvoice.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "\"{0}\" muss mindestens {2} Zeichen lang sein.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceName = "must_be_at_least", ErrorMessageResourceType = typeof(Resource), MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Kennwort")]
+        [Display(Name = "password", ResourceType = typeof(Resource))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Kennwort bestätigen")]
-        [Compare("Password", ErrorMessage = "Das Kennwort stimmt nicht mit dem Bestätigungskennwort überein.")]
+        [Display(Name = "Kennwort bestätigen", ResourceType = typeof(Resource))]
+        [Compare("Password", ErrorMessageResourceName = "password_does_not_match", ErrorMessageResourceType = typeof(Resource))]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

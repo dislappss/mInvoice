@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using mInvoice.App_GlobalResources;
 
 namespace mInvoice.Models
 {
@@ -16,15 +17,18 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("tax_rate")]
+        // [LocalizedDisplayName("tax_rate")]
+        [Display(Name = "tax_rate", ResourceType = typeof(Resource))]
         public string description { get; set; }
 
         [Required]
-        [LocalizedDisplayName("code")]       
+        // [LocalizedDisplayName("code")]   
+        [Display(Name = "code", ResourceType = typeof(Resource))]
         public string code { get; set; }
 
         [Required]
-        [LocalizedDisplayName("value")]
+        // [LocalizedDisplayName("value")]
+        [Display(Name = "value", ResourceType = typeof(Resource))]
         [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal value { get; set; }
 

@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using mInvoice.App_GlobalResources;
 
 namespace mInvoice.Models
 {
@@ -11,15 +10,17 @@ namespace mInvoice.Models
 
     public class Payment_methodMetadata
     {
-        //[ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]         
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("payment_method")]
+        // [LocalizedDisplayName("shortmark")]
+        [Display(Name = "shortmark", ResourceType = typeof(Resource))]
         public string code { get; set; }
 
         [Required]
-        [LocalizedDisplayName("payment_method_name")]       
+        // [LocalizedDisplayName("payment_method")]     
+        [Display(Name = "payment_method", ResourceType = typeof(Resource))]
         public string name { get; set; }
     }
 

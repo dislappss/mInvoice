@@ -309,4 +309,34 @@
   <data name="save" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="shortmark" xml:space="preserve">
+    <value>Kurzzeichen</value>
+  </data>
+  <data name="confirm_password" xml:space="preserve">
+    <value>Kennwort bestätigen</value>
+  </data>
+  <data name="create_a_new_account" xml:space="preserve">
+    <value>Neues Konto erstellen.</value>
+  </data>
+  <data name="is_save" xml:space="preserve">
+    <value>Speichern?</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="must_be_at_least" xml:space="preserve">
+    <value>"\"{0}\" muss mindestens {2} Zeichen lang sein."</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="password_does_not_match" xml:space="preserve">
+    <value>Das Kennwort entspricht nicht dem Bestätigungskennwort.</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="remember_this_browser" xml:space="preserve">
+    <value>Remember this browser?</value>
+  </data>
 </root>

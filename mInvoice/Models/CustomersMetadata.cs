@@ -15,56 +15,71 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [LocalizedDisplayName("customer")]
+        // [LocalizedDisplayName("customer")]
+        [Display(Name = "customer", ResourceType = typeof(Resource))]
         public string customer_name { get; set; }
 
         [Required]
-        [LocalizedDisplayName("client")]
+        // [LocalizedDisplayName("client")]
+        [Display(Name = "client", ResourceType = typeof(Resource))]
         public int clientsysid { get; set; }
 
         [Required]
-        [LocalizedDisplayName("country_name")]
+        // [LocalizedDisplayName("country_name")]
+        [Display(Name = "country_name", ResourceType = typeof(Resource))]
         public int countriesid { get; set; }
 
         [Required]
-        [LocalizedDisplayName("zip")]
+        // [LocalizedDisplayName("zip")]
+        [Display(Name = "zip", ResourceType = typeof(Resource))]
         public int zip { get; set; }
 
         [Required]
-        [LocalizedDisplayName("city")]
+        // [LocalizedDisplayName("city")]
+        [Display(Name = "city", ResourceType = typeof(Resource))]
         public int city { get; set; }
 
         [Required]
-        [LocalizedDisplayName("street")]
+        // [LocalizedDisplayName("street")]
+        [Display(Name = "street", ResourceType = typeof(Resource))]
         public int street { get; set; }
 
         [Required]
-        [LocalizedDisplayName("email")]
+        // [LocalizedDisplayName("email")]
+        [Display(Name = "email", ResourceType = typeof(Resource))]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "err_email")]
         public string email { get; set; }
 
-        [LocalizedDisplayName("payment_methodid")]
+        // [LocalizedDisplayName("payment_methodid")]
+         [Display(Name = "payment_methodid", ResourceType = typeof(Resource))]
         public int payment_methodid { get; set; }
 
-        [LocalizedDisplayName("customer_no")]
+        // [LocalizedDisplayName("customer_no")]
+         [Display(Name = "customer_no", ResourceType = typeof(Resource))]
         public int customer_no { get; set; }
 
-        [LocalizedDisplayName("phone")]
+        // [LocalizedDisplayName("phone")]
+         [Display(Name = "phone", ResourceType = typeof(Resource))]
         public int phone { get; set; }
 
-        [LocalizedDisplayName("phone_2")]
+        // [LocalizedDisplayName("phone_2")]
+         [Display(Name = "phone_2", ResourceType = typeof(Resource))]
         public int phone_2 { get; set; }
 
-        [LocalizedDisplayName("ustd_id")]
+        // [LocalizedDisplayName("ustd_id")]
+         [Display(Name = "ustd_id", ResourceType = typeof(Resource))]
         public int ustd_id { get; set; }
 
-        [LocalizedDisplayName("finance_office")]
+        // [LocalizedDisplayName("finance_office")]
+         [Display(Name = "finance_office", ResourceType = typeof(Resource))]
         public int finance_office { get; set; }
 
-        [LocalizedDisplayName("bank_name")]
+        // [LocalizedDisplayName("bank_name")]
+         [Display(Name = "bank_name", ResourceType = typeof(Resource))]
         public int bank_name { get; set; }
 
-        [LocalizedDisplayName("account_number")]
+        // [LocalizedDisplayName("account_number")]
+         [Display(Name = "account_number", ResourceType = typeof(Resource))]
         public int account_number { get; set; }
 
         [ScaffoldColumn(false)]

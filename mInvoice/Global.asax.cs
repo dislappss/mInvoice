@@ -74,8 +74,8 @@ namespace mInvoice
 
             try
             {
-                if (CultureInfo.CurrentCulture.Name == "de-DE" ||
-                    CultureInfo.CurrentCulture.Name == "en-US")
+                if (CultureInfo.CurrentCulture.Name == "de" ||
+                    CultureInfo.CurrentCulture.Name == "en")
                 {
                     //actualValue = Convert.ToDecimal(valueResult.AttemptedValue.Replace(".", ","), CultureInfo.CurrentCulture);
                     if (Decimal.TryParse(valueResult.AttemptedValue, style, CultureInfo.CurrentCulture, out _tmp_val_dec))
@@ -133,8 +133,8 @@ namespace mInvoice
 
             try
             {
-                if (CultureInfo.CurrentCulture.Name == "de-DE" ||
-                    CultureInfo.CurrentCulture.Name == "en-US")
+                if (CultureInfo.CurrentCulture.Name == "de" ||
+                    CultureInfo.CurrentCulture.Name == "en")
                 {
                     if (!string.IsNullOrEmpty(_year.AttemptedValue)
                         && !string.IsNullOrEmpty(_month.AttemptedValue)

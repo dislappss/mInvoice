@@ -46,8 +46,8 @@ namespace mInvoice.Controllers
             }
             Response.Cookies.Add(cookie);
 
-            //return Redirect (Request.UrlReferrer.ToString());
-            return RedirectToAction("Index", "Home");
+            return Redirect(Request.UrlReferrer.ToString());
+            //return RedirectToAction("Index", "Home");
         }
     }
 }

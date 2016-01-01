@@ -187,6 +187,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Confirm password ähnelt.
+        /// </summary>
+        public static string confirm_password {
+            get {
+                return ResourceManager.GetString("confirm_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Countries ähnelt.
         /// </summary>
         public static string countries {
@@ -210,6 +219,15 @@ namespace mInvoice.App_GlobalResources {
         public static string country_name {
             get {
                 return ResourceManager.GetString("country_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create a new account. ähnelt.
+        /// </summary>
+        public static string create_a_new_account {
+            get {
+                return ResourceManager.GetString("create_a_new_account", resourceCulture);
             }
         }
         
@@ -412,6 +430,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save? ähnelt.
+        /// </summary>
+        public static string is_save {
+            get {
+                return ResourceManager.GetString("is_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        public static string login {
+            get {
+                return ResourceManager.GetString("login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Methods of payment ähnelt.
         /// </summary>
         public static string method_of_payment {
@@ -430,6 +466,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &quot;\&quot; {0} \ &quot;must be at least {2} characters long.&quot; ähnelt.
+        /// </summary>
+        public static string must_be_at_least {
+            get {
+                return ResourceManager.GetString("must_be_at_least", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invoice date ähnelt.
         /// </summary>
         public static string order_date {
@@ -444,6 +489,24 @@ namespace mInvoice.App_GlobalResources {
         public static string owner {
             get {
                 return ResourceManager.GetString("owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
+        /// </summary>
+        public static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The password does not match the confirmation password. ähnelt.
+        /// </summary>
+        public static string password_does_not_match {
+            get {
+                return ResourceManager.GetString("password_does_not_match", resourceCulture);
             }
         }
         
@@ -565,6 +628,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
+        /// </summary>
+        public static string register {
+            get {
+                return ResourceManager.GetString("register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remember this browser? ähnelt.
+        /// </summary>
+        public static string remember_this_browser {
+            get {
+                return ResourceManager.GetString("remember_this_browser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Save ähnelt.
         /// </summary>
         public static string save {
@@ -579,6 +660,15 @@ namespace mInvoice.App_GlobalResources {
         public static string search {
             get {
                 return ResourceManager.GetString("search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Short mark ähnelt.
+        /// </summary>
+        public static string shortmark {
+            get {
+                return ResourceManager.GetString("shortmark", resourceCulture);
             }
         }
         
