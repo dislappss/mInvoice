@@ -45,51 +45,55 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "logo" })
-            </div>           
+                @*@Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "logo" })*@
+            </div>
             <div class="navbar-collapse collapse">
-               
+             
+                <table style="width:100%">
+                <tr>
+                    <td>
+                        <nav>
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
+                                <li>
+                                    <a href="#">@Resources.Resource.basic_claims_data</a>
+                                    <ul>
+                                        <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
+                                        <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
+                                        <li>@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
+                                        <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
+                                        <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
+                                        <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
 
-                <div style="text-align :right; color:gray; font-size:smaller  ; ">
-                    @using (Html.BeginForm("SetCulture", "Home"))
-                    {
-                        <label for="en-us">
-                            <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
-                        </label>
-                        <label for="de">
-                            <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> Deutsch
-                        </label>
-                    }
-                </div>
-
-                @Html.Partial("_LoginPartial")
-
-                <nav>
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
-                        <li>
-                            <a href="#">@Resources.Resource.basic_claims_data</a>
-                            <ul>
-                                <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
-                                <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
-                                <li>@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
-                                <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                                <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
-                                <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
                             </ul>
-                        </li>
-                        <li>@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
-                       
-                    </ul>
-                </nav>
-                <br />
-              
+                        </nav>
+                    </td>
+                    <td style="align-content:center;"><div style="text-align :right; color:gray; font-size:smaller  ; ">
+                            @using (Html.BeginForm("SetCulture", "Home"))
+                            {
+                                <label for="en-us">
+                                    <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
+                                </label>
+                                <label for="de">
+                                    <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> Deutsch
+                                </label>
+                            }
+                        </div>
+                    </td>
+                    <td style="width:30%">
+                        @Html.Partial("_LoginPartial")
+                    </td>
+                 </tr>               
+                </table>
+
+
             </div>
         </div>
     </div>
     <div class="container body-content">
-
-        <br/>
 
         @RenderBody()
         <hr />
