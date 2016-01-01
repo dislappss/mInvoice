@@ -62,25 +62,21 @@
                     </ul>
                 </nav>
 
+                @Html.Partial("_LoginPartial")
+
                 @using (Html.BeginForm("SetCulture", "Home"))
                 {
-                    <div class="control-group" style="text-align :right; color:gray; font:small; font-weight:normal; vertical-align:middle">
-                        @*<div class="controls">*@
-                            <label for="en-us">
-                                <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
-                            </label>
-                            <label for="es">
-                                <input name="culture" id="de" value="de-DE" type="radio" @selected("de", culture) /> Deutsch
-                            </label>
-
-                            @Html.Partial("_LoginPartial")
-                        @*</div>*@
+                    <div style="text-align :right; color:gray; font:small; font-weight:normal; vertical-align:middle">
+                        <label for="en-us">
+                            <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
+                        </label>
+                        <label for="de">
+                            <input name="culture" id="de" value="de-DE" type="radio" @selected("de", culture) /> Deutsch
+                        </label>
                     </div>
-
-    
                 }
 
-              
+
             </div>
         </div>
     </div>
