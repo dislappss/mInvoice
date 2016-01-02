@@ -342,4 +342,16 @@
   <data name="remember_this_browser" xml:space="preserve">
     <value>Remember this browser?</value>
   </data>
+  <data name="app_name" xml:space="preserve">
+    <value>mInvoice</value>
+  </data>
+  <data name="upload_image" xml:space="preserve">
+    <value>Upload picture</value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="choose_file" xml:space="preserve">
+    <value>Choose file</value>
+  </data>
 </root>

@@ -16,15 +16,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title - m-Invoices</title>
+    <title>@ViewBag.Title - @Resources.Resource.app_name</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @*@Styles.Render("~/Content/css")*@
     @Styles.Render("~/Content/css" + (mInvoice.Helpers.CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-
     @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/jquery-filestyle.min.css" rel="stylesheet" />
+
     <style>
         a.logo {
             background: url(../Images/invoice_32_32.png) no-repeat bottom center;
@@ -33,103 +34,142 @@
             height: 32px;
             text-indent: -9999px; /* hides the link text */
         }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+            .dropdown-submenu > .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                -webkit-border-radius: 0 6px 6px 6px;
+                -moz-border-radius: 0 6px 6px 6px;
+                border-radius: 0 6px 6px 6px;
+            }
+            /*.dropdown-submenu:hover>.dropdown-menu{display:block;}*/
+             .dropdown-submenu > a:after {
+                display: block;
+                content: " ";
+                float: right;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #cccccc;
+                margin-top: 5px;
+                margin-right: -10px;
+            }
+
+            .dropdown-submenu:hover > a:after {
+                border-left-color: #ffffff;
+            }
+
+            .dropdown-submenu.pull-left {
+                float: none;
+            }
+
+                .dropdown-submenu.pull-left > .dropdown-menu {
+                    left: -100%;
+                    margin-left: 10px;
+                    -webkit-border-radius: 6px 0 6px 6px;
+                    -moz-border-radius: 6px 0 6px 6px;
+                    border-radius: 6px 0 6px 6px;
+                }
     </style>
+
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*@Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "logo" })*@
+                @Html.ActionLink(@Resources.Resource.app_name, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*<a class="navbar-brand" href="http://bootply.com"><i class="icon-home icon-white"> </i> Lorem Ipsum blog*@						</a>
             </div>
-            <div class="navbar-collapse collapse">
-             
-                <table style="width:100%">
-                <tr>
-                    <td>
-                        <nav>
-                            <ul class="nav navbar-nav">
-                                <li>@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
-                                <li>
-                                    <a href="#">@Resources.Resource.basic_claims_data</a>
-                                    <ul>
-                                        <li>@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
-                                        <li>@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
-                                        <li>@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
-                                        <li>@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                                        <li>@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
-                                        <li>@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
-                                    </ul>
-                                </li>
-                                <li>@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
-
-                            </ul>
-                        </nav>
-                    </td>
-                    <td style="align-content:center;"><div style="text-align :right; color:gray; font-size:smaller  ; ">
-                            @using (Html.BeginForm("SetCulture", "Home"))
-                            {
-                                <label for="en-us">
-                                    <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
-                                </label>
-                                <label for="de">
-                                    <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> Deutsch
-                                </label>
-                            }
-                        </div>
-                    </td>
-                    <td style="width:30%">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="menu-item ">@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
+                    <li class="menu-item dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.basic_claims_data +</a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
+                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
+                        </ul>
+                    </li>
+                    <li class="menu-item ">@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="margin-right:70px ">
+                        @using (Html.BeginForm("SetCulture", "Home", FormMethod.Get, new { @class = "navbar-search navbar-form" }))
+                        {
+                            <label class="label_language" for="en-us">
+                                <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
+                            </label>
+                            <label class="label_language" for="de">
+                                <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> German
+                            </label>
+                        }
+                    </li>
+                    <li>
                         @Html.Partial("_LoginPartial")
-                    </td>
-                 </tr>               
-                </table>
-
-
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
 
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - m-Invoices</p>
+            <p>&copy; @DateTime.Now.Year - @Resources.Resource.app_name</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap" + (mInvoice.Helpers.CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
+    <script src="~/Scripts/jquery-filestyle.min.js"></script>
 
     @RenderSection("scripts", required: false)
 
 
     <script language="javascript">
 
-        $(function () {
-            $("body nav li").each(function () {
-                if ($(this).find("ul").length > 0) {
+        // MENU BAR
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+            // Avoid following the href location when clicking
+            event.preventDefault();
+            // Avoid having the menu to close when clicking
+            event.stopPropagation();
+            // If a menu is already open we close it
+            //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+            // opening the one you clicked on
+            $(this).parent().addClass('open');
 
-                    //show subnav on hover
-                    $(this).mouseenter(function () {
-                        $(this).find("ul").stop(true, true).slideDown();
-                    });
+            var menu = $(this).parent().find("ul");
+            var menupos = menu.offset();
 
-                    //hide submenus on exit
-                    $(this).mouseleave(function () {
-                        $(this).find("ul").stop(true, true).slideUp();
-                    });
+            if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+                var newpos = -menu.width();
+            } else {
+                var newpos = $(this).parent().width();
+            }
+            menu.css({ left: newpos });
 
-                    $(this).find("ul").mousemove(function () {
-                        $(this).stop(true, true).show();
-                    });
-                }
-            });
         });
 
         (function ($) {

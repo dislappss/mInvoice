@@ -79,6 +79,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die mInvoice ähnelt.
+        /// </summary>
+        public static string app_name {
+            get {
+                return ResourceManager.GetString("app_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure you want to delete this? ähnelt.
         /// </summary>
         public static string are_you_sure_delete {
@@ -147,6 +156,15 @@ namespace mInvoice.App_GlobalResources {
         public static string bic {
             get {
                 return ResourceManager.GetString("bic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose file ähnelt.
+        /// </summary>
+        public static string choose_file {
+            get {
+                return ResourceManager.GetString("choose_file", resourceCulture);
             }
         }
         
@@ -687,6 +705,24 @@ namespace mInvoice.App_GlobalResources {
         public static string tax_rate {
             get {
                 return ResourceManager.GetString("tax_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Upload ähnelt.
+        /// </summary>
+        public static string upload {
+            get {
+                return ResourceManager.GetString("upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Upload picture ähnelt.
+        /// </summary>
+        public static string upload_image {
+            get {
+                return ResourceManager.GetString("upload_image", resourceCulture);
             }
         }
         

@@ -7,10 +7,11 @@
 <h2>@Resources.Resource.edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Clients", FormMethod.Post,
+                             new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>@Resources.Resource.clients</h4>
         <hr />
@@ -34,20 +35,20 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.owner, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -82,7 +83,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.countriesid,  htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.countriesid, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("countriesid", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.countriesid, "", new { @class = "text-danger" })
@@ -138,12 +139,12 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.blz, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.blz, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.blz, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.blz, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.blz, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.blz, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.bank_name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -171,10 +172,23 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.picture, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @{
+                var base64 = Convert.ToBase64String(Model.picture);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
             <div class="col-md-10">
-                @Html.EditorFor(model => model.picture, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.picture, "", new { @class = "text-danger" })
+                <img src="@imgSrc" style="padding-bottom : 10px; max-width:280px; " />
+                <br />
+                <input type="file" name="Image"
+                       class="jfilestyle"
+                       data-buttonbefore="true"
+                       data-buttontext="@Resources.Resource.choose_file">
             </div>
+            @*@Html.Label(@Resources.Resource.upload_image, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="Image" data-buttontext=@Resources.Resource.upload_image class="jfilestyle" data-theme="blue" data-input="false" />
+                </div>*@
         </div>
 
         <div class="form-group">
@@ -185,6 +199,13 @@
     </div>
 }
 
+@*@using (Html.BeginForm("FileUpload", "Clients", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input class="form-control" type="file" id="file" name="file" style="width: 100%;" />
+        <input type="submit" value=@Resources.Resource.upload class="btn btn-default"
+               formaction='@Url.Action("FileUpload", "Clients")' />
+    }*@
+
 <div>
     @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @class = "btn btn-default" })
 </div>
@@ -192,3 +213,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
