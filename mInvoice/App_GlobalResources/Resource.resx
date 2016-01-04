@@ -343,7 +343,7 @@
     <value>Remember this browser?</value>
   </data>
   <data name="app_name" xml:space="preserve">
-    <value>mInvoice</value>
+    <value>inVoices</value>
   </data>
   <data name="upload_image" xml:space="preserve">
     <value>Upload picture</value>
@@ -353,5 +353,11 @@
   </data>
   <data name="choose_file" xml:space="preserve">
     <value>Choose file</value>
+  </data>
+  <data name="quantity_2_column_name" xml:space="preserve">
+    <value>"Quantity 2" column name</value>
+  </data>
+  <data name="quantity_3_column_name" xml:space="preserve">
+    <value>"Quantity 3" column name</value>
   </data>
 </root>

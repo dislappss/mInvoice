@@ -138,14 +138,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.blz, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.blz, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.blz, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.bank_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -173,9 +165,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.picture, htmlAttributes: new { @class = "control-label col-md-2" })
 
+            @Html.HiddenFor(model => model.picture)
+
             @{
-                var base64 = Convert.ToBase64String(Model.picture);
-                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                string imgSrc = "";
+                
+                if (Model.picture != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.picture);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }                
             }
             <div class="col-md-10">
                 <img src="@imgSrc" style="padding-bottom : 10px; max-width:280px; " />
@@ -185,10 +184,6 @@
                        data-buttonbefore="true"
                        data-buttontext="@Resources.Resource.choose_file">
             </div>
-            @*@Html.Label(@Resources.Resource.upload_image, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" name="Image" data-buttontext=@Resources.Resource.upload_image class="jfilestyle" data-theme="blue" data-input="false" />
-                </div>*@
         </div>
 
         <div class="form-group">

@@ -31,6 +31,8 @@ namespace mInvoice.Models
         public string street { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string quantity_2_column_name { get; set; }
+        public string quantity_3_column_name { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }

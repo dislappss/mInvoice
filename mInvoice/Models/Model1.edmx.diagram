@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="3" PointY="2.125" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Countries" Width="1.5" PointX="0.75" PointY="3.25" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="5.25" PointY="1.125" />
-        <EntityTypeShape EntityType="myinvoice_dbModel.Invoice_header" Width="1.5" PointX="7.5" PointY="2.875" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Invoice_header" Width="2.125" PointX="7.25" PointY="2.875" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Payment_method" Width="1.75" PointX="2.75" PointY="9.625" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Tax_rates" Width="1.5" PointX="5.25" PointY="9.5" />
         <AssociationConnector Association="myinvoice_dbModel.FK_articles_tax_rates" />

@@ -26,7 +26,7 @@ namespace mInvoice.Controllers
             {
                 Session["invoice_header_id"] = id;
 
-                var result = GetData();               
+                var result = GetData();
 
                 return View(result.ToList());
             }
@@ -39,8 +39,8 @@ namespace mInvoice.Controllers
 
         private IQueryable<Invoice_details> GetData()
         {
-            int _invoice_header_id = (int)Session["invoice_header_id"]; 
-                 
+            int _invoice_header_id = (int)Session["invoice_header_id"];
+
             var invoice_details =
                 from cust in db.Invoice_details
                 where cust.invoice_header_id == _invoice_header_id
@@ -83,7 +83,7 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
-                invoice_details.invoice_header_id = Convert.ToInt32 (Session["invoice_header_id"])  ;
+                invoice_details.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
 
                 db.Invoice_details.Add(invoice_details);
                 db.SaveChanges();
@@ -128,7 +128,7 @@ namespace mInvoice.Controllers
             {
                 db.Entry(invoice_details).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { id = Session["invoice_header_id"]} );
+                return RedirectToAction("Index", new { id = Session["invoice_header_id"] });
             }
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
@@ -169,6 +169,13 @@ namespace mInvoice.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public JsonResult getPrice(string article_id)
+        {
+            string result = "3.33";
+            return Json(result);
         }
     }
 }

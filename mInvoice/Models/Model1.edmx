@@ -116,6 +116,8 @@
           <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="quantity_2_column_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity_3_column_name" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -507,6 +509,8 @@
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Invoice_header" ToRole="Customers" />
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_header" ToRole="Invoice_details" />
+          <Property Name="quantity_2_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity_3_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Payment_method">
           <Key>
@@ -777,6 +781,8 @@
           <EntitySetMapping Name="Invoice_header">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
               <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="quantity_3_column_name" ColumnName="quantity_3_column_name" />
+                <ScalarProperty Name="quantity_2_column_name" ColumnName="quantity_2_column_name" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="street" ColumnName="street" />

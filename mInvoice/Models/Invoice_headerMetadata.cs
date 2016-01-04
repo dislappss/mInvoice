@@ -69,26 +69,20 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        //// [LocalizedDisplayName("invoice_no")]
         [Display(Name = "invoice_no", ResourceType = typeof(Resource))]
         public string invoice_no { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        //[LocalizedDisplayName("order_date")]
         [Display(Name = "order_date", ResourceType = typeof(Resource))]
         public DateTime? order_date   {   get;  set;   }
 
-        //[LocalizedDisplayName("delivery_date")]
         [Display(Name = "delivery_date", ResourceType = typeof(Resource))]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime? delivery_date  {  get;  set; }
 
-        //[Required]
-        //[LocalizedDisplayName("customer")]
         [Display(Name = "customer", ResourceType = typeof(Resource))]
         public int customers_id { get; set; }
 
-        //[LocalizedDisplayName("customer_reference")]
         [Display(Name = "customer_reference", ResourceType = typeof(Resource))]
         public string customer_reference { get; set; }
 
@@ -98,20 +92,22 @@ namespace mInvoice.Models
         public int countriesid { get; set; }
 
         [Required]
-        //[LocalizedDisplayName("zip")]
         [Display(Name = "zip", ResourceType = typeof(Resource))]
         public string zip { get; set; }
 
         [Required]
-        //[LocalizedDisplayName("city")]
         [Display(Name = "city", ResourceType = typeof(Resource))]
         public string city { get; set; }
 
         [Required]
-        //[LocalizedDisplayName("street")]
         [Display(Name = "street", ResourceType = typeof(Resource))]
         public string street { get; set; }
 
+        [Display(Name = "quantity_2_column_name", ResourceType = typeof(Resource))]
+        public string quantity_2_column_name { get; set; }
+
+        [Display(Name = "quantity_3_column_name", ResourceType = typeof(Resource))]
+        public string quantity_3_column_name { get; set; }
         
     }
 }

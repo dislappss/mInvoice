@@ -79,7 +79,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die mInvoice ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die inVoices ähnelt.
         /// </summary>
         public static string app_name {
             get {
@@ -628,11 +628,29 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &quot;Quantity 2&quot; column name ähnelt.
+        /// </summary>
+        public static string quantity_2_column_name {
+            get {
+                return ResourceManager.GetString("quantity_2_column_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Quantity (3) ähnelt.
         /// </summary>
         public static string quantity_3 {
             get {
                 return ResourceManager.GetString("quantity_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &quot;Quantity 3&quot; column name ähnelt.
+        /// </summary>
+        public static string quantity_3_column_name {
+            get {
+                return ResourceManager.GetString("quantity_3_column_name", resourceCulture);
             }
         }
         
