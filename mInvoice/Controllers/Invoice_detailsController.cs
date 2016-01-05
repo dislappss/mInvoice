@@ -174,8 +174,20 @@ namespace mInvoice.Controllers
 
         public JsonResult getPrice(string article_id)
         {
-            string result = "3.33";
-            return Json(result);
+            if (!string.IsNullOrEmpty(article_id))
+            {
+                Articles articles = db.Articles.Find(Convert.ToInt32(article_id));
+                if (articles != null)
+                {
+                    string result = articles.price.ToString();
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+
         }
     }
 }

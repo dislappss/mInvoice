@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.article_id,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control", @id = "article_id", @onchange = "getPrice()" })
                 @Html.ValidationMessageFor(model => model.article_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -115,3 +115,18 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    function getPrice() {
+        var _article_id = $('#article_id').val();
+        $.ajax({
+            url: '/Invoice_details/getPrice',
+            type: "GET",
+            dataType: "JSON",
+            data: { article_id: _article_id },
+            success: function (price) {
+                $("#price_netto").val(price); // clear before appending new list
+            }
+        });
+    }
+</script>

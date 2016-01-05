@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.article_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control", @id = "article_id", change = "getPrice" })
+                @Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control", @id = "article_id", @onchange = "getPrice()" })
                 @Html.ValidationMessageFor(model => model.article_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="form-group" id="price_netto">
+        <div class="form-group">
             @Html.LabelFor(model => model.price_netto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price_netto, new { htmlAttributes = new { @class = "form-control" } })
@@ -124,28 +124,9 @@
             type: "GET",
             dataType: "JSON",
             data: { article_id: _article_id },
-            success: function (cities) {
-                $("#City").html(""); // clear before appending new list
-                $.each(cities, function (i, city) {
-                    $("#City").append(
-                        $('<option></option>').val(city.CityId).html(city.CityName));
-                });
+            success: function (price) {
+                $("#price_netto").val(price); // clear before appending new list
             }
         });
     }
 </script>
-
-
-@*<script>
-    $("#article_id").change(function () {
-        $.ajax({
-            url: Url.Action("getPrice"),
-            type: "POST",
-            data: { 'article_id': $(this).val() },
-            dataType: "json",
-            success: function (result) { $('#price_netto').text(result); },
-            error: function (error) { alert(error); }
-        })
-
-    });
-</script>*@
