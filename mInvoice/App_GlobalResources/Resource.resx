@@ -378,4 +378,7 @@
   <data name="get_descriptions" xml:space="preserve">
     <value>Get Description</value>
   </data>
+  <data name="edit_delete" xml:space="preserve">
+    <value>Edit | Delete</value>
+  </data>
 </root>

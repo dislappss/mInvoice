@@ -5,7 +5,7 @@
 @*@model IEnumerable<mInvoice.Models.Invoice_header>*@
 
 @{
-    ViewBag.Title = @Resources.Resource.invoices ;
+    ViewBag.Title = @Resources.Resource.invoices;
 }
 
 <h2>@Resources.Resource.invoices</h2>
@@ -16,11 +16,18 @@
 
 @using (Html.BeginForm("Index", "Invoice_header", FormMethod.Get))
 {
-    <p>
-        @Resources.Resource.search @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value=@Resources.Resource.search />
-    </p>
+    <table style="margin-bottom:1.5em;margin-top:1.5em;">
+        <tr>
+            <td>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            </td>
+            <td>
+                <input type="submit" value=@Resources.Resource.search class="btn btn-default" style="margin-left:1em;" />
+            </td>
+        </tr>
+    </table>
 }
+
 
 <table class="table">
 
@@ -29,10 +36,10 @@
             @Html.ActionLink(@Resources.Resource.invoice_no, "Index",
                 new { sortOrder = ViewBag.invoice_noSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
-        @*<th>
-            @Html.ActionLink(@Resources.Resource.customer_no, "Index",
-                new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>*@
+        <th>
+                @Html.ActionLink(@Resources.Resource.customer_no, "Index",
+                    new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
         <th>
             @Html.ActionLink(@Resources.Resource.customer, "Index",
                 new { sortOrder = ViewBag.customerSortParm })
@@ -46,59 +53,62 @@
                 new { sortOrder = ViewBag.delivery_dateSortParm })
         </th>
         @*<th>
-            @Html.ActionLink(@Resources.Resource.city, "Index",
-                new { sortOrder = ViewBag.citySortParm })
+                @Html.ActionLink(@Resources.Resource.city, "Index",
+                    new { sortOrder = ViewBag.citySortParm })
+            </th>
+            <th>
+               @Html.ActionLink(@Resources.Resource.country_code, "Index",
+                    new { sortOrder = ViewBag.country_codeSortParm })
+            </th>*@
+        <th >
+            @Resources.Resource.edit_delete
         </th>
-        <th>
-           @Html.ActionLink(@Resources.Resource.country_code, "Index",
-                new { sortOrder = ViewBag.country_codeSortParm })
-        </th>*@
-        <th />
     </tr>
 
 
-@foreach (var item in Model) {
-    <tr>        
-        <td>
-            @Html.DisplayFor(modelItem => item.invoice_no)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Customers.customer_no)            
-        </td>*@
-        <td>
-           @Html.DisplayFor(modelItem => item.Customers.customer_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.order_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.delivery_date)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Countries.name)
-        </td>*@
-        
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit", title = @Resources.Resource.edit }) 
-            @*@Html.ActionLink("Details", "Details", new { id=item.Id })*@ 
-            @Html.ActionLink(" ", "Details", new { id = item.Id }) &nbsp;
-            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", title = @Resources.Resource.delete })
-        </td>
-    </tr>
-    <tr>
-        <td style="border:none ">
-            @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-primary" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.invoice_no)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Customers.customer_no)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customers.customer_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.delivery_date)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Countries.name)
+                </td>*@
+
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit", title = @Resources.Resource.edit })
+                @*@Html.ActionLink("Details", "Details", new { id=item.Id })*@
+                @Html.ActionLink(" ", "Details", new { id = item.Id }) &nbsp;&nbsp;
+                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", title = @Resources.Resource.delete })
+            </td>
+        </tr>
+        <tr>
+            <td style="border:none ">
+                @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
 
 </table>
 
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
+        @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

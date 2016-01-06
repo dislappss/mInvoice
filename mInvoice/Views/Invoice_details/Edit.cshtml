@@ -23,7 +23,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.article_id,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("article_id", null, htmlAttributes: new { @class = "form-control", @id = "article_id", @onchange = "getPrice(false)" })
+                @Html.DropDownList("article_id", null,
+                    htmlAttributes: new
+                    {
+                        @class = "form-control",
+                        @id = "article_id",
+                        @onchange = "getPrice(false); getTaxRate(false); getArticleDescription(false);"
+                    },
+                        optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.article_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,14 +40,17 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                <button type="button" value="" onclick="getArticleDescription(true);" class="btn btn-default" style="margin-top:0.5em;">@Resources.Resource.get_descriptions</button>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.tax_rate_id,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("tax_rate_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("tax_rate_id", null, htmlAttributes: new { @class = "form-control" },
+                    optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.tax_rate_id, "", new { @class = "text-danger" })
+                <button type="button" value="" onclick="getTaxRate(true);" class="btn btn-default" style="margin-top:0.5em;">@Resources.Resource.get_tax_rates</button>
             </div>
         </div>
 
@@ -69,7 +79,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.price_netto, htmlAttributes: new { @class = "control-label col-md-2" })
+           @Html.LabelFor(model => model.price_netto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price_netto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.price_netto, "", new { @class = "text-danger" })
@@ -116,23 +126,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-<script>
-    function getPrice(is_edit) {
-        var _article_id = $('#article_id').val();
-        var _price_netto = $('#price_netto').val();
-
-        if (is_edit ||
-            _price_netto === "" && typeof _price_netto === "string") {
-            $.ajax({
-                url: '/Invoice_details/getPrice',
-                type: "GET",
-                dataType: "JSON",
-                data: { article_id: _article_id },
-                success: function (price) {
-                    $("#price_netto").val(price); // clear before appending new list
-                }
-            });
-        }
-    }
-</script>

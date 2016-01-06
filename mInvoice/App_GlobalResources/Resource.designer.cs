@@ -367,6 +367,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit | Delete ähnelt.
+        /// </summary>
+        public static string edit_delete {
+            get {
+                return ResourceManager.GetString("edit_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
         /// </summary>
         public static string edit_h2 {
