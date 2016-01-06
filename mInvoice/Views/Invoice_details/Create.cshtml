@@ -19,8 +19,9 @@
             @Html.LabelFor(model => model.article_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("article_id", null,
-                    htmlAttributes: new { @class = "form-control", @id = "article_id", @onchange = "getPrice(false)" },
-                    optionLabel: @Resources.Resource.select_Item)
+                    htmlAttributes: new { @class = "form-control", @id = "article_id",
+                        @onchange = "getPrice(false); getTaxRate(false); getArticleDescription(false);" },
+                        optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.article_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,15 +31,18 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                <button type="button"  value="" onclick="getArticleDescription(true);" class="btn btn-default" style="margin-top:0.5em;">@Resources.Resource.get_descriptions</button>
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.tax_rate_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("tax_rate_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("tax_rate_id", null, htmlAttributes: new { @class = "form-control" },
+                    optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.tax_rate_id, "", new { @class = "text-danger" })
-                <button type="button" id="details" value="" onclick="getPrice(true);" class="btn btn-default" style="margin-top:0.5em;">@Resources.Resource.get_tax_rate</button>
+                <button type="button"  value="" onclick="getTaxRate(true);" class="btn btn-default" style="margin-top:0.5em;">@Resources.Resource.get_tax_rates</button>
             </div>
         </div>
 
@@ -107,7 +111,7 @@
 }
 
 <div>
-    @Html.ActionLink(@Resources.Resource.back_to_list, "Index", new { id = Session["invoice_header_id"], @class="btn btn-default" })
+    @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @id = Session["invoice_header_id"], @class="btn btn-default" })
 </div>
 
 
@@ -126,42 +130,28 @@
         if (is_edit ||
             _price_netto === "" && typeof _price_netto === "string") {
 
-                $.ajax({
-                    url: '/Invoice_details/getPrice',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { article_id: _article_id },
-                    success: function (ret_value) {
-                        $("#price_netto").val(ret_value);
-                    },
-                    error: function (xhr, err) {
-                        alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
-                        alert("responseText: " + xhr.responseText);                   
-                    }
-                });
-
-                $.ajax({
-                    url: '/Invoice_details/getTax_rate_id',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { article_id: _article_id },
-                    success: function (ret_value) {
-                        $("#price_netto").val(ret_value);
-                    },
-                    error: function (xhr, err) {
-                        alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
-                        alert("responseText: " + xhr.responseText);
-                    }
-                });
+            $.ajax({
+                url: '/Invoice_details/getPrice',
+                type: "GET",
+                dataType: "JSON",
+                data: { article_id: _article_id },
+                success: function (ret_value) {
+                    $("#price_netto").val(ret_value);
+                },
+                //error: function (xhr, err) {
+                //    alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                //    alert("responseText: " + xhr.responseText);
+                //}
+            });
         }
     }
 
     function getTaxRate(is_edit) {
         var _article_id = $('#article_id').val();
-        var _tax_rate = $('#tax_rate').val();
+        var _tax_rate_id = $('#tax_rate_id').val();
 
         if (is_edit ||
-            _price_netto === "" && typeof _price_netto === "string") {
+            _tax_rate_id === "" && typeof _tax_rate_id === "string") {
 
             $.ajax({
                 url: '/Invoice_details/getTax_rate_id',
@@ -169,12 +159,35 @@
                 dataType: "JSON",
                 data: { article_id: _article_id },
                 success: function (ret_value) {
-                    $("#price_netto").val(ret_value);
+                    $("#tax_rate_id").val(ret_value);
                 },
-                error: function (xhr, err) {
-                    alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
-                    alert("responseText: " + xhr.responseText);
-                }
+                //error: function (xhr, err) {
+                //    alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                //    alert("responseText: " + xhr.responseText);
+                //}
+            });
+        }
+    }
+
+    function getArticleDescription(is_edit) {
+        var _article_id = $('#article_id').val();
+        var _description = $('#description').val();
+
+        if (is_edit ||
+            _description === "" && typeof _description === "string") {
+
+            $.ajax({
+                url: '/Invoice_details/getArticleDescription',
+                type: "GET",
+                dataType: "JSON",
+                data: { article_id: _article_id },
+                success: function (ret_value) {
+                    $("#description").val(ret_value);
+                },
+                //error: function (xhr, err) {
+                //    alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                //    alert("responseText: " + xhr.responseText);
+                //}
             });
         }
     }

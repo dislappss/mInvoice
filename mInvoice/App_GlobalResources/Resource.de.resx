@@ -217,7 +217,7 @@
     <value>Kunden-Ref.-Nr.</value>
   </data>
   <data name="delivery_date" xml:space="preserve">
-    <value>Leistungsdatum</value>
+    <value>Leistungs- Datum</value>
   </data>
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
@@ -226,10 +226,10 @@
     <value>Rabatt</value>
   </data>
   <data name="invoice_no" xml:space="preserve">
-    <value>Rechnungs-Nr.</value>
+    <value>Rechnungs- Nr.</value>
   </data>
   <data name="order_date" xml:space="preserve">
-    <value>Rechn.-Datum</value>
+    <value>Rechn.- Datum</value>
   </data>
   <data name="price" xml:space="preserve">
     <value>Preis</value>
@@ -340,7 +340,7 @@
     <value>Remember this browser?</value>
   </data>
   <data name="app_name" xml:space="preserve">
-    <value>inVoices</value>
+    <value>mInvoices</value>
   </data>
   <data name="upload_image" xml:space="preserve">
     <value>Bild hochladen</value>
@@ -369,7 +369,10 @@
   <data name="select_Item" xml:space="preserve">
     <value>-- Element auswählen --</value>
   </data>
-  <data name="get_tax_rate" xml:space="preserve">
+  <data name="get_tax_rates" xml:space="preserve">
     <value>Steuersatz abrufen</value>
+  </data>
+  <data name="get_descriptions" xml:space="preserve">
+    <value>Beschreibung abrufen</value>
   </data>
 </root>

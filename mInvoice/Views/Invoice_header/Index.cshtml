@@ -29,10 +29,10 @@
             @Html.ActionLink(@Resources.Resource.invoice_no, "Index",
                 new { sortOrder = ViewBag.invoice_noSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink(@Resources.Resource.customer_no, "Index",
                 new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
+        </th>*@
         <th>
             @Html.ActionLink(@Resources.Resource.customer, "Index",
                 new { sortOrder = ViewBag.customerSortParm })
@@ -45,14 +45,15 @@
             @Html.ActionLink(@Resources.Resource.delivery_date, "Index",
                 new { sortOrder = ViewBag.delivery_dateSortParm })
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink(@Resources.Resource.city, "Index",
                 new { sortOrder = ViewBag.citySortParm })
         </th>
         <th>
            @Html.ActionLink(@Resources.Resource.country_code, "Index",
                 new { sortOrder = ViewBag.country_codeSortParm })
-        </th>
+        </th>*@
+        <th />
     </tr>
 
 
@@ -61,9 +62,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.invoice_no)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Customers.customer_no)            
-        </td>
+        </td>*@
         <td>
            @Html.DisplayFor(modelItem => item.Customers.customer_name)
         </td>
@@ -74,33 +75,22 @@
             @Html.DisplayFor(modelItem => item.delivery_date)
         </td>
         @*<td>
-            @Html.DisplayFor(modelItem => item.customer_reference)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.zip)
-        </td>*@
-        <td>
             @Html.DisplayFor(modelItem => item.city)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.street)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Countries.name)
-        </td>
+        </td>*@
         
         <td>
-            @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-primary" }) &nbsp;
             @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit", title = @Resources.Resource.edit }) 
             @*@Html.ActionLink("Details", "Details", new { id=item.Id })*@ 
             @Html.ActionLink(" ", "Details", new { id = item.Id }) &nbsp;
             @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", title = @Resources.Resource.delete })
+        </td>
+    </tr>
+    <tr>
+        <td style="border:none ">
+            @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-primary" })
         </td>
     </tr>
 }

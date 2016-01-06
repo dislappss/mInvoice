@@ -343,7 +343,7 @@
     <value>Remember this browser?</value>
   </data>
   <data name="app_name" xml:space="preserve">
-    <value>inVoices</value>
+    <value>mInvoices</value>
   </data>
   <data name="upload_image" xml:space="preserve">
     <value>Upload picture</value>
@@ -372,7 +372,10 @@
   <data name="select_Item" xml:space="preserve">
     <value>-- Select Item --</value>
   </data>
-  <data name="get_tax_rate" xml:space="preserve">
+  <data name="get_tax_rates" xml:space="preserve">
     <value>Get Tax Rate</value>
+  </data>
+  <data name="get_descriptions" xml:space="preserve">
+    <value>Get Description</value>
   </data>
 </root>

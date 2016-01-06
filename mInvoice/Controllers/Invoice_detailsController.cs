@@ -179,8 +179,8 @@ namespace mInvoice.Controllers
                 Articles articles = db.Articles.Find(Convert.ToInt32(article_id));
                 if (articles != null)
                 {
-                    //string result = articles.price.ToString();
-                    return Json(articles.price, JsonRequestBehavior.AllowGet);
+                    string result = articles.price.ToString();
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 else
                     return null;
@@ -197,8 +197,8 @@ namespace mInvoice.Controllers
                 Articles articles = db.Articles.Find(Convert.ToInt32(article_id));
                 if (articles != null)
                 {
-                    //string result = articles.price.ToString();
-                    return Json(articles.tax_rate_id, JsonRequestBehavior.AllowGet);
+                    string result = articles.tax_rate_id.ToString();
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 else
                     return null;
@@ -208,6 +208,24 @@ namespace mInvoice.Controllers
 
         }
 
+
+        public JsonResult getArticleDescription(string article_id)
+        {
+            if (!string.IsNullOrEmpty(article_id))
+            {
+                Articles articles = db.Articles.Find(Convert.ToInt32(article_id));
+                if (articles != null)
+                {
+                    string result = articles.description;
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+
+        }
        
     }
 }

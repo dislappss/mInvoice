@@ -88,7 +88,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die inVoices ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die mInvoices ähnelt.
         /// </summary>
         public static string app_name {
             get {
@@ -430,6 +430,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Get Description ähnelt.
+        /// </summary>
+        public static string get_descriptions {
+            get {
+                return ResourceManager.GetString("get_descriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Get price ähnelt.
         /// </summary>
         public static string get_prices {
@@ -441,9 +450,9 @@ namespace mInvoice.App_GlobalResources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Get Tax Rate ähnelt.
         /// </summary>
-        public static string get_tax_rate {
+        public static string get_tax_rates {
             get {
-                return ResourceManager.GetString("get_tax_rate", resourceCulture);
+                return ResourceManager.GetString("get_tax_rates", resourceCulture);
             }
         }
         
