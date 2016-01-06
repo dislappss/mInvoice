@@ -79,6 +79,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An unexpected error has occurred. Please contact the system administrator. ähnelt.
+        /// </summary>
+        public static string an_unexpected_error {
+            get {
+                return ResourceManager.GetString("an_unexpected_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die inVoices ähnelt.
         /// </summary>
         public static string app_name {
@@ -385,6 +394,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
+        /// </summary>
+        public static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fax ähnelt.
         /// </summary>
         public static string fax {
@@ -408,6 +426,24 @@ namespace mInvoice.App_GlobalResources {
         public static string find_by_name {
             get {
                 return ResourceManager.GetString("find_by_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Get price ähnelt.
+        /// </summary>
+        public static string get_prices {
+            get {
+                return ResourceManager.GetString("get_prices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Get Tax Rate ähnelt.
+        /// </summary>
+        public static string get_tax_rate {
+            get {
+                return ResourceManager.GetString("get_tax_rate", resourceCulture);
             }
         }
         
@@ -696,6 +732,15 @@ namespace mInvoice.App_GlobalResources {
         public static string search {
             get {
                 return ResourceManager.GetString("search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die -- Select Item -- ähnelt.
+        /// </summary>
+        public static string select_Item {
+            get {
+                return ResourceManager.GetString("select_Item", resourceCulture);
             }
         }
         

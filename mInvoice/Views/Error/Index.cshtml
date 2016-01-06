@@ -1,14 +1,14 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 @{
     Layout = "_Layout.cshtml";
-    ViewBag.Title = "Error";
+    ViewBag.Title = @Resources.Resource.error;
 }
 <div class="list-header clearfix">
-    <span>Error</span>
+    <span>@Resources.Resource.error</span>
 </div>
 <div class="list-sfs-holder">
     <div class="alert alert-error">
-        An unexpected error has occurred. Please contact the system administrator.
+        @Resources.Resource.an_unexpected_error
     </div>
     @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
     {
@@ -26,3 +26,4 @@
         </div>
     }
 </div>
+

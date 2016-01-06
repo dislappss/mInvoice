@@ -360,4 +360,19 @@
   <data name="quantity_3_column_name" xml:space="preserve">
     <value>"Quantity 3" column name</value>
   </data>
+  <data name="get_prices" xml:space="preserve">
+    <value>Get price</value>
+  </data>
+  <data name="an_unexpected_error" xml:space="preserve">
+    <value>An unexpected error has occurred. Please contact the system administrator.</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="select_Item" xml:space="preserve">
+    <value>-- Select Item --</value>
+  </data>
+  <data name="get_tax_rate" xml:space="preserve">
+    <value>Get Tax Rate</value>
+  </data>
 </root>

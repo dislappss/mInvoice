@@ -357,4 +357,19 @@
   <data name="quantity_3_column_name" xml:space="preserve">
     <value>"Menge 3" Spaltenname</value>
   </data>
+  <data name="get_prices" xml:space="preserve">
+    <value>Preis abrufen</value>
+  </data>
+  <data name="an_unexpected_error" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten. Bitte wenden Sie sich an den Systemadministrator.</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="select_Item" xml:space="preserve">
+    <value>-- Element auswählen --</value>
+  </data>
+  <data name="get_tax_rate" xml:space="preserve">
+    <value>Steuersatz abrufen</value>
+  </data>
 </root>

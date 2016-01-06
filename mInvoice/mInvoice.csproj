@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Invoice_detailsController.cs" />
     <Compile Include="Controllers\Invoice_headerController.cs" />
@@ -406,6 +407,8 @@
     <Content Include="Views\Invoice_details\Details.cshtml" />
     <Content Include="Views\Invoice_details\Edit.cshtml" />
     <Content Include="Views\Invoice_details\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
