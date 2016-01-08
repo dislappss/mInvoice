@@ -1,7 +1,6 @@
-﻿@*@model MvcInternationalization.Models.Person*@
+﻿@*@model mInvoice.Controllers.PageViewModel*@
 
 @{
-    //ViewBag.Title = Resources.AddPerson;
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
@@ -112,15 +111,21 @@
                     <li class="menu-item ">@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-right:70px ">
+                    <li style="margin-right:70px;">
                         @using (Html.BeginForm("SetCulture", "Home", FormMethod.Get, new { @class = "navbar-search navbar-form" }))
                         {
-                            <label class="label_language" for="en-us">
+                           @*@Html.DropDownListFor(model => model.Language, 
+                                new SelectList(new mInvoice.Controllers.HomeController().GetLanguages()
+                                    .Select(x => new SelectListItem() { Text = x.Text, Value = x.Value })))
+                            <input type="submit" />*@
+
+
+                           <label class="label_language" for="en-us" style="margin-top:8px; font-weight:normal;">
                                 <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
                             </label>
-                            <label class="label_language" for="de">
-                                <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> German
-                            </label>
+    <label class="label_language" for="de" style="margin-top:8px; font-weight:normal;">
+            <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> German
+        </label>
                         }
                     </li>
                     <li>
@@ -181,6 +186,8 @@
         })(jQuery);
 
     </script>
+
+  
 
 </body>
 </html>

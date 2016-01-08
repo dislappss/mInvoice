@@ -49,5 +49,56 @@ namespace mInvoice.Controllers
             return Redirect(Request.UrlReferrer.ToString());
             //return RedirectToAction("Index", "Home");
         }
+
+        //public ActionResult SetCulture(PageViewModel pageViewModel)
+        //{
+        //    //put breakpoint on the return view and after you submit a selection you'll see that the pageViewModel argument has the language of what you selected
+        //    return View(new PageViewModel
+        //    {
+        //        Language = "English",
+        //        Languages = new SelectList(new List<string>
+        //        {
+        //            "English",
+        //            "German"
+        //        })
+        //    });
+        //}
+
+        //public List<SelectListItem> GetLanguages()
+        //{
+        //    List<SelectListItem> _list = new List<SelectListItem>();
+
+        //    SelectListItem _english = new SelectListItem();
+        //    _english.Text = "English";
+        //    _english.Value = "en-us";
+        //    SelectListItem _german = new SelectListItem();
+        //    _german.Text = "German";
+        //    _german.Value = "de";
+
+        //    _list.Add(_english);
+        //    _list.Add(_german);
+
+        //    //SelectList _list = new SelectList(new List<SelectListItem>
+        //    //    {
+        //    //        _english,
+        //    //        _german
+        //    //    });
+
+        //    return _list;
+        //}
+
+       
     }
+
+    //public class PageViewModel
+    //{
+    //    public string Language { get; set; }
+    //    public SelectList Languages { get; set; }
+
+       
+    //}
+
+   
+
 }
+
