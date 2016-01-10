@@ -28,20 +28,30 @@ namespace mInvoice.Controllers
             return View();
         }
 
-        public ActionResult SetCulture(string culture)
+        public ActionResult SetCulture(int? id)
         {
+            string culture_str = null;
+
+            if (id >= 0)
+            {
+                if (id == 1)
+                    culture_str = "en";
+                else if (id == 2)
+                    culture_str = "de";
+            }
+
             // Validate input
-            culture = CultureHelper.GetImplementedCulture(culture);
+            var culture = CultureHelper.GetImplementedCulture(culture_str);
 
             // Save culture in a cookie
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
-                cookie.Value = culture;   // update cookie value
+                cookie.Value = culture_str;   // update cookie value
             else
             {
 
                 cookie = new HttpCookie("_culture");
-                cookie.Value = culture;
+                cookie.Value = culture_str;
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
@@ -50,53 +60,11 @@ namespace mInvoice.Controllers
             //return RedirectToAction("Index", "Home");
         }
 
-        //public ActionResult SetCulture(PageViewModel pageViewModel)
-        //{
-        //    //put breakpoint on the return view and after you submit a selection you'll see that the pageViewModel argument has the language of what you selected
-        //    return View(new PageViewModel
-        //    {
-        //        Language = "English",
-        //        Languages = new SelectList(new List<string>
-        //        {
-        //            "English",
-        //            "German"
-        //        })
-        //    });
-        //}
-
-        //public List<SelectListItem> GetLanguages()
-        //{
-        //    List<SelectListItem> _list = new List<SelectListItem>();
-
-        //    SelectListItem _english = new SelectListItem();
-        //    _english.Text = "English";
-        //    _english.Value = "en-us";
-        //    SelectListItem _german = new SelectListItem();
-        //    _german.Text = "German";
-        //    _german.Value = "de";
-
-        //    _list.Add(_english);
-        //    _list.Add(_german);
-
-        //    //SelectList _list = new SelectList(new List<SelectListItem>
-        //    //    {
-        //    //        _english,
-        //    //        _german
-        //    //    });
-
-        //    return _list;
-        //}
+      
 
        
     }
 
-    //public class PageViewModel
-    //{
-    //    public string Language { get; set; }
-    //    public SelectList Languages { get; set; }
-
-       
-    //}
 
    
 

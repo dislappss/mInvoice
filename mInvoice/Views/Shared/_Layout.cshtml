@@ -114,18 +114,16 @@
                     <li style="margin-right:70px;">
                         @using (Html.BeginForm("SetCulture", "Home", FormMethod.Get, new { @class = "navbar-search navbar-form" }))
                         {
-                           @*@Html.DropDownListFor(model => model.Language, 
-                                new SelectList(new mInvoice.Controllers.HomeController().GetLanguages()
-                                    .Select(x => new SelectListItem() { Text = x.Text, Value = x.Value })))
-                            <input type="submit" />*@
-
-
-                           <label class="label_language" for="en-us" style="margin-top:8px; font-weight:normal;">
-                                <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) /> English
-                            </label>
-    <label class="label_language" for="de" style="margin-top:8px; font-weight:normal;">
-            <input name="culture" id="de" value="de" type="radio" @selected("de", culture) /> German
-        </label>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Languages
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("English", "SetCulture", "Home", new { id = 1 }, null)</li>
+                                    <li>@Html.ActionLink("German", "SetCulture", "Home", new { id = 2 }, null)</li>
+                                </ul>
+                            </div>                         
                         }
                     </li>
                     <li>
