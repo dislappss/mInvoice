@@ -378,4 +378,7 @@
   <data name="edit_delete" xml:space="preserve">
     <value>Bearbeten | Löschen</value>
   </data>
+  <data name="reports" xml:space="preserve">
+    <value>Berichte</value>
+  </data>
 </root>

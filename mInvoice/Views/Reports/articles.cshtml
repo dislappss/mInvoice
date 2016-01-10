@@ -1,0 +1,13 @@
+﻿@using Microsoft.Reporting.WebForms;
+@using MvcReportViewer;
+@model new mInvoice.Models.ReportsModels.Articles();
+
+
+@{
+    ViewBag.Title = @Resources.Resource.article;
+}
+
+<h2>articles</h2>
+
+@Html.MvcReportViewerFluent("~/App_Data/Reports/articles.rdlc").Attributes(new { Height = 900, Width = 900, style = "border: none" })
+@*@Html.MvcReportViewerFluent("Reports/articles.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("articles", Model.Articles ).Attributes(new { Height = 900, Width = 900, style = "border: none" })*@
