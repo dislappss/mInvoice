@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>article no</Value>
+                              <Value>=First(Fields!article_no.Value, "ArticlesLabels")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -64,7 +64,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>description</Value>
+                              <Value>=First(Fields!description.Value, "ArticlesLabels")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -97,7 +97,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>price</Value>
+                              <Value>=First(Fields!price.Value, "ArticlesLabels")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -130,7 +130,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>tax rate id</Value>
+                              <Value>=First(Fields!tax_rate_id.Value, "ArticlesLabels")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -474,6 +474,46 @@
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>ArticlesTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="ArticlesLabels">
+      <Query>
+        <DataSourceName>reportsDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="article_no">
+          <DataField>article_no</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="price">
+          <DataField>price</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="description">
+          <DataField>description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tax_rate_id">
+          <DataField>tax_rate_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CreatedAt">
+          <DataField>CreatedAt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UpdatedAt">
+          <DataField>UpdatedAt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>reportsDataSet</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\disl\Documents\Visual Studio 2013\Projects\mInvoice\mInvoice\Reports\reportsDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>ArticlesLabels</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>ArticlesLabelsTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

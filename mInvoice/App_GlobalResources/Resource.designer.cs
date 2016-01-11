@@ -259,6 +259,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create at ähnelt.
+        /// </summary>
+        public static string create_at {
+            get {
+                return ResourceManager.GetString("create_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Create New ähnelt.
         /// </summary>
         public static string create_new {
@@ -795,6 +804,15 @@ namespace mInvoice.App_GlobalResources {
         public static string tax_rate {
             get {
                 return ResourceManager.GetString("tax_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update at ähnelt.
+        /// </summary>
+        public static string update_at {
+            get {
+                return ResourceManager.GetString("update_at", resourceCulture);
             }
         }
         

@@ -442,6 +442,7 @@
     <Content Include="Views\Reports\articles.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -452,7 +453,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Data\Reports\articles.rdlc" />
     <EmbeddedResource Include="App_GlobalResources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.designer.cs</LastGenOutput>

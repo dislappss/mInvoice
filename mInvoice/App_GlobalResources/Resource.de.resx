@@ -381,4 +381,10 @@
   <data name="reports" xml:space="preserve">
     <value>Berichte</value>
   </data>
+  <data name="create_at" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="update_at" xml:space="preserve">
+    <value>Geändert am</value>
+  </data>
 </root>

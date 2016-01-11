@@ -6,11 +6,11 @@ using System.Web;
 
 namespace mInvoice.Models
 {
-    public class ReportsModels
-    {
-        public class Articles
+    
+        public class ArticlesModel
         {
             public Reports.reportsDataSet.ArticlesDataTable articles { get; set; }
+            public Reports.reportsDataSet.ArticlesLabelsDataTable ArticlesLabels { get; set; }
         }
-    }
+    
 }

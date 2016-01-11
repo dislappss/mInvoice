@@ -1,7 +1,8 @@
-﻿@using Microsoft.Reporting.WebForms;
-@using MvcReportViewer;
-@model new mInvoice.Models.ReportsModels.Articles();
+﻿@using MvcReportViewer;
+@using mInvoice.Models;
+@using Microsoft.Reporting.WebForms;
 
+@model ArticlesModel
 
 @{
     ViewBag.Title = @Resources.Resource.article;
@@ -9,5 +10,18 @@
 
 <h2>articles</h2>
 
-@Html.MvcReportViewerFluent("~/App_Data/Reports/articles.rdlc").Attributes(new { Height = 900, Width = 900, style = "border: none" })
-@*@Html.MvcReportViewerFluent("Reports/articles.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("articles", Model.Articles ).Attributes(new { Height = 900, Width = 900, style = "border: none" })*@
+@{
+    var settings = new ControlSettings
+        {
+            ShowParameterPrompts = true,
+            ShowFindControls = true,
+            //BackColor = System.Drawing.Color.LightBlue ,
+            KeepSessionAlive = true,
+            //Width = new System.Web.UI.WebControls.Unit("100%"),
+            //Height = new System.Web.UI.WebControls.Unit("800px"),
+            AsyncRendering = false
+        };
+}
+
+@Html.MvcReportViewerFluent("Reports/articles.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("ArticlesLabels", Model.ArticlesLabels).LocalDataSource("articles", Model.articles).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
+
