@@ -440,6 +440,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Reports\articles.cshtml" />
+    <Content Include="Views\Reports\customers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -457,6 +458,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\customers.rdlc" />
     <EmbeddedResource Include="Reports\articles.rdlc" />
   </ItemGroup>
   <ItemGroup>

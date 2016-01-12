@@ -10,7 +10,13 @@ namespace mInvoice.Models
         public class ArticlesModel
         {
             public Reports.reportsDataSet.ArticlesDataTable articles { get; set; }
-            public Reports.reportsDataSet.ArticlesLabelsDataTable ArticlesLabels { get; set; }
+            public Reports.reportsDataSet.ArticlesLabelsDataTable labels { get; set; }
+        }
+
+        public class CustomersModel
+        {
+            public Reports.reportsDataSet.CustomersDataTable customers { get; set; }
+            public Reports.reportsDataSet.CustomersLabelsDataTable labels { get; set; }
         }
     
 }
