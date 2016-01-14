@@ -26,9 +26,11 @@ namespace mInvoice.Models
         public Nullable<decimal> discount { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public int clients_id { get; set; }
     
         public virtual Articles Articles { get; set; }
         public virtual Invoice_header Invoice_header { get; set; }
         public virtual Tax_rates Tax_rates { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

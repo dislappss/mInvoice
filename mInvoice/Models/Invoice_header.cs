@@ -33,9 +33,11 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string quantity_2_column_name { get; set; }
         public string quantity_3_column_name { get; set; }
+        public int clients_id { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }
         public virtual ICollection<Invoice_details> Invoice_details { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

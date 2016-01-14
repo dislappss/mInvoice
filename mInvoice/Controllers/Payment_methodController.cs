@@ -8,7 +8,7 @@ namespace mInvoice.Controllers
 {
     public class Payment_methodController : BaseController
     {
-        private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
+        private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
         // GET: Payment_method
         public ActionResult Index()

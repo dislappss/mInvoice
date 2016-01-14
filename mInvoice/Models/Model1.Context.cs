@@ -13,10 +13,10 @@ namespace mInvoice.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class myinvoice_dbEntities3 : DbContext
+    public partial class myinvoice_dbEntities : DbContext
     {
-        public myinvoice_dbEntities3()
-            : base("name=myinvoice_dbEntities3")
+        public myinvoice_dbEntities()
+            : base("name=myinvoice_dbEntities")
         {
         }
     

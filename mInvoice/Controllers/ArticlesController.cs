@@ -8,7 +8,7 @@ namespace mInvoice.Controllers
 {
     public class ArticlesController : BaseController
     {
-        private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
+        private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
         // GET: Articles
         public ActionResult Index()

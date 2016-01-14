@@ -17,6 +17,9 @@ namespace mInvoice.Models
         public Clients()
         {
             this.Customers = new HashSet<Customers>();
+            this.Articles = new HashSet<Articles>();
+            this.Invoice_details = new HashSet<Invoice_details>();
+            this.Invoice_header = new HashSet<Invoice_header>();
         }
     
         public int Id { get; set; }
@@ -39,8 +42,12 @@ namespace mInvoice.Models
         public byte[] picture { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string AspNetUsers_id { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }
+        public virtual ICollection<Articles> Articles { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
+        public virtual ICollection<Invoice_header> Invoice_header { get; set; }
     }
 }

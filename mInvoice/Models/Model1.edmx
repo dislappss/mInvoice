@@ -10,6 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="article_no" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="price" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="200" />
@@ -22,6 +23,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUsers_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="clientname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="owner" Type="nvarchar" MaxLength="50" />
@@ -90,6 +92,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="invoice_header_id" Type="int" Nullable="false" />
           <Property Name="article_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="100" />
@@ -107,6 +110,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="invoice_no" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="order_date" Type="smalldatetime" Nullable="false" />
           <Property Name="delivery_date" Type="smalldatetime" Nullable="false" />
@@ -152,6 +156,18 @@
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
+        <Association Name="FK_Articles_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_articles_tax_rates">
           <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
           <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
@@ -212,18 +228,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customers_ToTable">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customers">
-              <PropertyRef Name="clientsysid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_invoice_details_articles">
           <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
           <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
@@ -233,6 +237,18 @@
             </Principal>
             <Dependent Role="Invoice_details">
               <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="clients_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -260,6 +276,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Invoice_header_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_invoice_header_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
           <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
@@ -284,6 +312,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="getClientIDByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="myinvoice_dbModelStoreContainer">
           <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
@@ -294,6 +325,10 @@
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
           <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Articles" EntitySet="Articles" />
@@ -314,12 +349,12 @@
             <End Role="Payment_method" EntitySet="Payment_method" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_invoice_details_articles" Association="Self.FK_invoice_details_articles">
             <End Role="Articles" EntitySet="Articles" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Clients" Association="Self.FK_Invoice_details_Clients">
+            <End Role="Clients" EntitySet="Clients" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_invoice_header" Association="Self.FK_invoice_details_invoice_header">
@@ -329,6 +364,10 @@
           <AssociationSet Name="FK_invoice_details_tax_rates" Association="Self.FK_invoice_details_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Clients" Association="Self.FK_Invoice_header_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_header_Countries" Association="Self.FK_invoice_header_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -343,7 +382,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="myinvoice_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="myinvoice_dbEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="myinvoice_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articles" EntityType="myinvoice_dbModel.Articles" />
           <EntitySet Name="Clients" EntityType="myinvoice_dbModel.Clients" />
           <EntitySet Name="Countries" EntityType="myinvoice_dbModel.Countries" />
@@ -396,6 +435,18 @@
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
+          <AssociationSet Name="FK_Articles_Clients" Association="myinvoice_dbModel.FK_Articles_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Clients" Association="myinvoice_dbModel.FK_Invoice_details_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Clients" Association="myinvoice_dbModel.FK_Invoice_header_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articles">
           <Key>
@@ -410,6 +461,8 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Articles" ToRole="Tax_rates" />
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -437,6 +490,10 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_ToTable" FromRole="Clients" ToRole="Customers" />
+          <Property Name="AspNetUsers_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Clients" ToRole="Articles" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -511,7 +568,9 @@
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_header" ToRole="Invoice_details" />
           <Property Name="quantity_2_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="quantity_3_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Invoice_header" ToRole="Clients" />
+          </EntityType>
         <EntityType Name="Payment_method">
           <Key>
             <PropertyRef Name="Id" />
@@ -651,6 +710,8 @@
           <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Invoice_details" ToRole="Articles" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_details" ToRole="Invoice_header" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Invoice_details" ToRole="Tax_rates" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Invoice_details" ToRole="Clients" />
         </EntityType>
         <Association Name="FK_invoice_details_articles">
           <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
@@ -688,15 +749,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Articles_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="myinvoice_dbEntities3">
+        <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="myinvoice_dbEntities">
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Articles">
               <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
@@ -710,6 +808,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="AspNetUsers_id" ColumnName="AspNetUsers_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="picture" ColumnName="picture" />
@@ -781,6 +880,7 @@
           <EntitySetMapping Name="Invoice_header">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
               <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="quantity_3_column_name" ColumnName="quantity_3_column_name" />
                 <ScalarProperty Name="quantity_2_column_name" ColumnName="quantity_2_column_name" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
@@ -824,6 +924,7 @@
           <EntitySetMapping Name="Invoice_details">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_details">
               <MappingFragment StoreEntitySet="Invoice_details">
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="discount" ColumnName="discount" />

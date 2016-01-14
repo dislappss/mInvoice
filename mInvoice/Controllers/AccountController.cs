@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -58,6 +62,23 @@ namespace mInvoice.Controllers
             return View();
         }
 
+        [System.Data.Entity.DbFunction("myinvoice_dbModel.Store", "getClientIDByUserName")]
+        public static int? getClientIDByUserName(string UserName)
+        {
+            myinvoice_dbEntities _db = new myinvoice_dbEntities();
+
+            List<ObjectParameter> parameters = new List<ObjectParameter>(3);
+            parameters.Add(new ObjectParameter("@UserName", UserName));
+            var lObjectContext = ((IObjectContextAdapter)_db).ObjectContext;
+            var output = lObjectContext.
+                    CreateQuery<int?>("NaturalGroundingVideosModel.Store.fn_GetRatingValue(@height, @depth, @ratio)", parameters.ToArray())
+                .Execute(MergeOption.NoTracking)
+                .FirstOrDefault();
+
+            return output;
+        }
+
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -65,26 +86,51 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
-
-            // Anmeldefehler werden bezüglich einer Kontosperre nicht gezählt.
-            // Wenn Sie aktivieren möchten, dass Kennwortfehler eine Sperre auslösen, ändern Sie in "shouldLockout: true".
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Ungültiger Anmeldeversuch.");
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                // Anmeldefehler werden bezüglich einer Kontosperre nicht gezählt.
+                // Wenn Sie aktivieren möchten, dass Kennwortfehler eine Sperre auslösen, ändern Sie in "shouldLockout: true".
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+
+                        // Set "Session(client_id)"
+                        Session.Add("client_id", null);
+
+                        using (myinvoice_dbEntities db = new myinvoice_dbEntities())
+                        {
+                            var client_id = getClientIDByUserName(model.Email);
+
+                            Session.Add("client_id", client_id);
+                        }
+
+                        
+
+
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Ungültiger Anmeldeversuch.");
+                        return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                ModelState.AddModelError("", "Ungültiger Anmeldeversuch: " + ex.Message);
+                return View(model);
             }
         }
 

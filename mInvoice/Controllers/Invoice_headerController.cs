@@ -10,7 +10,7 @@ namespace mInvoice.Controllers
 {
     public class Invoice_headerController : BaseController
     {
-        private myinvoice_dbEntities3 db = new myinvoice_dbEntities3();
+        private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
         // GET: Invoice_header
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
