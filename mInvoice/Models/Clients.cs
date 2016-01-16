@@ -20,6 +20,7 @@ namespace mInvoice.Models
             this.Articles = new HashSet<Articles>();
             this.Invoice_details = new HashSet<Invoice_details>();
             this.Invoice_header = new HashSet<Invoice_header>();
+            this.Tax_rates = new HashSet<Tax_rates>();
         }
     
         public int Id { get; set; }
@@ -49,5 +50,6 @@ namespace mInvoice.Models
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual ICollection<Invoice_details> Invoice_details { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
+        public virtual ICollection<Tax_rates> Tax_rates { get; set; }
     }
 }

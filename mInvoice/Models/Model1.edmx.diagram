@@ -27,6 +27,8 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_Articles_Clients" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_details_Clients" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_header_Clients" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.v_AspNetUsers" Width="1.5" PointX="10.375" PointY="0.75" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Tax_rates_Clients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

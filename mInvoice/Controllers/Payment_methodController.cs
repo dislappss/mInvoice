@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,7 +14,18 @@ namespace mInvoice.Controllers
         // GET: Payment_method
         public ActionResult Index()
         {
-            return View(db.Payment_method.ToList());
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+
+            var _list = from cust in db.Payment_method
+                        where cust.clients_id == _clientsysid
+                        select cust;
+
+            return View(_list.ToList());            
         }
 
         // GET: Payment_method/Details/5
@@ -43,9 +55,15 @@ namespace mInvoice.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
-        {
+        {            
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                payment_method.clients_id = Convert.ToInt32(Session["client_id"]); 
+
                 db.Payment_method.Add(payment_method);
                 db.SaveChanges();
                 return RedirectToAction("Index");

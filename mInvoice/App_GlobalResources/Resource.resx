@@ -390,4 +390,7 @@
   <data name="update_at" xml:space="preserve">
     <value>Update at</value>
   </data>
+  <data name="payment_methodid" xml:space="preserve">
+    <value>Payment_method</value>
+  </data>
 </root>

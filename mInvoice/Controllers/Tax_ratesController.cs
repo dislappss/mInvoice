@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,7 +14,18 @@ namespace mInvoice.Controllers
         // GET: Tax_rates
         public ActionResult Index()
         {
-            return View(db.Tax_rates.ToList());
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+
+            var _list = from cust in db.Tax_rates
+                                              where cust.clients_id == _clientsysid
+                                              select cust;
+
+            return View(_list.ToList());
         }
 
         // GET: Tax_rates/Details/5
@@ -34,6 +46,13 @@ namespace mInvoice.Controllers
         // GET: Tax_rates/Create
         public ActionResult Create()
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); 
+
             return View();
         }
 
@@ -46,6 +65,13 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                tax_rates.clients_id = Convert.ToInt32(Session["client_id"]); 
+
                 db.Tax_rates.Add(tax_rates);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -26,8 +26,10 @@ namespace mInvoice.Models
         public decimal value { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public int clients_id { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual ICollection<Invoice_details> Invoice_details { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

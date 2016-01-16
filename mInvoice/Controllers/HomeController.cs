@@ -9,8 +9,23 @@ namespace mInvoice.Controllers
 {
     public class HomeController : BaseController
     {
+        public bool ShowMenu { get; set; }
+
         public ActionResult Index()
         {
+            string _AspNetUsers_id = null;
+
+            // Set "Session(client_id)"
+            Session.Add("client_id", null);
+            var client_id = Helpers.AccountHelper.getClientIDByUserName(User.Identity.Name, ref _AspNetUsers_id);
+
+            if (client_id == -2) // need to create customer
+                RedirectToAction("Create", "Customers");
+
+            Session.Add("client_id", client_id);
+
+           ShowMenu = User.Identity.IsAuthenticated;
+
             return View();
         }
 

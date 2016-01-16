@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Security;
 using mInvoice.Models;
 
 namespace mInvoice.Controllers
@@ -13,7 +15,19 @@ namespace mInvoice.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method);
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+
+            IQueryable<Customers> customers = from cust in db.Customers
+                                               where cust.clientsysid == _clientsysid
+                                               select cust;
+
+            customers = customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method);
+
             return View(customers.ToList());
         }
 
@@ -34,11 +48,22 @@ namespace mInvoice.Controllers
 
         // GET: Customers/Create
         public ActionResult Create()
-        {
-            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname");
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name");
-            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name");
-            return View();
+        {                        
+            if (Session["email"] != null &&
+                Session["client_id"].ToString () == "-2") // new customer
+            {
+               
+
+                ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
+                ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name");
+
+                return View();
+            }   
+            else if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Customers/Create
@@ -50,13 +75,20 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                customers.clientsysid = Convert.ToInt32(Session["client_id"]); 
+
                 db.Customers.Add(customers);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
             ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }
@@ -73,8 +105,8 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
             ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }
@@ -92,8 +124,8 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", customers.countriesid);
+            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
             ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
             return View(customers);
         }

@@ -15,6 +15,11 @@ namespace mInvoice.Controllers
         // GET: Invoice_header
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.invoice_noSortParm = sortOrder == "invoice_no" ? "invoice_no_desc" : "invoice_no";
             ViewBag.customers_idSortParm = sortOrder == "customers_id" ? "customers_id_desc" : "customers_id";
@@ -35,9 +40,11 @@ namespace mInvoice.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
-            var _headers = from s in db.Invoice_header 
-                             select s;
+            var _headers = from s in db.Invoice_header
+                           where s.clients_id == _clientsysid
+                           select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -122,6 +129,14 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Create
         public ActionResult Create()
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.clients_id = Convert.ToInt32(Session["clients_id"]); 
+
+
             DateTime _now = DateTime.Now;
 
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
@@ -144,14 +159,19 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
+                invoice_header.clients_id = Convert.ToInt32(Session["clients_id"]); 
 
                 db.Invoice_header.Add(invoice_header);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", invoice_header.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
@@ -168,7 +188,7 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", invoice_header.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
@@ -186,7 +206,7 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", invoice_header.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,18 @@ namespace mInvoice.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            var clients = db.Clients.Include(c => c.Countries);
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+
+            IQueryable<Clients> _list = from cust in db.Clients
+                                              where cust.Id == _clientsysid
+                                              select cust;
+
+            var clients = _list.Include(c => c.Countries);
             return View(clients.ToList());
         }
 
@@ -65,8 +77,13 @@ namespace mInvoice.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name");
-            return View();
+            Clients  _new_obj = new Clients ();
+
+            if (Session["email"] != null)
+                _new_obj.email = Session["email"].ToString();
+
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
+            return View(_new_obj);
         }
 
         // POST: Clients/Create
@@ -74,16 +91,25 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients)
+        public ActionResult Create([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients)
         {
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                //invoice_header.clients_id = Convert.ToInt32(Session["clients_id"]); 
+
+                clients.AspNetUsers_id = Session["AspNetUsers_id"].ToString ();
+
                 db.Clients.Add(clients);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
             return View(clients);
         }
 
@@ -99,7 +125,7 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
             return View(clients);
         }
 
@@ -107,7 +133,7 @@ namespace mInvoice.Controllers
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit([Bind(Include = "Id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture")] Clients clients, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -117,11 +143,13 @@ namespace mInvoice.Controllers
                     image.InputStream.Read(clients.picture, 0, image.ContentLength);
                 }
 
+                clients.AspNetUsers_id = Session["AspNetUsers_id"].ToString ();
+
                 db.Entry(clients).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.countriesid = new SelectList(db.Countries, "Id", "name", clients.countriesid);
+            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
             return View(clients);
         }
 

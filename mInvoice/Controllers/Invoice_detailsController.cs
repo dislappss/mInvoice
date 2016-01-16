@@ -20,6 +20,11 @@ namespace mInvoice.Controllers
 
         public ActionResult Index(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Session["invoice_header_id"] = null;
 
             if (id >= 0)
@@ -40,10 +45,12 @@ namespace mInvoice.Controllers
         private IQueryable<Invoice_details> GetData()
         {
             int _invoice_header_id = (int)Session["invoice_header_id"];
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
             var invoice_details =
                 from cust in db.Invoice_details
-                where cust.invoice_header_id == _invoice_header_id
+                where cust.invoice_header_id == _invoice_header_id &&
+                      cust.clients_id == _clientsysid
                 //orderby cust.Name ascending
                 select cust;
             var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
@@ -68,6 +75,14 @@ namespace mInvoice.Controllers
         // GET: Invoice_details/Create
         public ActionResult Create()
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.clients_id = Convert.ToInt32(Session["clients_id"]); 
+
+
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no");
             ViewBag.invoice_header_id = Session["invoice_header_id"]; // new SelectList(db.Invoice_header, "Id", "invoice_no");
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description");
@@ -83,6 +98,13 @@ namespace mInvoice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                invoice_details.clients_id = Convert.ToInt32(Session["clients_id"]); 
+
                 invoice_details.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
 
                 db.Invoice_details.Add(invoice_details);

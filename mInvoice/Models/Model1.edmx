@@ -130,6 +130,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
@@ -150,11 +151,37 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="value" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="v_AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <Association Name="FK_Articles_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
@@ -189,6 +216,18 @@
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="clientsysid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -312,6 +351,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tax_rates_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax_rates">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="getClientIDByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
@@ -325,6 +376,22 @@
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_AspNetUsers" EntityType="Self.v_AspNetUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_AspNetUsers].[Id] AS [Id], 
+    [v_AspNetUsers].[Email] AS [Email], 
+    [v_AspNetUsers].[EmailConfirmed] AS [EmailConfirmed], 
+    [v_AspNetUsers].[PasswordHash] AS [PasswordHash], 
+    [v_AspNetUsers].[SecurityStamp] AS [SecurityStamp], 
+    [v_AspNetUsers].[PhoneNumber] AS [PhoneNumber], 
+    [v_AspNetUsers].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed], 
+    [v_AspNetUsers].[TwoFactorEnabled] AS [TwoFactorEnabled], 
+    [v_AspNetUsers].[LockoutEndDateUtc] AS [LockoutEndDateUtc], 
+    [v_AspNetUsers].[LockoutEnabled] AS [LockoutEnabled], 
+    [v_AspNetUsers].[AccessFailedCount] AS [AccessFailedCount], 
+    [v_AspNetUsers].[UserName] AS [UserName]
+    FROM [dbo].[v_AspNetUsers] AS [v_AspNetUsers]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Articles" EntitySet="Articles" />
@@ -336,6 +403,10 @@
           <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Clients" Association="Self.FK_Customers_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_Countries" Association="Self.FK_Customers_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -376,6 +447,10 @@
           <AssociationSet Name="FK_invoice_header_Customers" Association="Self.FK_invoice_header_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_rates_Clients" Association="Self.FK_Tax_rates_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -447,6 +522,11 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
+          <EntitySet Name="v_AspNetUsers" EntityType="myinvoice_dbModel.v_AspNetUsers" />
+          <AssociationSet Name="FK_Tax_rates_Clients" Association="myinvoice_dbModel.FK_Tax_rates_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articles">
           <Key>
@@ -494,6 +574,7 @@
           <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Clients" ToRole="Articles" />
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
+          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -581,6 +662,7 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Payment_method" ToRole="Customers" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Tax_rates">
           <Key>
@@ -594,6 +676,8 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Tax_rates" ToRole="Articles" />
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Tax_rates" ToRole="Invoice_details" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Tax_rates" ToRole="Clients" />
         </EntityType>
         <Association Name="FK_articles_tax_rates">
           <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
@@ -785,6 +869,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="v_AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Tax_rates_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax_rates">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -901,6 +1020,7 @@
           <EntitySetMapping Name="Payment_method">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_method">
               <MappingFragment StoreEntitySet="Payment_method">
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="code" ColumnName="code" />
@@ -912,6 +1032,7 @@
           <EntitySetMapping Name="Tax_rates">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Tax_rates">
               <MappingFragment StoreEntitySet="Tax_rates">
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="value" ColumnName="value" />
@@ -936,6 +1057,24 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
                 <ScalarProperty Name="invoice_header_id" ColumnName="invoice_header_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_AspNetUsers">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.v_AspNetUsers">
+              <MappingFragment StoreEntitySet="v_AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

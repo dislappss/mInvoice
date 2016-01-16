@@ -619,6 +619,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment_method ähnelt.
+        /// </summary>
+        public static string payment_methodid {
+            get {
+                return ResourceManager.GetString("payment_methodid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Phone ähnelt.
         /// </summary>
         public static string phone {

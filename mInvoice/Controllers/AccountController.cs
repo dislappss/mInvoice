@@ -62,21 +62,8 @@ namespace mInvoice.Controllers
             return View();
         }
 
-        [System.Data.Entity.DbFunction("myinvoice_dbModel.Store", "getClientIDByUserName")]
-        public static int? getClientIDByUserName(string UserName)
-        {
-            myinvoice_dbEntities _db = new myinvoice_dbEntities();
-
-            List<ObjectParameter> parameters = new List<ObjectParameter>(3);
-            parameters.Add(new ObjectParameter("@UserName", UserName));
-            var lObjectContext = ((IObjectContextAdapter)_db).ObjectContext;
-            var output = lObjectContext.
-                    CreateQuery<int?>("NaturalGroundingVideosModel.Store.fn_GetRatingValue(@height, @depth, @ratio)", parameters.ToArray())
-                .Execute(MergeOption.NoTracking)
-                .FirstOrDefault();
-
-            return output;
-        }
+      
+       
 
 
         //
@@ -86,6 +73,8 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            string _AspNetUsers_id = null;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -101,18 +90,21 @@ namespace mInvoice.Controllers
                 {
                     case SignInStatus.Success:
 
-                        // Set "Session(client_id)"
+                        Session.Add("email", model.Email);
                         Session.Add("client_id", null);
 
-                        using (myinvoice_dbEntities db = new myinvoice_dbEntities())
-                        {
-                            var client_id = getClientIDByUserName(model.Email);
+                        var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
-                            Session.Add("client_id", client_id);
+                        Session.Add("AspNetUsers_id", _AspNetUsers_id); 
+
+                        if (client_id == -2) // need to create client
+                        {
+                            Session["client_id"] = -2;                          
+
+                            return RedirectToAction("Create", "Clients");
                         }
 
-                        
-
+                        Session.Add("client_id", client_id);
 
                         return RedirectToLocal(returnUrl);
                     case SignInStatus.LockedOut:

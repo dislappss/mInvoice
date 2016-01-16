@@ -2,6 +2,8 @@
 
 @{
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+
+    bool _show_menu = Request.IsAuthenticated;
 }
 
 @helper selected(string c, string culture)
@@ -92,30 +94,33 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink(@Resources.Resource.app_name, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @*<a class="navbar-brand" href="http://bootply.com"><i class="icon-home icon-white"> </i> Lorem Ipsum blog*@						</a>
+                @*<a class="navbar-brand" href="http://bootply.com"><i class="icon-home icon-white"> </i> Lorem Ipsum blog</a>*@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menu-item ">@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
-                    <li class="menu-item dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.basic_claims_data +</a>
-                        <ul class="dropdown-menu">
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
-                        </ul>
-                    </li>
-                    <li class="menu-item ">@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
-                    <li class="menu-item dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.reports +</a>
-                        <ul class="dropdown-menu">
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "articles", "Reports")</li>                           
-                            <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "customers", "Reports")</li>
-                        </ul>
-                    </li>
+                    @if(_show_menu)
+                    { 
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.basic_claims_data +</a>
+                            <ul class="dropdown-menu">
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
+                            </ul>
+                        </li>
+                        <li class="menu-item ">@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.reports +</a>
+                            <ul class="dropdown-menu">
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "articles", "Reports")</li>                           
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "customers", "Reports")</li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li style="margin-right:70px;">
