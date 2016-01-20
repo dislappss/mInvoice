@@ -4,7 +4,16 @@
     ViewBag.Title = @Resources.Resource.delete;
 }
 
-<h2>@Resources.Resource.delete</h2>
+
+<h2>
+    @Resources.Resource.delete<br />
+@Resources.Resource.attention_delete
+</h2>
+
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.Id)
 
 <h3>@Resources.Resource.are_you_sure_delete</h3>
 <div>

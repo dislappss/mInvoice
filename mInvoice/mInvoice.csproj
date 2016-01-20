@@ -62,6 +62,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -234,6 +235,11 @@
     <Compile Include="Models\Articles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetDataClasses.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AspNetDataClasses.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Clients.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -346,6 +352,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Reports\reportsDataSet.xsc">
       <DependentUpon>reportsDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Models\AspNetDataClasses.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AspNetDataClasses.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Reports\reportsDataSet.xsd">
       <SubType>Designer</SubType>
@@ -460,6 +471,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -470,6 +482,9 @@
     <EmbeddedResource Include="Migrations\201601141917262_Init.resx">
       <DependentUpon>201601141917262_Init.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Models\AspNetDataClasses.dbml.layout">
+      <DependentUpon>AspNetDataClasses.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Reports\customers.rdlc" />
     <EmbeddedResource Include="Reports\articles.rdlc" />
   </ItemGroup>

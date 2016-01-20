@@ -62,10 +62,6 @@ namespace mInvoice.Controllers
             return View();
         }
 
-      
-       
-
-
         //
         // POST: /Account/Login
         [HttpPost]
@@ -184,27 +180,54 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            string _AspNetUsers_id = null;
+
+            try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // Weitere Informationen zum Aktivieren der Kontobestätigung und Kennwortzurücksetzung finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=320771".
-                    // E-Mail-Nachricht mit diesem Link senden
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Konto bestätigen", "Bitte bestätigen Sie Ihr Konto. Klicken Sie dazu <a href=\"" + callbackUrl + "\">hier</a>");
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+
+                        Session.Add("email", model.Email);
+                        Session.Add("client_id", null);
+
+                        var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
+
+                        Session.Add("AspNetUsers_id", _AspNetUsers_id);
+
+                        if (client_id == -2) // need to create client
+                        {
+                            Session["client_id"] = -2;
+
+                            return RedirectToAction("Create", "Clients");
+                        }
+
+                        Session.Add("client_id", client_id);
+
+                        // Weitere Informationen zum Aktivieren der Kontobestätigung und Kennwortzurücksetzung finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=320771".
+                        // E-Mail-Nachricht mit diesem Link senden
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Konto bestätigen", "Bitte bestätigen Sie Ihr Konto. Klicken Sie dazu <a href=\"" + callbackUrl + "\">hier</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
-            }
 
-            // Wurde dieser Punkt erreicht, ist ein Fehler aufgetreten; Formular erneut anzeigen.
-            return View(model);
+                // Wurde dieser Punkt erreicht, ist ein Fehler aufgetreten; Formular erneut anzeigen.
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Ungültiger Anmeldeversuch.", ex);
+            }
+            return View();
         }
 
         //

@@ -11,6 +11,7 @@ namespace mInvoice.Controllers
     {
         public bool ShowMenu { get; set; }
 
+
         public ActionResult Index()
         {
             string _AspNetUsers_id = null;

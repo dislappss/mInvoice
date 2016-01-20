@@ -393,4 +393,7 @@
   <data name="payment_methodid" xml:space="preserve">
     <value>Payment_method</value>
   </data>
+  <data name="attention_delete" xml:space="preserve">
+    <value>Attention! All transactions and entries will be deleted!</value>
+  </data>
 </root>

@@ -387,4 +387,7 @@
   <data name="update_at" xml:space="preserve">
     <value>Geändert am</value>
   </data>
+  <data name="attention_delete" xml:space="preserve">
+    <value>Achtung! Alle Transaktionen und Einträge werden gelöscht!</value>
+  </data>
 </root>

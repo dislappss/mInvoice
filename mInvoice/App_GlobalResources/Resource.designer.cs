@@ -133,6 +133,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Attention! All transactions and entries will be deleted! ähnelt.
+        /// </summary>
+        public static string attention_delete {
+            get {
+                return ResourceManager.GetString("attention_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Back to List ähnelt.
         /// </summary>
         public static string back_to_list {

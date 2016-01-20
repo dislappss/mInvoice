@@ -6,9 +6,12 @@
 
 <h2>@Resources.Resource.clients</h2>
 
-<p>
+@*<p>
     @Html.ActionLink(@Resources.Resource.create_new, "Create", null, new { @class = "btn btn-primary" })
-</p>
+</p>*@
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 <table class="table">
     <tr>
         <th>
