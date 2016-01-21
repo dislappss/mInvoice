@@ -198,7 +198,7 @@ namespace mInvoice.Controllers
 
                         var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
-                        Session.Add("AspNetUsers_id", _AspNetUsers_id);
+                        Session.Add("AspNetUsers_id", user.Id ); // _AspNetUsers_id);
 
                         if (client_id == -2) // need to create client
                         {

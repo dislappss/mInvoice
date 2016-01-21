@@ -54,7 +54,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
+        public ActionResult Create([Bind(Include = "Id,clients_id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
         {            
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
         {
             if (ModelState.IsValid)
             {

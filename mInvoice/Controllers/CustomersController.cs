@@ -48,22 +48,19 @@ namespace mInvoice.Controllers
 
         // GET: Customers/Create
         public ActionResult Create()
-        {                        
-            if (Session["email"] != null &&
-                Session["client_id"].ToString () == "-2") // new customer
-            {
-               
+        {
+            var _client_id = Convert.ToInt32(Session["client_id"]);
 
+            if (Session["email"] != null 
+                && Session["client_id"] != null) 
+            {               
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
-                ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name");
+                ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name");
 
                 return View();
             }   
-            else if (Session["client_id"] == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            else 
+              return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Customers/Create
@@ -73,42 +70,70 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
         {
-            if (ModelState.IsValid)
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            try
             {
-                if (Session["client_id"] == null)
+                if (ModelState.IsValid)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    if (Session["client_id"] == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+
+                    customers.clientsysid = _client_id;
+
+                    db.Customers.Add(customers);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                customers.clientsysid = Convert.ToInt32(Session["client_id"]); 
+                ViewBag.clientsysid = new SelectList(db.Clients.Where(s => s.Id == _client_id), "Id", "clientname", customers.clientsysid);
+                ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
+                ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                return View(customers);
 
-                db.Customers.Add(customers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
 
-            ViewBag.clientsysid = new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
-            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
-            return View(customers);
+                ModelState.AddModelError("", ex.Message);
+                return View(customers);
+            }
         }
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Customers customers = db.Customers.Find(id);
-            if (customers == null)
+
+            try
             {
-                return HttpNotFound();
+                var _client_id = Convert.ToInt32(Session["client_id"]);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                
+                if (customers == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+                ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
+                ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                return View(customers);
+
             }
-            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
-            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
-            return View(customers);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                ModelState.AddModelError("", ex.Message);
+                return View(customers);
+            }
         }
 
         // POST: Customers/Edit/5
@@ -118,16 +143,29 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
         {
-            if (ModelState.IsValid)
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            try
             {
-                db.Entry(customers).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(customers).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+                ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
+                ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                return View(customers);
+
             }
-            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
-            ViewBag.payment_methodid = new SelectList(db.Payment_method, "Id", "name", customers.payment_methodid);
-            return View(customers);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                ModelState.AddModelError("", ex.Message);
+                return View(customers);
+            }
         }
 
         // GET: Customers/Delete/5

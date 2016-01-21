@@ -61,7 +61,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,description,code,value,CreatedAt,UpdatedAt")] Tax_rates tax_rates)
+        public ActionResult Create([Bind(Include = "Id,clients_id,description,code,value,CreatedAt,UpdatedAt")] Tax_rates tax_rates)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,description,code,value,CreatedAt,UpdatedAt")] Tax_rates tax_rates)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,description,code,value,CreatedAt,UpdatedAt")] Tax_rates tax_rates)
         {
             if (ModelState.IsValid)
             {

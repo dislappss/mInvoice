@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -179,95 +181,139 @@ namespace mInvoice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             int _client_id = -1;
+            string _AspNetUsers_id = null;
             myinvoice_dbEntities _db = new myinvoice_dbEntities();
             AspNetDataClassesDataContext _db_aspnet = new AspNetDataClassesDataContext();
+            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlTransaction transaction = null;
 
             Clients clients = db.Clients.Find(id);
 
             try
             {
-
-
-                if (Session["client_id"] != null)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    _client_id = Convert.ToInt32(Session["client_id"]);
+                    connection.Open();
 
-                    var _invoice_details = from item in _db.Invoice_details
-                                           where item.clients_id == _client_id
-                                           select item;
-                    if (_invoice_details != null)
-                        _db.Invoice_details.RemoveRange(_invoice_details);
+                    SqlCommand command = connection.CreateCommand();
+                    transaction = connection.BeginTransaction("SampleTransaction");
 
+                    if (Session["client_id"] != null && Session["AspNetUsers_id"] != null)
+                    {
+                        _client_id = Convert.ToInt32(Session["client_id"]);
+                        _AspNetUsers_id = Session["AspNetUsers_id"].ToString();
 
-                    var _invoice_headers = from item in _db.Invoice_header
-                                           where item.clients_id == _client_id
-                                           select item;
-                    if (_invoice_headers != null)
-                        _db.Invoice_header.RemoveRange(_invoice_headers);
+                        command.CommandText = "DELETE FROM [dbo].[Invoice_details] WHERE clients_id = " + _client_id;
+                        command.ExecuteNonQuery();
 
+                        command.CommandText = "DELETE FROM [dbo].[Invoice_header] WHERE clients_id = " + _client_id;
+                        command.ExecuteNonQuery();
 
-                    var _payment_methods = from item in _db.Payment_method
-                                           where item.clients_id == _client_id
-                                           select item;
-                    if (_payment_methods != null)
-                        _db.Payment_method.RemoveRange(_payment_methods);
+                        command.CommandText = "DELETE FROM [dbo].[Payment_method] WHERE clients_id = " + _client_id;
+                        command.ExecuteNonQuery();
 
+                        command.CommandText = "DELETE FROM [dbo].[Tax_rates] WHERE clients_id = " + _client_id;
+                        command.ExecuteNonQuery();
 
-                    var _tax_rates = from item in _db.Tax_rates
-                                     where item.clients_id == _client_id
-                                     select item;
-                    if (_tax_rates != null)
-                        _db.Tax_rates.RemoveRange(_tax_rates);
+                        command.CommandText = "DELETE FROM [dbo].[Customers] WHERE clientsysid = " + _client_id;
+                        command.ExecuteNonQuery();
 
 
-                    var _customers = from item in _db.Customers
-                                     where item.clientsysid == _client_id
-                                     select item;
-                    if (_customers != null)
-                        _db.Customers.RemoveRange(_customers);
+                        command.CommandText = "DELETE FROM [dbo].[AspNetUserLogins] WHERE UserId = " + _AspNetUsers_id;
+                        command.ExecuteNonQuery();
 
-                   
-                    db.Clients.Remove(clients);
+                        command.CommandText = "DELETE FROM [dbo].[AspNetUserClaims] WHERE UserId = " + _AspNetUsers_id;
+                        command.ExecuteNonQuery();
 
-                    db.SaveChanges();
+                        command.CommandText = "DELETE FROM [dbo].[AspNetUserRoles] WHERE UserId = " + _AspNetUsers_id;
+                        command.ExecuteNonQuery();
 
-                    
-
-                    // AspNet
-                    var _logins = from item in _db_aspnet.AspNetUserLogins
-                                  where item.UserId == Session["AspNetUsers_id"].ToString()
-                                  select item;
-                    if (_logins != null && _logins.Count() > 0)
-                        _db_aspnet.AspNetUserLogins.DeleteAllOnSubmit(_logins);
-
-                    var _claims = from item in _db_aspnet.AspNetUserClaims
-                                  where item.UserId == Session["AspNetUsers_id"].ToString()
-                                  select item;
-                    if (_claims != null && _claims.Count() > 0)
-                        _db_aspnet.AspNetUserClaims.DeleteAllOnSubmit(_claims);
-
-                    var _roles = from item in _db_aspnet.AspNetUserRoles
-                                 where item.UserId == Session["AspNetUsers_id"].ToString()
-                                 select item;
-                    if (_roles != null && _roles.Count() > 0)
-                        _db_aspnet.AspNetUserRoles.DeleteAllOnSubmit(_roles);
+                        command.CommandText = "DELETE FROM [dbo].[AspNetUsers] WHERE Id = " + _AspNetUsers_id;
+                        command.ExecuteNonQuery();
 
 
-                    var _users = from item in _db_aspnet.AspNetUsers
-                                 where item.Id == Session["AspNetUsers_id"].ToString()
-                                 select item;
-                    if (_users != null && _users.Count() > 0)
-                        _db_aspnet.AspNetUsers.DeleteAllOnSubmit(_users);
+                        transaction.Commit();
 
 
-                   
-                    _db_aspnet.SubmitChanges();
+                        #region OLD VERSION
+                        //var _invoice_details = from item in _db.Invoice_details
+                        //                       where item.clients_id == _client_id
+                        //                       select item;
+                        //if (_invoice_details != null)
+                        //    _db.Invoice_details.RemoveRange(_invoice_details);
 
-                    //FormsAuthentication.SignOut();
 
-                    AuthenticationManager.SignOut();
+                        //var _invoice_headers = from item in _db.Invoice_header
+                        //                       where item.clients_id == _client_id
+                        //                       select item;
+                        //if (_invoice_headers != null)
+                        //    _db.Invoice_header.RemoveRange(_invoice_headers);
+
+
+                        //var _payment_methods = from item in _db.Payment_method
+                        //                       where item.clients_id == _client_id
+                        //                       select item;
+                        //if (_payment_methods != null)
+                        //    _db.Payment_method.RemoveRange(_payment_methods);
+
+
+                        //var _tax_rates = from item in _db.Tax_rates
+                        //                 where item.clients_id == _client_id
+                        //                 select item;
+                        //if (_tax_rates != null)
+                        //    _db.Tax_rates.RemoveRange(_tax_rates);
+
+
+                        //var _customers = from item in _db.Customers
+                        //                 where item.clientsysid == _client_id
+                        //                 select item;
+                        //if (_customers != null)
+                        //    _db.Customers.RemoveRange(_customers);
+
+
+                        //db.Clients.Remove(clients);
+
+                        //db.SaveChanges();
+
+
+
+                        // AspNet
+                        //var _logins = from item in _db_aspnet.AspNetUserLogins
+                        //              where item.UserId == Session["AspNetUsers_id"].ToString()
+                        //              select item;
+                        //if (_logins != null && _logins.Count() > 0)
+                        //    _db_aspnet.AspNetUserLogins.DeleteAllOnSubmit(_logins);
+
+                        //var _claims = from item in _db_aspnet.AspNetUserClaims
+                        //              where item.UserId == Session["AspNetUsers_id"].ToString()
+                        //              select item;
+                        //if (_claims != null && _claims.Count() > 0)
+                        //    _db_aspnet.AspNetUserClaims.DeleteAllOnSubmit(_claims);
+
+                        //var _roles = from item in _db_aspnet.AspNetUserRoles
+                        //             where item.UserId == Session["AspNetUsers_id"].ToString()
+                        //             select item;
+                        //if (_roles != null && _roles.Count() > 0)
+                        //    _db_aspnet.AspNetUserRoles.DeleteAllOnSubmit(_roles);
+
+
+                        //var _users = from item in _db_aspnet.AspNetUsers
+                        //             where item.Id == Session["AspNetUsers_id"].ToString()
+                        //             select item;
+                        //if (_users != null && _users.Count() > 0)
+                        //    _db_aspnet.AspNetUsers.DeleteAllOnSubmit(_users);
+
+
+
+                        //_db_aspnet.SubmitChanges();
+                        #endregion
+
+                        ////FormsAuthentication.SignOut();
+
+                        AuthenticationManager.SignOut();
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
@@ -275,6 +321,28 @@ namespace mInvoice.Controllers
 
                 ModelState.AddModelError("", ex.Message);
                 // return RedirectToAction("Index");
+
+                // Transactions
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
+
+                // Attempt to roll back the transaction.
+                try
+                {
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    // This catch block will handle any errors that may have occurred
+                    // on the server that would cause the rollback to fail, such as
+                    // a closed connection.
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
+                }
+
+
+
+
                 return View(clients);
             }
         }

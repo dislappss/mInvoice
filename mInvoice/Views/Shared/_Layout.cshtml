@@ -39,6 +39,7 @@
         .dropdown-submenu {
             position: relative;
         }
+
             .dropdown-submenu > .dropdown-menu {
                 top: 0;
                 left: 100%;
@@ -49,7 +50,7 @@
                 border-radius: 0 6px 6px 6px;
             }
             /*.dropdown-submenu:hover>.dropdown-menu{display:block;}*/
-             .dropdown-submenu > a:after {
+            .dropdown-submenu > a:after {
                 display: block;
                 content: " ";
                 float: right;
@@ -78,6 +79,12 @@
                     -moz-border-radius: 6px 0 6px 6px;
                     border-radius: 6px 0 6px 6px;
                 }
+
+        .form-group.required .control-label:after {
+            content: " *";
+            font-weight: bold;
+            color: red;
+        }
     </style>
 
 </head>
@@ -99,8 +106,8 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menu-item ">@Html.ActionLink(@Resources.Resource.home_site, "Index", "Home")</li>
-                    @if(_show_menu)
-                    { 
+                    @if (_show_menu)
+                    {
                         <li class="menu-item dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.basic_claims_data +</a>
                             <ul class="dropdown-menu">
@@ -116,7 +123,7 @@
                         <li class="menu-item dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Resource.reports +</a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "articles", "Reports")</li>                           
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "articles", "Reports")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "customers", "Reports")</li>
                             </ul>
                         </li>
@@ -135,7 +142,7 @@
                                     <li>@Html.ActionLink("English", "SetCulture", "Home", new { id = 1 }, null)</li>
                                     <li>@Html.ActionLink("German", "SetCulture", "Home", new { id = 2 }, null)</li>
                                 </ul>
-                            </div>                         
+                            </div>
                         }
                     </li>
                     <li>
@@ -195,9 +202,11 @@
 
         })(jQuery);
 
+
+
     </script>
 
-  
+
 
 </body>
 </html>

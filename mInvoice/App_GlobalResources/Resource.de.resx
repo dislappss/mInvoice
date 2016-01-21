@@ -142,7 +142,7 @@
     <value>Landesname</value>
   </data>
   <data name="create_new" xml:space="preserve">
-    <value>Neu einfügen</value>
+    <value>Einfügen</value>
   </data>
   <data name="customer" xml:space="preserve">
     <value>Kunde</value>

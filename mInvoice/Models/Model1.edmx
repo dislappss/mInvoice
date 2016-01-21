@@ -62,7 +62,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clientsysid" Type="int" Nullable="false" />
           <Property Name="payment_methodid" Type="int" />
-          <Property Name="customer_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_no" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="customer_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="countriesid" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -132,7 +132,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -153,7 +153,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="value" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
@@ -595,7 +595,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="clientsysid" Type="Int32" Nullable="false" />
           <Property Name="payment_methodid" Type="Int32" />
-          <Property Name="customer_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="customer_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="countriesid" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -655,7 +655,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Payment_method" ToRole="Customers" />
@@ -667,7 +667,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="value" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />

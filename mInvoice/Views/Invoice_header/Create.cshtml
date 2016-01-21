@@ -15,8 +15,10 @@
     <div class="form-horizontal">
         <h4>@Resources.Resource.invoices </h4>
         <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+
+        <div class="form-group required">
             @Html.LabelFor(model => model.invoice_no, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.invoice_no, new { htmlAttributes = new { @class = "form-control" } })
@@ -24,7 +26,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.order_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.order_date, "Date", new { htmlAttributes = new { @class = "form-control" } })
@@ -32,7 +34,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.delivery_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.delivery_date, "Date", new { htmlAttributes = new { @class = "form-control" } })
@@ -41,13 +43,14 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.customers_id,  htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group required">
+            @Html.LabelFor(model => model.customers_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("customers_id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.customers_id, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.customer_reference, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -57,15 +60,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.countriesid,  htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group required">
+            @Html.LabelFor(model => model.countriesid, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("countriesid", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.countriesid, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+
+        <div class="form-group required">
             @Html.LabelFor(model => model.zip, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.zip, new { htmlAttributes = new { @class = "form-control" } })
@@ -73,7 +77,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
@@ -81,7 +85,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.street, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
@@ -123,7 +127,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value=@Resources.Resource.create_new class="btn btn-default" />
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,13 +14,29 @@ namespace mInvoice.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            var articles = db.Articles.Include(a => a.Tax_rates);
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+
+            IQueryable<Articles> _list = from cust in db.Articles
+                                              where cust.clients_id == _clientsysid
+                                              select cust;
+
+
+            var articles = _list.Include(a => a.Tax_rates);
             return View(articles.ToList());
         }
 
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -35,8 +52,16 @@ namespace mInvoice.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description");
-            return View();
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            if (Session["email"] != null
+                && Session["client_id"] != null)
+            {
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
+                return View();
+            }
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // POST: Articles/Create
@@ -44,22 +69,33 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
+        public ActionResult Create([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
         {
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
             if (ModelState.IsValid)
             {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                articles.clients_id = Convert.ToInt32(Session["client_id"]); 
+
                 db.Articles.Add(articles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", articles.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
             return View(articles);
         }
 
         // GET: Articles/Edit/5
         public ActionResult Edit(int? id)
         {
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -69,7 +105,7 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", articles.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
             return View(articles);
         }
 
@@ -78,15 +114,17 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
         {
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
             if (ModelState.IsValid)
             {
                 db.Entry(articles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", articles.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
             return View(articles);
         }
 

@@ -129,18 +129,20 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Create
         public ActionResult Create()
         {
+            int _client_id =-1;
+
             if (Session["client_id"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.clients_id = Convert.ToInt32(Session["clients_id"]); 
-
+            _client_id =  Convert.ToInt32(Session["clients_id"]);
+            ViewBag.clients_id = _client_id; 
 
             DateTime _now = DateTime.Now;
 
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
-            ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no");
+            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no");
 
             var _new_item = new Invoice_header ();
 
@@ -157,14 +159,17 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name")] Invoice_header invoice_header)
         {
+            int _client_id = -1;
+
             if (ModelState.IsValid)
             {
                 if (Session["client_id"] == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                _client_id = Convert.ToInt32(Session["clients_id"]);
 
-                invoice_header.clients_id = Convert.ToInt32(Session["clients_id"]); 
+                invoice_header.clients_id = _client_id; 
 
                 db.Invoice_header.Add(invoice_header);
                 db.SaveChanges();
@@ -172,7 +177,7 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
@@ -188,8 +193,11 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
+
+            var _client_id = Convert.ToInt32(Session["clients_id"]);
+
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
@@ -206,8 +214,11 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            var _client_id = Convert.ToInt32(Session["clients_id"]);
+
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers, "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
