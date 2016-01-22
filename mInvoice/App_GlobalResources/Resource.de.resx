@@ -390,4 +390,7 @@
   <data name="attention_delete" xml:space="preserve">
     <value>Achtung! Alle Transaktionen und Einträge werden gelöscht!</value>
   </data>
+  <data name="copy_invoice" xml:space="preserve">
+    <value>Rechnung kopieren</value>
+  </data>
 </root>

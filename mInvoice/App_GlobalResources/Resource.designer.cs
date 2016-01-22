@@ -232,6 +232,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Copy invoice ähnelt.
+        /// </summary>
+        public static string copy_invoice {
+            get {
+                return ResourceManager.GetString("copy_invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Countries ähnelt.
         /// </summary>
         public static string countries {

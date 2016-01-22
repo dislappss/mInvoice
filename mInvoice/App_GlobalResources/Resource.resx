@@ -396,4 +396,7 @@
   <data name="attention_delete" xml:space="preserve">
     <value>Attention! All transactions and entries will be deleted!</value>
   </data>
+  <data name="copy_invoice" xml:space="preserve">
+    <value>Copy invoice</value>
+  </data>
 </root>

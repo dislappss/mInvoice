@@ -248,6 +248,41 @@ namespace mInvoice.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Invoice_header/Delete/5
+        public ActionResult Copy_invoice(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Copy_Invoice _copy_Invoice = new Copy_Invoice();
+            _copy_Invoice.invoice_header_id = (int)id;
+
+            return View(_copy_Invoice);
+        }
+
+        // POST: Invoice_header/Copy_invoice/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Copy_invoice(Copy_Invoice copy_invoice)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Entry(invoice_header).State = EntityState.Modified;
+                //db.SaveChanges();
+
+
+
+                return RedirectToAction("Index");
+            }
+
+            var _client_id = Convert.ToInt32(Session["clients_id"]);
+
+            //ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            //ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            return View(copy_invoice);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

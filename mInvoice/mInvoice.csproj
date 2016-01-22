@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="Models\cDate.cs" />
     <Compile Include="Models\ArticlesMetadata.cs" />
+    <Compile Include="Models\Copy_Invoice.cs" />
     <Compile Include="Models\DateRequiredAttribute.cs" />
     <Compile Include="Models\Invoice_details.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -461,6 +462,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Reports\articles.cshtml" />
     <Content Include="Views\Reports\customers.cshtml" />
+    <Content Include="Views\Invoice_header\Copy_invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
