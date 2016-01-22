@@ -80,7 +80,7 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.clients_id = Convert.ToInt32(Session["clients_id"]); 
+            ViewBag.clients_id = Convert.ToInt32(Session["client_id"]); 
 
 
             ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no");
@@ -94,7 +94,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace mInvoice.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                invoice_details.clients_id = Convert.ToInt32(Session["clients_id"]); 
+                invoice_details.clients_id = Convert.ToInt32(Session["client_id"]); 
 
                 invoice_details.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
 
@@ -144,7 +144,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
         {
             if (ModelState.IsValid)
             {

@@ -154,9 +154,9 @@ namespace mInvoice
 
             try
             {
-                if (CultureInfo.CurrentCulture.Name == "de" ||
-                    CultureInfo.CurrentCulture.Name == "en")
-                {
+                //if (CultureInfo.CurrentCulture.Name == "de" ||
+                //    CultureInfo.CurrentCulture.Name == "en")
+                //{
                     if (!string.IsNullOrEmpty(_year.AttemptedValue)
                         && !string.IsNullOrEmpty(_month.AttemptedValue)
                         && !string.IsNullOrEmpty(_day.AttemptedValue))
@@ -170,7 +170,7 @@ namespace mInvoice
                     {
                         actualValue = DateTime.Now; 
                     }
-                }
+                //}
 
             }
             catch (FormatException e)

@@ -136,7 +136,7 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            _client_id =  Convert.ToInt32(Session["clients_id"]);
+            _client_id = Convert.ToInt32(Session["client_id"]);
             ViewBag.clients_id = _client_id; 
 
             DateTime _now = DateTime.Now;
@@ -157,7 +157,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name")] Invoice_header invoice_header)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name")] Invoice_header invoice_header)
         {
             int _client_id = -1;
 
@@ -167,7 +167,7 @@ namespace mInvoice.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                _client_id = Convert.ToInt32(Session["clients_id"]);
+                _client_id = Convert.ToInt32(Session["client_id"]);
 
                 invoice_header.clients_id = _client_id; 
 
@@ -194,7 +194,7 @@ namespace mInvoice.Controllers
                 return HttpNotFound();
             }
 
-            var _client_id = Convert.ToInt32(Session["clients_id"]);
+            var _client_id = Convert.ToInt32(Session["client_id"]);
 
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
@@ -206,17 +206,23 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name")] Invoice_header invoice_header)
-        {
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name")] Invoice_header invoice_header)
+        {           
             if (ModelState.IsValid)
             {
                 db.Entry(invoice_header).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            var _client_id = Convert.ToInt32(Session["clients_id"]);
+            if (invoice_header == null)
+            {
+                return HttpNotFound();
+            }
 
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+           
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
@@ -276,7 +282,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
 
-            var _client_id = Convert.ToInt32(Session["clients_id"]);
+            var _client_id = Convert.ToInt32(Session["client_id"]);
 
             //ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             //ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
