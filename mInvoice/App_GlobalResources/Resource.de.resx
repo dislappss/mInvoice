@@ -393,4 +393,13 @@
   <data name="copy_invoice" xml:space="preserve">
     <value>Rechnung kopieren</value>
   </data>
+  <data name="optonal_parameters" xml:space="preserve">
+    <value>Optional Parameter</value>
+  </data>
+  <data name="last_index_invoices" xml:space="preserve">
+    <value>Lätzter Index (Rechnungen)</value>
+  </data>
+  <data name="prefix_invoices" xml:space="preserve">
+    <value>Prefix (Rechnungen)</value>
+  </data>
 </root>

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Web.Mvc;
 using mInvoice.Models;
 using PagedList;
@@ -184,6 +187,11 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -231,6 +239,11 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -254,9 +267,13 @@ namespace mInvoice.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Invoice_header/Delete/5
         public ActionResult Copy_invoice(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -267,26 +284,84 @@ namespace mInvoice.Controllers
             return View(_copy_Invoice);
         }
 
-        // POST: Invoice_header/Copy_invoice/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Copy_invoice(Copy_Invoice copy_invoice)
         {
+            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            int _new_invoice_header_id = -1;
+            SqlTransaction _transaction = null;
+            Invoice_header _new_header = new Invoice_header();
+
             if (ModelState.IsValid)
             {
-                //db.Entry(invoice_header).State = EntityState.Modified;
-                //db.SaveChanges();
+                using (var context = new myinvoice_dbEntities())
+                {
+                    using (var dbContextTransaction = context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Old header
+                            Invoice_header _invoice_header = context.Invoice_header.Find(copy_invoice.invoice_header_id);
 
+                            // Old deatails
+                            int _invoice_header_id = copy_invoice.invoice_header_id;
+                            int _client_id = Convert.ToInt32(Session["client_id"]);
 
+                            IQueryable<Invoice_details> invoice_details_arr =
+                                from cust in context.Invoice_details
+                                where cust.invoice_header_id == _invoice_header_id &&
+                                      cust.clients_id == _client_id
+                                select cust;
 
-                return RedirectToAction("Index");
+                            //var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+
+                            // New header
+                            
+                            _new_header = _invoice_header;
+
+                            DateTime _now = DateTime.Now;
+                            _new_header.order_date = _now;
+                            _new_header.delivery_date = _now;
+                            if (!string.IsNullOrEmpty(copy_invoice.quantity_2_column_name))
+                                _new_header.quantity_2_column_name = copy_invoice.quantity_2_column_name;
+                            if (!string.IsNullOrEmpty(copy_invoice.quantity_3_column_name))
+                                _new_header.quantity_3_column_name = copy_invoice.quantity_3_column_name;
+
+                            Invoice_header _inserted_header = context.Invoice_header.Add(_new_header);
+
+                            context.SaveChanges();
+
+                            _new_invoice_header_id = _inserted_header.Id;
+
+                            // New details
+                            foreach (Invoice_details _old_position in invoice_details_arr)
+                            {
+                                Invoice_details _new_position = new Invoice_details();
+
+                                _new_position = _old_position;
+
+                                _new_position.clients_id = _client_id;
+                                _new_position.invoice_header_id = _new_invoice_header_id;
+                                if (copy_invoice.quantity_2 >= 0)
+                                    _new_position.quantity_2 = copy_invoice.quantity_2;
+                                if (copy_invoice.quantity_3 >= 0)
+                                    _new_position.quantity_3 = copy_invoice.quantity_3;
+
+                                context.Invoice_details.Add(_new_position);
+                                context.SaveChanges();                                
+                            }
+
+                            dbContextTransaction.Commit(); 
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction.Rollback();
+                        }
+                    }
+                }
             }
-
-            var _client_id = Convert.ToInt32(Session["client_id"]);
-
-            //ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            //ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
-            return View(copy_invoice);
+            return View(_new_header);
         }
 
         protected override void Dispose(bool disposing)

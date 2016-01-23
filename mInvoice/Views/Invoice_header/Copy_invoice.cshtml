@@ -1,10 +1,10 @@
 ﻿@model mInvoice.Models.Copy_Invoice
 
 @{
-    ViewBag.Title = "Copy_invoice";
+    ViewBag.Title = @Resources.Resource.copy_invoice;
 }
 
-<h2>Copy_invoice</h2>
+<h2>@Resources.Resource.copy_invoice</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,14 +13,13 @@
 
 
     <div class="form-horizontal">
-        <h4>@Resources.Resource.invoices</h4>
+        <h4>@Resources.Resource.optonal_parameters</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @*@Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.clients_id)*@
+        @Html.HiddenFor(model => model.invoice_header_id)
 
-        <div class="form-group required">
+        <div class="form-group">
             @Html.LabelFor(model => model.quantity_2_column_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity_2_column_name, new { htmlAttributes = new { @class = "form-control" } })
@@ -28,15 +27,15 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group">
             @Html.LabelFor(model => model.quantity_2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.quantity_2, "Date", new { htmlAttributes = new { @class = "form-control-not-100" } })
+                @Html.EditorFor(model => model.quantity_2, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.quantity_2, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group">
             @Html.LabelFor(model => model.quantity_3_column_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity_3_column_name, new { htmlAttributes = new { @class = "form-control" } })
@@ -44,10 +43,10 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group">
             @Html.LabelFor(model => model.quantity_3, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.quantity_3, "Date", new { htmlAttributes = new { @class = "form-control-not-100" } })
+                @Html.EditorFor(model => model.quantity_3, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.quantity_3, "", new { @class = "text-danger" })
             </div>
         </div>

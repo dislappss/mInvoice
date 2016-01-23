@@ -538,6 +538,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Last index (invoices) ähnelt.
+        /// </summary>
+        public static string last_index_invoices {
+            get {
+                return ResourceManager.GetString("last_index_invoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
         /// </summary>
         public static string login {
@@ -570,6 +579,15 @@ namespace mInvoice.App_GlobalResources {
         public static string must_be_at_least {
             get {
                 return ResourceManager.GetString("must_be_at_least", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Optional parameters ähnelt.
+        /// </summary>
+        public static string optonal_parameters {
+            get {
+                return ResourceManager.GetString("optonal_parameters", resourceCulture);
             }
         }
         
@@ -678,6 +696,15 @@ namespace mInvoice.App_GlobalResources {
         public static string positions {
             get {
                 return ResourceManager.GetString("positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Prefix (invoices) ähnelt.
+        /// </summary>
+        public static string prefix_invoices {
+            get {
+                return ResourceManager.GetString("prefix_invoices", resourceCulture);
             }
         }
         

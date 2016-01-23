@@ -44,6 +44,8 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string AspNetUsers_id { get; set; }
+        public string prefix_invoices { get; set; }
+        public int last_index_invoices { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }

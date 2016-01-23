@@ -80,13 +80,17 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.clients_id = Convert.ToInt32(Session["client_id"]); 
+            var _client_id = Convert.ToInt32(Session["client_id"]);
 
-
-            ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no");
+            ViewBag.clients_id = _client_id;
+            ViewBag.article_id = new SelectList(db.Articles.Where (x=>x.clients_id == _client_id ), "Id", "article_no");
             ViewBag.invoice_header_id = Session["invoice_header_id"]; // new SelectList(db.Invoice_header, "Id", "invoice_no");
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description");
-            return View();
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description");
+
+            var _new_item = new Invoice_details();
+            _new_item.clients_id = _client_id;
+            _new_item.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
+            return View(_new_item);
         }
 
         // POST: Invoice_details/Create
@@ -94,31 +98,36 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount")] Invoice_details invoice_details)
         {
+            int _client_id = -1;
+
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            _client_id = Convert.ToInt32(Session["client_id"]);
+
+            invoice_details.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
+            invoice_details.clients_id = _client_id;
+
             if (ModelState.IsValid)
             {
-                if (Session["client_id"] == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
-                invoice_details.clients_id = Convert.ToInt32(Session["client_id"]); 
-
-                invoice_details.invoice_header_id = Convert.ToInt32(Session["invoice_header_id"]);
-
                 db.Invoice_details.Add(invoice_details);
                 db.SaveChanges();
 
                 var result = GetData();
 
-                return RedirectToAction("Index", new { id = Session["invoice_header_id"] });
+                return RedirectToAction("Index", new { @id = Session["invoice_header_id"] });
             }
-
-            ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
-            ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", invoice_details.tax_rate_id);
-            return View(invoice_details);
+            else
+            {
+                ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
+                ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
+                return View(invoice_details);
+            }
         }
 
         // GET: Invoice_details/Edit/5
@@ -133,9 +142,12 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
+
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", invoice_details.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
             return View(invoice_details);
         }
 
@@ -152,9 +164,12 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = Session["invoice_header_id"] });
             }
-            ViewBag.article_id = new SelectList(db.Articles, "Id", "article_no", invoice_details.article_id);
+
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
-            ViewBag.tax_rate_id = new SelectList(db.Tax_rates, "Id", "description", invoice_details.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
             return View(invoice_details);
         }
 

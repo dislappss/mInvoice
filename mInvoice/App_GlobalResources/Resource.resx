@@ -399,4 +399,13 @@
   <data name="copy_invoice" xml:space="preserve">
     <value>Copy invoice</value>
   </data>
+  <data name="optonal_parameters" xml:space="preserve">
+    <value>Optional parameters</value>
+  </data>
+  <data name="last_index_invoices" xml:space="preserve">
+    <value>Last index (invoices)</value>
+  </data>
+  <data name="prefix_invoices" xml:space="preserve">
+    <value>Prefix (invoices)</value>
+  </data>
 </root>

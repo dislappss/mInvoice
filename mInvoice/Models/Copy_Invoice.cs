@@ -18,9 +18,9 @@ namespace mInvoice.Models
         public string quantity_3_column_name { get; set; }
 
         [Display(Name = "quantity_2", ResourceType = typeof(Resource))]
-        public decimal quantity_2 { get; set; }
+        public decimal? quantity_2 { get; set; }
 
         [Display(Name = "quantity_2", ResourceType = typeof(Resource))]
-        public decimal quantity_3 { get; set; }
+        public decimal? quantity_3 { get; set; }
     }
 }

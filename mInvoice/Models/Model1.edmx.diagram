@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="myinvoice_dbModel.Articles" Width="1.5" PointX="7.5" PointY="9.375" />
-        <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.75" PointX="3" PointY="2.125" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Countries" Width="1.5" PointX="0.75" PointY="3.25" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="5.25" PointY="1.125" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Invoice_header" Width="2.125" PointX="7.25" PointY="2.875" />

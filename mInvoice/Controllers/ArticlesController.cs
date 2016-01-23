@@ -52,13 +52,23 @@ namespace mInvoice.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
-            if (Session["email"] != null
-                && Session["client_id"] != null)
+            if (//Session["email"] != null && 
+                Session["client_id"] != null)
             {
                 ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
-                return View();
+
+                Articles _new_item = new Articles();
+
+                _new_item.clients_id = _client_id;
+
+                return View(_new_item);
             }
             else
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,15 +81,15 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
             if (ModelState.IsValid)
-            {
-                if (Session["client_id"] == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
+            {               
                 articles.clients_id = Convert.ToInt32(Session["client_id"]); 
 
                 db.Articles.Add(articles);
