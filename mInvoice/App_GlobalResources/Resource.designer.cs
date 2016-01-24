@@ -250,6 +250,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Countries ähnelt.
+        /// </summary>
+        public static string countriesid {
+            get {
+                return ResourceManager.GetString("countriesid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Country ähnelt.
         /// </summary>
         public static string country_code {
@@ -876,6 +885,33 @@ namespace mInvoice.App_GlobalResources {
         public static string tax_rate {
             get {
                 return ResourceManager.GetString("tax_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text to table ähnelt.
+        /// </summary>
+        public static string text_to_table {
+            get {
+                return ResourceManager.GetString("text_to_table", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text under the table ähnelt.
+        /// </summary>
+        public static string text_under_the_table {
+            get {
+                return ResourceManager.GetString("text_under_the_table", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text under the table (bold) ähnelt.
+        /// </summary>
+        public static string text_under_the_table_bold {
+            get {
+                return ResourceManager.GetString("text_under_the_table_bold", resourceCulture);
             }
         }
         

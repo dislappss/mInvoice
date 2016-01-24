@@ -51,9 +51,12 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); 
+            //ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); 
 
-            return View();
+            Tax_rates _item = new Tax_rates();
+            _item.clients_id = Convert.ToInt32(Session["client_id"]);
+
+            return View(_item);
         }
 
         // POST: Tax_rates/Create

@@ -394,7 +394,7 @@
     <value>Rechnung kopieren</value>
   </data>
   <data name="optonal_parameters" xml:space="preserve">
-    <value>Optional Parameter</value>
+    <value>Optionale Parameter</value>
   </data>
   <data name="last_index_invoices" xml:space="preserve">
     <value>Lätzter Index (Rechnungen)</value>
@@ -406,6 +406,18 @@
     <value>Rechn.-Nr. Schablone</value>
   </data>
   <data name="no_template_invoices_info" xml:space="preserve">
-    <value>e.g. "%P%Y-%N", %P-Prefix, %Y-Jahr, %N-Nummer ("INV16-000101")</value>
+    <value>z.B. "%P%Y-%N", %P-Prefix, %Y-Jahr, %N-Nummer ("INV16-000101")</value>
+  </data>
+  <data name="countriesid" xml:space="preserve">
+    <value>Länder</value>
+  </data>
+  <data name="text_to_table" xml:space="preserve">
+    <value>Text vor der Tabelle</value>
+  </data>
+  <data name="text_under_the_table" xml:space="preserve">
+    <value>Text nach der Tabelle</value>
+  </data>
+  <data name="text_under_the_table_bold" xml:space="preserve">
+    <value>Text nach der Tabelle (bold)</value>
   </data>
 </root>

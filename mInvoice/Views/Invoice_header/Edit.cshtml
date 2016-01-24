@@ -137,6 +137,7 @@
 }
 
 <div>
+    @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = Model.Id }, new { @class = "btn btn-default" })
     @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @class = "btn btn-default" })
 </div>
 

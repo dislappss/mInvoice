@@ -48,10 +48,10 @@
             @Html.ActionLink(@Resources.Resource.order_date, "Index",
                 new { sortOrder = ViewBag.order_dateSortParm })
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink(@Resources.Resource.delivery_date, "Index",
                 new { sortOrder = ViewBag.delivery_dateSortParm })
-        </th>
+        </th>*@
         @*<th>
                 @Html.ActionLink(@Resources.Resource.city, "Index",
                     new { sortOrder = ViewBag.citySortParm })
@@ -81,9 +81,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.order_date)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.delivery_date)
-            </td>
+            </td>*@
             @*<td>
                     @Html.DisplayFor(modelItem => item.city)
                 </td>

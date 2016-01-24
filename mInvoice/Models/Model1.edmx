@@ -44,6 +44,9 @@
           <Property Name="prefix_invoices" Type="nvarchar" MaxLength="10" />
           <Property Name="last_index_invoices" Type="int" Nullable="false" />
           <Property Name="no_template_invoices" Type="nvarchar" MaxLength="50" />
+          <Property Name="text_to_table" Type="nvarchar" MaxLength="500" />
+          <Property Name="text_under_the_table_bold" Type="nvarchar" MaxLength="500" />
+          <Property Name="text_under_the_table" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -578,6 +581,9 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="last_index_invoices" Type="Int32" Nullable="false" />
           <Property Name="no_template_invoices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="text_to_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table_bold" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -930,6 +936,9 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="text_under_the_table" ColumnName="text_under_the_table" />
+                <ScalarProperty Name="text_under_the_table_bold" ColumnName="text_under_the_table_bold" />
+                <ScalarProperty Name="text_to_table" ColumnName="text_to_table" />
                 <ScalarProperty Name="no_template_invoices" ColumnName="no_template_invoices" />
                 <ScalarProperty Name="last_index_invoices" ColumnName="last_index_invoices" />
                 <ScalarProperty Name="prefix_invoices" ColumnName="prefix_invoices" />

@@ -77,6 +77,15 @@ namespace mInvoice.Models
 
         [Display(Name = "no_template_invoices", ResourceType = typeof(Resource))]
         public string no_template_invoices { get; set; }
+
+        [Display(Name = "text_to_table", ResourceType = typeof(Resource))]
+        public string text_to_table { get; set; }
+
+        [Display(Name = "text_under_the_table_bold", ResourceType = typeof(Resource))]
+        public string text_under_the_table_bold { get; set; }
+
+        [Display(Name = "text_under_the_table", ResourceType = typeof(Resource))]
+        public string text_under_the_table { get; set; }
     }
 
    

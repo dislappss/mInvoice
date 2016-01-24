@@ -47,6 +47,9 @@ namespace mInvoice.Models
         public string prefix_invoices { get; set; }
         public int last_index_invoices { get; set; }
         public string no_template_invoices { get; set; }
+        public string text_to_table { get; set; }
+        public string text_under_the_table_bold { get; set; }
+        public string text_under_the_table { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }

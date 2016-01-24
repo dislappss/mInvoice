@@ -89,6 +89,7 @@ namespace mInvoice.Models
         [Required]
         //[LocalizedDisplayName("country_code")]
 
+        [Display(Name = "countriesid", ResourceType = typeof(Resource))]
         public int countriesid { get; set; }
 
         [Required]

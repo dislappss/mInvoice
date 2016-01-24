@@ -197,9 +197,35 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.no_template_invoices, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.no_template_invoices, "", new { @class = "text-danger" })
-                <h5> @Resources.Resource.no_template_invoices_info</h5>
+                <h6> @Resources.Resource.no_template_invoices_info</h6>
             </div>
         </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.text_to_table , htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.text_to_table, new { cols = 60, rows = 10, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.text_to_table, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.text_under_the_table_bold  , htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.text_under_the_table_bold, new { cols = 60, rows = 10, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.text_under_the_table_bold, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.text_under_the_table, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.text_under_the_table, new { cols = 60, rows = 10, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.text_under_the_table, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

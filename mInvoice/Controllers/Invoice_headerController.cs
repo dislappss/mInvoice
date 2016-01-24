@@ -13,7 +13,7 @@ namespace mInvoice.Controllers
 {
     public class Invoice_headerController : BaseController
     {
-        private myinvoice_dbEntities db = new myinvoice_dbEntities();
+        private myinvoice_dbEntities m_db = new myinvoice_dbEntities();
 
         // GET: Invoice_header
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -45,7 +45,7 @@ namespace mInvoice.Controllers
 
             int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
-            var _headers = from s in db.Invoice_header
+            var _headers = from s in m_db.Invoice_header
                            where s.clients_id == _clientsysid
                            select s;
 
@@ -121,7 +121,7 @@ namespace mInvoice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice_header invoice_header = db.Invoice_header.Find(id);
+            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
             if (invoice_header == null)
             {
                 return HttpNotFound();
@@ -144,8 +144,8 @@ namespace mInvoice.Controllers
 
             DateTime _now = DateTime.Now;
 
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
-            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no");
+            ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name");
+            ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no");
 
             var _new_item = new Invoice_header ();
 
@@ -174,13 +174,13 @@ namespace mInvoice.Controllers
 
                 invoice_header.clients_id = _client_id; 
 
-                db.Invoice_header.Add(invoice_header);
-                db.SaveChanges();
+                m_db.Invoice_header.Add(invoice_header);
+                m_db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
@@ -196,7 +196,7 @@ namespace mInvoice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice_header invoice_header = db.Invoice_header.Find(id);
+            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
             if (invoice_header == null)
             {
                 return HttpNotFound();
@@ -204,8 +204,8 @@ namespace mInvoice.Controllers
 
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
@@ -218,9 +218,9 @@ namespace mInvoice.Controllers
         {           
             if (ModelState.IsValid)
             {
-                db.Entry(invoice_header).State = EntityState.Modified;
+                m_db.Entry(invoice_header).State = EntityState.Modified;
 
-                db.SaveChanges();
+                m_db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -231,8 +231,8 @@ namespace mInvoice.Controllers
 
             var _client_id = Convert.ToInt32(Session["client_id"]);
            
-            ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             return View(invoice_header);
         }
 
@@ -248,7 +248,7 @@ namespace mInvoice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice_header invoice_header = db.Invoice_header.Find(id);
+            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
             if (invoice_header == null)
             {
                 return HttpNotFound();
@@ -262,13 +262,13 @@ namespace mInvoice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             // Details
-            IQueryable<Invoice_details> _details = db.Invoice_details.Where(x => x.invoice_header_id == id);
-            db.Invoice_details.RemoveRange(_details); 
+            IQueryable<Invoice_details> _details = m_db.Invoice_details.Where(x => x.invoice_header_id == id);
+            m_db.Invoice_details.RemoveRange(_details); 
             
             // Header
-            Invoice_header invoice_header = db.Invoice_header.Find(id);
-            db.Invoice_header.Remove(invoice_header);
-            db.SaveChanges();
+            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
+            m_db.Invoice_header.Remove(invoice_header);
+            m_db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -283,8 +283,13 @@ namespace mInvoice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Invoice_header _invoice_header = m_db.Invoice_header.Find(id);
+
             Copy_Invoice _copy_Invoice = new Copy_Invoice();
             _copy_Invoice.invoice_header_id = (int)id;
+            _copy_Invoice.quantity_2_column_name = _invoice_header.quantity_2_column_name;
+            _copy_Invoice.quantity_3_column_name = _invoice_header.quantity_3_column_name;
 
             return View(_copy_Invoice);
         }
@@ -430,7 +435,7 @@ namespace mInvoice.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                m_db.Dispose();
             }
             base.Dispose(disposing);
         }
