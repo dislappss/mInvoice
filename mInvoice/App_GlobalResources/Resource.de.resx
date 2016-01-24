@@ -402,4 +402,10 @@
   <data name="prefix_invoices" xml:space="preserve">
     <value>Prefix (Rechnungen)</value>
   </data>
+  <data name="no_template_invoices" xml:space="preserve">
+    <value>Rechn.-Nr. Schablone</value>
+  </data>
+  <data name="no_template_invoices_info" xml:space="preserve">
+    <value>e.g. "%P%Y-%N", %P-Prefix, %Y-Jahr, %N-Nummer ("INV16-000101")</value>
+  </data>
 </root>

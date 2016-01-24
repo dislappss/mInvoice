@@ -583,6 +583,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoice-no. template ähnelt.
+        /// </summary>
+        public static string no_template_invoices {
+            get {
+                return ResourceManager.GetString("no_template_invoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die e.g. &quot;%P%Y-%N&quot;, %P-Prefix, %Y-Year, %N-Number (&quot;INV16-000101&quot;) ähnelt.
+        /// </summary>
+        public static string no_template_invoices_info {
+            get {
+                return ResourceManager.GetString("no_template_invoices_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Optional parameters ähnelt.
         /// </summary>
         public static string optonal_parameters {

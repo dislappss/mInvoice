@@ -68,13 +68,15 @@ namespace mInvoice.Models
         [Display(Name = "picture", ResourceType = typeof(Resource))]
         public byte[] picture { get; set; }
 
-        [Required]
         [Display(Name = "prefix_invoices", ResourceType = typeof(Resource))]
         public string prefix_invoices { get; set; }
 
         [Required]
         [Display(Name = "last_index_invoices", ResourceType = typeof(Resource))]
         public int last_index_invoices { get; set; }
+
+        [Display(Name = "no_template_invoices", ResourceType = typeof(Resource))]
+        public string no_template_invoices { get; set; }
     }
 
    

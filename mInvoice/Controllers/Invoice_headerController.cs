@@ -261,6 +261,11 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Details
+            IQueryable<Invoice_details> _details = db.Invoice_details.Where(x => x.invoice_header_id == id);
+            db.Invoice_details.RemoveRange(_details); 
+            
+            // Header
             Invoice_header invoice_header = db.Invoice_header.Find(id);
             db.Invoice_header.Remove(invoice_header);
             db.SaveChanges();
@@ -295,21 +300,21 @@ namespace mInvoice.Controllers
 
             if (ModelState.IsValid)
             {
-                using (var context = new myinvoice_dbEntities())
+                using (var _db = new myinvoice_dbEntities())
                 {
-                    using (var dbContextTransaction = context.Database.BeginTransaction())
+                    using (var dbContextTransaction = _db.Database.BeginTransaction())
                     {
                         try
                         {
                             // Old header
-                            Invoice_header _invoice_header = context.Invoice_header.Find(copy_invoice.invoice_header_id);
+                            Invoice_header _invoice_header = _db.Invoice_header.Find(copy_invoice.invoice_header_id);
 
-                            // Old deatails
+                            // Old details
                             int _invoice_header_id = copy_invoice.invoice_header_id;
                             int _client_id = Convert.ToInt32(Session["client_id"]);
 
                             IQueryable<Invoice_details> invoice_details_arr =
-                                from cust in context.Invoice_details
+                                from cust in _db.Invoice_details
                                 where cust.invoice_header_id == _invoice_header_id &&
                                       cust.clients_id == _client_id
                                 select cust;
@@ -322,15 +327,16 @@ namespace mInvoice.Controllers
 
                             DateTime _now = DateTime.Now;
                             _new_header.order_date = _now;
+                            _new_header.invoice_no = getNewInvoiceNo(_db);
                             _new_header.delivery_date = _now;
                             if (!string.IsNullOrEmpty(copy_invoice.quantity_2_column_name))
                                 _new_header.quantity_2_column_name = copy_invoice.quantity_2_column_name;
                             if (!string.IsNullOrEmpty(copy_invoice.quantity_3_column_name))
                                 _new_header.quantity_3_column_name = copy_invoice.quantity_3_column_name;
 
-                            Invoice_header _inserted_header = context.Invoice_header.Add(_new_header);
+                            Invoice_header _inserted_header = _db.Invoice_header.Add(_new_header);
 
-                            context.SaveChanges();
+                            _db.SaveChanges();
 
                             _new_invoice_header_id = _inserted_header.Id;
 
@@ -348,20 +354,76 @@ namespace mInvoice.Controllers
                                 if (copy_invoice.quantity_3 >= 0)
                                     _new_position.quantity_3 = copy_invoice.quantity_3;
 
-                                context.Invoice_details.Add(_new_position);
-                                context.SaveChanges();                                
+                                _db.Invoice_details.Add(_new_position);
+                                _db.SaveChanges();                                
                             }
+
+                            // Update Clients
+                            Clients _client = _db.Clients.FirstOrDefault(x => x.Id == _client_id);
+                            _client.last_index_invoices = _client.last_index_invoices + 1;
+                            _db.Entry(_client).State = EntityState.Modified;
+                            _db.SaveChanges();  
 
                             dbContextTransaction.Commit(); 
                         }
+                        catch (SqlException ex)
+                        {
+                            ModelState.AddModelError("", ex);
+                            dbContextTransaction.Rollback();
+                        }
                         catch (Exception ex)
                         {
+                            ModelState.AddModelError("", ex);
                             dbContextTransaction.Rollback();
                         }
                     }
                 }
             }
-            return View(_new_header);
+            return RedirectToAction("Edit", new { id = _new_invoice_header_id });
+        }
+
+        private string getNewInvoiceNo(myinvoice_dbEntities db)
+        {
+            string _ret_val = null;
+            string _prefix_invoices = null, _no_template_invoices = null;
+            int _last_index_invoices = 1;
+            int _client_id = Convert.ToInt32(Session["client_id"]);
+           
+
+            Clients _client = db.Clients.FirstOrDefault (x => x.Id == _client_id);
+
+            _prefix_invoices = _client.prefix_invoices;
+            _no_template_invoices = _client.no_template_invoices;
+            _last_index_invoices = _client.last_index_invoices;
+
+            string _prefix = !string.IsNullOrEmpty(_prefix_invoices) ? _prefix_invoices : "";
+            string _year = DateTime.Today.Year.ToString();
+            _year = _year.Substring(2, 2);
+            string _number = getNumberStringByNumber(_last_index_invoices + 1);
+
+            if (!string.IsNullOrEmpty(_no_template_invoices))
+            {
+                _ret_val = _no_template_invoices.Replace ("%P", _prefix).Replace ("%Y", _year).Replace ("%N", _number);
+            }
+            else
+            {
+                _ret_val = _number;
+            }
+
+            return _ret_val;
+        }
+
+        private string getNumberStringByNumber(int Number)
+        {
+            string _ret_val = null;
+
+            int _len = Number.ToString().Length;
+            int _count_of_zeros = 6 - _len;
+
+            _ret_val = new String('0', _count_of_zeros);
+            _ret_val = _ret_val + Number;            
+
+            return _ret_val;
         }
 
         protected override void Dispose(bool disposing)

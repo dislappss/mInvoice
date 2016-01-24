@@ -41,8 +41,9 @@
           <Property Name="iban" Type="nvarchar" MaxLength="50" />
           <Property Name="bic" Type="nvarchar" MaxLength="50" />
           <Property Name="picture" Type="image" />
-          <Property Name="prefix_invoices" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="prefix_invoices" Type="nvarchar" MaxLength="10" />
           <Property Name="last_index_invoices" Type="int" Nullable="false" />
+          <Property Name="no_template_invoices" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -574,8 +575,9 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
-          <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="last_index_invoices" Type="Int32" Nullable="false" />
+          <Property Name="no_template_invoices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -928,6 +930,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="no_template_invoices" ColumnName="no_template_invoices" />
                 <ScalarProperty Name="last_index_invoices" ColumnName="last_index_invoices" />
                 <ScalarProperty Name="prefix_invoices" ColumnName="prefix_invoices" />
                 <ScalarProperty Name="AspNetUsers_id" ColumnName="AspNetUsers_id" />

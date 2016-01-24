@@ -2,8 +2,8 @@
     var _article_id = $('#article_id').val();
     var _price_netto = $('#price_netto').val();
 
-    if (is_edit ||
-        _price_netto === "" && typeof _price_netto === "string") {
+    //if (is_edit ||
+    //    _price_netto === "" && typeof _price_netto === "string") {
 
         $.ajax({
             url: '/Invoice_details/getPrice',
@@ -18,15 +18,15 @@
             //    alert("responseText: " + xhr.responseText);
             //}
         });
-    }
+    //}
 }
 
 function getTaxRate(is_edit) {
     var _article_id = $('#article_id').val();
     var _tax_rate_id = $('#tax_rate_id').val();
 
-    if (is_edit ||
-        _tax_rate_id === "" && typeof _tax_rate_id === "string") {
+    //if (is_edit ||
+    //    _tax_rate_id === "" && typeof _tax_rate_id === "string") {
 
         $.ajax({
             url: '/Invoice_details/getTax_rate_id',
@@ -41,15 +41,15 @@ function getTaxRate(is_edit) {
             //    alert("responseText: " + xhr.responseText);
             //}
         });
-    }
+    //}
 }
 
 function getArticleDescription(is_edit) {
     var _article_id = $('#article_id').val();
     var _description = $('#description').val();
 
-    if (is_edit ||
-        _description === "" && typeof _description === "string") {
+    //if (is_edit ||
+    //    _description === "" && typeof _description === "string") {
 
         $.ajax({
             url: '/Invoice_details/getArticleDescription',
@@ -64,5 +64,5 @@ function getArticleDescription(is_edit) {
             //    alert("responseText: " + xhr.responseText);
             //}
         });
-    }
+    //}
 }

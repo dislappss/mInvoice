@@ -92,6 +92,7 @@ namespace mInvoice.Controllers
                 _new_obj.email = Session["email"].ToString();
             _new_obj.prefix_invoices = "INV";
             _new_obj.last_index_invoices = 1;
+            _new_obj.no_template_invoices = "%P%Y-%N";
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
             return View(_new_obj);
         }
@@ -101,7 +102,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices")] Clients clients)
+        public ActionResult Create([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices")] Clients clients)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +142,7 @@ namespace mInvoice.Controllers
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices")] Clients clients, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices")] Clients clients, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {

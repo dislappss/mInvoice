@@ -46,6 +46,7 @@ namespace mInvoice.Models
         public string AspNetUsers_id { get; set; }
         public string prefix_invoices { get; set; }
         public int last_index_invoices { get; set; }
+        public string no_template_invoices { get; set; }
     
         public virtual Countries Countries { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }
