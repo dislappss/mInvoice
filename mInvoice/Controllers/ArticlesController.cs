@@ -28,7 +28,8 @@ namespace mInvoice.Controllers
                                               select cust;
 
 
-            var articles = _list.Include(a => a.Tax_rates);
+            var articles = _list.Include(a => a.Tax_rates).Include(a => a.quantity_units_id );
+
             return View(articles.ToList());
         }
 
@@ -63,6 +64,7 @@ namespace mInvoice.Controllers
                 Session["client_id"] != null)
             {
                 ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
+                ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description");
 
                 Articles _new_item = new Articles();
 
@@ -79,7 +81,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
+        public ActionResult Create([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,quantity_units_id,CreatedAt,UpdatedAt")] Articles articles)
         {
             if (Session["client_id"] == null)
             {
@@ -98,6 +100,8 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id  );
+
             return View(articles);
         }
 
@@ -115,8 +119,13 @@ namespace mInvoice.Controllers
             {
                 return HttpNotFound();
             }
+            
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id);
+
+
             return View(articles);
+
         }
 
         // POST: Articles/Edit/5
@@ -124,7 +133,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,CreatedAt,UpdatedAt")] Articles articles)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,article_no,price,description,tax_rate_id,quantity_units_id,CreatedAt,UpdatedAt")] Articles articles)
         {
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
@@ -135,6 +144,8 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id);
+
             return View(articles);
         }
 

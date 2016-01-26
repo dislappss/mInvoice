@@ -12,27 +12,23 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice_details
+    public partial class Quantity_units
     {
+        public Quantity_units()
+        {
+            this.Articles = new HashSet<Articles>();
+            this.Invoice_details = new HashSet<Invoice_details>();
+        }
+    
         public int Id { get; set; }
-        public int invoice_header_id { get; set; }
-        public int article_id { get; set; }
+        public int clients_id { get; set; }
         public string description { get; set; }
-        public int tax_rate_id { get; set; }
-        public decimal quantity { get; set; }
-        public Nullable<decimal> quantity_2 { get; set; }
-        public Nullable<decimal> quantity_3 { get; set; }
-        public decimal price_netto { get; set; }
-        public Nullable<decimal> discount { get; set; }
+        public string code { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public int clients_id { get; set; }
-        public int quantity_units_id { get; set; }
     
-        public virtual Articles Articles { get; set; }
-        public virtual Invoice_header Invoice_header { get; set; }
-        public virtual Tax_rates Tax_rates { get; set; }
         public virtual Clients Clients { get; set; }
-        public virtual Quantity_units Quantity_units { get; set; }
+        public virtual ICollection<Articles> Articles { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
     }
 }

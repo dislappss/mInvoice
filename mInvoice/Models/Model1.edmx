@@ -15,6 +15,7 @@
           <Property Name="price" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="200" />
           <Property Name="tax_rate_id" Type="int" Nullable="false" />
+          <Property Name="quantity_units_id" Type="int" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -106,6 +107,7 @@
           <Property Name="quantity" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="quantity_2" Type="numeric" Precision="15" Scale="2" />
           <Property Name="quantity_3" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="quantity_units_id" Type="int" Nullable="false" />
           <Property Name="price_netto" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="discount" Type="numeric" Precision="15" Scale="2" />
           <Property Name="CreatedAt" Type="smalldatetime" />
@@ -138,6 +140,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clients_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Quantity_units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
@@ -198,6 +211,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Principal>
             <Dependent Role="Articles">
               <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="quantity_units_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,6 +334,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Invoice_details_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_invoice_details_tax_rates">
           <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
           <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
@@ -357,6 +394,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Quantity_units_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quantity_units">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tax_rates_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="*" />
@@ -377,6 +426,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_header" EntityType="Self.Invoice_header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quantity_units" EntityType="Self.Quantity_units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="v_AspNetUsers" EntityType="Self.v_AspNetUsers" store:Type="Views" store:Schema="dbo">
@@ -397,6 +447,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           </EntitySet>
           <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
             <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_Quantity_units" Association="Self.FK_Articles_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
             <End Role="Articles" EntitySet="Articles" />
           </AssociationSet>
           <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
@@ -435,6 +489,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Invoice_header" EntitySet="Invoice_header" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Quantity_units" Association="Self.FK_Invoice_details_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
           <AssociationSet Name="FK_invoice_details_tax_rates" Association="Self.FK_invoice_details_tax_rates">
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
@@ -450,6 +508,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <AssociationSet Name="FK_invoice_header_Customers" Association="Self.FK_invoice_header_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quantity_units_Clients" Association="Self.FK_Quantity_units_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
           </AssociationSet>
           <AssociationSet Name="FK_Tax_rates_Clients" Association="Self.FK_Tax_rates_Clients">
             <End Role="Clients" EntitySet="Clients" />
@@ -530,6 +592,19 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Tax_rates" EntitySet="Tax_rates" />
           </AssociationSet>
+          <EntitySet Name="Quantity_units" EntityType="myinvoice_dbModel.Quantity_units" />
+          <AssociationSet Name="FK_Quantity_units_Clients" Association="myinvoice_dbModel.FK_Quantity_units_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_Quantity_units" Association="myinvoice_dbModel.FK_Articles_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Quantity_units" Association="myinvoice_dbModel.FK_Invoice_details_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articles">
           <Key>
@@ -546,6 +621,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
           <Property Name="clients_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
+          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Articles" ToRole="Quantity_units" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -584,6 +661,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="text_to_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="text_under_the_table_bold" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="text_under_the_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Quantity_units_Clients" FromRole="Clients" ToRole="Quantity_units" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -805,6 +883,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Invoice_details" ToRole="Tax_rates" />
           <Property Name="clients_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Invoice_details" ToRole="Clients" />
+          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Invoice_details_Quantity_units" FromRole="Invoice_details" ToRole="Quantity_units" />
         </EntityType>
         <Association Name="FK_invoice_details_articles">
           <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
@@ -913,6 +993,56 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Quantity_units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Quantity_units_Clients" FromRole="Quantity_units" ToRole="Clients" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Quantity_units" ToRole="Articles" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Quantity_units" FromRole="Quantity_units" ToRole="Invoice_details" />
+        </EntityType>
+        <Association Name="FK_Quantity_units_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quantity_units">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_Quantity_units">
+          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Quantity_units">
+          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -922,6 +1052,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Articles">
               <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
                 <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -1060,6 +1191,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Invoice_details">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_details">
               <MappingFragment StoreEntitySet="Invoice_details">
+                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
                 <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -1090,6 +1222,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quantity_units">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Quantity_units">
+              <MappingFragment StoreEntitySet="Quantity_units">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

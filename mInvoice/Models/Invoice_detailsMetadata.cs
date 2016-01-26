@@ -27,6 +27,9 @@ namespace mInvoice.Models
         [Display(Name = "tax_rate", ResourceType = typeof(Resource))]
         public int tax_rate_id { get; set; }
 
+        [Display(Name = "quantity_units_id", ResourceType = typeof(Resource))]
+        public int quantity_units_id { get; set; }
+
         // [LocalizedDisplayName("description")]
         [Display(Name = "description", ResourceType = typeof(Resource))]
         public string description { get; set; }

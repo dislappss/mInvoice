@@ -34,5 +34,6 @@ namespace mInvoice.Models
         public virtual DbSet<Tax_rates> Tax_rates { get; set; }
         public virtual DbSet<Invoice_details> Invoice_details { get; set; }
         public virtual DbSet<v_AspNetUsers> v_AspNetUsers { get; set; }
+        public virtual DbSet<Quantity_units> Quantity_units { get; set; }
     }
 }

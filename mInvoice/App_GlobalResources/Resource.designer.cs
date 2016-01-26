@@ -493,6 +493,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Get quantity unit ähnelt.
+        /// </summary>
+        public static string get_quantity_unit {
+            get {
+                return ResourceManager.GetString("get_quantity_unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Get Tax Rate ähnelt.
         /// </summary>
         public static string get_tax_rates {
@@ -795,6 +804,24 @@ namespace mInvoice.App_GlobalResources {
         public static string quantity_3_column_name {
             get {
                 return ResourceManager.GetString("quantity_3_column_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity unit ähnelt.
+        /// </summary>
+        public static string quantity_units {
+            get {
+                return ResourceManager.GetString("quantity_units", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity unit ähnelt.
+        /// </summary>
+        public static string quantity_units_id {
+            get {
+                return ResourceManager.GetString("quantity_units_id", resourceCulture);
             }
         }
         

@@ -426,4 +426,13 @@
   <data name="text_under_the_table_bold" xml:space="preserve">
     <value>Text under the table (bold)</value>
   </data>
+  <data name="quantity_units" xml:space="preserve">
+    <value>Quantity unit</value>
+  </data>
+  <data name="get_quantity_unit" xml:space="preserve">
+    <value>Get quantity unit</value>
+  </data>
+  <data name="quantity_units_id" xml:space="preserve">
+    <value>Quantity unit</value>
+  </data>
 </root>

@@ -29,6 +29,10 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_header_Clients" />
         <EntityTypeShape EntityType="myinvoice_dbModel.v_AspNetUsers" Width="1.5" PointX="10.375" PointY="0.75" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Tax_rates_Clients" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Quantity_units" Width="1.5" PointX="5.625" PointY="13.75" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Quantity_units_Clients" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Articles_Quantity_units" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_details_Quantity_units" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

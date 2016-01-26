@@ -44,6 +44,29 @@ function getTaxRate(is_edit) {
     //}
 }
 
+function getQuantity_unit(is_edit) {
+    var _article_id = $('#article_id').val();
+    var _quantity_units_id = $('#quantity_units_id').val();
+
+    //if (is_edit ||
+    //    _quantity_units_id === "" && typeof _quantity_units_id === "string") {
+
+    $.ajax({
+        url: '/Invoice_details/getQuantity_unit',
+        type: "GET",
+        dataType: "JSON",
+        data: { article_id: _article_id },
+        success: function (ret_value) {
+            $("#quantity_units_id").val(ret_value);
+        },
+        //error: function (xhr, err) {
+        //    alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+        //    alert("responseText: " + xhr.responseText);
+        //}
+    });
+    //}
+}
+
 function getArticleDescription(is_edit) {
     var _article_id = $('#article_id').val();
     var _description = $('#description').val();

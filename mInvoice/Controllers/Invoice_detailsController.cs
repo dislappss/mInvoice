@@ -37,7 +37,8 @@ namespace mInvoice.Controllers
             }
             else
             {
-                var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+                var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
+
                 return View(invoice_details.ToList());
             }
         }
@@ -53,7 +54,7 @@ namespace mInvoice.Controllers
                       cust.clients_id == _clientsysid
                 //orderby cust.Name ascending
                 select cust;
-            var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
+            var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
             return result;
         }
 
@@ -86,6 +87,7 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where (x=>x.clients_id == _client_id ), "Id", "article_no");
             ViewBag.invoice_header_id = Session["invoice_header_id"]; // new SelectList(db.Invoice_header, "Id", "invoice_no");
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description");
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description");
 
             var _new_item = new Invoice_details();
             _new_item.clients_id = _client_id;
@@ -98,7 +100,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount")] Invoice_details invoice_details)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount")] Invoice_details invoice_details)
         {
             int _client_id = -1;
 
@@ -126,7 +128,10 @@ namespace mInvoice.Controllers
                 ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
                 ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
                 ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
+                ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+                
                 return View(invoice_details);
+
             }
         }
 
@@ -148,6 +153,8 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+
             return View(invoice_details);
         }
 
@@ -156,7 +163,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
         {
             if (ModelState.IsValid)
             {
@@ -170,6 +177,8 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+
             return View(invoice_details);
         }
 
@@ -224,7 +233,6 @@ namespace mInvoice.Controllers
             }
             else
                 return null;
-
         }
 
         public JsonResult getTax_rate_id(string article_id)
@@ -242,9 +250,7 @@ namespace mInvoice.Controllers
             }
             else
                 return null;
-
         }
-
 
         public JsonResult getArticleDescription(string article_id)
         {
@@ -261,7 +267,23 @@ namespace mInvoice.Controllers
             }
             else
                 return null;
+        }
 
+        public JsonResult getQuantity_unit(string article_id)
+        {
+            if (!string.IsNullOrEmpty(article_id))
+            {
+                Articles articles = db.Articles.Find(Convert.ToInt32(article_id));
+                if (articles != null)
+                {
+                    string result = articles.quantity_units_id.ToString();
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
         }
        
     }
