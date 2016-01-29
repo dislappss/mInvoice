@@ -429,4 +429,13 @@
   <data name="quantity_units_id" xml:space="preserve">
     <value>Mengeneinheit</value>
   </data>
+  <data name="date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="invoice" xml:space="preserve">
+    <value>Rechnung</value>
+  </data>
+  <data name="sum_price" xml:space="preserve">
+    <value>Gesamtpreis</value>
+  </data>
 </root>

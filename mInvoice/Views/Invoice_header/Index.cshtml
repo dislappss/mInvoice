@@ -105,6 +105,9 @@
             <td style="border:none ">
                 @Html.ActionLink(@Resources.Resource.copy_invoice, "Copy_invoice", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-md" })
             </td>
+            <td style="border:none ">
+                @Html.ActionLink(@Resources.Resource.invoice, "rp_invoice_details", "Reports", new { id = item.Id }, new { @class = "btn btn-primary btn-md" })
+            </td>
         </tr>
     }
 

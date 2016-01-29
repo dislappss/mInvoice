@@ -425,43 +425,35 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Countries\Create.cshtml" />
     <Content Include="Views\Countries\Delete.cshtml" />
-    <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Payment_method\Create.cshtml" />
     <Content Include="Views\Payment_method\Delete.cshtml" />
-    <Content Include="Views\Payment_method\Details.cshtml" />
     <Content Include="Views\Payment_method\Edit.cshtml" />
     <Content Include="Views\Payment_method\Index.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
-    <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Tax_rates\Create.cshtml" />
     <Content Include="Views\Tax_rates\Delete.cshtml" />
-    <Content Include="Views\Tax_rates\Details.cshtml" />
     <Content Include="Views\Tax_rates\Edit.cshtml" />
     <Content Include="Views\Tax_rates\Index.cshtml" />
     <Content Include="Views\Invoice_header\Create.cshtml" />
     <Content Include="Views\Invoice_header\Delete.cshtml" />
-    <Content Include="Views\Invoice_header\Details.cshtml" />
     <Content Include="Views\Invoice_header\Edit.cshtml" />
     <Content Include="Views\Invoice_header\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
-    <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Invoice_details\Create.cshtml" />
     <Content Include="Views\Invoice_details\Delete.cshtml" />
-    <Content Include="Views\Invoice_details\Details.cshtml" />
     <Content Include="Views\Invoice_details\Edit.cshtml" />
     <Content Include="Views\Invoice_details\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
@@ -471,9 +463,9 @@
     <Content Include="Views\Invoice_header\Copy_invoice.cshtml" />
     <Content Include="Views\Quantity_units\Create.cshtml" />
     <Content Include="Views\Quantity_units\Delete.cshtml" />
-    <Content Include="Views\Quantity_units\Details.cshtml" />
     <Content Include="Views\Quantity_units\Edit.cshtml" />
     <Content Include="Views\Quantity_units\Index.cshtml" />
+    <Content Include="Views\Reports\invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -495,6 +487,7 @@
     <EmbeddedResource Include="Migrations\201601141917262_Init.resx">
       <DependentUpon>201601141917262_Init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\invoice.rdlc" />
     <None Include="Models\AspNetDataClasses.dbml.layout">
       <DependentUpon>AspNetDataClasses.dbml</DependentUpon>
     </None>

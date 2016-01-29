@@ -362,20 +362,23 @@ FROM            Articles</CommandText>
                     <CommandText>SELECT        Clients.clientname, Clients.email AS Clients_email, Clients.owner AS Clients_owner, Clients.street AS Clients_street, Clients.zip AS Clients_zip, Clients.city AS Clients_city, Clients.phone AS Clients_phone, 
                          Clients.fax AS Clients_fax, Clients.www AS Clients_www, Clients.ustd_id AS Clients_ustd_id, Clients.finance_office AS Clients_finance_office, Clients.account_number AS Clients_account_number, 
                          Clients.bank_name AS Clients_bank_name, Clients.iban AS Clients_iban, Clients.bic AS Clients_bic, Clients.picture AS Clients_picture, Invoice_header.invoice_no, Invoice_header.order_date, 
-                         Invoice_header.delivery_date, Invoice_header.customer_reference, Invoice_header.zip AS Invoice_header_zip, Invoice_header.city AS Invoice_header_city, Invoice_header.street AS Invoice_header_street, Invoice_details.description as  Invoice_details_description, 
-                         Invoice_details.quantity as Invoice_details_quantity, Invoice_details.quantity_2 as Invoice_details_quantity_2, Invoice_details.quantity_3 as Invoice_details_quantity_3, Invoice_details.price_netto as Invoice_details_price_netto, Invoice_details.discount as Invoice_details_discount, Articles.article_no as Articles_article_no, Articles.description AS Articles_description, 
-                         Countries.name AS Countries_name, Customers.customer_no, Customers.customer_name, Customers.email AS Customers_email, Customers.zip AS Customers_zip, Customers.city AS Customers_city, 
-                         Customers.street AS Customers_street, Customers.countriesid_invoice, Customers.email_invoice, Customers.zip_invoice, Customers.city_invoice, Customers.street_invoice, 
-                         Customers.phone AS Customers_phone, Customers.fax AS Customers_fax, Customers.phone_2 AS Customers_phone_2, Customers.www AS Customers_www, Customers.ustd_id AS Customers_ustd_id, 
-                         Customers.finance_office AS Customers_finance_office, Customers.account_number AS Customers_account_number, Customers.bank_name AS Customers_bank_name, Customers.iban AS Customers_iban, 
-                         Customers.bic AS Customers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS Tax_rates_value
+                         Invoice_header.delivery_date, Invoice_header.customer_reference, Invoice_header.zip AS Invoice_header_zip, Invoice_header.city AS Invoice_header_city, Invoice_header.street AS Invoice_header_street, 
+                         Invoice_details.description AS Invoice_details_description, Invoice_details.quantity AS Invoice_details_quantity, Invoice_details.quantity_2 AS Invoice_details_quantity_2, 
+                         Invoice_details.quantity_3 AS Invoice_details_quantity_3, Invoice_details.price_netto AS Invoice_details_price_netto, Invoice_details.discount AS Invoice_details_discount, 
+                         Articles.article_no AS Articles_article_no, Articles.description AS Articles_description, Countries.name AS Countries_name, Customers.customer_no, Customers.customer_name, 
+                         Customers.email AS Customers_email, Customers.zip AS Customers_zip, Customers.city AS Customers_city, Customers.street AS Customers_street, Customers.countriesid_invoice, Customers.email_invoice, 
+                         Customers.zip_invoice, Customers.city_invoice, Customers.street_invoice, Customers.phone AS Customers_phone, Customers.fax AS Customers_fax, Customers.phone_2 AS Customers_phone_2, 
+                         Customers.www AS Customers_www, Customers.ustd_id AS Customers_ustd_id, Customers.finance_office AS Customers_finance_office, Customers.account_number AS Customers_account_number, 
+                         Customers.bank_name AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS Customers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS Tax_rates_value, 
+                         Invoice_header.quantity_3_column_name, Invoice_header.quantity_2_column_name, Quantity_units.description AS Quantity_unitsdescription
 FROM            Invoice_details WITH (nolock) INNER JOIN
                          Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN
                          Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER JOIN
                          Articles ON Articles.Id = Invoice_details.article_id INNER JOIN
                          Countries ON Countries.Id = Invoice_header.countriesid INNER JOIN
                          Customers ON Customers.Id = Invoice_header.customers_id INNER JOIN
-                         Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id
+                         Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN
+                         Quantity_units ON Invoice_details.quantity_units_id = Quantity_units.Id AND Clients.Id = Quantity_units.clients_id AND Articles.quantity_units_id = Quantity_units.Id
 WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = @invoice_header_id)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="client_id" ColumnName="clients_id" DataSourceName="myinvoice_db.dbo.Invoice_details" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@client_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="clients_id" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -441,6 +444,9 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
               <Mapping SourceColumn="Invoice_details_discount" DataSetColumn="Invoice_details_discount" />
               <Mapping SourceColumn="Articles_article_no" DataSetColumn="Articles_article_no" />
               <Mapping SourceColumn="Customers_ustd_id" DataSetColumn="Customers_ustd_id" />
+              <Mapping SourceColumn="quantity_3_column_name" DataSetColumn="quantity_3_column_name" />
+              <Mapping SourceColumn="quantity_2_column_name" DataSetColumn="quantity_2_column_name" />
+              <Mapping SourceColumn="Quantity_unitsdescription" DataSetColumn="Quantity_unitsdescription" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -524,7 +530,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
   <xs:element name="reportsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="reportsDataSet" msprop:Generator_UserDSName="reportsDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Articles" msprop:Generator_TableClassName="ArticlesDataTable" msprop:Generator_TableVarName="tableArticles" msprop:Generator_RowChangedName="ArticlesRowChanged" msprop:Generator_TablePropName="Articles" msprop:Generator_RowDeletingName="ArticlesRowDeleting" msprop:Generator_RowChangingName="ArticlesRowChanging" msprop:Generator_RowEvHandlerName="ArticlesRowChangeEventHandler" msprop:Generator_RowDeletedName="ArticlesRowDeleted" msprop:Generator_RowClassName="ArticlesRow" msprop:Generator_UserTableName="Articles" msprop:Generator_RowEvArgName="ArticlesRowChangeEvent">
+        <xs:element name="Articles" msprop:Generator_TableClassName="ArticlesDataTable" msprop:Generator_TableVarName="tableArticles" msprop:Generator_TablePropName="Articles" msprop:Generator_RowDeletingName="ArticlesRowDeleting" msprop:Generator_RowChangingName="ArticlesRowChanging" msprop:Generator_RowEvHandlerName="ArticlesRowChangeEventHandler" msprop:Generator_RowDeletedName="ArticlesRowDeleted" msprop:Generator_UserTableName="Articles" msprop:Generator_RowChangedName="ArticlesRowChanged" msprop:Generator_RowEvArgName="ArticlesRowChangeEvent" msprop:Generator_RowClassName="ArticlesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -549,7 +555,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ArticlesLabels" msprop:Generator_TableClassName="ArticlesLabelsDataTable" msprop:Generator_TableVarName="tableArticlesLabels" msprop:Generator_TablePropName="ArticlesLabels" msprop:Generator_RowDeletingName="ArticlesLabelsRowDeleting" msprop:Generator_RowChangingName="ArticlesLabelsRowChanging" msprop:Generator_RowEvHandlerName="ArticlesLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="ArticlesLabelsRowDeleted" msprop:Generator_UserTableName="ArticlesLabels" msprop:Generator_RowChangedName="ArticlesLabelsRowChanged" msprop:Generator_RowEvArgName="ArticlesLabelsRowChangeEvent" msprop:Generator_RowClassName="ArticlesLabelsRow">
+        <xs:element name="ArticlesLabels" msprop:Generator_TableClassName="ArticlesLabelsDataTable" msprop:Generator_TableVarName="tableArticlesLabels" msprop:Generator_RowChangedName="ArticlesLabelsRowChanged" msprop:Generator_TablePropName="ArticlesLabels" msprop:Generator_RowDeletingName="ArticlesLabelsRowDeleting" msprop:Generator_RowChangingName="ArticlesLabelsRowChanging" msprop:Generator_RowEvHandlerName="ArticlesLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="ArticlesLabelsRowDeleted" msprop:Generator_RowClassName="ArticlesLabelsRow" msprop:Generator_UserTableName="ArticlesLabels" msprop:Generator_RowEvArgName="ArticlesLabelsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="article_no" msprop:Generator_ColumnVarNameInTable="columnarticle_no" msprop:Generator_ColumnPropNameInRow="article_no" msprop:Generator_ColumnPropNameInTable="article_noColumn" msprop:Generator_UserColumnName="article_no">
@@ -574,7 +580,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Customers" msprop:Generator_TableClassName="CustomersDataTable" msprop:Generator_TableVarName="tableCustomers" msprop:Generator_RowChangedName="CustomersRowChanged" msprop:Generator_TablePropName="Customers" msprop:Generator_RowDeletingName="CustomersRowDeleting" msprop:Generator_RowChangingName="CustomersRowChanging" msprop:Generator_RowEvHandlerName="CustomersRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomersRowDeleted" msprop:Generator_RowClassName="CustomersRow" msprop:Generator_UserTableName="Customers" msprop:Generator_RowEvArgName="CustomersRowChangeEvent">
+        <xs:element name="Customers" msprop:Generator_TableClassName="CustomersDataTable" msprop:Generator_TableVarName="tableCustomers" msprop:Generator_TablePropName="Customers" msprop:Generator_RowDeletingName="CustomersRowDeleting" msprop:Generator_RowChangingName="CustomersRowChanging" msprop:Generator_RowEvHandlerName="CustomersRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomersRowDeleted" msprop:Generator_UserTableName="Customers" msprop:Generator_RowChangedName="CustomersRowChanged" msprop:Generator_RowEvArgName="CustomersRowChangeEvent" msprop:Generator_RowClassName="CustomersRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -727,7 +733,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CustomersLabels" msprop:Generator_TableClassName="CustomersLabelsDataTable" msprop:Generator_TableVarName="tableCustomersLabels" msprop:Generator_RowChangedName="CustomersLabelsRowChanged" msprop:Generator_TablePropName="CustomersLabels" msprop:Generator_RowDeletingName="CustomersLabelsRowDeleting" msprop:Generator_RowChangingName="CustomersLabelsRowChanging" msprop:Generator_RowEvHandlerName="CustomersLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomersLabelsRowDeleted" msprop:Generator_RowClassName="CustomersLabelsRow" msprop:Generator_UserTableName="CustomersLabels" msprop:Generator_RowEvArgName="CustomersLabelsRowChangeEvent">
+        <xs:element name="CustomersLabels" msprop:Generator_TableClassName="CustomersLabelsDataTable" msprop:Generator_TableVarName="tableCustomersLabels" msprop:Generator_TablePropName="CustomersLabels" msprop:Generator_RowDeletingName="CustomersLabelsRowDeleting" msprop:Generator_RowChangingName="CustomersLabelsRowChanging" msprop:Generator_RowEvHandlerName="CustomersLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomersLabelsRowDeleted" msprop:Generator_UserTableName="CustomersLabels" msprop:Generator_RowChangedName="CustomersLabelsRowChanged" msprop:Generator_RowEvArgName="CustomersLabelsRowChangeEvent" msprop:Generator_RowClassName="CustomersLabelsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="payment_methodid" msprop:Generator_ColumnVarNameInTable="columnpayment_methodid" msprop:Generator_ColumnPropNameInRow="payment_methodid" msprop:Generator_ColumnPropNameInTable="payment_methodidColumn" msprop:Generator_UserColumnName="payment_methodid" type="xs:string" minOccurs="0" />
@@ -879,7 +885,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent" msprop:Generator_RowClassName="rp_invoice_detailsRow">
+        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_RowClassName="rp_invoice_detailsRow" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="invoice_no" msprop:Generator_ColumnVarNameInTable="columninvoice_no" msprop:Generator_ColumnPropNameInRow="invoice_no" msprop:Generator_ColumnPropNameInTable="invoice_noColumn" msprop:Generator_UserColumnName="invoice_no">
@@ -1207,10 +1213,31 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="quantity_3_column_name" msprop:Generator_ColumnVarNameInTable="columnquantity_3_column_name" msprop:Generator_ColumnPropNameInRow="quantity_3_column_name" msprop:Generator_ColumnPropNameInTable="quantity_3_column_nameColumn" msprop:Generator_UserColumnName="quantity_3_column_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="quantity_2_column_name" msprop:Generator_ColumnVarNameInTable="columnquantity_2_column_name" msprop:Generator_ColumnPropNameInRow="quantity_2_column_name" msprop:Generator_ColumnPropNameInTable="quantity_2_column_nameColumn" msprop:Generator_UserColumnName="quantity_2_column_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Quantity_unitsdescription" msprop:Generator_ColumnVarNameInTable="columnQuantity_unitsdescription" msprop:Generator_ColumnPropNameInRow="Quantity_unitsdescription" msprop:Generator_ColumnPropNameInTable="Quantity_unitsdescriptionColumn" msprop:Generator_UserColumnName="Quantity_unitsdescription">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rp_invoice_detailsLabels" msprop:Generator_TableClassName="rp_invoice_detailsLabelsDataTable" msprop:Generator_TableVarName="tablerp_invoice_detailsLabels" msprop:Generator_TablePropName="rp_invoice_detailsLabels" msprop:Generator_RowDeletingName="rp_invoice_detailsLabelsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsLabelsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsLabelsRowDeleted" msprop:Generator_UserTableName="rp_invoice_detailsLabels" msprop:Generator_RowChangedName="rp_invoice_detailsLabelsRowChanged" msprop:Generator_RowEvArgName="rp_invoice_detailsLabelsRowChangeEvent" msprop:Generator_RowClassName="rp_invoice_detailsLabelsRow">
+        <xs:element name="rp_invoice_detailsLabels" msprop:Generator_TableClassName="rp_invoice_detailsLabelsDataTable" msprop:Generator_TableVarName="tablerp_invoice_detailsLabels" msprop:Generator_RowChangedName="rp_invoice_detailsLabelsRowChanged" msprop:Generator_TablePropName="rp_invoice_detailsLabels" msprop:Generator_RowDeletingName="rp_invoice_detailsLabelsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsLabelsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsLabelsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsLabelsRowDeleted" msprop:Generator_RowClassName="rp_invoice_detailsLabelsRow" msprop:Generator_UserTableName="rp_invoice_detailsLabels" msprop:Generator_RowEvArgName="rp_invoice_detailsLabelsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="invoice_no" msprop:Generator_ColumnVarNameInTable="columninvoice_no" msprop:Generator_ColumnPropNameInRow="invoice_no" msprop:Generator_ColumnPropNameInTable="invoice_noColumn" msprop:Generator_UserColumnName="invoice_no">
@@ -1397,7 +1424,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="picture" msdata:Caption="Clients_picture" msprop:Generator_ColumnVarNameInTable="columnpicture" msprop:Generator_ColumnPropNameInRow="picture" msprop:Generator_ColumnPropNameInTable="pictureColumn" msprop:Generator_UserColumnName="picture" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="picture" msdata:Caption="Clients_picture" msprop:Generator_ColumnVarNameInTable="columnpicture" msprop:Generator_ColumnPropNameInRow="picture" msprop:Generator_ColumnPropNameInTable="pictureColumn" msprop:Generator_UserColumnName="picture" type="xs:string" minOccurs="0" />
               <xs:element name="phone_2" msdata:Caption="Customers_phone_2" msprop:Generator_ColumnVarNameInTable="columnphone_2" msprop:Generator_ColumnPropNameInRow="phone_2" msprop:Generator_ColumnPropNameInTable="phone_2Column" msprop:Generator_UserColumnName="phone_2" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -1412,10 +1439,10 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="quantity" msdata:Caption="Invoice_details_quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:decimal" />
-              <xs:element name="quantity_2" msdata:Caption="Invoice_details_quantity_2" msprop:Generator_ColumnVarNameInTable="columnquantity_2" msprop:Generator_ColumnPropNameInRow="quantity_2" msprop:Generator_ColumnPropNameInTable="quantity_2Column" msprop:Generator_UserColumnName="quantity_2" type="xs:decimal" minOccurs="0" />
-              <xs:element name="quantity_3" msdata:Caption="Invoice_details_quantity_3" msprop:Generator_ColumnVarNameInTable="columnquantity_3" msprop:Generator_ColumnPropNameInRow="quantity_3" msprop:Generator_ColumnPropNameInTable="quantity_3Column" msprop:Generator_UserColumnName="quantity_3" type="xs:decimal" minOccurs="0" />
-              <xs:element name="price_netto" msdata:Caption="Invoice_details_price_netto" msprop:Generator_ColumnVarNameInTable="columnprice_netto" msprop:Generator_ColumnPropNameInRow="price_netto" msprop:Generator_ColumnPropNameInTable="price_nettoColumn" msprop:Generator_UserColumnName="price_netto" type="xs:decimal" />
+              <xs:element name="quantity" msdata:Caption="Invoice_details_quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:string" />
+              <xs:element name="quantity_2" msdata:Caption="Invoice_details_quantity_2" msprop:Generator_ColumnVarNameInTable="columnquantity_2" msprop:Generator_ColumnPropNameInRow="quantity_2" msprop:Generator_ColumnPropNameInTable="quantity_2Column" msprop:Generator_UserColumnName="quantity_2" type="xs:string" minOccurs="0" />
+              <xs:element name="quantity_3" msdata:Caption="Invoice_details_quantity_3" msprop:Generator_ColumnVarNameInTable="columnquantity_3" msprop:Generator_ColumnPropNameInRow="quantity_3" msprop:Generator_ColumnPropNameInTable="quantity_3Column" msprop:Generator_UserColumnName="quantity_3" type="xs:string" minOccurs="0" />
+              <xs:element name="price_netto" msdata:Caption="Invoice_details_price_netto" msprop:Generator_ColumnVarNameInTable="columnprice_netto" msprop:Generator_ColumnPropNameInRow="price_netto" msprop:Generator_ColumnPropNameInTable="price_nettoColumn" msprop:Generator_UserColumnName="price_netto" type="xs:string" />
               <xs:element name="discount" msdata:Caption="Invoice_details_discount" msprop:Generator_ColumnVarNameInTable="columndiscount" msprop:Generator_ColumnPropNameInRow="discount" msprop:Generator_ColumnPropNameInTable="discountColumn" msprop:Generator_UserColumnName="discount" type="xs:string" minOccurs="0" />
               <xs:element name="article_no" msdata:Caption="Articles_article_no" msprop:Generator_ColumnVarNameInTable="columnarticle_no" msprop:Generator_ColumnPropNameInRow="article_no" msprop:Generator_ColumnPropNameInTable="article_noColumn" msprop:Generator_UserColumnName="article_no">
                 <xs:simpleType>
@@ -1424,6 +1451,13 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="invoice" msprop:Generator_ColumnVarNameInTable="columninvoice" msprop:Generator_ColumnPropNameInRow="invoice" msprop:Generator_ColumnPropNameInTable="invoiceColumn" msprop:Generator_UserColumnName="invoice" type="xs:string" minOccurs="0" />
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:string" minOccurs="0" />
+              <xs:element name="position" msprop:Generator_ColumnVarNameInTable="columnposition" msprop:Generator_ColumnPropNameInRow="position" msprop:Generator_ColumnPropNameInTable="positionColumn" msprop:Generator_UserColumnName="position" type="xs:string" minOccurs="0" />
+              <xs:element name="price" msprop:Generator_ColumnVarNameInTable="columnprice" msprop:Generator_ColumnPropNameInRow="price" msprop:Generator_ColumnPropNameInTable="priceColumn" msprop:Generator_UserColumnName="price" type="xs:string" minOccurs="0" />
+              <xs:element name="sum_price" msprop:Generator_ColumnVarNameInTable="columnsum_price" msprop:Generator_ColumnPropNameInRow="sum_price" msprop:Generator_ColumnPropNameInTable="sum_priceColumn" msprop:Generator_UserColumnName="sum_price" type="xs:string" minOccurs="0" />
+              <xs:element name="quantity_unit" msprop:Generator_ColumnVarNameInTable="columnquantity_unit" msprop:Generator_ColumnPropNameInRow="quantity_unit" msprop:Generator_ColumnPropNameInTable="quantity_unitColumn" msprop:Generator_UserColumnName="quantity_unit" type="xs:string" minOccurs="0" />
+              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

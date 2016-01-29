@@ -18,5 +18,11 @@ namespace mInvoice.Models
             public Reports.reportsDataSet.CustomersDataTable customers { get; set; }
             public Reports.reportsDataSet.CustomersLabelsDataTable labels { get; set; }
         }
+
+        public class rp_invoice_detailsModel
+        {
+            public Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_details { get; set; }
+            public Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable  labels { get; set; }
+        }
     
 }

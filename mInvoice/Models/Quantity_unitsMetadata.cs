@@ -17,7 +17,7 @@ namespace mInvoice.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "quantity_units", ResourceType = typeof(Resource))]
+        [Display(Name = "description", ResourceType = typeof(Resource))]
         public string description { get; set; }
 
         [Required]

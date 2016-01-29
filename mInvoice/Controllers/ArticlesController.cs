@@ -28,7 +28,7 @@ namespace mInvoice.Controllers
                                               select cust;
 
 
-            var articles = _list.Include(a => a.Tax_rates).Include(a => a.quantity_units_id );
+            var articles = _list.Include(a => a.Tax_rates); //.Include(a => a.quantity_units_id );
 
             return View(articles.ToList());
         }
@@ -69,6 +69,7 @@ namespace mInvoice.Controllers
                 Articles _new_item = new Articles();
 
                 _new_item.clients_id = _client_id;
+
 
                 return View(_new_item);
             }

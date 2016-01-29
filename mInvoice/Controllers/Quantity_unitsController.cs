@@ -10,7 +10,7 @@ using mInvoice.Models;
 
 namespace mInvoice.Controllers
 {
-    public class Quantity_unitsController : Controller
+    public class Quantity_unitsController : BaseController
     {
         private myinvoice_dbEntities db = new myinvoice_dbEntities();
 

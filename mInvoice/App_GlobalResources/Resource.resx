@@ -435,4 +435,13 @@
   <data name="quantity_units_id" xml:space="preserve">
     <value>Quantity unit</value>
   </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="sum_price" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

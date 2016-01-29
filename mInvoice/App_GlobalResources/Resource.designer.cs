@@ -340,6 +340,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date ähnelt.
+        /// </summary>
+        public static string date {
+            get {
+                return ResourceManager.GetString("date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Day ähnelt.
         /// </summary>
         public static string day {
@@ -525,6 +534,15 @@ namespace mInvoice.App_GlobalResources {
         public static string iban {
             get {
                 return ResourceManager.GetString("iban", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoice ähnelt.
+        /// </summary>
+        public static string invoice {
+            get {
+                return ResourceManager.GetString("invoice", resourceCulture);
             }
         }
         
@@ -903,6 +921,15 @@ namespace mInvoice.App_GlobalResources {
         public static string street {
             get {
                 return ResourceManager.GetString("street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total ähnelt.
+        /// </summary>
+        public static string sum_price {
+            get {
+                return ResourceManager.GetString("sum_price", resourceCulture);
             }
         }
         
