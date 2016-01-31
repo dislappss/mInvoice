@@ -12,12 +12,11 @@ namespace mInvoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Quantity_units
+    public partial class Delivery_terms
     {
-        public Quantity_units()
+        public Delivery_terms()
         {
-            this.Articles = new HashSet<Articles>();
-            this.Invoice_details = new HashSet<Invoice_details>();
+            this.Invoice_header = new HashSet<Invoice_header>();
         }
     
         public int Id { get; set; }
@@ -27,8 +26,7 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual ICollection<Articles> Articles { get; set; }
         public virtual Clients Clients { get; set; }
-        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
+        public virtual ICollection<Invoice_header> Invoice_header { get; set; }
     }
 }

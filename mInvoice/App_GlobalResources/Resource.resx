@@ -166,10 +166,10 @@
     <value>Customers</value>
   </data>
   <data name="customer_no" xml:space="preserve">
-    <value>Customer no.</value>
+    <value>Cust.-no.</value>
   </data>
   <data name="customer_reference" xml:space="preserve">
-    <value>Customer-Ref.-No.</value>
+    <value>Cust.-Ref.-No.</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
@@ -184,7 +184,7 @@
     <value>Details</value>
   </data>
   <data name="discount" xml:space="preserve">
-    <value>Discount</value>
+    <value>Discount, %</value>
   </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
@@ -443,5 +443,68 @@
   </data>
   <data name="sum_price" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="cash_discount" xml:space="preserve">
+    <value>Cash discount</value>
+  </data>
+  <data name="err_range" xml:space="preserve">
+    <value>Value for {0} must be between {1} and {2}.</value>
+  </data>
+  <data name="net_amount" xml:space="preserve">
+    <value>Net amount</value>
+  </data>
+  <data name="plus_vat" xml:space="preserve">
+    <value>plus %1% VAT</value>
+  </data>
+  <data name="subtotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="total_amount" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="positions_short" xml:space="preserve">
+    <value>Pos.</value>
+  </data>
+  <data name="unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="bic_report" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="delivery_date_report" xml:space="preserve">
+    <value>Delivery date</value>
+  </data>
+  <data name="delivery_term" xml:space="preserve">
+    <value>Delivery term</value>
+  </data>
+  <data name="delivery_terms" xml:space="preserve">
+    <value>Delivery terms</value>
+  </data>
+  <data name="discount_report" xml:space="preserve">
+    <value>Discount, %</value>
+  </data>
+  <data name="fax_report" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="iban_report" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="owner_report" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="payment_term" xml:space="preserve">
+    <value>Payment term</value>
+  </data>
+  <data name="payment_terms" xml:space="preserve">
+    <value>Payment terms</value>
+  </data>
+  <data name="phone_report" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="quantity_report" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="tax_number" xml:space="preserve">
+    <value>Tax-No.</value>
   </data>
 </root>

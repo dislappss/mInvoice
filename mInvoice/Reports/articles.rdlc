@@ -317,7 +317,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>articles</DataSetName>
+        <DataSetName>data</DataSetName>
         <Height>1.2cm</Height>
         <Width>16.51cm</Width>
         <Style>
@@ -399,7 +399,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>0cm</Top>
           <Height>0.6cm</Height>
           <Width>16.51cm</Width>
           <Style>
@@ -439,7 +438,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="articles">
+    <DataSet Name="data">
       <Query>
         <DataSourceName>reportsDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>

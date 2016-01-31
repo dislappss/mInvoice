@@ -14,12 +14,8 @@ namespace mInvoice.Models
     
     public partial class Invoice_header
     {
-        public Invoice_header()
-        {
-            this.Invoice_details = new HashSet<Invoice_details>();
-        }
-    
         public int Id { get; set; }
+        public int clients_id { get; set; }
         public string invoice_no { get; set; }
         public System.DateTime order_date { get; set; }
         public System.DateTime delivery_date { get; set; }
@@ -29,15 +25,19 @@ namespace mInvoice.Models
         public string zip { get; set; }
         public string city { get; set; }
         public string street { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string quantity_2_column_name { get; set; }
         public string quantity_3_column_name { get; set; }
-        public int clients_id { get; set; }
+        public Nullable<int> tax_rate_id { get; set; }
+        public Nullable<decimal> discount { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<int> payment_terms_id { get; set; }
+        public Nullable<int> delivery_terms_id { get; set; }
     
+        public virtual Clients Clients { get; set; }
         public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }
-        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
-        public virtual Clients Clients { get; set; }
+        public virtual Delivery_terms Delivery_terms { get; set; }
+        public virtual Payment_terms Payment_terms { get; set; }
     }
 }

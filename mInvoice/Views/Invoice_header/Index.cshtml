@@ -36,11 +36,11 @@
             @Html.ActionLink(@Resources.Resource.invoice_no, "Index",
                 new { sortOrder = ViewBag.invoice_noSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
-                @Html.ActionLink(@Resources.Resource.customer_no, "Index",
-                    new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-        <th>
+        @*<th>
+        @Html.ActionLink(@Resources.Resource.customer_no, "Index",
+            new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        *@<th>
             @Html.ActionLink(@Resources.Resource.customer, "Index",
                 new { sortOrder = ViewBag.customerSortParm })
         </th>
@@ -72,9 +72,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.invoice_no)
             </td>
-            <td>
+            @*<td>
                     @Html.DisplayFor(modelItem => item.Customers.customer_no)
-                </td>
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Customers.customer_name)
             </td>

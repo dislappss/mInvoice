@@ -37,7 +37,7 @@ namespace mInvoice.Controllers
             }
             else
             {
-                var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
+                var invoice_details = db.Invoice_details.Include(i => i.Articles).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
 
                 return View(invoice_details.ToList());
             }
@@ -54,7 +54,7 @@ namespace mInvoice.Controllers
                       cust.clients_id == _clientsysid
                 //orderby cust.Name ascending
                 select cust;
-            var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
+            var result = invoice_details.Include(i => i.Articles).Include(i => i.Tax_rates).Include(i => i.Quantity_units);
             return result;
         }
 
@@ -100,7 +100,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount")] Invoice_details invoice_details)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount,cash_discount")] Invoice_details invoice_details)
         {
             int _client_id = -1;
 
@@ -163,7 +163,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_header_id,article_id,description,tax_rate_id,quantity_units_id,quantity,quantity_2,quantity_3,price_netto,discount,cash_discount,CreatedAt,UpdatedAt")] Invoice_details invoice_details)
         {
             if (ModelState.IsValid)
             {

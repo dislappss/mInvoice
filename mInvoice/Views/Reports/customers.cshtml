@@ -23,5 +23,5 @@
         };
 }
 
-@Html.MvcReportViewerFluent("Reports/customers.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("labels", Model.labels).LocalDataSource("customers", Model.customers).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
+@Html.MvcReportViewerFluent("Reports/customers.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("labels", Model.labels).LocalDataSource("data", Model.data).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
 

@@ -86,6 +86,9 @@ namespace mInvoice.Models
 
         [Display(Name = "text_under_the_table", ResourceType = typeof(Resource))]
         public string text_under_the_table { get; set; }
+
+        [Display(Name = "tax_number", ResourceType = typeof(Resource))]
+        public string tax_number { get; set; }
     }
 
    

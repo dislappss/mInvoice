@@ -109,6 +109,16 @@ namespace mInvoice.Models
 
         [Display(Name = "quantity_3_column_name", ResourceType = typeof(Resource))]
         public string quantity_3_column_name { get; set; }
+
+        [Range(0, 100, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "err_range")]
+        [Display(Name = "discount", ResourceType = typeof(Resource))]
+        public Nullable<decimal> discount { get; set; }
+
+        [Display(Name = "payment_terms", ResourceType = typeof(Resource))]
+        public Nullable<decimal> payment_terms_id { get; set; }
+
+        [Display(Name = "delivery_terms", ResourceType = typeof(Resource))]
+        public Nullable<decimal> delivery_terms_id { get; set; }
         
     }
 }

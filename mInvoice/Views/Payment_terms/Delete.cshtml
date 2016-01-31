@@ -1,0 +1,56 @@
+﻿@model mInvoice.Models.Payment_terms
+
+@{
+    ViewBag.Title = @Resources.Resource.delete;
+}
+
+<h2>@Resources.Resource.delete</h2>
+
+<h3>@Resources.Resource.are_you_sure_delete</h3>
+<div>
+    <h4>@Resources.Resource.payment_terms </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resources.Resource.delete class="btn btn-default" /> |
+            @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

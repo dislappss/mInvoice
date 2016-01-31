@@ -148,7 +148,7 @@
     <value>Kunde</value>
   </data>
   <data name="customer_no" xml:space="preserve">
-    <value>Kunden-Nr.</value>
+    <value>Kund.-Nr.</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Löschen</value>
@@ -223,7 +223,7 @@
     <value>Beschreibung</value>
   </data>
   <data name="discount" xml:space="preserve">
-    <value>Rabatt</value>
+    <value>Rabatt, %</value>
   </data>
   <data name="invoice_no" xml:space="preserve">
     <value>Rechnungs- Nr.</value>
@@ -421,13 +421,13 @@
     <value>Text nach der Tabelle (bold)</value>
   </data>
   <data name="quantity_units" xml:space="preserve">
-    <value>Mengeneinheit</value>
+    <value>Mengen einheit</value>
   </data>
   <data name="get_quantity_unit" xml:space="preserve">
     <value>Mengeneinheit abrufen</value>
   </data>
   <data name="quantity_units_id" xml:space="preserve">
-    <value>Mengeneinheit</value>
+    <value>Mengen einheit</value>
   </data>
   <data name="date" xml:space="preserve">
     <value>Datum</value>
@@ -437,5 +437,68 @@
   </data>
   <data name="sum_price" xml:space="preserve">
     <value>Gesamtpreis</value>
+  </data>
+  <data name="net_amount" xml:space="preserve">
+    <value>Nettobetrag</value>
+  </data>
+  <data name="plus_vat" xml:space="preserve">
+    <value>zzgl. %1% MwSt.</value>
+  </data>
+  <data name="subtotal" xml:space="preserve">
+    <value>Zwischensumme</value>
+  </data>
+  <data name="total_amount" xml:space="preserve">
+    <value>Gesamtbetrag</value>
+  </data>
+  <data name="cash_discount" xml:space="preserve">
+    <value>Skonto</value>
+  </data>
+  <data name="err_range" xml:space="preserve">
+    <value>Der Wert {0} muss zwischen {1} und {2} sein.</value>
+  </data>
+  <data name="positions_short" xml:space="preserve">
+    <value>Pos.</value>
+  </data>
+  <data name="bic_report" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="delivery_date_report" xml:space="preserve">
+    <value>Leistungsdatum</value>
+  </data>
+  <data name="delivery_term" xml:space="preserve">
+    <value>Lieferbedingung</value>
+  </data>
+  <data name="delivery_terms" xml:space="preserve">
+    <value>Lieferbedingungen</value>
+  </data>
+  <data name="discount_report" xml:space="preserve">
+    <value>Rabatt, %</value>
+  </data>
+  <data name="fax_report" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="iban_report" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="owner_report" xml:space="preserve">
+    <value>Besitzer</value>
+  </data>
+  <data name="payment_term" xml:space="preserve">
+    <value>Zahlungsbedingung</value>
+  </data>
+  <data name="payment_terms" xml:space="preserve">
+    <value>Zahlungsbedingungen</value>
+  </data>
+  <data name="phone_report" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="quantity_report" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="tax_number" xml:space="preserve">
+    <value>Steuer-Nr.</value>
+  </data>
+  <data name="unit" xml:space="preserve">
+    <value>Einheit</value>
   </data>
 </root>

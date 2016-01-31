@@ -50,7 +50,7 @@ namespace mInvoice.Models
         [Display(Name = "price_netto", ResourceType = typeof(Resource))]
         public decimal price_netto { get; set; }
 
-        // [LocalizedDisplayName("discount")]
+        [Range(0, 100, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "err_range")]
         [Display(Name = "discount", ResourceType = typeof(Resource))]
         public Nullable<decimal> discount { get; set; }
     }

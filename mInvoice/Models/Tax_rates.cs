@@ -18,18 +18,20 @@ namespace mInvoice.Models
         {
             this.Articles = new HashSet<Articles>();
             this.Invoice_details = new HashSet<Invoice_details>();
+            this.Invoice_details1 = new HashSet<Invoice_details>();
         }
     
         public int Id { get; set; }
+        public int clients_id { get; set; }
         public string description { get; set; }
         public string code { get; set; }
         public decimal value { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public int clients_id { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
-        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
         public virtual Clients Clients { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details1 { get; set; }
     }
 }

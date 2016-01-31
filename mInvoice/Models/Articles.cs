@@ -20,18 +20,18 @@ namespace mInvoice.Models
         }
     
         public int Id { get; set; }
+        public int clients_id { get; set; }
         public string article_no { get; set; }
         public decimal price { get; set; }
         public string description { get; set; }
         public int tax_rate_id { get; set; }
+        public int quantity_units_id { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public int clients_id { get; set; }
-        public int quantity_units_id { get; set; }
     
-        public virtual Tax_rates Tax_rates { get; set; }
-        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual Quantity_units Quantity_units { get; set; }
+        public virtual Tax_rates Tax_rates { get; set; }
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
     }
 }

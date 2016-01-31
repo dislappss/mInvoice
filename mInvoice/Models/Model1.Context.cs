@@ -25,15 +25,17 @@ namespace mInvoice.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<v_AspNetUsers> v_AspNetUsers { get; set; }
         public virtual DbSet<Articles> Articles { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Invoice_details> Invoice_details { get; set; }
         public virtual DbSet<Invoice_header> Invoice_header { get; set; }
         public virtual DbSet<Payment_method> Payment_method { get; set; }
-        public virtual DbSet<Tax_rates> Tax_rates { get; set; }
-        public virtual DbSet<Invoice_details> Invoice_details { get; set; }
-        public virtual DbSet<v_AspNetUsers> v_AspNetUsers { get; set; }
         public virtual DbSet<Quantity_units> Quantity_units { get; set; }
+        public virtual DbSet<Tax_rates> Tax_rates { get; set; }
+        public virtual DbSet<Delivery_terms> Delivery_terms { get; set; }
+        public virtual DbSet<Payment_terms> Payment_terms { get; set; }
     }
 }

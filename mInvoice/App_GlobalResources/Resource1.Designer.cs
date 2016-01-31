@@ -178,6 +178,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BIC ähnelt.
+        /// </summary>
+        public static string bic_report {
+            get {
+                return ResourceManager.GetString("bic_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cash discount ähnelt.
+        /// </summary>
+        public static string cash_discount {
+            get {
+                return ResourceManager.GetString("cash_discount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Choose file ähnelt.
         /// </summary>
         public static string choose_file {
@@ -313,7 +331,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Customer no. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cust.-no. ähnelt.
         /// </summary>
         public static string customer_no {
             get {
@@ -322,7 +340,7 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Customer-Ref.-No. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cust.-Ref.-No. ähnelt.
         /// </summary>
         public static string customer_reference {
             get {
@@ -376,6 +394,33 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delivery date ähnelt.
+        /// </summary>
+        public static string delivery_date_report {
+            get {
+                return ResourceManager.GetString("delivery_date_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delivery term ähnelt.
+        /// </summary>
+        public static string delivery_term {
+            get {
+                return ResourceManager.GetString("delivery_term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delivery terms ähnelt.
+        /// </summary>
+        public static string delivery_terms {
+            get {
+                return ResourceManager.GetString("delivery_terms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
         /// </summary>
         public static string description {
@@ -394,11 +439,20 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Discount ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount, % ähnelt.
         /// </summary>
         public static string discount {
             get {
                 return ResourceManager.GetString("discount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Discount, % ähnelt.
+        /// </summary>
+        public static string discount_report {
+            get {
+                return ResourceManager.GetString("discount_report", resourceCulture);
             }
         }
         
@@ -448,6 +502,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Value for {0} must be between {1} and {2}. ähnelt.
+        /// </summary>
+        public static string err_range {
+            get {
+                return ResourceManager.GetString("err_range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
         /// </summary>
         public static string error {
@@ -462,6 +525,15 @@ namespace mInvoice.App_GlobalResources {
         public static string fax {
             get {
                 return ResourceManager.GetString("fax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fax ähnelt.
+        /// </summary>
+        public static string fax_report {
+            get {
+                return ResourceManager.GetString("fax_report", resourceCulture);
             }
         }
         
@@ -534,6 +606,15 @@ namespace mInvoice.App_GlobalResources {
         public static string iban {
             get {
                 return ResourceManager.GetString("iban", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die IBAN ähnelt.
+        /// </summary>
+        public static string iban_report {
+            get {
+                return ResourceManager.GetString("iban_report", resourceCulture);
             }
         }
         
@@ -619,6 +700,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Net amount ähnelt.
+        /// </summary>
+        public static string net_amount {
+            get {
+                return ResourceManager.GetString("net_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invoice-no. template ähnelt.
         /// </summary>
         public static string no_template_invoices {
@@ -660,6 +750,15 @@ namespace mInvoice.App_GlobalResources {
         public static string owner {
             get {
                 return ResourceManager.GetString("owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Owner ähnelt.
+        /// </summary>
+        public static string owner_report {
+            get {
+                return ResourceManager.GetString("owner_report", resourceCulture);
             }
         }
         
@@ -718,6 +817,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment term ähnelt.
+        /// </summary>
+        public static string payment_term {
+            get {
+                return ResourceManager.GetString("payment_term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Payment terms ähnelt.
+        /// </summary>
+        public static string payment_terms {
+            get {
+                return ResourceManager.GetString("payment_terms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Phone ähnelt.
         /// </summary>
         public static string phone {
@@ -736,6 +853,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Phone ähnelt.
+        /// </summary>
+        public static string phone_report {
+            get {
+                return ResourceManager.GetString("phone_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Picture ähnelt.
         /// </summary>
         public static string picture {
@@ -745,11 +871,29 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die plus %1% VAT ähnelt.
+        /// </summary>
+        public static string plus_vat {
+            get {
+                return ResourceManager.GetString("plus_vat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Positions ähnelt.
         /// </summary>
         public static string positions {
             get {
                 return ResourceManager.GetString("positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pos. ähnelt.
+        /// </summary>
+        public static string positions_short {
+            get {
+                return ResourceManager.GetString("positions_short", resourceCulture);
             }
         }
         
@@ -822,6 +966,15 @@ namespace mInvoice.App_GlobalResources {
         public static string quantity_3_column_name {
             get {
                 return ResourceManager.GetString("quantity_3_column_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quantity ähnelt.
+        /// </summary>
+        public static string quantity_report {
+            get {
+                return ResourceManager.GetString("quantity_report", resourceCulture);
             }
         }
         
@@ -925,11 +1078,29 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subtotal ähnelt.
+        /// </summary>
+        public static string subtotal {
+            get {
+                return ResourceManager.GetString("subtotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Total ähnelt.
         /// </summary>
         public static string sum_price {
             get {
                 return ResourceManager.GetString("sum_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tax-No. ähnelt.
+        /// </summary>
+        public static string tax_number {
+            get {
+                return ResourceManager.GetString("tax_number", resourceCulture);
             }
         }
         
@@ -966,6 +1137,24 @@ namespace mInvoice.App_GlobalResources {
         public static string text_under_the_table_bold {
             get {
                 return ResourceManager.GetString("text_under_the_table_bold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total amount ähnelt.
+        /// </summary>
+        public static string total_amount {
+            get {
+                return ResourceManager.GetString("total_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unit ähnelt.
+        /// </summary>
+        public static string unit {
+            get {
+                return ResourceManager.GetString("unit", resourceCulture);
             }
         }
         
