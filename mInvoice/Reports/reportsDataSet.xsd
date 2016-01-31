@@ -370,8 +370,8 @@ FROM            Articles</CommandText>
                          Customers.zip_invoice, Customers.city_invoice, Customers.street_invoice, Customers.phone AS Customers_phone, Customers.fax AS Customers_fax, Customers.phone_2 AS Customers_phone_2, 
                          Customers.www AS Customers_www, Customers.ustd_id AS Customers_ustd_id, Customers.finance_office AS Customers_finance_office, Customers.account_number AS Customers_account_number, 
                          Customers.bank_name AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS Customers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS Tax_rates_value, 
-                         Invoice_header.quantity_3_column_name, Invoice_header.quantity_2_column_name, Quantity_units.description AS Quantity_unitsdescription, Invoice_header.cash_discount AS header_cash_discount, 
-                         Invoice_header.discount AS header_discount, Invoice_details.Id, Clients.text_under_the_table_bold, Clients.text_to_table, Clients.text_under_the_table, Clients.tax_number
+                         Invoice_header.quantity_3_column_name, Invoice_header.quantity_2_column_name, Quantity_units.description AS Quantity_unitsdescription, Invoice_header.discount AS header_discount, Invoice_details.Id, 
+                         Clients.text_under_the_table_bold, Clients.text_to_table, Clients.text_under_the_table, Clients.tax_number
 FROM            Invoice_details WITH (nolock) INNER JOIN
                          Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN
                          Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER JOIN
@@ -448,7 +448,6 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
               <Mapping SourceColumn="quantity_3_column_name" DataSetColumn="quantity_3_column_name" />
               <Mapping SourceColumn="quantity_2_column_name" DataSetColumn="quantity_2_column_name" />
               <Mapping SourceColumn="Quantity_unitsdescription" DataSetColumn="Quantity_unitsdescription" />
-              <Mapping SourceColumn="header_cash_discount" DataSetColumn="header_cash_discount" />
               <Mapping SourceColumn="header_discount" DataSetColumn="header_discount" />
               <Mapping SourceColumn="Id" DataSetColumn="Id" />
               <Mapping SourceColumn="text_under_the_table_bold" DataSetColumn="text_under_the_table_bold" />
@@ -1239,13 +1238,6 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="64" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="header_cash_discount" msprop:Generator_ColumnVarNameInTable="columnheader_cash_discount" msprop:Generator_ColumnPropNameInRow="header_cash_discount" msprop:Generator_ColumnPropNameInTable="header_cash_discountColumn" msprop:Generator_UserColumnName="header_cash_discount" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="500" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

@@ -6361,14 +6361,14 @@ iif(isnothing(Fields!Invoice_details_discount.Value), 1, ((100 - Fields!Invoice_
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="header_cash_discount">
+                    <Textbox Name="Textbox341">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!header_cash_discount.Value</Value>
+                              <Value />
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -6379,7 +6379,7 @@ iif(isnothing(Fields!Invoice_details_discount.Value), 1, ((100 - Fields!Invoice_
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>header_cash_discount</rd:DefaultName>
+                      <rd:DefaultName>Textbox341</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -6900,9 +6900,6 @@ iif(isnothing(Fields!Invoice_details_discount.Value), 1, ((100 - Fields!Invoice_
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <Visibility>
-                <Hidden>=isnothing(Fields!header_cash_discount.Value)</Hidden>
-              </Visibility>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
             <TablixMember>
@@ -7328,10 +7325,6 @@ First(Fields!Clients_zip.Value, "data") &amp; " " &amp; First(Fields!Clients_cit
         </Field>
         <Field Name="Quantity_unitsdescription">
           <DataField>Quantity_unitsdescription</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="header_cash_discount">
-          <DataField>header_cash_discount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="header_discount">

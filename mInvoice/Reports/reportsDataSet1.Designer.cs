@@ -2585,8 +2585,6 @@ namespace mInvoice.Reports {
             
             private global::System.Data.DataColumn columnQuantity_unitsdescription;
             
-            private global::System.Data.DataColumn columnheader_cash_discount;
-            
             private global::System.Data.DataColumn columnheader_discount;
             
             private global::System.Data.DataColumn columnId;
@@ -3098,14 +3096,6 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn header_cash_discountColumn {
-                get {
-                    return this.columnheader_cash_discount;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn header_discountColumn {
                 get {
                     return this.columnheader_discount;
@@ -3248,7 +3238,6 @@ namespace mInvoice.Reports {
                         string quantity_3_column_name, 
                         string quantity_2_column_name, 
                         string Quantity_unitsdescription, 
-                        string header_cash_discount, 
                         decimal header_discount, 
                         string text_under_the_table_bold, 
                         string text_to_table, 
@@ -3314,7 +3303,6 @@ namespace mInvoice.Reports {
                         quantity_3_column_name,
                         quantity_2_column_name,
                         Quantity_unitsdescription,
-                        header_cash_discount,
                         header_discount,
                         null,
                         text_under_the_table_bold,
@@ -3408,7 +3396,6 @@ namespace mInvoice.Reports {
                 this.columnquantity_3_column_name = base.Columns["quantity_3_column_name"];
                 this.columnquantity_2_column_name = base.Columns["quantity_2_column_name"];
                 this.columnQuantity_unitsdescription = base.Columns["Quantity_unitsdescription"];
-                this.columnheader_cash_discount = base.Columns["header_cash_discount"];
                 this.columnheader_discount = base.Columns["header_discount"];
                 this.columnId = base.Columns["Id"];
                 this.columntext_under_the_table_bold = base.Columns["text_under_the_table_bold"];
@@ -3536,8 +3523,6 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columnquantity_2_column_name);
                 this.columnQuantity_unitsdescription = new global::System.Data.DataColumn("Quantity_unitsdescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantity_unitsdescription);
-                this.columnheader_cash_discount = new global::System.Data.DataColumn("header_cash_discount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnheader_cash_discount);
                 this.columnheader_discount = new global::System.Data.DataColumn("header_discount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnheader_discount);
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
@@ -3621,7 +3606,6 @@ namespace mInvoice.Reports {
                 this.columnquantity_2_column_name.MaxLength = 50;
                 this.columnQuantity_unitsdescription.AllowDBNull = false;
                 this.columnQuantity_unitsdescription.MaxLength = 64;
-                this.columnheader_cash_discount.MaxLength = 500;
                 this.columnId.AutoIncrement = true;
                 this.columnId.AutoIncrementSeed = -1;
                 this.columnId.AutoIncrementStep = -1;
@@ -7371,23 +7355,6 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string header_cash_discount {
-                get {
-                    try {
-                        return ((string)(this[this.tablerp_invoice_details.header_cash_discountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte header_cash_discount in Tabelle rp_invoice_details ist DBNull" +
-                                ".", e);
-                    }
-                }
-                set {
-                    this[this.tablerp_invoice_details.header_cash_discountColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal header_discount {
                 get {
                     try {
@@ -7921,18 +7888,6 @@ namespace mInvoice.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setquantity_2_column_nameNull() {
                 this[this.tablerp_invoice_details.quantity_2_column_nameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isheader_cash_discountNull() {
-                return this.IsNull(this.tablerp_invoice_details.header_cash_discountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setheader_cash_discountNull() {
-                this[this.tablerp_invoice_details.header_cash_discountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11950,7 +11905,6 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("quantity_3_column_name", "quantity_3_column_name");
             tableMapping.ColumnMappings.Add("quantity_2_column_name", "quantity_2_column_name");
             tableMapping.ColumnMappings.Add("Quantity_unitsdescription", "Quantity_unitsdescription");
-            tableMapping.ColumnMappings.Add("header_cash_discount", "header_cash_discount");
             tableMapping.ColumnMappings.Add("header_discount", "header_discount");
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("text_under_the_table_bold", "text_under_the_table_bold");
@@ -12004,20 +11958,20 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
                 "stomers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS " +
                 "Tax_rates_value, \r\n                         Invoice_header.quantity_3_column_nam" +
                 "e, Invoice_header.quantity_2_column_name, Quantity_units.description AS Quantity" +
-                "_unitsdescription, Invoice_header.cash_discount AS header_cash_discount, \r\n     " +
-                "                    Invoice_header.discount AS header_discount, Invoice_details." +
-                "Id, Clients.text_under_the_table_bold, Clients.text_to_table, Clients.text_under" +
-                "_the_table, Clients.tax_number\r\nFROM            Invoice_details WITH (nolock) IN" +
-                "NER JOIN\r\n                         Clients ON Clients.Id = Invoice_details.clien" +
-                "ts_id INNER JOIN\r\n                         Invoice_header WITH (nolock) ON Invoi" +
-                "ce_header.Id = Invoice_details.invoice_header_id INNER JOIN\r\n                   " +
-                "      Articles ON Articles.Id = Invoice_details.article_id INNER JOIN\r\n         " +
-                "                Countries ON Countries.Id = Invoice_header.countriesid INNER JOI" +
-                "N\r\n                         Customers ON Customers.Id = Invoice_header.customers" +
-                "_id INNER JOIN\r\n                         Tax_rates ON Tax_rates.Id = Invoice_det" +
-                "ails.tax_rate_id INNER JOIN\r\n                         Quantity_units ON Invoice_" +
-                "details.quantity_units_id = Quantity_units.Id\r\nWHERE        (Invoice_details.cli" +
-                "ents_id = @client_id) AND (Invoice_header.Id = @invoice_header_id)";
+                "_unitsdescription, Invoice_header.discount AS header_discount, Invoice_details.I" +
+                "d, \r\n                         Clients.text_under_the_table_bold, Clients.text_to" +
+                "_table, Clients.text_under_the_table, Clients.tax_number\r\nFROM            Invoic" +
+                "e_details WITH (nolock) INNER JOIN\r\n                         Clients ON Clients." +
+                "Id = Invoice_details.clients_id INNER JOIN\r\n                         Invoice_hea" +
+                "der WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER" +
+                " JOIN\r\n                         Articles ON Articles.Id = Invoice_details.articl" +
+                "e_id INNER JOIN\r\n                         Countries ON Countries.Id = Invoice_he" +
+                "ader.countriesid INNER JOIN\r\n                         Customers ON Customers.Id " +
+                "= Invoice_header.customers_id INNER JOIN\r\n                         Tax_rates ON " +
+                "Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN\r\n                         " +
+                "Quantity_units ON Invoice_details.quantity_units_id = Quantity_units.Id\r\nWHERE  " +
+                "      (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = @invoic" +
+                "e_header_id)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@client_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "clients_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@invoice_header_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
