@@ -141,7 +141,9 @@ namespace mInvoice.Controllers
                         Resource.bic_report, 
                         Resource.iban_report, 
                         Resource.owner_report, 
-                        Resource.delivery_date_report
+                        Resource.delivery_date_report,
+                        Resource.payment_terms,
+                        Resource.delivery_terms  
                         );
 
             var model = new mInvoice.Models.rp_invoice_detailsModel()

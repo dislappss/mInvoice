@@ -48,7 +48,7 @@
         <div class="form-group required">
             @Html.LabelFor(model => model.customers_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("customers_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("customers_id", null, htmlAttributes: new { @class = "form-control" }, optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.customers_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="form-group required">
             @Html.LabelFor(model => model.countriesid, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("countriesid", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("countriesid", null, htmlAttributes: new { @class = "form-control" }, optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.countriesid, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -119,11 +119,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.cash_discount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group required">
+            @Html.LabelFor(model => model.payment_terms_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cash_discount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cash_discount, "", new { @class = "text-danger" })
+                @Html.DropDownList("payment_terms_id", null, htmlAttributes: new { @class = "form-control" }, optionLabel: @Resources.Resource.select_Item)
+                @Html.ValidationMessageFor(model => model.payment_terms_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.delivery_terms_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("delivery_terms_id", null, htmlAttributes: new { @class = "form-control" }, optionLabel: @Resources.Resource.select_Item)
+                @Html.ValidationMessageFor(model => model.delivery_terms_id, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -2527,8 +2527,6 @@ namespace mInvoice.Reports {
             
             private global::System.Data.DataColumn columnClients_bic;
             
-            private global::System.Data.DataColumn columnClients_picture;
-            
             private global::System.Data.DataColumn columnCustomers_email;
             
             private global::System.Data.DataColumn columnCustomers_zip;
@@ -2579,23 +2577,33 @@ namespace mInvoice.Reports {
             
             private global::System.Data.DataColumn columnCustomers_ustd_id;
             
-            private global::System.Data.DataColumn columnquantity_3_column_name;
+            private global::System.Data.DataColumn columnPayment_terms_description;
             
-            private global::System.Data.DataColumn columnquantity_2_column_name;
+            private global::System.Data.DataColumn columnDelivery_terms_description;
             
-            private global::System.Data.DataColumn columnQuantity_unitsdescription;
+            private global::System.Data.DataColumn columnQuantity_units_description;
             
-            private global::System.Data.DataColumn columnheader_discount;
+            private global::System.Data.DataColumn columnClients__picture;
             
             private global::System.Data.DataColumn columnId;
             
-            private global::System.Data.DataColumn columntext_under_the_table_bold;
+            private global::System.Data.DataColumn columnquantity_2_column_name;
+            
+            private global::System.Data.DataColumn columnquantity_3_column_name;
+            
+            private global::System.Data.DataColumn columntax_number;
+            
+            private global::System.Data.DataColumn columnprefix_invoices;
+            
+            private global::System.Data.DataColumn columnlast_index_invoices;
+            
+            private global::System.Data.DataColumn columnno_template_invoices;
             
             private global::System.Data.DataColumn columntext_to_table;
             
             private global::System.Data.DataColumn columntext_under_the_table;
             
-            private global::System.Data.DataColumn columntax_number;
+            private global::System.Data.DataColumn columntext_under_the_table_bold;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2864,14 +2872,6 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Clients_pictureColumn {
-                get {
-                    return this.columnClients_picture;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Customers_emailColumn {
                 get {
                     return this.columnCustomers_email;
@@ -3072,33 +3072,33 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn quantity_3_column_nameColumn {
+            public global::System.Data.DataColumn Payment_terms_descriptionColumn {
                 get {
-                    return this.columnquantity_3_column_name;
+                    return this.columnPayment_terms_description;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn quantity_2_column_nameColumn {
+            public global::System.Data.DataColumn Delivery_terms_descriptionColumn {
                 get {
-                    return this.columnquantity_2_column_name;
+                    return this.columnDelivery_terms_description;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Quantity_unitsdescriptionColumn {
+            public global::System.Data.DataColumn Quantity_units_descriptionColumn {
                 get {
-                    return this.columnQuantity_unitsdescription;
+                    return this.columnQuantity_units_description;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn header_discountColumn {
+            public global::System.Data.DataColumn Clients__pictureColumn {
                 get {
-                    return this.columnheader_discount;
+                    return this.columnClients__picture;
                 }
             }
             
@@ -3112,9 +3112,49 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn text_under_the_table_boldColumn {
+            public global::System.Data.DataColumn quantity_2_column_nameColumn {
                 get {
-                    return this.columntext_under_the_table_bold;
+                    return this.columnquantity_2_column_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn quantity_3_column_nameColumn {
+                get {
+                    return this.columnquantity_3_column_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn tax_numberColumn {
+                get {
+                    return this.columntax_number;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn prefix_invoicesColumn {
+                get {
+                    return this.columnprefix_invoices;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn last_index_invoicesColumn {
+                get {
+                    return this.columnlast_index_invoices;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn no_template_invoicesColumn {
+                get {
+                    return this.columnno_template_invoices;
                 }
             }
             
@@ -3136,9 +3176,9 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tax_numberColumn {
+            public global::System.Data.DataColumn text_under_the_table_boldColumn {
                 get {
-                    return this.columntax_number;
+                    return this.columntext_under_the_table_bold;
                 }
             }
             
@@ -3209,7 +3249,6 @@ namespace mInvoice.Reports {
                         string Clients_bank_name, 
                         string Clients_iban, 
                         string Clients_bic, 
-                        byte[] Clients_picture, 
                         string Customers_email, 
                         string Customers_zip, 
                         string Customers_city, 
@@ -3235,14 +3274,19 @@ namespace mInvoice.Reports {
                         decimal Invoice_details_discount, 
                         string Articles_article_no, 
                         string Customers_ustd_id, 
-                        string quantity_3_column_name, 
+                        string Payment_terms_description, 
+                        string Delivery_terms_description, 
+                        string Quantity_units_description, 
+                        byte[] Clients__picture, 
                         string quantity_2_column_name, 
-                        string Quantity_unitsdescription, 
-                        decimal header_discount, 
-                        string text_under_the_table_bold, 
+                        string quantity_3_column_name, 
+                        string tax_number, 
+                        string prefix_invoices, 
+                        int last_index_invoices, 
+                        string no_template_invoices, 
                         string text_to_table, 
                         string text_under_the_table, 
-                        string tax_number) {
+                        string text_under_the_table_bold) {
                 rp_invoice_detailsRow rowrp_invoice_detailsRow = ((rp_invoice_detailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -3274,7 +3318,6 @@ namespace mInvoice.Reports {
                         Clients_bank_name,
                         Clients_iban,
                         Clients_bic,
-                        Clients_picture,
                         Customers_email,
                         Customers_zip,
                         Customers_city,
@@ -3300,15 +3343,20 @@ namespace mInvoice.Reports {
                         Invoice_details_discount,
                         Articles_article_no,
                         Customers_ustd_id,
-                        quantity_3_column_name,
-                        quantity_2_column_name,
-                        Quantity_unitsdescription,
-                        header_discount,
+                        Payment_terms_description,
+                        Delivery_terms_description,
+                        Quantity_units_description,
+                        Clients__picture,
                         null,
-                        text_under_the_table_bold,
+                        quantity_2_column_name,
+                        quantity_3_column_name,
+                        tax_number,
+                        prefix_invoices,
+                        last_index_invoices,
+                        no_template_invoices,
                         text_to_table,
                         text_under_the_table,
-                        tax_number};
+                        text_under_the_table_bold};
                 rowrp_invoice_detailsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrp_invoice_detailsRow);
                 return rowrp_invoice_detailsRow;
@@ -3367,7 +3415,6 @@ namespace mInvoice.Reports {
                 this.columnClients_bank_name = base.Columns["Clients_bank_name"];
                 this.columnClients_iban = base.Columns["Clients_iban"];
                 this.columnClients_bic = base.Columns["Clients_bic"];
-                this.columnClients_picture = base.Columns["Clients_picture"];
                 this.columnCustomers_email = base.Columns["Customers_email"];
                 this.columnCustomers_zip = base.Columns["Customers_zip"];
                 this.columnCustomers_city = base.Columns["Customers_city"];
@@ -3393,15 +3440,20 @@ namespace mInvoice.Reports {
                 this.columnInvoice_details_discount = base.Columns["Invoice_details_discount"];
                 this.columnArticles_article_no = base.Columns["Articles_article_no"];
                 this.columnCustomers_ustd_id = base.Columns["Customers_ustd_id"];
-                this.columnquantity_3_column_name = base.Columns["quantity_3_column_name"];
-                this.columnquantity_2_column_name = base.Columns["quantity_2_column_name"];
-                this.columnQuantity_unitsdescription = base.Columns["Quantity_unitsdescription"];
-                this.columnheader_discount = base.Columns["header_discount"];
+                this.columnPayment_terms_description = base.Columns["Payment_terms_description"];
+                this.columnDelivery_terms_description = base.Columns["Delivery_terms_description"];
+                this.columnQuantity_units_description = base.Columns["Quantity_units_description"];
+                this.columnClients__picture = base.Columns["Clients__picture"];
                 this.columnId = base.Columns["Id"];
-                this.columntext_under_the_table_bold = base.Columns["text_under_the_table_bold"];
+                this.columnquantity_2_column_name = base.Columns["quantity_2_column_name"];
+                this.columnquantity_3_column_name = base.Columns["quantity_3_column_name"];
+                this.columntax_number = base.Columns["tax_number"];
+                this.columnprefix_invoices = base.Columns["prefix_invoices"];
+                this.columnlast_index_invoices = base.Columns["last_index_invoices"];
+                this.columnno_template_invoices = base.Columns["no_template_invoices"];
                 this.columntext_to_table = base.Columns["text_to_table"];
                 this.columntext_under_the_table = base.Columns["text_under_the_table"];
-                this.columntax_number = base.Columns["tax_number"];
+                this.columntext_under_the_table_bold = base.Columns["text_under_the_table_bold"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3465,8 +3517,6 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columnClients_iban);
                 this.columnClients_bic = new global::System.Data.DataColumn("Clients_bic", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnClients_bic);
-                this.columnClients_picture = new global::System.Data.DataColumn("Clients_picture", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnClients_picture);
                 this.columnCustomers_email = new global::System.Data.DataColumn("Customers_email", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomers_email);
                 this.columnCustomers_zip = new global::System.Data.DataColumn("Customers_zip", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3517,24 +3567,34 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columnArticles_article_no);
                 this.columnCustomers_ustd_id = new global::System.Data.DataColumn("Customers_ustd_id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomers_ustd_id);
-                this.columnquantity_3_column_name = new global::System.Data.DataColumn("quantity_3_column_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnquantity_3_column_name);
-                this.columnquantity_2_column_name = new global::System.Data.DataColumn("quantity_2_column_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnquantity_2_column_name);
-                this.columnQuantity_unitsdescription = new global::System.Data.DataColumn("Quantity_unitsdescription", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantity_unitsdescription);
-                this.columnheader_discount = new global::System.Data.DataColumn("header_discount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnheader_discount);
+                this.columnPayment_terms_description = new global::System.Data.DataColumn("Payment_terms_description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPayment_terms_description);
+                this.columnDelivery_terms_description = new global::System.Data.DataColumn("Delivery_terms_description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelivery_terms_description);
+                this.columnQuantity_units_description = new global::System.Data.DataColumn("Quantity_units_description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity_units_description);
+                this.columnClients__picture = new global::System.Data.DataColumn("Clients__picture", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClients__picture);
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
-                this.columntext_under_the_table_bold = new global::System.Data.DataColumn("text_under_the_table_bold", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntext_under_the_table_bold);
+                this.columnquantity_2_column_name = new global::System.Data.DataColumn("quantity_2_column_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnquantity_2_column_name);
+                this.columnquantity_3_column_name = new global::System.Data.DataColumn("quantity_3_column_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnquantity_3_column_name);
+                this.columntax_number = new global::System.Data.DataColumn("tax_number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_number);
+                this.columnprefix_invoices = new global::System.Data.DataColumn("prefix_invoices", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprefix_invoices);
+                this.columnlast_index_invoices = new global::System.Data.DataColumn("last_index_invoices", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlast_index_invoices);
+                this.columnno_template_invoices = new global::System.Data.DataColumn("no_template_invoices", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnno_template_invoices);
                 this.columntext_to_table = new global::System.Data.DataColumn("text_to_table", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntext_to_table);
                 this.columntext_under_the_table = new global::System.Data.DataColumn("text_under_the_table", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntext_under_the_table);
-                this.columntax_number = new global::System.Data.DataColumn("tax_number", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntax_number);
+                this.columntext_under_the_table_bold = new global::System.Data.DataColumn("text_under_the_table_bold", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntext_under_the_table_bold);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columninvoice_no.AllowDBNull = false;
@@ -3602,20 +3662,27 @@ namespace mInvoice.Reports {
                 this.columnArticles_article_no.AllowDBNull = false;
                 this.columnArticles_article_no.MaxLength = 50;
                 this.columnCustomers_ustd_id.MaxLength = 50;
-                this.columnquantity_3_column_name.MaxLength = 50;
-                this.columnquantity_2_column_name.MaxLength = 50;
-                this.columnQuantity_unitsdescription.AllowDBNull = false;
-                this.columnQuantity_unitsdescription.MaxLength = 64;
+                this.columnPayment_terms_description.AllowDBNull = false;
+                this.columnPayment_terms_description.MaxLength = 200;
+                this.columnDelivery_terms_description.AllowDBNull = false;
+                this.columnDelivery_terms_description.MaxLength = 64;
+                this.columnQuantity_units_description.AllowDBNull = false;
+                this.columnQuantity_units_description.MaxLength = 64;
                 this.columnId.AutoIncrement = true;
                 this.columnId.AutoIncrementSeed = -1;
                 this.columnId.AutoIncrementStep = -1;
                 this.columnId.AllowDBNull = false;
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
-                this.columntext_under_the_table_bold.MaxLength = 500;
+                this.columnquantity_2_column_name.MaxLength = 50;
+                this.columnquantity_3_column_name.MaxLength = 50;
+                this.columntax_number.MaxLength = 50;
+                this.columnprefix_invoices.MaxLength = 10;
+                this.columnlast_index_invoices.AllowDBNull = false;
+                this.columnno_template_invoices.MaxLength = 50;
                 this.columntext_to_table.MaxLength = 500;
                 this.columntext_under_the_table.MaxLength = 500;
-                this.columntax_number.MaxLength = 50;
+                this.columntext_under_the_table_bold.MaxLength = 500;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3866,6 +3933,10 @@ namespace mInvoice.Reports {
             private global::System.Data.DataColumn columnowner_report;
             
             private global::System.Data.DataColumn columndelivery_date_report;
+            
+            private global::System.Data.DataColumn columnPayment_terms;
+            
+            private global::System.Data.DataColumn columnDelivery_terms;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4374,6 +4445,22 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Payment_termsColumn {
+                get {
+                    return this.columnPayment_terms;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Delivery_termsColumn {
+                get {
+                    return this.columnDelivery_terms;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4468,7 +4555,9 @@ namespace mInvoice.Reports {
                         string bic_report, 
                         string iban_report, 
                         string owner_report, 
-                        string delivery_date_report) {
+                        string delivery_date_report, 
+                        string Payment_terms, 
+                        string Delivery_terms) {
                 rp_invoice_detailsLabelsRow rowrp_invoice_detailsLabelsRow = ((rp_invoice_detailsLabelsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -4529,7 +4618,9 @@ namespace mInvoice.Reports {
                         bic_report,
                         iban_report,
                         owner_report,
-                        delivery_date_report};
+                        delivery_date_report,
+                        Payment_terms,
+                        Delivery_terms};
                 rowrp_invoice_detailsLabelsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrp_invoice_detailsLabelsRow);
                 return rowrp_invoice_detailsLabelsRow;
@@ -4611,6 +4702,8 @@ namespace mInvoice.Reports {
                 this.columniban_report = base.Columns["iban_report"];
                 this.columnowner_report = base.Columns["owner_report"];
                 this.columndelivery_date_report = base.Columns["delivery_date_report"];
+                this.columnPayment_terms = base.Columns["Payment_terms"];
+                this.columnDelivery_terms = base.Columns["Delivery_terms"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4734,6 +4827,10 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columnowner_report);
                 this.columndelivery_date_report = new global::System.Data.DataColumn("delivery_date_report", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndelivery_date_report);
+                this.columnPayment_terms = new global::System.Data.DataColumn("Payment_terms", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPayment_terms);
+                this.columnDelivery_terms = new global::System.Data.DataColumn("Delivery_terms", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelivery_terms);
                 this.columninvoice_no.AllowDBNull = false;
                 this.columninvoice_no.MaxLength = 50;
                 this.columnorder_date.AllowDBNull = false;
@@ -6936,22 +7033,6 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte[] Clients_picture {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablerp_invoice_details.Clients_pictureColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Clients_picture in Tabelle rp_invoice_details ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablerp_invoice_details.Clients_pictureColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Customers_email {
                 get {
                     return ((string)(this[this.tablerp_invoice_details.Customers_emailColumn]));
@@ -7310,18 +7391,61 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string quantity_3_column_name {
+            public string Payment_terms_description {
+                get {
+                    return ((string)(this[this.tablerp_invoice_details.Payment_terms_descriptionColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.Payment_terms_descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Delivery_terms_description {
+                get {
+                    return ((string)(this[this.tablerp_invoice_details.Delivery_terms_descriptionColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.Delivery_terms_descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Quantity_units_description {
+                get {
+                    return ((string)(this[this.tablerp_invoice_details.Quantity_units_descriptionColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.Quantity_units_descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte[] Clients__picture {
                 get {
                     try {
-                        return ((string)(this[this.tablerp_invoice_details.quantity_3_column_nameColumn]));
+                        return ((byte[])(this[this.tablerp_invoice_details.Clients__pictureColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte quantity_3_column_name in Tabelle rp_invoice_details ist DBNu" +
-                                "ll.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Clients__picture in Tabelle rp_invoice_details ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerp_invoice_details.quantity_3_column_nameColumn] = value;
+                    this[this.tablerp_invoice_details.Clients__pictureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    return ((int)(this[this.tablerp_invoice_details.IdColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.IdColumn] = value;
                 }
             }
             
@@ -7344,56 +7468,78 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Quantity_unitsdescription {
-                get {
-                    return ((string)(this[this.tablerp_invoice_details.Quantity_unitsdescriptionColumn]));
-                }
-                set {
-                    this[this.tablerp_invoice_details.Quantity_unitsdescriptionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal header_discount {
+            public string quantity_3_column_name {
                 get {
                     try {
-                        return ((decimal)(this[this.tablerp_invoice_details.header_discountColumn]));
+                        return ((string)(this[this.tablerp_invoice_details.quantity_3_column_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte header_discount in Tabelle rp_invoice_details ist DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte quantity_3_column_name in Tabelle rp_invoice_details ist DBNu" +
+                                "ll.", e);
                     }
                 }
                 set {
-                    this[this.tablerp_invoice_details.header_discountColumn] = value;
+                    this[this.tablerp_invoice_details.quantity_3_column_nameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Id {
-                get {
-                    return ((int)(this[this.tablerp_invoice_details.IdColumn]));
-                }
-                set {
-                    this[this.tablerp_invoice_details.IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string text_under_the_table_bold {
+            public string tax_number {
                 get {
                     try {
-                        return ((string)(this[this.tablerp_invoice_details.text_under_the_table_boldColumn]));
+                        return ((string)(this[this.tablerp_invoice_details.tax_numberColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte text_under_the_table_bold in Tabelle rp_invoice_details ist D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte tax_number in Tabelle rp_invoice_details ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerp_invoice_details.text_under_the_table_boldColumn] = value;
+                    this[this.tablerp_invoice_details.tax_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string prefix_invoices {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_details.prefix_invoicesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte prefix_invoices in Tabelle rp_invoice_details ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_details.prefix_invoicesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int last_index_invoices {
+                get {
+                    return ((int)(this[this.tablerp_invoice_details.last_index_invoicesColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.last_index_invoicesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string no_template_invoices {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_details.no_template_invoicesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte no_template_invoices in Tabelle rp_invoice_details ist DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_details.no_template_invoicesColumn] = value;
                 }
             }
             
@@ -7432,17 +7578,18 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string tax_number {
+            public string text_under_the_table_bold {
                 get {
                     try {
-                        return ((string)(this[this.tablerp_invoice_details.tax_numberColumn]));
+                        return ((string)(this[this.tablerp_invoice_details.text_under_the_table_boldColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte tax_number in Tabelle rp_invoice_details ist DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte text_under_the_table_bold in Tabelle rp_invoice_details ist D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerp_invoice_details.tax_numberColumn] = value;
+                    this[this.tablerp_invoice_details.text_under_the_table_boldColumn] = value;
                 }
             }
             
@@ -7676,18 +7823,6 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsClients_pictureNull() {
-                return this.IsNull(this.tablerp_invoice_details.Clients_pictureColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetClients_pictureNull() {
-                this[this.tablerp_invoice_details.Clients_pictureColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Iscountriesid_invoiceNull() {
                 return this.IsNull(this.tablerp_invoice_details.countriesid_invoiceColumn);
             }
@@ -7868,14 +8003,14 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isquantity_3_column_nameNull() {
-                return this.IsNull(this.tablerp_invoice_details.quantity_3_column_nameColumn);
+            public bool IsClients__pictureNull() {
+                return this.IsNull(this.tablerp_invoice_details.Clients__pictureColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setquantity_3_column_nameNull() {
-                this[this.tablerp_invoice_details.quantity_3_column_nameColumn] = global::System.Convert.DBNull;
+            public void SetClients__pictureNull() {
+                this[this.tablerp_invoice_details.Clients__pictureColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7892,26 +8027,50 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isheader_discountNull() {
-                return this.IsNull(this.tablerp_invoice_details.header_discountColumn);
+            public bool Isquantity_3_column_nameNull() {
+                return this.IsNull(this.tablerp_invoice_details.quantity_3_column_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setheader_discountNull() {
-                this[this.tablerp_invoice_details.header_discountColumn] = global::System.Convert.DBNull;
+            public void Setquantity_3_column_nameNull() {
+                this[this.tablerp_invoice_details.quantity_3_column_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Istext_under_the_table_boldNull() {
-                return this.IsNull(this.tablerp_invoice_details.text_under_the_table_boldColumn);
+            public bool Istax_numberNull() {
+                return this.IsNull(this.tablerp_invoice_details.tax_numberColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Settext_under_the_table_boldNull() {
-                this[this.tablerp_invoice_details.text_under_the_table_boldColumn] = global::System.Convert.DBNull;
+            public void Settax_numberNull() {
+                this[this.tablerp_invoice_details.tax_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isprefix_invoicesNull() {
+                return this.IsNull(this.tablerp_invoice_details.prefix_invoicesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setprefix_invoicesNull() {
+                this[this.tablerp_invoice_details.prefix_invoicesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isno_template_invoicesNull() {
+                return this.IsNull(this.tablerp_invoice_details.no_template_invoicesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setno_template_invoicesNull() {
+                this[this.tablerp_invoice_details.no_template_invoicesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7940,14 +8099,14 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Istax_numberNull() {
-                return this.IsNull(this.tablerp_invoice_details.tax_numberColumn);
+            public bool Istext_under_the_table_boldNull() {
+                return this.IsNull(this.tablerp_invoice_details.text_under_the_table_boldColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Settax_numberNull() {
-                this[this.tablerp_invoice_details.tax_numberColumn] = global::System.Convert.DBNull;
+            public void Settext_under_the_table_boldNull() {
+                this[this.tablerp_invoice_details.text_under_the_table_boldColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8863,6 +9022,40 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Payment_terms {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_detailsLabels.Payment_termsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Payment_terms in Tabelle rp_invoice_detailsLabels ist DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_detailsLabels.Payment_termsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Delivery_terms {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_detailsLabels.Delivery_termsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Delivery_terms in Tabelle rp_invoice_detailsLabels ist DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_detailsLabels.Delivery_termsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Iscustomer_referenceNull() {
                 return this.IsNull(this.tablerp_invoice_detailsLabels.customer_referenceColumn);
             }
@@ -9423,6 +9616,30 @@ namespace mInvoice.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setdelivery_date_reportNull() {
                 this[this.tablerp_invoice_detailsLabels.delivery_date_reportColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPayment_termsNull() {
+                return this.IsNull(this.tablerp_invoice_detailsLabels.Payment_termsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPayment_termsNull() {
+                this[this.tablerp_invoice_detailsLabels.Payment_termsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDelivery_termsNull() {
+                return this.IsNull(this.tablerp_invoice_detailsLabels.Delivery_termsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDelivery_termsNull() {
+                this[this.tablerp_invoice_detailsLabels.Delivery_termsColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11876,7 +12093,6 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Clients_bank_name", "Clients_bank_name");
             tableMapping.ColumnMappings.Add("Clients_iban", "Clients_iban");
             tableMapping.ColumnMappings.Add("Clients_bic", "Clients_bic");
-            tableMapping.ColumnMappings.Add("Clients_picture", "Clients_picture");
             tableMapping.ColumnMappings.Add("Customers_email", "Customers_email");
             tableMapping.ColumnMappings.Add("Customers_zip", "Customers_zip");
             tableMapping.ColumnMappings.Add("Customers_city", "Customers_city");
@@ -11902,15 +12118,20 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Invoice_details_discount", "Invoice_details_discount");
             tableMapping.ColumnMappings.Add("Articles_article_no", "Articles_article_no");
             tableMapping.ColumnMappings.Add("Customers_ustd_id", "Customers_ustd_id");
-            tableMapping.ColumnMappings.Add("quantity_3_column_name", "quantity_3_column_name");
-            tableMapping.ColumnMappings.Add("quantity_2_column_name", "quantity_2_column_name");
-            tableMapping.ColumnMappings.Add("Quantity_unitsdescription", "Quantity_unitsdescription");
-            tableMapping.ColumnMappings.Add("header_discount", "header_discount");
+            tableMapping.ColumnMappings.Add("Payment_terms_description", "Payment_terms_description");
+            tableMapping.ColumnMappings.Add("Delivery_terms_description", "Delivery_terms_description");
+            tableMapping.ColumnMappings.Add("Quantity_units_description", "Quantity_units_description");
+            tableMapping.ColumnMappings.Add("Clients__picture", "Clients__picture");
             tableMapping.ColumnMappings.Add("Id", "Id");
-            tableMapping.ColumnMappings.Add("text_under_the_table_bold", "text_under_the_table_bold");
+            tableMapping.ColumnMappings.Add("quantity_2_column_name", "quantity_2_column_name");
+            tableMapping.ColumnMappings.Add("quantity_3_column_name", "quantity_3_column_name");
+            tableMapping.ColumnMappings.Add("tax_number", "tax_number");
+            tableMapping.ColumnMappings.Add("prefix_invoices", "prefix_invoices");
+            tableMapping.ColumnMappings.Add("last_index_invoices", "last_index_invoices");
+            tableMapping.ColumnMappings.Add("no_template_invoices", "no_template_invoices");
             tableMapping.ColumnMappings.Add("text_to_table", "text_to_table");
             tableMapping.ColumnMappings.Add("text_under_the_table", "text_under_the_table");
-            tableMapping.ColumnMappings.Add("tax_number", "tax_number");
+            tableMapping.ColumnMappings.Add("text_under_the_table_bold", "text_under_the_table_bold");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11934,44 +12155,49 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
                 "AS Clients_ustd_id, Clients.finance_office AS Clients_finance_office, Clients.ac" +
                 "count_number AS Clients_account_number, \r\n                         Clients.bank_" +
                 "name AS Clients_bank_name, Clients.iban AS Clients_iban, Clients.bic AS Clients_" +
-                "bic, Clients.picture AS Clients_picture, Invoice_header.invoice_no, Invoice_head" +
-                "er.order_date, \r\n                         Invoice_header.delivery_date, Invoice_" +
-                "header.customer_reference, Invoice_header.zip AS Invoice_header_zip, Invoice_hea" +
-                "der.city AS Invoice_header_city, Invoice_header.street AS Invoice_header_street," +
-                " \r\n                         Invoice_details.description AS Invoice_details_descr" +
-                "iption, Invoice_details.quantity AS Invoice_details_quantity, Invoice_details.qu" +
-                "antity_2 AS Invoice_details_quantity_2, \r\n                         Invoice_detai" +
-                "ls.quantity_3 AS Invoice_details_quantity_3, Invoice_details.price_netto AS Invo" +
-                "ice_details_price_netto, Invoice_details.discount AS Invoice_details_discount, \r" +
-                "\n                         Articles.article_no AS Articles_article_no, Articles.d" +
-                "escription AS Articles_description, Countries.name AS Countries_name, Customers." +
-                "customer_no, Customers.customer_name, \r\n                         Customers.email" +
-                " AS Customers_email, Customers.zip AS Customers_zip, Customers.city AS Customers" +
-                "_city, Customers.street AS Customers_street, Customers.countriesid_invoice, Cust" +
-                "omers.email_invoice, \r\n                         Customers.zip_invoice, Customers" +
-                ".city_invoice, Customers.street_invoice, Customers.phone AS Customers_phone, Cus" +
-                "tomers.fax AS Customers_fax, Customers.phone_2 AS Customers_phone_2, \r\n         " +
-                "                Customers.www AS Customers_www, Customers.ustd_id AS Customers_u" +
-                "std_id, Customers.finance_office AS Customers_finance_office, Customers.account_" +
-                "number AS Customers_account_number, \r\n                         Customers.bank_na" +
-                "me AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS Cu" +
-                "stomers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS " +
-                "Tax_rates_value, \r\n                         Invoice_header.quantity_3_column_nam" +
-                "e, Invoice_header.quantity_2_column_name, Quantity_units.description AS Quantity" +
-                "_unitsdescription, Invoice_header.discount AS header_discount, Invoice_details.I" +
-                "d, \r\n                         Clients.text_under_the_table_bold, Clients.text_to" +
-                "_table, Clients.text_under_the_table, Clients.tax_number\r\nFROM            Invoic" +
-                "e_details WITH (nolock) INNER JOIN\r\n                         Clients ON Clients." +
-                "Id = Invoice_details.clients_id INNER JOIN\r\n                         Invoice_hea" +
-                "der WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER" +
-                " JOIN\r\n                         Articles ON Articles.Id = Invoice_details.articl" +
-                "e_id INNER JOIN\r\n                         Countries ON Countries.Id = Invoice_he" +
-                "ader.countriesid INNER JOIN\r\n                         Customers ON Customers.Id " +
-                "= Invoice_header.customers_id INNER JOIN\r\n                         Tax_rates ON " +
-                "Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN\r\n                         " +
-                "Quantity_units ON Invoice_details.quantity_units_id = Quantity_units.Id\r\nWHERE  " +
-                "      (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = @invoic" +
-                "e_header_id)";
+                "bic, Clients.picture AS Clients__picture, Invoice_header.invoice_no, Invoice_hea" +
+                "der.order_date, \r\n                         Invoice_header.delivery_date, Invoice" +
+                "_header.customer_reference, Invoice_header.zip AS Invoice_header_zip, Invoice_he" +
+                "ader.city AS Invoice_header_city, Invoice_header.street AS Invoice_header_street" +
+                ", \r\n                         Invoice_details.description AS Invoice_details_desc" +
+                "ription, Invoice_details.quantity AS Invoice_details_quantity, Invoice_details.q" +
+                "uantity_2 AS Invoice_details_quantity_2, \r\n                         Invoice_deta" +
+                "ils.quantity_3 AS Invoice_details_quantity_3, Invoice_details.price_netto AS Inv" +
+                "oice_details_price_netto, Invoice_details.discount AS Invoice_details_discount, " +
+                "\r\n                         Articles.article_no AS Articles_article_no, Articles." +
+                "description AS Articles_description, Countries.name AS Countries_name, Customers" +
+                ".customer_no, Customers.customer_name, \r\n                         Customers.emai" +
+                "l AS Customers_email, Customers.zip AS Customers_zip, Customers.city AS Customer" +
+                "s_city, Customers.street AS Customers_street, Customers.countriesid_invoice, Cus" +
+                "tomers.email_invoice, \r\n                         Customers.zip_invoice, Customer" +
+                "s.city_invoice, Customers.street_invoice, Customers.phone AS Customers_phone, Cu" +
+                "stomers.fax AS Customers_fax, Customers.phone_2 AS Customers_phone_2, \r\n        " +
+                "                 Customers.www AS Customers_www, Customers.ustd_id AS Customers_" +
+                "ustd_id, Customers.finance_office AS Customers_finance_office, Customers.account" +
+                "_number AS Customers_account_number, \r\n                         Customers.bank_n" +
+                "ame AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS C" +
+                "ustomers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS" +
+                " Tax_rates_value, \r\n                         Payment_terms.description AS Paymen" +
+                "t_terms_description, Delivery_terms.description AS Delivery_terms_description, Q" +
+                "uantity_units.description AS Quantity_units_description, Invoice_details.Id, \r\n " +
+                "                        Invoice_header.quantity_2_column_name, Invoice_header.qu" +
+                "antity_3_column_name, Clients.tax_number, Clients.prefix_invoices, Clients.last_" +
+                "index_invoices, Clients.no_template_invoices, \r\n                         Clients" +
+                ".text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold\r" +
+                "\nFROM            Invoice_details WITH (nolock) INNER JOIN\r\n                     " +
+                "    Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN\r\n             " +
+                "            Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details." +
+                "invoice_header_id INNER JOIN\r\n                         Articles ON Articles.Id =" +
+                " Invoice_details.article_id INNER JOIN\r\n                         Countries ON Co" +
+                "untries.Id = Invoice_header.countriesid INNER JOIN\r\n                         Cus" +
+                "tomers ON Customers.Id = Invoice_header.customers_id INNER JOIN\r\n               " +
+                "          Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN\r\n  " +
+                "                       Payment_terms ON Payment_terms.Id = Invoice_header.paymen" +
+                "t_terms_id INNER JOIN\r\n                         Delivery_terms ON Delivery_terms" +
+                ".Id = Invoice_header.delivery_terms_id INNER JOIN\r\n                         Quan" +
+                "tity_units ON Invoice_details.quantity_units_id = Quantity_units.Id\r\nWHERE      " +
+                "  (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = @invoice_he" +
+                "ader_id)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@client_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "clients_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@invoice_header_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
