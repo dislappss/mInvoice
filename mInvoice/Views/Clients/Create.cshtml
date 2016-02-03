@@ -233,6 +233,24 @@
             </div>
         </div>
 
+        <div class="form-group required">
+            @Html.LabelFor(model => model.email_subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.email_subject, new { cols = 60, rows = 10, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.email_subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.email_message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.email_message, new { cols = 60, rows = 10, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.email_message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
 
 
         <div class="form-group">

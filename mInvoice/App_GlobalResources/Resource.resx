@@ -507,4 +507,22 @@
   <data name="tax_number" xml:space="preserve">
     <value>Tax-No.</value>
   </data>
+  <data name="email_attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="email_body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="email_from" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="email_subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="email_to" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="send_email" xml:space="preserve">
+    <value>Send email</value>
+  </data>
 </root>

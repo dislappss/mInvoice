@@ -2,12 +2,10 @@
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Microsoft.Owin.Security;
 using mInvoice.Models;
 
@@ -22,7 +20,7 @@ namespace mInvoice.Controllers
         {
             string _AspNetUsers_id = null;
 
-            if (Session["client_id"] == null)
+            if (Session["client_id"] == null || Session["email"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -102,7 +100,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices,text_to_table,text_under_the_table_bold,text_under_the_table,tax_number")] Clients clients)
+        public ActionResult Create([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices,text_to_table,text_under_the_table_bold,text_under_the_table,tax_number,email_from,email_subject,email_message")] Clients clients)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +140,7 @@ namespace mInvoice.Controllers
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices,text_to_table,text_under_the_table_bold,text_under_the_table,tax_number")] Clients clients, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "Id,AspNetUsers_id,clientname,email,CreatedAt,UpdatedAt,owner,street,zip,city,countriesid,phone,fax,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,picture,prefix_invoices,last_index_invoices,no_template_invoices,text_to_table,text_under_the_table_bold,text_under_the_table,tax_number,email_from,email_subject,email_message")] Clients clients, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {

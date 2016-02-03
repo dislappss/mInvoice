@@ -54,6 +54,8 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string tax_number { get; set; }
+        public string email_subject { get; set; }
+        public string email_message { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual Countries Countries { get; set; }

@@ -49,6 +49,8 @@
           <Property Name="text_to_table" Type="nvarchar" MaxLength="500" />
           <Property Name="text_under_the_table_bold" Type="nvarchar" MaxLength="500" />
           <Property Name="text_under_the_table" Type="nvarchar" MaxLength="500" />
+          <Property Name="email_subject" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_message" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -166,7 +168,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clients_id" Type="int" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
@@ -799,6 +801,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="tax_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Delivery_terms" Relationship="myinvoice_dbModel.FK_Delivery_terms_Clients" FromRole="Clients" ToRole="Delivery_terms" />
           <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Clients" ToRole="Payment_terms" />
+          <Property Name="email_subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -1279,6 +1283,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="email_message" ColumnName="email_message" />
+                <ScalarProperty Name="email_subject" ColumnName="email_subject" />
                 <ScalarProperty Name="tax_number" ColumnName="tax_number" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />

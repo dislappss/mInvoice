@@ -501,4 +501,22 @@
   <data name="unit" xml:space="preserve">
     <value>Einheit</value>
   </data>
+  <data name="email_attachment" xml:space="preserve">
+    <value>Anlage</value>
+  </data>
+  <data name="email_body" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="email_from" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="email_subject" xml:space="preserve">
+    <value>Betreff</value>
+  </data>
+  <data name="email_to" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="send_email" xml:space="preserve">
+    <value>EMail senden</value>
+  </data>
 </root>

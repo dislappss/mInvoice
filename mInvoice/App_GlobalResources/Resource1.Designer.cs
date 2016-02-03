@@ -493,6 +493,51 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Attachment ähnelt.
+        /// </summary>
+        public static string email_attachment {
+            get {
+                return ResourceManager.GetString("email_attachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Body ähnelt.
+        /// </summary>
+        public static string email_body {
+            get {
+                return ResourceManager.GetString("email_body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die From ähnelt.
+        /// </summary>
+        public static string email_from {
+            get {
+                return ResourceManager.GetString("email_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subject ähnelt.
+        /// </summary>
+        public static string email_subject {
+            get {
+                return ResourceManager.GetString("email_subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die To ähnelt.
+        /// </summary>
+        public static string email_to {
+            get {
+                return ResourceManager.GetString("email_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The Email field is not a valid e-mail address. ähnelt.
         /// </summary>
         public static string err_email {
@@ -1056,6 +1101,15 @@ namespace mInvoice.App_GlobalResources {
         public static string select_Item {
             get {
                 return ResourceManager.GetString("select_Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Send email ähnelt.
+        /// </summary>
+        public static string send_email {
+            get {
+                return ResourceManager.GetString("send_email", resourceCulture);
             }
         }
         

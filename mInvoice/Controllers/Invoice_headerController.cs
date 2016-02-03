@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -6,8 +7,15 @@ using System.Linq;
 using System.Net;
 using System.Transactions;
 using System.Web.Mvc;
+using mInvoice.App_GlobalResources;
 using mInvoice.Models;
 using PagedList;
+using System.Web.Mvc;
+using mInvoice.Models;
+using MvcReportViewer;
+using System.IO;
+
+
 
 namespace mInvoice.Controllers
 {
@@ -51,7 +59,7 @@ namespace mInvoice.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                _headers = _headers.Where(s => 
+                _headers = _headers.Where(s =>
                     s.invoice_no.Contains(searchString)
                  || s.Customers.customer_no.Contains(searchString)
                  || s.Customers.customer_name.Contains(searchString)
@@ -67,10 +75,10 @@ namespace mInvoice.Controllers
                     _headers = _headers.OrderByDescending(s => s.invoice_no);
                     break;
                 case "customers_id_desc":
-                    _headers = _headers.OrderByDescending(s => s.customers_id );
+                    _headers = _headers.OrderByDescending(s => s.customers_id);
                     break;
                 case "customer_desc":
-                    _headers = _headers.OrderByDescending(s => s.Customers.customer_name );
+                    _headers = _headers.OrderByDescending(s => s.Customers.customer_name);
                     break;
                 case "order_date_desc":
                     _headers = _headers.OrderByDescending(s => s.order_date);
@@ -132,7 +140,7 @@ namespace mInvoice.Controllers
         // GET: Invoice_header/Create
         public ActionResult Create()
         {
-            int _client_id =-1;
+            int _client_id = -1;
 
             if (Session["client_id"] == null)
             {
@@ -140,7 +148,7 @@ namespace mInvoice.Controllers
             }
 
             _client_id = Convert.ToInt32(Session["client_id"]);
-            ViewBag.clients_id = _client_id; 
+            ViewBag.clients_id = _client_id;
 
             DateTime _now = DateTime.Now;
 
@@ -149,7 +157,7 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description");
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description");
 
-            var _new_item = new Invoice_header ();
+            var _new_item = new Invoice_header();
 
             _new_item.order_date = _now;
             _new_item.delivery_date = _now;
@@ -174,7 +182,7 @@ namespace mInvoice.Controllers
                 }
                 _client_id = Convert.ToInt32(Session["client_id"]);
 
-                invoice_header.clients_id = _client_id; 
+                invoice_header.clients_id = _client_id;
 
                 m_db.Invoice_header.Add(invoice_header);
                 m_db.SaveChanges();
@@ -211,8 +219,8 @@ namespace mInvoice.Controllers
 
             ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
-            ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id );
-            ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id );
+            ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
+            ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
 
             return View(invoice_header);
         }
@@ -223,7 +231,7 @@ namespace mInvoice.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id")] Invoice_header invoice_header)
-        {           
+        {
             if (ModelState.IsValid)
             {
                 m_db.Entry(invoice_header).State = EntityState.Modified;
@@ -238,11 +246,11 @@ namespace mInvoice.Controllers
             }
 
             var _client_id = Convert.ToInt32(Session["client_id"]);
-           
+
             ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
-            ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id );
-            ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id );
+            ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
+            ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
 
             return View(invoice_header);
         }
@@ -274,8 +282,8 @@ namespace mInvoice.Controllers
         {
             // Details
             IQueryable<Invoice_details> _details = m_db.Invoice_details.Where(x => x.invoice_header_id == id);
-            m_db.Invoice_details.RemoveRange(_details); 
-            
+            m_db.Invoice_details.RemoveRange(_details);
+
             // Header
             Invoice_header invoice_header = m_db.Invoice_header.Find(id);
             m_db.Invoice_header.Remove(invoice_header);
@@ -338,7 +346,7 @@ namespace mInvoice.Controllers
                             //var result = invoice_details.Include(i => i.Articles).Include(i => i.Invoice_header).Include(i => i.Tax_rates);
 
                             // New header
-                            
+
                             _new_header = _invoice_header;
 
                             DateTime _now = DateTime.Now;
@@ -371,16 +379,16 @@ namespace mInvoice.Controllers
                                     _new_position.quantity_3 = copy_invoice.quantity_3;
 
                                 _db.Invoice_details.Add(_new_position);
-                                _db.SaveChanges();                                
+                                _db.SaveChanges();
                             }
 
                             // Update Clients
                             Clients _client = _db.Clients.FirstOrDefault(x => x.Id == _client_id);
                             _client.last_index_invoices = _client.last_index_invoices + 1;
                             _db.Entry(_client).State = EntityState.Modified;
-                            _db.SaveChanges();  
+                            _db.SaveChanges();
 
-                            dbContextTransaction.Commit(); 
+                            dbContextTransaction.Commit();
                         }
                         catch (SqlException ex)
                         {
@@ -404,9 +412,9 @@ namespace mInvoice.Controllers
             string _prefix_invoices = null, _no_template_invoices = null;
             int _last_index_invoices = 1;
             int _client_id = Convert.ToInt32(Session["client_id"]);
-           
 
-            Clients _client = db.Clients.FirstOrDefault (x => x.Id == _client_id);
+
+            Clients _client = db.Clients.FirstOrDefault(x => x.Id == _client_id);
 
             _prefix_invoices = _client.prefix_invoices;
             _no_template_invoices = _client.no_template_invoices;
@@ -419,7 +427,7 @@ namespace mInvoice.Controllers
 
             if (!string.IsNullOrEmpty(_no_template_invoices))
             {
-                _ret_val = _no_template_invoices.Replace ("%P", _prefix).Replace ("%Y", _year).Replace ("%N", _number);
+                _ret_val = _no_template_invoices.Replace("%P", _prefix).Replace("%Y", _year).Replace("%N", _number);
             }
             else
             {
@@ -437,7 +445,7 @@ namespace mInvoice.Controllers
             int _count_of_zeros = 6 - _len;
 
             _ret_val = new String('0', _count_of_zeros);
-            _ret_val = _ret_val + Number;            
+            _ret_val = _ret_val + Number;
 
             return _ret_val;
         }
@@ -449,6 +457,173 @@ namespace mInvoice.Controllers
                 m_db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult EmailForm(int? id)
+        {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Invoice_header _invoice_header = m_db.Invoice_header.Find(id);
+            EmailFormModel _email_form = new EmailFormModel();
+            Clients _client = m_db.Clients.Find(Convert.ToInt32(Session["client_id"]));
+            Customers _customer = m_db.Customers.Find(_invoice_header.customers_id);  
+
+            _email_form.From = _client.email;
+            _email_form.Subject = _client.email_subject.Replace("%1", _invoice_header.invoice_no);
+            _email_form.Message = _client.email_message.Replace("%1", _invoice_header.invoice_no);
+            _email_form.To = _customer.email;
+
+
+            var model = GetData_invoice((int)id);
+
+            Dictionary<string, System.Data.DataTable> _localReportDataSources =
+                new Dictionary<string, System.Data.DataTable>();
+
+            _localReportDataSources.Add("labels", model.labels);
+            _localReportDataSources.Add("data", model.data);
+
+           string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string pathDownload = Path.Combine(pathUser, "Downloads");
+
+            string _filename = "invoice_" + Guid.NewGuid ().ToString() + ".pdf";
+            string _file_path = Path.Combine(pathDownload, _filename);
+
+            //FileStream fs = new FileStream(filePath + filename,
+            //           FileMode.Open, FileAccess.Read);
+            //BinaryReader br = new BinaryReader(fs);
+            //Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+            //br.Close();
+            //fs.Close();
+
+
+
+            return this.Report(
+                ReportFormat.Pdf
+                , "Reports/invoice.rdlc"
+                , localReportDataSources: _localReportDataSources
+                , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                , filename: _filename
+                );
+
+
+
+            //_email_form.Attachment = _file_path;
+
+            //return View(_ret_val);
+        }
+
+        private rp_invoice_detailsModel GetData_invoice(int id)
+        {
+            int _client_id = Convert.ToInt32(Session["client_id"]);
+
+            Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable _labelsDataTable =
+                new Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable();
+
+            _labelsDataTable.Addrp_invoice_detailsLabelsRow(
+                                        Resource.invoice_no,
+                        Resource.order_date,
+                        Resource.delivery_date,
+                        Resource.customer_reference,
+                        Resource.description,
+                        Resource.country_name,
+                        Resource.customer_no,
+                        Resource.customer,
+                        Resource.email,
+                        Resource.zip,
+                        Resource.city,
+                        Resource.street,
+                        Resource.tax_rate,
+                        Resource.client,
+                        Resource.email,
+                        Resource.owner,
+                        Resource.street,
+                        Resource.zip,
+                        Resource.city,
+                        Resource.phone,
+                        Resource.fax,
+                        "WWW",
+                        Resource.ustd_id,
+                        Resource.finance_office,
+                        Resource.account_number,
+                        Resource.bank_name,
+                        Resource.iban,
+                        Resource.bic,
+                        Resource.picture,
+                        Resource.phone_2,
+                        Resource.description,
+                        Resource.quantity,
+                        Resource.quantity_2,
+                        Resource.quantity_3,
+                        Resource.price_netto,
+                        Resource.discount,
+                        Resource.article_no,
+                        Resource.invoice,
+                        Resource.date,
+                        Resource.positions_short,
+                        Resource.price,
+                        Resource.sum_price,
+                        Resource.quantity_units,
+                        Resource.description,
+                        Resource.net_amount,
+                        Resource.subtotal,
+                        Resource.plus_vat,
+                        Resource.total_amount,
+                        Resource.positions_short,
+                        Resource.unit,
+                        Resource.quantity_report,
+                        Resource.discount_report,
+                        Resource.phone_report,
+                        Resource.fax_report,
+                        Resource.tax_number,
+                        Resource.bic_report,
+                        Resource.iban_report,
+                        Resource.owner_report,
+                        Resource.delivery_date_report,
+                        Resource.payment_terms,
+                        Resource.delivery_terms
+                        );
+
+            var model = new mInvoice.Models.rp_invoice_detailsModel()
+            {
+                data = LocalData.GetInvoice(_client_id, id),
+                labels = _labelsDataTable
+            };
+            return model;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmailForm(EmailFormModel EmailForm)
+        {
+            int _client_id = -1;
+
+            if (ModelState.IsValid)
+            {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                
+
+
+               
+                return RedirectToAction("Index");
+            }
+
+            //ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            //ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            //ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
+            //ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
+
+            return View();
         }
     }
 }
