@@ -10,6 +10,8 @@ namespace mInvoice.Models
 {
     public class EmailFormModel: Email
     {
+        public int ID { get; set; }
+
         [Required, EmailAddress]
         [Display(Name = "email_from", ResourceType = typeof(Resource))]
         public string From { get; set; }

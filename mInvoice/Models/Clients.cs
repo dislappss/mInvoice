@@ -56,6 +56,10 @@ namespace mInvoice.Models
         public string tax_number { get; set; }
         public string email_subject { get; set; }
         public string email_message { get; set; }
+        public string email_user_name { get; set; }
+        public string email_password { get; set; }
+        public string email_host { get; set; }
+        public Nullable<int> email_port { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual Countries Countries { get; set; }

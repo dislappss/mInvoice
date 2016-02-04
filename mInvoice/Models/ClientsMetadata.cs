@@ -89,6 +89,19 @@ namespace mInvoice.Models
 
         [Display(Name = "tax_number", ResourceType = typeof(Resource))]
         public string tax_number { get; set; }
+
+
+        //[Display(Name = "email_user_name", ResourceType = typeof(Resource))]
+        //public string email_user_name { get; set; }
+
+        //[Display(Name = "email_password", ResourceType = typeof(Resource))]
+        //public string email_password { get; set; }
+
+        //[Display(Name = "email_host", ResourceType = typeof(Resource))]
+        //public string email_host { get; set; }
+
+        //[Display(Name = "email_port", ResourceType = typeof(Resource))]
+        //public string email_port { get; set; }
     }
 
    

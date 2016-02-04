@@ -14,6 +14,9 @@ using System.Web.Mvc;
 using mInvoice.Models;
 using MvcReportViewer;
 using System.IO;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading.Tasks;
 
 
 
@@ -459,6 +462,8 @@ namespace mInvoice.Controllers
             base.Dispose(disposing);
         }
 
+        //private string m_tmp_pdf_filename = null; //"invoice_" + Guid.NewGuid().ToString() + ".pdf";
+
         public ActionResult EmailForm(int? id)
         {
             if (Session["client_id"] == null)
@@ -474,51 +479,125 @@ namespace mInvoice.Controllers
             Invoice_header _invoice_header = m_db.Invoice_header.Find(id);
             EmailFormModel _email_form = new EmailFormModel();
             Clients _client = m_db.Clients.Find(Convert.ToInt32(Session["client_id"]));
-            Customers _customer = m_db.Customers.Find(_invoice_header.customers_id);  
+            Customers _customer = m_db.Customers.Find(_invoice_header.customers_id);
 
+            _email_form.ID = (int)id;
             _email_form.From = _client.email;
             _email_form.Subject = _client.email_subject.Replace("%1", _invoice_header.invoice_no);
             _email_form.Message = _client.email_message.Replace("%1", _invoice_header.invoice_no);
             _email_form.To = _customer.email;
 
-
-            var model = GetData_invoice((int)id);
-
-            Dictionary<string, System.Data.DataTable> _localReportDataSources =
-                new Dictionary<string, System.Data.DataTable>();
-
-            _localReportDataSources.Add("labels", model.labels);
-            _localReportDataSources.Add("data", model.data);
-
-           string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathDownload = Path.Combine(pathUser, "Downloads");
-
-            string _filename = "invoice_" + Guid.NewGuid ().ToString() + ".pdf";
+            string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
             string _file_path = Path.Combine(pathDownload, _filename);
 
-            //FileStream fs = new FileStream(filePath + filename,
-            //           FileMode.Open, FileAccess.Read);
-            //BinaryReader br = new BinaryReader(fs);
-            //Byte[] bytes = br.ReadBytes((Int32)fs.Length);
-            //br.Close();
-            //fs.Close();
+            _email_form.Attachment = _file_path;
+
+          
+
+           // var model = GetData_invoice((int)id);
+
+            //Dictionary<string, System.Data.DataTable> _localReportDataSources =
+            //    new Dictionary<string, System.Data.DataTable>();
+
+            //_localReportDataSources.Add("labels", model.labels);
+            //_localReportDataSources.Add("data", model.data);
+
+            //string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            //string pathDownload = Path.Combine(pathUser, "Downloads");
+            //string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
+            //string _file_path = Path.Combine(pathDownload, _filename);
 
 
 
-            return this.Report(
-                ReportFormat.Pdf
-                , "Reports/invoice.rdlc"
-                , localReportDataSources: _localReportDataSources
-                , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
-                , filename: _filename
-                );
+           // return this.Report(
+           //     ReportFormat.Pdf
+           //     , "Reports/invoice.rdlc"
+           //     , localReportDataSources: _localReportDataSources
+           //     , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+           //     , filename: _filename
+           //     );
 
 
 
             //_email_form.Attachment = _file_path;
 
-            //return View(_ret_val);
+            return View(_email_form);
         }
+
+
+        //async private void GenerateInvoicePDFAndSendMail(EmailFormModel EmailForm)
+        //{
+            //if (Session["client_id"] == null)
+            //{
+            //    return ;
+            //}
+
+            //int _client_id = Convert.ToInt32(Session["client_id"]);
+
+            //var model = GetData_invoice(EmailForm.ID);
+
+            //Dictionary<string, System.Data.DataTable> _localReportDataSources =
+            //    new Dictionary<string, System.Data.DataTable>();
+
+            //_localReportDataSources.Add("labels", model.labels);
+            //_localReportDataSources.Add("data", model.data);
+
+            //string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            //string pathDownload = Path.Combine(pathUser, "Downloads");
+
+            ////string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
+            ////string _file_path = Path.Combine(pathDownload, PDFFileName);
+
+
+            //MailMessage msg = new MailMessage();
+
+            //msg.From = new MailAddress("dnepr65@gmail.com"); //EmailForm.From);
+            //msg.To.Add(new MailAddress("dnepr65@gmail.com")); //EmailForm.To));
+            //msg.Subject = EmailForm.Subject;
+            //msg.Body = EmailForm.Message;
+
+            //Stream stream = this.Report(
+            //    ReportFormat.Pdf
+            //    , "Reports/invoice.rdlc"
+            //    , localReportDataSources: _localReportDataSources
+            //    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+            //    , filename: EmailForm.Attachment 
+            //    ).FileStream ;
+
+            //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
+
+            //Attachment att1 = new Attachment(stream, EmailForm.Attachment );
+            //msg.Attachments.Add(att1);
+
+            //var _client = m_db.Clients.Find(_client_id); 
+
+
+
+            //try
+            //{
+            //    using (var smtp = new SmtpClient())
+            //    {
+            //        var credential = new NetworkCredential
+            //        {
+            //            UserName = _client.email_user_name ,  // replace with valid value
+            //            Password = _client.email_password   // replace with valid value
+            //        };
+            //        smtp.Credentials = credential;
+            //        smtp.Host = _client.email_host ;
+            //        smtp.Port = (int)_client.email_port;
+            //        smtp.EnableSsl = true;
+            //        await smtp.SendMailAsync(msg);                   
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+            //          ex.ToString());
+            //}
+            
+        //}
 
         private rp_invoice_detailsModel GetData_invoice(int id)
         {
@@ -601,29 +680,89 @@ namespace mInvoice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EmailForm(EmailFormModel EmailForm)
+        async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
         {
-            int _client_id = -1;
-
             if (ModelState.IsValid)
             {
+                //if (Session["client_id"] == null)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //}
+
                 if (Session["client_id"] == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                
+
+                int _client_id = Convert.ToInt32(Session["client_id"]);
+
+                var model = GetData_invoice(EmailForm.ID);
+
+                Dictionary<string, System.Data.DataTable> _localReportDataSources =
+                    new Dictionary<string, System.Data.DataTable>();
+
+                _localReportDataSources.Add("labels", model.labels);
+                _localReportDataSources.Add("data", model.data);
+
+                string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string pathDownload = Path.Combine(pathUser, "Downloads");
+
+                //string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
+                //string _file_path = Path.Combine(pathDownload, PDFFileName);
 
 
-               
-                return RedirectToAction("Index");
+                MailMessage msg = new MailMessage();
+
+                msg.From = new MailAddress("dnepr65@gmail.com"); //EmailForm.From);
+                msg.To.Add(new MailAddress("dnepr65@gmail.com")); //EmailForm.To));
+                msg.Subject = EmailForm.Subject;
+                msg.Body = EmailForm.Message;
+
+                Stream stream = this.Report(
+                    ReportFormat.Pdf
+                    , "Reports/invoice.rdlc"
+                    , localReportDataSources: _localReportDataSources
+                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                    , filename: EmailForm.Attachment
+                    ).FileStream;
+
+                ContentType ct = new ContentType(MediaTypeNames.Text.Html);
+
+                Attachment att1 = new Attachment(stream, EmailForm.Attachment);
+                msg.Attachments.Add(att1);
+
+                var _client = m_db.Clients.Find(_client_id);
+
+
+
+                try
+                {
+                    using (var smtp = new SmtpClient())
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = _client.email_user_name,  // replace with valid value
+                            Password = _client.email_password   // replace with valid value
+                        };                        
+                        smtp.Host = _client.email_host;
+                        smtp.Port = (int)_client.email_port;
+                        smtp.EnableSsl = true;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network ;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = credential;
+                        smtp.Timeout = 20000;
+
+                        await smtp.SendMailAsync(msg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                          ex.ToString());                    
+                }                                              
             }
 
-            //ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            //ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
-            //ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
-            //ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
