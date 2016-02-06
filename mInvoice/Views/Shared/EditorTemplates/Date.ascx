@@ -55,9 +55,3 @@
     }), "-- " + @Resources.Resource.year + " --",  htmlAttributes: new { @class = "horizontal-style-cell-year form-control"}) %></td>
     </tr>
 </table>
-
-<%--<div class="horizontal-style">
-  
-   
-   
-</div>--%>
