@@ -32,11 +32,6 @@
 </style>
 
 <table >
-    <%--<colgroup>
-        <col style="width: 10%">
-        <col style="width: 30%">
-        <col style="width: 15%">
-    </colgroup>--%>
     <tr>
         <td><%= @Html.DropDownListFor(dateTime => dateTime.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem                          
     {                              
