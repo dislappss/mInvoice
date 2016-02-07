@@ -74,11 +74,13 @@ namespace mInvoice.Models
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Display(Name = "order_date", ResourceType = typeof(Resource))]
-        public DateTime? order_date   {   get;  set;   }
+        [Required]
+        public DateTime order_date   {   get;  set;   }
 
         [Display(Name = "delivery_date", ResourceType = typeof(Resource))]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        public DateTime? delivery_date  {  get;  set; }
+        [Required]
+        public DateTime delivery_date  {  get;  set; }
 
         [Display(Name = "customer", ResourceType = typeof(Resource))]
         public int customers_id { get; set; }
@@ -119,6 +121,10 @@ namespace mInvoice.Models
 
         [Display(Name = "delivery_terms", ResourceType = typeof(Resource))]
         public Nullable<decimal> delivery_terms_id { get; set; }
+
+         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [Display(Name = "paid_at", ResourceType = typeof(Resource))]
+        public Nullable<DateTime> paid_at { get; set; }
         
     }
 }

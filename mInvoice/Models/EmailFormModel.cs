@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using mInvoice.App_GlobalResources;
-using Postal;
 
 namespace mInvoice.Models
 {
-    public class EmailFormModel: Email
+    public class EmailFormModel
     {
         public int ID { get; set; }
 

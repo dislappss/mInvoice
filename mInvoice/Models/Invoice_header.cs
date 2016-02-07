@@ -33,6 +33,7 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<int> payment_terms_id { get; set; }
         public Nullable<int> delivery_terms_id { get; set; }
+        public Nullable<System.DateTime> paid_at { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Countries Countries { get; set; }

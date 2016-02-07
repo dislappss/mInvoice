@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.DateTime>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Nullable<DateTime>>" %>
 <%@ Import Namespace="System.Threading" %>
 <%@ Import Namespace=" System.Web.Mvc" %>
 <%@ Import Namespace=" System.Web.Mvc.Html" %>
@@ -8,59 +8,78 @@
         display: table;
         width: 100%
     }
-    /*.horizontal-style li {
-        display: table-cell;
-    }*/
     .horizontal-style-cell-day {
        padding: 5px 6px;
-       /*width:70%;*/
        text-align: center;
     }
     .horizontal-style-cell-month {
     padding: 5px 6px;
-       /*width:45%;*/
        text-align: center;
     }
     .horizontal-style-cell-year {
         padding: 5px 6px;
-       /*width:90%;*/
        text-align: center;
     }
-    
-
-    
+        
 </style>
+
+<%--@{
+    var now = DateTime.Now;
+    var years = Enumerable.Range(0, 150).Select(x => new SelectListItem { Value = (now.Year - x).ToString(), Text = (now.Year - x).ToString() });
+    var months = Enumerable.Range(1, 12).Select(x => new SelectListItem { Value = x.ToString("00"), Text = x.ToString() });
+    var days = Enumerable.Range(1, 31).Select(x => new SelectListItem { Value = x.ToString("00"), Text = x.ToString() });
+
+    var result = ViewData.ModelState[ViewData.TemplateInfo.HtmlFieldPrefix];
+    if (result != null)
+    { 
+        var values = result.Value.RawValue as string[];
+        years = new SelectList(years, "Value", "Text", values[0]);
+        months = new SelectList(months, "Value", "Text", values[1]);
+        days = new SelectList(days, "Value", "Text", values[2]);
+        result.Value = null;
+    }
+}
+
+<div class="trippleddldatetime">
+    @Html.Label("")
+
+    @Html.DropDownList("", years, "-- year --")
+    @Html.DropDownList("", months, "-- month --")
+    @Html.DropDownList("", days, "-- day --")
+
+    @Html.ValidationMessage("")
+</div>--%>
 
 <table >
     <tr>
-        <td><%= @Html.DropDownListFor(dateTime => dateTime.Day, 
+        <td><%= @Html.DropDownList("Day",
             Enumerable.Range(1, 31).Select(i => new SelectListItem                          
             {                              
               Value = i.ToString(),                              
               Text = i.ToString(),                             
-              Selected = (i == Model.Day && Model != DateTime.MinValue && Model != DateTime.MaxValue)                         
+              Selected = (Model.HasValue ?  i == ((DateTime)Model).Day && Model != DateTime.MinValue && Model != DateTime.MaxValue : false)                         
             }), 
             "-- " + @Resources.Resource.day + " --", 
             htmlAttributes: new { @class = "horizontal-style-cell-day form-control" } ) %>
         </td>
 
-        <td><%= @Html.DropDownListFor(dateTime => dateTime.Month, 
+        <td><%= @Html.DropDownList("Month", 
             Enumerable.Range(1, 12).Select(i => new SelectListItem                          
             {                              
               Value = i.ToString(),                              
               Text = Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetMonthName(i),                             
-              Selected = (i == Model.Month && Model != DateTime.MinValue && Model != DateTime.MaxValue)
+              Selected = (Model.HasValue ?  i == ((DateTime)Model).Month && Model != DateTime.MinValue && Model != DateTime.MaxValue : false) 
             }), 
             "-- " + @Resources.Resource.month + " --",  
             htmlAttributes: new { @class = "horizontal-style-cell-month form-control" }) %>
         </td>
 
-        <td><%= @Html.DropDownListFor(dateTime => dateTime.Year, 
-            Enumerable.Range(DateTime.Now.Year-100, 200).Select(i => new SelectListItem                           
+        <td><%= @Html.DropDownList("Year", 
+            Enumerable.Range(DateTime.Now.Year-5, 15).Select(i => new SelectListItem                           
             {                                                             
               Value = i.ToString(),                               
               Text = i.ToString(),                              
-              Selected = (i == Model.Year && Model != DateTime.MinValue && Model != DateTime.MaxValue)
+             Selected = (Model.HasValue ?  i == ((DateTime)Model).Year && Model != DateTime.MinValue && Model != DateTime.MaxValue : false) 
             }), 
             "-- " + @Resources.Resource.year + " --",  
             htmlAttributes: new { @class = "horizontal-style-cell-year form-control"}) %>

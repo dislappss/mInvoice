@@ -519,4 +519,13 @@
   <data name="send_email" xml:space="preserve">
     <value>EMail senden</value>
   </data>
+  <data name="paid_at" xml:space="preserve">
+    <value>Bezahlt am</value>
+  </data>
+  <data name="copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
 </root>

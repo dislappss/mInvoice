@@ -173,7 +173,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id")] Invoice_header invoice_header)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at")] Invoice_header invoice_header)
         {
             int _client_id = -1;
 
@@ -233,7 +233,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id")] Invoice_header invoice_header)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at")] Invoice_header invoice_header)
         {
             if (ModelState.IsValid)
             {

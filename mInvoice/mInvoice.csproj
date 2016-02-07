@@ -59,9 +59,6 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Postal">
-      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
-    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -254,7 +251,6 @@
     <Compile Include="Models\Clients.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cDate.cs" />
     <Compile Include="Models\ArticlesMetadata.cs" />
     <Compile Include="Models\Copy_Invoice.cs" />
     <Compile Include="Models\DateRequiredAttribute.cs" />
@@ -492,7 +488,6 @@
     <Content Include="Views\Delivery_terms\Edit.cshtml" />
     <Content Include="Views\Delivery_terms\Index.cshtml" />
     <Content Include="Views\Emails\Web.config" />
-    <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Invoice_header\EmailForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -528,6 +523,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ohaERP_ZUGFeRD\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD.csproj">
+      <Project>{1ff5a300-0d7a-4c87-9785-d9c5483db301}</Project>
+      <Name>ohaERP_ZUGFeRD</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

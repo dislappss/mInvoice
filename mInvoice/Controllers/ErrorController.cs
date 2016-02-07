@@ -6,7 +6,7 @@ namespace mInvoice.Controllers
     {
         public ViewResult Index()
         {
-            return View("Error");
+            return View("Index");
         }
         public ViewResult NotFound()
         {

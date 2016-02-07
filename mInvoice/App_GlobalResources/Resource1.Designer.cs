@@ -250,6 +250,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Copy ähnelt.
+        /// </summary>
+        public static string copy {
+            get {
+                return ResourceManager.GetString("copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Copy invoice ähnelt.
         /// </summary>
         public static string copy_invoice {
@@ -808,6 +817,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Paid at ähnelt.
+        /// </summary>
+        public static string paid_at {
+            get {
+                return ResourceManager.GetString("paid_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
         /// </summary>
         public static string password {
@@ -1101,6 +1119,15 @@ namespace mInvoice.App_GlobalResources {
         public static string select_Item {
             get {
                 return ResourceManager.GetString("select_Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Send ähnelt.
+        /// </summary>
+        public static string send {
+            get {
+                return ResourceManager.GetString("send", resourceCulture);
             }
         }
         

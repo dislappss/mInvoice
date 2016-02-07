@@ -22,6 +22,20 @@ namespace mInvoice
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(Nullable<DateTime>), new DateTimeModelBinder()
+            {
+                //Date = DateTime.Now, // Date parts are not splitted in the View
+                //// (e.g. the whole date is held by a TextBox  with id “xxx_Date”)
+                //Time = DateTime.Now, // Time parts are not  splitted in the View
+                //// (e.g. the whole time  is held by a TextBox with id “xxx_Time”)
+                //Day = DateTime.Now.Day,
+                //Month = DateTime.Now.Month,
+                //Year = DateTime.Now.Year,
+                //Hour = DateTime.Now.Hour,
+                //Minute = DateTime.Now.Minute,
+                //Second = DateTime.Now.Second
+            });
+
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder()
             {
                 Date = DateTime.Now, // Date parts are not splitted in the View
@@ -131,14 +145,14 @@ namespace mInvoice
 
     public class DateTimeModelBinder : IModelBinder
     {
-        public DateTime Date ;
-        public DateTime Time;
-        public int Day;
-        public int Month;
-        public int Year;
-        public int Hour = 0;
-        public int Minute = 0;
-        public int Second = 0;
+        public DateTime? Date = new DateTime? ();
+        public DateTime? Time = new DateTime? ();
+        public int? Day = null;
+        public int? Month = null;
+        public int? Year = null;
+        public int? Hour =  null;
+        public int? Minute = null;
+        public int? Second = null;
 
 
         public object BindModel(ControllerContext controllerContext,
@@ -164,11 +178,11 @@ namespace mInvoice
                         actualValue = new DateTime(
                             Convert.ToInt32(_year.AttemptedValue),
                             Convert.ToInt32(_month.AttemptedValue),
-                            Convert.ToInt32(_day.AttemptedValue), Hour, Minute, Second);
+                            Convert.ToInt32(_day.AttemptedValue), 0, 0, 0);
                     }
                     else
                     {
-                        actualValue = DateTime.Now; 
+                        actualValue = new Nullable<DateTime>();// DateTime.Now; 
                     }
                 //}
 

@@ -21,13 +21,13 @@ namespace mInvoice.Models
         public string description { get; set; }
         public int tax_rate_id { get; set; }
         public decimal quantity { get; set; }
-        public Nullable<decimal> quantity_2 { get; set; }
-        public Nullable<decimal> quantity_3 { get; set; }
+        public decimal? quantity_2 { get; set; }
+        public decimal? quantity_3 { get; set; }
         public int quantity_units_id { get; set; }
         public decimal price_netto { get; set; }
-        public Nullable<decimal> discount { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public decimal? discount { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     
         public virtual Articles Articles { get; set; }
         public virtual Clients Clients { get; set; }

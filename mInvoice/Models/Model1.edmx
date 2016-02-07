@@ -152,6 +152,7 @@
           <Property Name="discount" Type="numeric" Precision="15" Scale="2" />
           <Property Name="payment_terms_id" Type="int" />
           <Property Name="delivery_terms_id" Type="int" />
+          <Property Name="paid_at" Type="smalldatetime" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -916,6 +917,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="delivery_terms_id" Type="Int32" />
           <NavigationProperty Name="Delivery_terms" Relationship="myinvoice_dbModel.FK_Invoice_header_Delivery_terms" FromRole="Invoice_header" ToRole="Delivery_terms" />
           <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Invoice_header_Payment_terms" FromRole="Invoice_header" ToRole="Payment_terms" />
+          <Property Name="paid_at" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Payment_method">
           <Key>
@@ -1396,6 +1398,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Invoice_header">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
               <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
                 <ScalarProperty Name="delivery_terms_id" ColumnName="delivery_terms_id" />
                 <ScalarProperty Name="payment_terms_id" ColumnName="payment_terms_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />

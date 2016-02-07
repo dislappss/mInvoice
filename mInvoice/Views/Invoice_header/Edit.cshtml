@@ -33,8 +33,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.order_date, "Date", new { htmlAttributes = new { @class = "form-control-not-100" } })
                 @Html.ValidationMessageFor(model => model.order_date, "", new { @class = "text-danger" })
-
-
             </div>
         </div>
 
@@ -135,6 +133,16 @@
                 @Html.ValidationMessageFor(model => model.delivery_terms_id, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.paid_at, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.paid_at, "Date", new { htmlAttributes = new { @class = "form-control-not-100" } })
+                @Html.ValidationMessageFor(model => model.paid_at, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
