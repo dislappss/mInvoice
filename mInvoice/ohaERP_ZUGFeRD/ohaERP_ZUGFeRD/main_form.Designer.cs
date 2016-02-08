@@ -34,13 +34,13 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderTextBox = new System.Windows.Forms.TextBox();
-            this.rp_invoice_headerTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_invoice_headerTableAdapter();
-            this.rp_invoice_detailsTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_invoice_detailsTableAdapter();
+            //this.rp_invoice_headerTableAdapter = new DataSet1TableAdapters.Invoice_headerTableAdapter ();
+            this.rp_invoice_detailsTableAdapter = new  DataSet1TableAdapters.rp_invoice_detailsTableAdapter   ();
             this.dataSet11 = new ZUGFeRD_Test.DataSet1();
-            this.rp_invoice_header_paymentsTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_invoice_header_paymentsTableAdapter();
-            this.banksTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.banksTableAdapter();
-            this.clientTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.clientTableAdapter();
-            this.rp_headofletter_layoutTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_headofletter_layoutTableAdapter();
+            //this.rp_invoice_header_paymentsTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_invoice_header_paymentsTableAdapter();
+            //this.banksTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.banksTableAdapter();
+            //this.clientTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.clientTableAdapter();
+            //this.rp_headofletter_layoutTableAdapter = new ZUGFeRD_Test.DataSet1TableAdapters.rp_headofletter_layoutTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +87,7 @@
             // 
             // rp_invoice_headerTableAdapter
             // 
-            this.rp_invoice_headerTableAdapter.ClearBeforeFill = true;
+            //this.rp_invoice_headerTableAdapter.ClearBeforeFill = true;
             // 
             // rp_invoice_detailsTableAdapter
             // 
@@ -100,19 +100,17 @@
             // 
             // rp_invoice_header_paymentsTableAdapter
             // 
-            this.rp_invoice_header_paymentsTableAdapter.ClearBeforeFill = true;
-            // 
-            // banksTableAdapter
-            // 
-            this.banksTableAdapter.ClearBeforeFill = true;
+            //this.rp_invoice_header_paymentsTableAdapter.ClearBeforeFill = true;
+            //// 
+            //// banksTableAdapter
+            //// 
+            //this.banksTableAdapter.ClearBeforeFill = true;
             // 
             // clientTableAdapter
             // 
-            this.clientTableAdapter.ClearBeforeFill = true;
             // 
             // rp_headofletter_layoutTableAdapter
             // 
-            this.rp_headofletter_layoutTableAdapter.ClearBeforeFill = true;
             // 
             // main_form
             // 
@@ -142,12 +140,12 @@
         private System.Windows.Forms.Button folderButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private DataSet1TableAdapters.rp_invoice_headerTableAdapter rp_invoice_headerTableAdapter;
-        private DataSet1TableAdapters.rp_invoice_detailsTableAdapter rp_invoice_detailsTableAdapter;
+        //private DataSet1TableAdapters.Invoice_headerTableAdapter rp_invoice_headerTableAdapter;
+        private DataSet1TableAdapters.rp_invoice_detailsTableAdapter  rp_invoice_detailsTableAdapter;
         private DataSet1 dataSet11;
-        private DataSet1TableAdapters.rp_invoice_header_paymentsTableAdapter rp_invoice_header_paymentsTableAdapter;
-        private DataSet1TableAdapters.banksTableAdapter banksTableAdapter;
-        private DataSet1TableAdapters.clientTableAdapter clientTableAdapter;
-        private DataSet1TableAdapters.rp_headofletter_layoutTableAdapter rp_headofletter_layoutTableAdapter;
+        //private DataSet1TableAdapters.rp_invoice_header_paymentsTableAdapter rp_invoice_header_paymentsTableAdapter;
+        //private DataSet1TableAdapters.banksTableAdapter banksTableAdapter;
+        //private DataSet1TableAdapters.clientTableAdapter clientTableAdapter;
+        //private DataSet1TableAdapters.rp_headofletter_layoutTableAdapter rp_headofletter_layoutTableAdapter;
     }
 }

@@ -10,8 +10,9 @@
 {
     @Html.AntiForgeryToken()
     
-    @Html.HiddenFor(model => model.ID  ) 
-    
+    @Html.HiddenFor(model => model.ID  )
+    @Html.HiddenFor(model => model.Zugferd)
+
     <div class="form-horizontal">
         <h4>EmailFormModel</h4>
         <hr />

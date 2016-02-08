@@ -103,7 +103,8 @@
                 @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.copy, "Copy_invoice", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.invoice, "rp_invoice_details", "Reports", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
-                @Html.ActionLink(@Resources.Resource.send_email, "EmailForm", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@Resources.Resource.email, "EmailForm", "Invoice_header", new { id = item.Id, zugferd = false }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@Resources.Resource.email + " (" +@Resources.Resource.zugferd + ")", "EmailForm", "Invoice_header", new { id = item.Id, zugferd = true }, new { @class = "btn btn-primary btn-xs" })
             </td>
         </tr>
     }

@@ -30,5 +30,9 @@ namespace mInvoice.Models
         [Required]
         [Display(Name = "email_attachment", ResourceType = typeof(Resource))]
         public string Attachment { get; set; }
+
+        [Required]
+        [Display(Name = "zugferd", ResourceType = typeof(Resource))]
+        public bool Zugferd { get; set; }
     }
 }

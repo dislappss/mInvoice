@@ -1310,5 +1310,14 @@ namespace mInvoice.App_GlobalResources {
                 return ResourceManager.GetString("zip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ZUGFeRD ähnelt.
+        /// </summary>
+        public static string zugferd {
+            get {
+                return ResourceManager.GetString("zugferd", resourceCulture);
+            }
+        }
     }
 }

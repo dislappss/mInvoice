@@ -534,4 +534,7 @@
   <data name="send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="zugferd" xml:space="preserve">
+    <value>ZUGFeRD</value>
+  </data>
 </root>
