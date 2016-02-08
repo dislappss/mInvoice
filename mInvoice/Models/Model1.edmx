@@ -55,6 +55,7 @@
           <Property Name="email_password" Type="nvarchar" MaxLength="250" />
           <Property Name="email_host" Type="nvarchar" MaxLength="250" />
           <Property Name="email_port" Type="int" />
+          <Property Name="currency_id" Type="int" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -68,6 +69,14 @@
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -98,6 +107,7 @@
           <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
           <Property Name="iban" Type="nvarchar" MaxLength="50" />
           <Property Name="bic" Type="nvarchar" MaxLength="50" />
+          <Property Name="currency_id" Type="int" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -272,6 +282,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Clients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Clients1" Type="Self.Clients" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Clients_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
@@ -281,6 +303,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="currency_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,6 +351,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Principal>
             <Dependent Role="Customers">
               <PropertyRef Name="countriesid_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="currency_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -504,6 +550,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery_terms" EntityType="Self.Delivery_terms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" Schema="dbo" store:Type="Tables" />
@@ -541,8 +588,16 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Articles" EntitySet="Articles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Clients_Clients" Association="Self.FK_Clients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Clients1" EntitySet="Clients" />
+          </AssociationSet>
           <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Currency" Association="Self.FK_Clients_Currency">
+            <End Role="Currency" EntitySet="Currency" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_Clients" Association="Self.FK_Customers_Clients">
@@ -555,6 +610,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           </AssociationSet>
           <AssociationSet Name="FK_Customers_Countries1" Association="Self.FK_Customers_Countries1">
             <End Role="Countries" EntitySet="Countries" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currency" Association="Self.FK_Customers_Currency">
+            <End Role="Currency" EntitySet="Currency" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_payment_method" Association="Self.FK_Customers_payment_method">
@@ -723,6 +782,19 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Payment_terms" EntitySet="Payment_terms" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
+          <AssociationSet Name="FK_Clients_Clients" Association="myinvoice_dbModel.FK_Clients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Clients1" EntitySet="Clients" />
+          </AssociationSet>
+          <EntitySet Name="Currency" EntityType="myinvoice_dbModel.Currency" />
+          <AssociationSet Name="FK_Clients_Currency" Association="myinvoice_dbModel.FK_Clients_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currency" Association="myinvoice_dbModel.FK_Customers_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="v_AspNetUsers">
           <Key>
@@ -812,6 +884,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="email_password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="email_host" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="email_port" Type="Int32" />
+          <Property Name="currency_id" Type="Int32" />
+          <NavigationProperty Name="Clients1" Relationship="myinvoice_dbModel.FK_Clients_Clients" FromRole="Clients" ToRole="Clients1" />
+          <NavigationProperty Name="Clients2" Relationship="myinvoice_dbModel.FK_Clients_Clients" FromRole="Clients1" ToRole="Clients" />
+          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Clients" ToRole="Currency" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -864,6 +940,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <NavigationProperty Name="Countries1" Relationship="myinvoice_dbModel.FK_Customers_Countries1" FromRole="Customers" ToRole="Countries" />
           <NavigationProperty Name="Payment_method" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Customers" ToRole="Payment_method" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Customers" ToRole="Invoice_header" />
+          <Property Name="currency_id" Type="Int32" />
+          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Customers" ToRole="Currency" />
         </EntityType>
         <EntityType Name="Invoice_details">
           <Key>
@@ -1251,6 +1329,52 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Clients_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Currency" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Currency" ToRole="Customers" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Clients_Currency">
+          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currency">
+          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1293,6 +1417,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
                 <ScalarProperty Name="email_port" ColumnName="email_port" />
                 <ScalarProperty Name="email_host" ColumnName="email_host" />
                 <ScalarProperty Name="email_password" ColumnName="email_password" />
@@ -1345,6 +1470,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="bic" ColumnName="bic" />
@@ -1478,6 +1604,15 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

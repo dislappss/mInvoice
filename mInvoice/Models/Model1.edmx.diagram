@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="99">
         <EntityTypeShape EntityType="myinvoice_dbModel.v_AspNetUsers" PointX="0.75" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Articles" Width="1.5" PointX="10.625" PointY="9.625" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Clients" Width="1.5" PointX="6.125" PointY="0.75" />
@@ -39,6 +39,10 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_Payment_terms_Clients" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_header_Delivery_terms" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_header_Payment_terms" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Clients_Clients" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Currency" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Clients_Currency" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Customers_Currency" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

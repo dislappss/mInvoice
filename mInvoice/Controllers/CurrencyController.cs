@@ -8,7 +8,7 @@ using PagedList;
 
 namespace mInvoice.Controllers
 {
-    public class CountriesController : BaseController
+    public class CurrencyController : BaseController
     {
         /*         
          http://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application 
@@ -16,7 +16,7 @@ namespace mInvoice.Controllers
 
         private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
-        // GET: Countries
+        // GET: Currency
         public ActionResult Index(  string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -40,136 +40,136 @@ namespace mInvoice.Controllers
            ViewBag.CurrentFilter = searchString;
 
 
-            var _countries = from s in db.Countries
+            var _Currency = from s in db.Currency
                            select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                _countries = _countries.Where(s => s.name.Contains(searchString)
+                _Currency = _Currency.Where(s => s.name.Contains(searchString)
                                        || s.code.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    _countries = _countries.OrderByDescending(s => s.name );
+                    _Currency = _Currency.OrderByDescending(s => s.name );
                     break;
                 case "Code":
-                    _countries = _countries.OrderBy(s => s.code);
+                    _Currency = _Currency.OrderBy(s => s.code);
                     break;
                 case "code_desc":
-                    _countries = _countries.OrderByDescending(s => s.code);
+                    _Currency = _Currency.OrderByDescending(s => s.code);
                     break;
-                case "Active":
-                    _countries = _countries.OrderBy(s => s.active);
-                    break;
-                case "active_desc":
-                    _countries = _countries.OrderByDescending(s => s.active);
-                    break;
+                //case "Active":
+                //    _Currency = _Currency.OrderBy(s => s.active);
+                //    break;
+                //case "active_desc":
+                //    _Currency = _Currency.OrderByDescending(s => s.active);
+                //    break;
                 default:
-                    //_countries = _countries.OrderBy(s => s.name);
-                    _countries = _countries.OrderByDescending(s => s.active);
+                    //_Currency = _Currency.OrderBy(s => s.name);
+                    _Currency = _Currency.OrderByDescending(s => s.name );
                     break;
             }
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(_countries.ToPagedList(pageNumber, pageSize));
+            return View(_Currency.ToPagedList(pageNumber, pageSize));
 
-            //return View(_countries.ToList());
+            //return View(_Currency.ToList());
         }
 
-        // GET: Countries/Details/5
+        // GET: Currency/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Countries countries = db.Countries.Find(id);
-            if (countries == null)
+            Currency Currency = db.Currency.Find(id);
+            if (Currency == null)
             {
                 return HttpNotFound();
             }
-            return View(countries);
+            return View(Currency);
         }
 
-        // GET: Countries/Create
+        // GET: Currency/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Countries/Create
+        // POST: Currency/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,code,name")] Countries countries)
+        public ActionResult Create([Bind(Include = "Id,code,name,active")] Currency currency)
         {
             if (ModelState.IsValid)
             {
-                db.Countries.Add(countries);
+                db.Currency.Add(currency);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(countries);
+            return View(currency);
         }
 
-        // GET: Countries/Edit/5
+        // GET: Currency/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Countries countries = db.Countries.Find(id);
-            if (countries == null)
+            Currency Currency = db.Currency.Find(id);
+            if (Currency == null)
             {
                 return HttpNotFound();
             }
-            return View(countries);
+            return View(Currency);
         }
 
-        // POST: Countries/Edit/5
+        // POST: Currency/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,code,name,active")] Countries countries)
+        public ActionResult Edit([Bind(Include = "Id,code,name,active")] Currency Currency)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(countries).State = EntityState.Modified;
+                db.Entry(Currency).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(countries);
+            return View(Currency);
         }
 
-        // GET: Countries/Delete/5
+        // GET: Currency/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Countries countries = db.Countries.Find(id);
-            if (countries == null)
+            Currency Currency = db.Currency.Find(id);
+            if (Currency == null)
             {
                 return HttpNotFound();
             }
-            return View(countries);
+            return View(Currency);
         }
 
-        // POST: Countries/Delete/5
+        // POST: Currency/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Countries countries = db.Countries.Find(id);
-            db.Countries.Remove(countries);
+            Currency Currency = db.Currency.Find(id);
+            db.Currency.Remove(Currency);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

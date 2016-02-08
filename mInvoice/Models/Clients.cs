@@ -59,7 +59,8 @@ namespace mInvoice.Models
         public string email_user_name { get; set; }
         public string email_password { get; set; }
         public string email_host { get; set; }
-        public int? email_port { get; set; }
+        public Nullable<int> email_port { get; set; }
+        public Nullable<int> currency_id { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual Countries Countries { get; set; }
@@ -70,5 +71,8 @@ namespace mInvoice.Models
         public virtual ICollection<Tax_rates> Tax_rates { get; set; }
         public virtual ICollection<Delivery_terms> Delivery_terms { get; set; }
         public virtual ICollection<Payment_terms> Payment_terms { get; set; }
+        public virtual Clients Clients1 { get; set; }
+        public virtual Clients Clients2 { get; set; }
+        public virtual Currency Currency { get; set; }
     }
 }

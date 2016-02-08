@@ -531,4 +531,7 @@
   <data name="zugferd" xml:space="preserve">
     <value>ZUGFeRD</value>
   </data>
+  <data name="currency_id" xml:space="preserve">
+    <value>Währung</value>
+  </data>
 </root>

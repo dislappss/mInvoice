@@ -1,0 +1,67 @@
+﻿@model PagedList.IPagedList<mInvoice.Models.Currency>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = @Resources.Resource.currency_id ;
+}
+
+<h2>@Resources.Resource.currency_id</h2>
+
+<p>
+    @Html.ActionLink(@Resources.Resource.create_new, "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm("Index", "Currency", FormMethod.Get))
+{
+    <p>
+        @Resources.Resource.find_by_name @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value=@Resources.Resource.search  />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>         
+            @Html.ActionLink(@Resources.Resource.country_code, "Index", 
+                new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink(@Resources.Resource.country_name, "Index", 
+                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink(@Resources.Resource.active, "Index", 
+                new { sortOrder = ViewBag.ActiveSortParm })
+        </th>
+        <th>
+            @*@Resources.Resource.edit_delete*@
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>*@
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit", title = @Resources.Resource.edit }) &nbsp;&nbsp;
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) &nbsp;*@
+            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash", title = @Resources.Resource.delete })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

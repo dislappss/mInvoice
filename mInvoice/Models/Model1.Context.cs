@@ -37,5 +37,6 @@ namespace mInvoice.Models
         public virtual DbSet<Tax_rates> Tax_rates { get; set; }
         public virtual DbSet<Delivery_terms> Delivery_terms { get; set; }
         public virtual DbSet<Payment_terms> Payment_terms { get; set; }
+        public virtual DbSet<Currency> Currency { get; set; }
     }
 }

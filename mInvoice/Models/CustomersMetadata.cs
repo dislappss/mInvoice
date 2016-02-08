@@ -82,6 +82,9 @@ namespace mInvoice.Models
          [Display(Name = "account_number", ResourceType = typeof(Resource))]
         public int account_number { get; set; }
 
+         [Display(Name = "currency_id", ResourceType = typeof(Resource))]
+         public int currency_id { get; set; }
+
         [ScaffoldColumn(false)]
         [Editable(false)]
         //[UIHint("Hidden")]

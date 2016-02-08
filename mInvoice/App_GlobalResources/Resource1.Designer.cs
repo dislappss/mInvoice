@@ -331,6 +331,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currency ähnelt.
+        /// </summary>
+        public static string currency_id {
+            get {
+                return ResourceManager.GetString("currency_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Customer ähnelt.
         /// </summary>
         public static string customer {

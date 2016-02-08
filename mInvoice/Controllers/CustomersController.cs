@@ -26,7 +26,7 @@ namespace mInvoice.Controllers
                                                where cust.clientsysid == _clientsysid
                                                select cust;
 
-            customers = customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method);
+            customers = customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method).Include(c => c.currency_id);
 
             return View(customers.ToList());
         }
@@ -68,7 +68,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id")] Customers customers)
         {
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
@@ -141,7 +141,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id")] Customers customers)
         {
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
