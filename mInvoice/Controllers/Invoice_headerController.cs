@@ -10,8 +10,6 @@ using System.Web.Mvc;
 using mInvoice.App_GlobalResources;
 using mInvoice.Models;
 using PagedList;
-using System.Web.Mvc;
-using mInvoice.Models;
 using MvcReportViewer;
 using System.IO;
 using System.Net.Mail;
@@ -323,7 +321,6 @@ namespace mInvoice.Controllers
         {
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             int _new_invoice_header_id = -1;
-            SqlTransaction _transaction = null;
             Invoice_header _new_header = new Invoice_header();
 
             if (ModelState.IsValid)

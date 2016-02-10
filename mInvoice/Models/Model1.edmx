@@ -282,18 +282,6 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Clients_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Clients1" Type="Self.Clients" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Clients1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Clients_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
@@ -588,10 +576,6 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Articles" EntitySet="Articles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Clients_Clients" Association="Self.FK_Clients_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Clients1" EntitySet="Clients" />
-          </AssociationSet>
           <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Clients" EntitySet="Clients" />
@@ -682,56 +666,17 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
     <edmx:ConceptualModels>
       <Schema Namespace="myinvoice_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="myinvoice_dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="v_AspNetUsers" EntityType="myinvoice_dbModel.v_AspNetUsers" />
-          <EntitySet Name="Articles" EntityType="myinvoice_dbModel.Articles" />
-          <EntitySet Name="Clients" EntityType="myinvoice_dbModel.Clients" />
           <EntitySet Name="Countries" EntityType="myinvoice_dbModel.Countries" />
+          <EntitySet Name="Currency" EntityType="myinvoice_dbModel.Currency" />
           <EntitySet Name="Customers" EntityType="myinvoice_dbModel.Customers" />
+          <EntitySet Name="Delivery_terms" EntityType="myinvoice_dbModel.Delivery_terms" />
           <EntitySet Name="Invoice_details" EntityType="myinvoice_dbModel.Invoice_details" />
           <EntitySet Name="Invoice_header" EntityType="myinvoice_dbModel.Invoice_header" />
           <EntitySet Name="Payment_method" EntityType="myinvoice_dbModel.Payment_method" />
+          <EntitySet Name="Payment_terms" EntityType="myinvoice_dbModel.Payment_terms" />
           <EntitySet Name="Quantity_units" EntityType="myinvoice_dbModel.Quantity_units" />
           <EntitySet Name="Tax_rates" EntityType="myinvoice_dbModel.Tax_rates" />
-          <AssociationSet Name="FK_Articles_Clients" Association="myinvoice_dbModel.FK_Articles_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Articles" EntitySet="Articles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Articles_Quantity_units" Association="myinvoice_dbModel.FK_Articles_Quantity_units">
-            <End Role="Quantity_units" EntitySet="Quantity_units" />
-            <End Role="Articles" EntitySet="Articles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_articles_tax_rates" Association="myinvoice_dbModel.FK_articles_tax_rates">
-            <End Role="Tax_rates" EntitySet="Tax_rates" />
-            <End Role="Articles" EntitySet="Articles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_invoice_details_articles" Association="myinvoice_dbModel.FK_invoice_details_articles">
-            <End Role="Articles" EntitySet="Articles" />
-            <End Role="Invoice_details" EntitySet="Invoice_details" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Countries" Association="myinvoice_dbModel.FK_Clients_Countries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="Clients" EntitySet="Clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customers_Clients" Association="myinvoice_dbModel.FK_Customers_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_details_Clients" Association="myinvoice_dbModel.FK_Invoice_details_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Invoice_details" EntitySet="Invoice_details" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_header_Clients" Association="myinvoice_dbModel.FK_Invoice_header_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Invoice_header" EntitySet="Invoice_header" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Quantity_units_Clients" Association="myinvoice_dbModel.FK_Quantity_units_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Quantity_units" EntitySet="Quantity_units" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tax_rates_Clients" Association="myinvoice_dbModel.FK_Tax_rates_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Tax_rates" EntitySet="Tax_rates" />
-          </AssociationSet>
+          <EntitySet Name="v_AspNetUsers" EntityType="myinvoice_dbModel.v_AspNetUsers" />
           <AssociationSet Name="FK_Customers_Countries" Association="myinvoice_dbModel.FK_Customers_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Customers" EntitySet="Customers" />
@@ -744,12 +689,20 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currency" Association="myinvoice_dbModel.FK_Customers_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customers_payment_method" Association="myinvoice_dbModel.FK_Customers_payment_method">
             <End Role="Payment_method" EntitySet="Payment_method" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_header_Customers" Association="myinvoice_dbModel.FK_invoice_header_Customers">
             <End Role="Customers" EntitySet="Customers" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Delivery_terms" Association="myinvoice_dbModel.FK_Invoice_header_Delivery_terms">
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_details_invoice_header" Association="myinvoice_dbModel.FK_invoice_details_invoice_header">
@@ -764,131 +717,65 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Tax_rates" EntitySet="Tax_rates" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
-          <EntitySet Name="Delivery_terms" EntityType="myinvoice_dbModel.Delivery_terms" />
-          <EntitySet Name="Payment_terms" EntityType="myinvoice_dbModel.Payment_terms" />
+          <AssociationSet Name="FK_Invoice_header_Payment_terms" Association="myinvoice_dbModel.FK_Invoice_header_Payment_terms">
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <EntitySet Name="Articles" EntityType="myinvoice_dbModel.Articles" />
+          <AssociationSet Name="FK_Articles_Quantity_units" Association="myinvoice_dbModel.FK_Articles_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_articles_tax_rates" Association="myinvoice_dbModel.FK_articles_tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_articles" Association="myinvoice_dbModel.FK_invoice_details_articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <EntitySet Name="Clients" EntityType="myinvoice_dbModel.Clients" />
+          <AssociationSet Name="FK_Articles_Clients" Association="myinvoice_dbModel.FK_Articles_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Countries" Association="myinvoice_dbModel.FK_Clients_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Currency" Association="myinvoice_dbModel.FK_Clients_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Clients" Association="myinvoice_dbModel.FK_Customers_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Delivery_terms_Clients" Association="myinvoice_dbModel.FK_Delivery_terms_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Clients" Association="myinvoice_dbModel.FK_Invoice_details_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Clients" Association="myinvoice_dbModel.FK_Invoice_header_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
           <AssociationSet Name="FK_Payment_terms_Clients" Association="myinvoice_dbModel.FK_Payment_terms_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Payment_terms" EntitySet="Payment_terms" />
           </AssociationSet>
-          <AssociationSet Name="FK_Invoice_header_Delivery_terms" Association="myinvoice_dbModel.FK_Invoice_header_Delivery_terms">
-            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
-            <End Role="Invoice_header" EntitySet="Invoice_header" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_header_Payment_terms" Association="myinvoice_dbModel.FK_Invoice_header_Payment_terms">
-            <End Role="Payment_terms" EntitySet="Payment_terms" />
-            <End Role="Invoice_header" EntitySet="Invoice_header" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Clients" Association="myinvoice_dbModel.FK_Clients_Clients">
+          <AssociationSet Name="FK_Quantity_units_Clients" Association="myinvoice_dbModel.FK_Quantity_units_Clients">
             <End Role="Clients" EntitySet="Clients" />
-            <End Role="Clients1" EntitySet="Clients" />
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
           </AssociationSet>
-          <EntitySet Name="Currency" EntityType="myinvoice_dbModel.Currency" />
-          <AssociationSet Name="FK_Clients_Currency" Association="myinvoice_dbModel.FK_Clients_Currency">
-            <End Role="Currency" EntitySet="Currency" />
+          <AssociationSet Name="FK_Tax_rates_Clients" Association="myinvoice_dbModel.FK_Tax_rates_Clients">
             <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customers_Currency" Association="myinvoice_dbModel.FK_Customers_Currency">
-            <End Role="Currency" EntitySet="Currency" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="v_AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="EmailConfirmed" />
-            <PropertyRef Name="PhoneNumberConfirmed" />
-            <PropertyRef Name="TwoFactorEnabled" />
-            <PropertyRef Name="LockoutEnabled" />
-            <PropertyRef Name="AccessFailedCount" />
-            <PropertyRef Name="UserName" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Articles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clients_id" Type="Int32" Nullable="false" />
-          <Property Name="article_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
-          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
-          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Articles" ToRole="Quantity_units" />
-          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Articles" ToRole="Tax_rates" />
-          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
-        </EntityType>
-        <EntityType Name="Clients">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AspNetUsers_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="clientname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="countriesid" Type="Int32" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="www" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="last_index_invoices" Type="Int32" Nullable="false" />
-          <Property Name="no_template_invoices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="text_to_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="text_under_the_table_bold" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="text_under_the_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Clients" ToRole="Articles" />
-          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
-          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Clients" FromRole="Clients" ToRole="Customers" />
-          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
-          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
-          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Quantity_units_Clients" FromRole="Clients" ToRole="Quantity_units" />
-          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
-          <Property Name="tax_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Delivery_terms" Relationship="myinvoice_dbModel.FK_Delivery_terms_Clients" FromRole="Clients" ToRole="Delivery_terms" />
-          <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Clients" ToRole="Payment_terms" />
-          <Property Name="email_subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="email_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="email_user_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="email_password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="email_host" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="email_port" Type="Int32" />
-          <Property Name="currency_id" Type="Int32" />
-          <NavigationProperty Name="Clients1" Relationship="myinvoice_dbModel.FK_Clients_Clients" FromRole="Clients" ToRole="Clients1" />
-          <NavigationProperty Name="Clients2" Relationship="myinvoice_dbModel.FK_Clients_Clients" FromRole="Clients1" ToRole="Clients" />
-          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Clients" ToRole="Currency" />
-        </EntityType>
+        </EntityContainer>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="Id" />
@@ -899,10 +786,20 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="active" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Countries" ToRole="Clients" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
           <NavigationProperty Name="Customers1" Relationship="myinvoice_dbModel.FK_Customers_Countries1" FromRole="Countries" ToRole="Customers" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Countries" ToRole="Invoice_header" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Countries" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Currency" ToRole="Customers" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Currency" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -933,15 +830,28 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="currency_id" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_Clients" FromRole="Customers" ToRole="Clients" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
           <NavigationProperty Name="Countries1" Relationship="myinvoice_dbModel.FK_Customers_Countries1" FromRole="Customers" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Customers" ToRole="Currency" />
           <NavigationProperty Name="Payment_method" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Customers" ToRole="Payment_method" />
           <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Customers" ToRole="Invoice_header" />
-          <Property Name="currency_id" Type="Int32" />
-          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Customers" ToRole="Currency" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Customers_Clients" FromRole="Customers" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Delivery_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Delivery_terms" FromRole="Delivery_terms" ToRole="Invoice_header" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Delivery_terms_Clients" FromRole="Delivery_terms" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Invoice_details">
           <Key>
@@ -961,11 +871,11 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Invoice_details" ToRole="Articles" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Invoice_details" ToRole="Clients" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Invoice_details" ToRole="Tax_rates" />
           <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Invoice_details_Quantity_units" FromRole="Invoice_details" ToRole="Quantity_units" />
           <NavigationProperty Name="Tax_rates1" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Invoice_details" ToRole="Tax_rates" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Invoice_details" ToRole="Articles" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Invoice_details" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Invoice_header">
           <Key>
@@ -986,16 +896,16 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="quantity_3_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="tax_rate_id" Type="Int32" />
           <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Invoice_header" ToRole="Clients" />
-          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
-          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Invoice_header" ToRole="Customers" />
           <Property Name="payment_terms_id" Type="Int32" />
           <Property Name="delivery_terms_id" Type="Int32" />
+          <Property Name="paid_at" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_invoice_header_Customers" FromRole="Invoice_header" ToRole="Customers" />
           <NavigationProperty Name="Delivery_terms" Relationship="myinvoice_dbModel.FK_Invoice_header_Delivery_terms" FromRole="Invoice_header" ToRole="Delivery_terms" />
           <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Invoice_header_Payment_terms" FromRole="Invoice_header" ToRole="Payment_terms" />
-          <Property Name="paid_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Invoice_header" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Payment_method">
           <Key>
@@ -1009,6 +919,19 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_payment_method" FromRole="Payment_method" ToRole="Customers" />
         </EntityType>
+        <EntityType Name="Payment_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Payment_terms" FromRole="Payment_terms" ToRole="Invoice_header" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Payment_terms" ToRole="Clients" />
+        </EntityType>
         <EntityType Name="Quantity_units">
           <Key>
             <PropertyRef Name="Id" />
@@ -1019,9 +942,9 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Quantity_units" FromRole="Quantity_units" ToRole="Invoice_details" />
           <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Quantity_units" ToRole="Articles" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Quantity_units_Clients" FromRole="Quantity_units" ToRole="Clients" />
-          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Quantity_units" FromRole="Quantity_units" ToRole="Invoice_details" />
         </EntityType>
         <EntityType Name="Tax_rates">
           <Key>
@@ -1034,131 +957,34 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="value" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Tax_rates" ToRole="Articles" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Tax_rates" ToRole="Clients" />
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_invoice_header" FromRole="Tax_rates" ToRole="Invoice_details" />
           <NavigationProperty Name="Invoice_details1" Relationship="myinvoice_dbModel.FK_invoice_details_tax_rates" FromRole="Tax_rates" ToRole="Invoice_details" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Tax_rates" ToRole="Articles" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Tax_rates" ToRole="Clients" />
         </EntityType>
-        <Association Name="FK_Articles_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Articles">
-              <PropertyRef Name="clients_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Articles_Quantity_units">
-          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Quantity_units">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Articles">
-              <PropertyRef Name="quantity_units_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_articles_tax_rates">
-          <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tax_rates">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Articles">
-              <PropertyRef Name="tax_rate_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_invoice_details_articles">
-          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_details">
-              <PropertyRef Name="article_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Countries">
-          <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="0..1" />
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Clients">
-              <PropertyRef Name="countriesid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customers_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customers">
-              <PropertyRef Name="clientsysid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_details_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_details">
-              <PropertyRef Name="clients_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_header_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_header">
-              <PropertyRef Name="clients_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Quantity_units_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Quantity_units">
-              <PropertyRef Name="clients_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tax_rates_Clients">
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tax_rates">
-              <PropertyRef Name="clients_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="v_AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_Customers_Countries">
           <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="1" />
           <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
@@ -1195,6 +1021,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customers_Currency">
+          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customers_payment_method">
           <End Type="myinvoice_dbModel.Payment_method" Role="Payment_method" Multiplicity="0..1" />
           <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
@@ -1216,6 +1054,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Principal>
             <Dependent Role="Invoice_header">
               <PropertyRef Name="customers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Delivery_terms">
+          <End Type="myinvoice_dbModel.Delivery_terms" Role="Delivery_terms" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="delivery_terms_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1255,32 +1105,170 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Delivery_terms">
+        <Association Name="FK_Invoice_header_Payment_terms">
+          <End Type="myinvoice_dbModel.Payment_terms" Role="Payment_terms" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="payment_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Articles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="clients_id" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="article_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Delivery_terms_Clients" FromRole="Delivery_terms" ToRole="Clients" />
-          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Delivery_terms" FromRole="Delivery_terms" ToRole="Invoice_header" />
+          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Articles" ToRole="Quantity_units" />
+          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_articles_tax_rates" FromRole="Articles" ToRole="Tax_rates" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
         </EntityType>
-        <EntityType Name="Payment_terms">
+        <Association Name="FK_Articles_Quantity_units">
+          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_articles_tax_rates">
+          <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_articles">
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clients_id" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUsers_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="clientname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countriesid" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="www" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tax_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="last_index_invoices" Type="Int32" Nullable="false" />
+          <Property Name="no_template_invoices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="text_to_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table_bold" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="email_subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="email_user_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_host" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_port" Type="Int32" />
+          <Property Name="currency_id" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Payment_terms" ToRole="Clients" />
-          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Payment_terms" FromRole="Payment_terms" ToRole="Invoice_header" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Clients" ToRole="Articles" />
+          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Clients" ToRole="Currency" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Clients" FromRole="Clients" ToRole="Customers" />
+          <NavigationProperty Name="Delivery_terms" Relationship="myinvoice_dbModel.FK_Delivery_terms_Clients" FromRole="Clients" ToRole="Delivery_terms" />
+          <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
+          <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Clients" ToRole="Payment_terms" />
+          <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Quantity_units_Clients" FromRole="Clients" ToRole="Quantity_units" />
+          <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
         </EntityType>
+        <Association Name="FK_Articles_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Countries">
+          <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Currency">
+          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="clientsysid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Delivery_terms_Clients">
           <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
           <End Type="myinvoice_dbModel.Delivery_terms" Role="Delivery_terms" Multiplicity="*" />
@@ -1289,6 +1277,30 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Delivery_terms">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_details" Role="Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
               <PropertyRef Name="clients_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1305,73 +1317,27 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Invoice_header_Delivery_terms">
-          <End Type="myinvoice_dbModel.Delivery_terms" Role="Delivery_terms" Multiplicity="0..1" />
-          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Delivery_terms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_header">
-              <PropertyRef Name="delivery_terms_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_header_Payment_terms">
-          <End Type="myinvoice_dbModel.Payment_terms" Role="Payment_terms" Multiplicity="0..1" />
-          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment_terms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice_header">
-              <PropertyRef Name="payment_terms_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Clients">
+        <Association Name="FK_Quantity_units_Clients">
           <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="myinvoice_dbModel.Clients" Role="Clients1" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Quantity_units" Role="Quantity_units" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Clients1">
-              <PropertyRef Name="Id" />
+            <Dependent Role="Quantity_units">
+              <PropertyRef Name="clients_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Currency">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Currency" FromRole="Currency" ToRole="Clients" />
-          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Currency" FromRole="Currency" ToRole="Customers" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_Clients_Currency">
-          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
-          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="*" />
+        <Association Name="FK_Tax_rates_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Currency">
+            <Principal Role="Clients">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Clients">
-              <PropertyRef Name="currency_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customers_Currency">
-          <End Type="myinvoice_dbModel.Currency" Role="Currency" Multiplicity="0..1" />
-          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customers">
-              <PropertyRef Name="currency_id" />
+            <Dependent Role="Tax_rates">
+              <PropertyRef Name="clients_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1381,6 +1347,168 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="myinvoice_dbEntities">
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="bic" ColumnName="bic" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
+                <ScalarProperty Name="www" ColumnName="www" />
+                <ScalarProperty Name="phone_2" ColumnName="phone_2" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="street_invoice" ColumnName="street_invoice" />
+                <ScalarProperty Name="city_invoice" ColumnName="city_invoice" />
+                <ScalarProperty Name="zip_invoice" ColumnName="zip_invoice" />
+                <ScalarProperty Name="email_invoice" ColumnName="email_invoice" />
+                <ScalarProperty Name="countriesid_invoice" ColumnName="countriesid_invoice" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_no" ColumnName="customer_no" />
+                <ScalarProperty Name="payment_methodid" ColumnName="payment_methodid" />
+                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery_terms">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Delivery_terms">
+              <MappingFragment StoreEntitySet="Delivery_terms">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_details">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_details">
+              <MappingFragment StoreEntitySet="Invoice_details">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="price_netto" ColumnName="price_netto" />
+                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
+                <ScalarProperty Name="quantity_3" ColumnName="quantity_3" />
+                <ScalarProperty Name="quantity_2" ColumnName="quantity_2" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="invoice_header_id" ColumnName="invoice_header_id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_header">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
+              <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="delivery_terms_id" ColumnName="delivery_terms_id" />
+                <ScalarProperty Name="payment_terms_id" ColumnName="payment_terms_id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="quantity_3_column_name" ColumnName="quantity_3_column_name" />
+                <ScalarProperty Name="quantity_2_column_name" ColumnName="quantity_2_column_name" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="customer_reference" ColumnName="customer_reference" />
+                <ScalarProperty Name="customers_id" ColumnName="customers_id" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_method">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_method">
+              <MappingFragment StoreEntitySet="Payment_method">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_terms">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_terms">
+              <MappingFragment StoreEntitySet="Payment_terms">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quantity_units">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Quantity_units">
+              <MappingFragment StoreEntitySet="Quantity_units">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tax_rates">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Tax_rates">
+              <MappingFragment StoreEntitySet="Tax_rates">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="v_AspNetUsers">
             <EntityTypeMapping TypeName="myinvoice_dbModel.v_AspNetUsers">
               <MappingFragment StoreEntitySet="v_AspNetUsers">
@@ -1417,6 +1545,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="currency_id" ColumnName="currency_id" />
                 <ScalarProperty Name="email_port" ColumnName="email_port" />
                 <ScalarProperty Name="email_host" ColumnName="email_host" />
@@ -1424,9 +1554,6 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
                 <ScalarProperty Name="email_user_name" ColumnName="email_user_name" />
                 <ScalarProperty Name="email_message" ColumnName="email_message" />
                 <ScalarProperty Name="email_subject" ColumnName="email_subject" />
-                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="text_under_the_table" ColumnName="text_under_the_table" />
                 <ScalarProperty Name="text_under_the_table_bold" ColumnName="text_under_the_table_bold" />
                 <ScalarProperty Name="text_to_table" ColumnName="text_to_table" />
@@ -1439,6 +1566,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
                 <ScalarProperty Name="bank_name" ColumnName="bank_name" />
                 <ScalarProperty Name="account_number" ColumnName="account_number" />
                 <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
                 <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
                 <ScalarProperty Name="www" ColumnName="www" />
                 <ScalarProperty Name="fax" ColumnName="fax" />
@@ -1455,169 +1583,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Countries">
-              <MappingFragment StoreEntitySet="Countries">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Customers">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="bic" ColumnName="bic" />
-                <ScalarProperty Name="iban" ColumnName="iban" />
-                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
-                <ScalarProperty Name="account_number" ColumnName="account_number" />
-                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
-                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
-                <ScalarProperty Name="www" ColumnName="www" />
-                <ScalarProperty Name="phone_2" ColumnName="phone_2" />
-                <ScalarProperty Name="fax" ColumnName="fax" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="street_invoice" ColumnName="street_invoice" />
-                <ScalarProperty Name="city_invoice" ColumnName="city_invoice" />
-                <ScalarProperty Name="zip_invoice" ColumnName="zip_invoice" />
-                <ScalarProperty Name="email_invoice" ColumnName="email_invoice" />
-                <ScalarProperty Name="countriesid_invoice" ColumnName="countriesid_invoice" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="customer_no" ColumnName="customer_no" />
-                <ScalarProperty Name="payment_methodid" ColumnName="payment_methodid" />
-                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Invoice_details">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_details">
-              <MappingFragment StoreEntitySet="Invoice_details">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="price_netto" ColumnName="price_netto" />
-                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
-                <ScalarProperty Name="quantity_3" ColumnName="quantity_3" />
-                <ScalarProperty Name="quantity_2" ColumnName="quantity_2" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="article_id" ColumnName="article_id" />
-                <ScalarProperty Name="invoice_header_id" ColumnName="invoice_header_id" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Invoice_header">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
-              <MappingFragment StoreEntitySet="Invoice_header">
-                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
-                <ScalarProperty Name="delivery_terms_id" ColumnName="delivery_terms_id" />
-                <ScalarProperty Name="payment_terms_id" ColumnName="payment_terms_id" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
-                <ScalarProperty Name="quantity_3_column_name" ColumnName="quantity_3_column_name" />
-                <ScalarProperty Name="quantity_2_column_name" ColumnName="quantity_2_column_name" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
-                <ScalarProperty Name="customer_reference" ColumnName="customer_reference" />
-                <ScalarProperty Name="customers_id" ColumnName="customers_id" />
-                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
-                <ScalarProperty Name="order_date" ColumnName="order_date" />
-                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Payment_method">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_method">
-              <MappingFragment StoreEntitySet="Payment_method">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Quantity_units">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Quantity_units">
-              <MappingFragment StoreEntitySet="Quantity_units">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tax_rates">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Tax_rates">
-              <MappingFragment StoreEntitySet="Tax_rates">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="value" ColumnName="value" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Delivery_terms">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Delivery_terms">
-              <MappingFragment StoreEntitySet="Delivery_terms">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Payment_terms">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Payment_terms">
-              <MappingFragment StoreEntitySet="Payment_terms">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Currency">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.Currency">
-              <MappingFragment StoreEntitySet="Currency">
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

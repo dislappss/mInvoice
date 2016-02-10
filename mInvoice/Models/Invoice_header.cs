@@ -29,16 +29,16 @@ namespace mInvoice.Models
         public string quantity_3_column_name { get; set; }
         public Nullable<int> tax_rate_id { get; set; }
         public Nullable<decimal> discount { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<int> payment_terms_id { get; set; }
         public Nullable<int> delivery_terms_id { get; set; }
         public Nullable<System.DateTime> paid_at { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual Clients Clients { get; set; }
         public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }
         public virtual Delivery_terms Delivery_terms { get; set; }
         public virtual Payment_terms Payment_terms { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

@@ -23,17 +23,17 @@
 <table class="table">
     <tr>
         <th>         
-            @Html.ActionLink(@Resources.Resource.country_code, "Index", 
+            @Html.ActionLink(@Resources.Resource.code, "Index", 
                 new { sortOrder = ViewBag.CodeSortParm, currentFilter=ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(@Resources.Resource.country_name, "Index", 
+            @Html.ActionLink(@Resources.Resource.name, "Index", 
                 new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink(@Resources.Resource.active, "Index", 
                 new { sortOrder = ViewBag.ActiveSortParm })
-        </th>
+        </th>*@
         <th>
             @*@Resources.Resource.edit_delete*@
         </th>

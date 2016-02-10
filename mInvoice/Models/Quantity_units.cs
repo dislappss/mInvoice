@@ -16,8 +16,8 @@ namespace mInvoice.Models
     {
         public Quantity_units()
         {
-            this.Articles = new HashSet<Articles>();
             this.Invoice_details = new HashSet<Invoice_details>();
+            this.Articles = new HashSet<Articles>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
+        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
         public virtual ICollection<Articles> Articles { get; set; }
         public virtual Clients Clients { get; set; }
-        public virtual ICollection<Invoice_details> Invoice_details { get; set; }
     }
 }

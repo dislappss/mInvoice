@@ -26,7 +26,7 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual Clients Clients { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

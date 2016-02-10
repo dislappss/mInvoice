@@ -540,4 +540,10 @@
   <data name="currency_id" xml:space="preserve">
     <value>Currency</value>
   </data>
+  <data name="name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="max_lenght" xml:space="preserve">
+    <value>The maximum string for {0} length is {1} characters.</value>
+  </data>
 </root>

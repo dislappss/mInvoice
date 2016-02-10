@@ -44,15 +44,15 @@ namespace mInvoice.Models
         public string bank_name { get; set; }
         public string iban { get; set; }
         public string bic { get; set; }
+        public Nullable<int> currency_id { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public Nullable<int> currency_id { get; set; }
     
-        public virtual Clients Clients { get; set; }
         public virtual Countries Countries { get; set; }
         public virtual Countries Countries1 { get; set; }
+        public virtual Currency Currency { get; set; }
         public virtual Payment_method Payment_method { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
-        public virtual Currency Currency { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

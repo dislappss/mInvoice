@@ -16,15 +16,15 @@ namespace mInvoice.Models
     {
         public Currency()
         {
-            this.Clients = new HashSet<Clients>();
             this.Customers = new HashSet<Customers>();
+            this.Clients = new HashSet<Clients>();
         }
     
         public int Id { get; set; }
-        public string name { get; set; }
         public string code { get; set; }
+        public string name { get; set; }
     
-        public virtual ICollection<Clients> Clients { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }
+        public virtual ICollection<Clients> Clients { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace mInvoice.Models
     {
         public Countries()
         {
-            this.Clients = new HashSet<Clients>();
             this.Customers = new HashSet<Customers>();
             this.Customers1 = new HashSet<Customers>();
             this.Invoice_header = new HashSet<Invoice_header>();
+            this.Clients = new HashSet<Clients>();
         }
     
         public int Id { get; set; }
@@ -29,9 +29,9 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual ICollection<Clients> Clients { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }
         public virtual ICollection<Customers> Customers1 { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
+        public virtual ICollection<Clients> Clients { get; set; }
     }
 }

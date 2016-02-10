@@ -19,10 +19,15 @@ namespace mInvoice.Controllers
         // GET: Currency
         public ActionResult Index(  string sortOrder, string currentFilter, string searchString, int? page)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CodeSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NameSortParm = sortOrder == "Code" ? "code_desc" : "Code";
-            ViewBag.ActiveSortParm = sortOrder == "Active" ? "active_desc" : "Active";
+            //ViewBag.ActiveSortParm = sortOrder == "Active" ? "active_desc" : "Active";
 
            //ViewBag.CurrentSort = sortOrder;
            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -105,8 +110,13 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,code,name,active")] Currency currency)
+        public ActionResult Create([Bind(Include = "Id,code,name")] Currency currency)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Currency.Add(currency);
@@ -120,6 +130,11 @@ namespace mInvoice.Controllers
         // GET: Currency/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -137,8 +152,13 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,code,name,active")] Currency Currency)
+        public ActionResult Edit([Bind(Include = "Id,code,name")] Currency Currency)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(Currency).State = EntityState.Modified;
@@ -151,6 +171,11 @@ namespace mInvoice.Controllers
         // GET: Currency/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -168,6 +193,11 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Currency Currency = db.Currency.Find(id);
             db.Currency.Remove(Currency);
             db.SaveChanges();

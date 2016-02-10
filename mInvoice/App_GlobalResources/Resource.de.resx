@@ -534,4 +534,10 @@
   <data name="currency_id" xml:space="preserve">
     <value>Währung</value>
   </data>
+  <data name="name" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="max_lenght" xml:space="preserve">
+    <value>Die maximale Symbollänge für {0} ist {1}.</value>
+  </data>
 </root>

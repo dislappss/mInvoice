@@ -286,6 +286,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Quantity_unitsMetadata.cs" />
+    <Compile Include="Models\CurrencyMetadata.cs" />
     <Compile Include="Models\Tax_ratesMetadata.cs" />
     <Compile Include="Models\Payment_methodMetadata.cs" />
     <Compile Include="Models\CountriesMetadata.cs" />

@@ -19,6 +19,11 @@ namespace mInvoice.Controllers
         // GET: Countries
         public ActionResult Index(  string sortOrder, string currentFilter, string searchString, int? page)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CodeSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NameSortParm = sortOrder == "Code" ? "code_desc" : "Code";
@@ -97,6 +102,11 @@ namespace mInvoice.Controllers
         // GET: Countries/Create
         public ActionResult Create()
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             return View();
         }
 
@@ -120,6 +130,11 @@ namespace mInvoice.Controllers
         // GET: Countries/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -151,6 +166,11 @@ namespace mInvoice.Controllers
         // GET: Countries/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -168,6 +188,11 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Countries countries = db.Countries.Find(id);
             db.Countries.Remove(countries);
             db.SaveChanges();

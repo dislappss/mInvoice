@@ -28,13 +28,15 @@ namespace mInvoice.Controllers
             var client_id = Helpers.AccountHelper.getClientIDByUserName(
                 Session["email"].ToString (), ref _AspNetUsers_id);
 
+            Session["AspNetUsers_id"] = _AspNetUsers_id;
+
             //int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
             IQueryable<Clients> _list = from cust in db.Clients
                                         where cust.Id == client_id
                                         select cust;
 
-            var clients = _list.Include(c => c.Countries).Include(c => c.currency_id);
+            var clients = _list.Include(c => c.Countries).Include(c => c.Currency);
             return View(clients.ToList());
         }
 
@@ -92,6 +94,7 @@ namespace mInvoice.Controllers
             _new_obj.last_index_invoices = 1;
             _new_obj.no_template_invoices = "%P%Y-%N";
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
+            ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name");
             return View(_new_obj);
         }
 
@@ -117,6 +120,7 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
+            ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", clients.currency_id );
             return View(clients);
         }
 
@@ -133,6 +137,7 @@ namespace mInvoice.Controllers
                 return HttpNotFound();
             }
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
+            ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", clients.currency_id);
             return View(clients);
         }
 
@@ -157,6 +162,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", clients.countriesid);
+            ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", clients.currency_id);
             return View(clients);
         }
 

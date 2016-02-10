@@ -736,6 +736,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The maximum string for {0} length is {1} characters. ähnelt.
+        /// </summary>
+        public static string max_lenght {
+            get {
+                return ResourceManager.GetString("max_lenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Methods of payment ähnelt.
         /// </summary>
         public static string method_of_payment {
@@ -759,6 +768,15 @@ namespace mInvoice.App_GlobalResources {
         public static string must_be_at_least {
             get {
                 return ResourceManager.GetString("must_be_at_least", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
+        /// </summary>
+        public static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
             }
         }
         

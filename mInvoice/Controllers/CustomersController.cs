@@ -26,7 +26,7 @@ namespace mInvoice.Controllers
                                                where cust.clientsysid == _clientsysid
                                                select cust;
 
-            customers = customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method).Include(c => c.currency_id);
+            customers = customers.Include(c => c.Clients).Include(c => c.Countries).Include(c => c.Payment_method).Include(c => c.Currency );
 
             return View(customers.ToList());
         }
@@ -56,7 +56,7 @@ namespace mInvoice.Controllers
             {               
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name");
-
+                ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name");
                 return View();
             }   
             else 
@@ -91,6 +91,7 @@ namespace mInvoice.Controllers
                 ViewBag.clientsysid = new SelectList(db.Clients.Where(s => s.Id == _client_id), "Id", "clientname", customers.clientsysid);
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
                 return View(customers);
 
             }
@@ -124,6 +125,7 @@ namespace mInvoice.Controllers
                 ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
                 return View(customers);
 
             }
@@ -156,6 +158,7 @@ namespace mInvoice.Controllers
                 ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
+                ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
                 return View(customers);
 
             }
