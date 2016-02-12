@@ -4,6 +4,7 @@
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 
     bool _show_menu = Request.IsAuthenticated;
+    bool _is_admin = Session["email"] != null && Session["email"].ToString ()  == "dnepr5555@gmail.com";
 }
 
 @helper selected(string c, string culture)
@@ -115,7 +116,10 @@
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.currency_id, "Index", "Currency")</li>
+                               @if (_is_admin) 
+                               {
+                                   <li class="menu-item ">@Html.ActionLink(@Resources.Resource.currency_id, "Index", "Currency")</li>
+                               }
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.quantity_units, "Index", "Quantity_units")</li>

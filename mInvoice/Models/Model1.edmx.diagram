@@ -42,6 +42,7 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_Payment_terms_Clients" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Quantity_units_Clients" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Tax_rates_Clients" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_header_Currency" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

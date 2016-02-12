@@ -10,6 +10,7 @@ namespace mInvoice.Controllers
     public class HomeController : BaseController
     {
         public bool ShowMenu { get; set; }
+        public bool IsAdmin { get; set; }
 
 
         public ActionResult Index()
@@ -28,6 +29,9 @@ namespace mInvoice.Controllers
                 Session["email"] = email;
 
            ShowMenu = User.Identity.IsAuthenticated;
+
+           //  Admin ?
+           //ViewBag.IsAdmin = email == "dnepr5555@gmail.com";
 
             return View();
         }

@@ -3844,7 +3844,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.5cm</Height>
+              <Height>0.68521cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4146,7 +4146,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!sum_price.Value, "labels")</Value>
+                              <Value>=First(Fields!sum_price.Value, "labels") + "," + vbcrlf +  First(Fields!currency_code.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -7146,7 +7146,7 @@ iif(isnothing(Fields!Invoice_details_discount.Value), 1, ((100 - Fields!Invoice_
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>data</DataSetName>
-        <Height>17.25875cm</Height>
+        <Height>17.44396cm</Height>
         <Width>18.11668cm</Width>
         <Style>
           <Border>
@@ -7603,6 +7603,10 @@ First(Fields!Clients_zip.Value, "data") &amp; " " &amp; First(Fields!Clients_cit
         </Field>
         <Field Name="text_under_the_table_bold">
           <DataField>text_under_the_table_bold</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="currency_code">
+          <DataField>currency_code</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

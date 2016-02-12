@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Transactions;
-using System.Web.Mvc;
-using mInvoice.App_GlobalResources;
-using mInvoice.Models;
-using PagedList;
-using MvcReportViewer;
-using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using System.Text;
+using System.Web.Mvc;
+using mInvoice.App_GlobalResources;
+using mInvoice.Models;
+using MvcReportViewer;
+using PagedList;
 
 
 
@@ -158,6 +156,7 @@ namespace mInvoice.Controllers
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no");
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description");
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description");
+            ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name");
 
             var _new_item = new Invoice_header();
 
@@ -172,7 +171,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at")] Invoice_header invoice_header)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id")] Invoice_header invoice_header)
         {
             int _client_id = -1;
 
@@ -195,7 +194,7 @@ namespace mInvoice.Controllers
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
-
+            ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
             return View(invoice_header);
         }
 
@@ -223,6 +222,7 @@ namespace mInvoice.Controllers
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
+            ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
 
             return View(invoice_header);
         }
@@ -232,7 +232,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at")] Invoice_header invoice_header)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id")] Invoice_header invoice_header)
         {
             if (ModelState.IsValid)
             {
@@ -253,6 +253,7 @@ namespace mInvoice.Controllers
             ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
+            ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
 
             return View(invoice_header);
         }

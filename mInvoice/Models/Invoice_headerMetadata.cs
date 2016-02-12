@@ -125,6 +125,9 @@ namespace mInvoice.Models
          [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Display(Name = "paid_at", ResourceType = typeof(Resource))]
         public Nullable<DateTime> paid_at { get; set; }
+
+        [Display(Name = "currency_id", ResourceType = typeof(Resource))]
+         public int currency_id { get; set; }
         
     }
 }

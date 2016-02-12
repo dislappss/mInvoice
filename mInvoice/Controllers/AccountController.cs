@@ -192,9 +192,11 @@ namespace mInvoice.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-
                         Session.Add("email", model.Email);
                         Session.Add("client_id", null);
+
+                        //  Admin ?
+                        Session.Add("is_admin", model.Email == "dnepr65@gmail.com");
 
                         var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 

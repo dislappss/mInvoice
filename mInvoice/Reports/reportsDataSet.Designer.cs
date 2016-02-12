@@ -2605,6 +2605,8 @@ namespace mInvoice.Reports {
             
             private global::System.Data.DataColumn columntext_under_the_table_bold;
             
+            private global::System.Data.DataColumn columncurrency_code;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public rp_invoice_detailsDataTable() {
@@ -3184,6 +3186,14 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn currency_codeColumn {
+                get {
+                    return this.columncurrency_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3286,7 +3296,8 @@ namespace mInvoice.Reports {
                         string no_template_invoices, 
                         string text_to_table, 
                         string text_under_the_table, 
-                        string text_under_the_table_bold) {
+                        string text_under_the_table_bold, 
+                        string currency_code) {
                 rp_invoice_detailsRow rowrp_invoice_detailsRow = ((rp_invoice_detailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -3356,7 +3367,8 @@ namespace mInvoice.Reports {
                         no_template_invoices,
                         text_to_table,
                         text_under_the_table,
-                        text_under_the_table_bold};
+                        text_under_the_table_bold,
+                        currency_code};
                 rowrp_invoice_detailsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrp_invoice_detailsRow);
                 return rowrp_invoice_detailsRow;
@@ -3454,6 +3466,7 @@ namespace mInvoice.Reports {
                 this.columntext_to_table = base.Columns["text_to_table"];
                 this.columntext_under_the_table = base.Columns["text_under_the_table"];
                 this.columntext_under_the_table_bold = base.Columns["text_under_the_table_bold"];
+                this.columncurrency_code = base.Columns["currency_code"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3595,6 +3608,8 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columntext_under_the_table);
                 this.columntext_under_the_table_bold = new global::System.Data.DataColumn("text_under_the_table_bold", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntext_under_the_table_bold);
+                this.columncurrency_code = new global::System.Data.DataColumn("currency_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurrency_code);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columninvoice_no.AllowDBNull = false;
@@ -3683,6 +3698,8 @@ namespace mInvoice.Reports {
                 this.columntext_to_table.MaxLength = 500;
                 this.columntext_under_the_table.MaxLength = 500;
                 this.columntext_under_the_table_bold.MaxLength = 500;
+                this.columncurrency_code.AllowDBNull = false;
+                this.columncurrency_code.MaxLength = 3;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7590,6 +7607,17 @@ namespace mInvoice.Reports {
                 }
                 set {
                     this[this.tablerp_invoice_details.text_under_the_table_boldColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string currency_code {
+                get {
+                    return ((string)(this[this.tablerp_invoice_details.currency_codeColumn]));
+                }
+                set {
+                    this[this.tablerp_invoice_details.currency_codeColumn] = value;
                 }
             }
             
@@ -12132,6 +12160,7 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("text_to_table", "text_to_table");
             tableMapping.ColumnMappings.Add("text_under_the_table", "text_under_the_table");
             tableMapping.ColumnMappings.Add("text_under_the_table_bold", "text_under_the_table_bold");
+            tableMapping.ColumnMappings.Add("currency_code", "currency_code");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12183,21 +12212,22 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
                 "                        Invoice_header.quantity_2_column_name, Invoice_header.qu" +
                 "antity_3_column_name, Clients.tax_number, Clients.prefix_invoices, Clients.last_" +
                 "index_invoices, Clients.no_template_invoices, \r\n                         Clients" +
-                ".text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold\r" +
-                "\nFROM            Invoice_details WITH (nolock) INNER JOIN\r\n                     " +
-                "    Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN\r\n             " +
-                "            Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details." +
-                "invoice_header_id INNER JOIN\r\n                         Articles ON Articles.Id =" +
-                " Invoice_details.article_id INNER JOIN\r\n                         Countries ON Co" +
-                "untries.Id = Invoice_header.countriesid INNER JOIN\r\n                         Cus" +
-                "tomers ON Customers.Id = Invoice_header.customers_id INNER JOIN\r\n               " +
-                "          Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN\r\n  " +
-                "                       Payment_terms ON Payment_terms.Id = Invoice_header.paymen" +
-                "t_terms_id INNER JOIN\r\n                         Delivery_terms ON Delivery_terms" +
-                ".Id = Invoice_header.delivery_terms_id INNER JOIN\r\n                         Quan" +
-                "tity_units ON Invoice_details.quantity_units_id = Quantity_units.Id\r\nWHERE      " +
-                "  (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = @invoice_he" +
-                "ader_id)";
+                ".text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold," +
+                " Currency.code  as currency_code\r\nFROM            Invoice_details WITH (nolock) " +
+                "INNER JOIN\r\n                         Clients ON Clients.Id = Invoice_details.cli" +
+                "ents_id INNER JOIN\r\n                         Invoice_header WITH (nolock) ON Inv" +
+                "oice_header.Id = Invoice_details.invoice_header_id INNER JOIN\r\n                 " +
+                "        Articles ON Articles.Id = Invoice_details.article_id INNER JOIN\r\n       " +
+                "                  Countries ON Countries.Id = Invoice_header.countriesid INNER J" +
+                "OIN\r\n                         Customers ON Customers.Id = Invoice_header.custome" +
+                "rs_id INNER JOIN\r\n                         Tax_rates ON Tax_rates.Id = Invoice_d" +
+                "etails.tax_rate_id INNER JOIN\r\n                         Payment_terms ON Payment" +
+                "_terms.Id = Invoice_header.payment_terms_id INNER JOIN\r\n                        " +
+                " Delivery_terms ON Delivery_terms.Id = Invoice_header.delivery_terms_id INNER JO" +
+                "IN\r\n                         Quantity_units ON Invoice_details.quantity_units_id" +
+                " = Quantity_units.Id INNER JOIN\r\n\t\t\t\t     Currency ON Customers.currency_id = Cu" +
+                "rrency.Id \r\nWHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_" +
+                "header.Id = @invoice_header_id)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@client_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "clients_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@invoice_header_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
