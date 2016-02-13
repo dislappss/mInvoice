@@ -28,8 +28,8 @@
                         @class = "form-control",
                         @id = "article_id",
                         @onchange = "getPrice(false); getTaxRate(false); getArticleDescription(false); getQuantity_unit(false);"
-                    },
-                        optionLabel: @Resources.Resource.select_Item)
+                    }, 
+                    optionLabel: @Resources.Resource.select_Item)
                 @Html.ValidationMessageFor(model => model.article_id, "", new { @class = "text-danger" })
             </div>
         </div>

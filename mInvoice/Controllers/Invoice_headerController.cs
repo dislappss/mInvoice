@@ -157,9 +157,11 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description");
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description");
             ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name");
+            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
 
             var _new_item = new Invoice_header();
 
+            _new_item.clients_id = _client_id;
             _new_item.order_date = _now;
             _new_item.delivery_date = _now;
 
@@ -171,7 +173,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id")] Invoice_header invoice_header)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id,tax_rate_id")] Invoice_header invoice_header)
         {
             int _client_id = -1;
 
@@ -183,6 +185,7 @@ namespace mInvoice.Controllers
                 }
                 _client_id = Convert.ToInt32(Session["client_id"]);
 
+                invoice_header.invoice_no = getNewInvoiceNo(m_db);
                 invoice_header.clients_id = _client_id;
 
                 m_db.Invoice_header.Add(invoice_header);
@@ -195,6 +198,8 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.customers_id);
             ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
+            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
+
             return View(invoice_header);
         }
 
@@ -223,6 +228,7 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
             ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
+            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
 
             return View(invoice_header);
         }
@@ -232,7 +238,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id")] Invoice_header invoice_header)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id,tax_rate_id")] Invoice_header invoice_header)
         {
             if (ModelState.IsValid)
             {
@@ -254,6 +260,7 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
             ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
+            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
 
             return View(invoice_header);
         }
@@ -283,14 +290,39 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            // Details
-            IQueryable<Invoice_details> _details = m_db.Invoice_details.Where(x => x.invoice_header_id == id);
-            m_db.Invoice_details.RemoveRange(_details);
+            int _client_id = Convert.ToInt32(Session["client_id"]);
 
-            // Header
-            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
-            m_db.Invoice_header.Remove(invoice_header);
-            m_db.SaveChanges();
+            using (var _db = new myinvoice_dbEntities())
+            {
+                using (var dbContextTransaction = _db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // Details
+                        IQueryable<Invoice_details> _details =
+                            m_db.Invoice_details.Where(x => x.invoice_header_id == id).Where(x => x.clients_id == _client_id);
+                        m_db.Invoice_details.RemoveRange(_details);
+
+                        // Header
+                        Invoice_header invoice_header = m_db.Invoice_header.Find(id);
+                        m_db.Invoice_header.Remove(invoice_header);
+
+                        m_db.SaveChanges();
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch (SqlException ex)
+                    {
+                        ModelState.AddModelError("", ex);
+                        dbContextTransaction.Rollback();
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", ex);
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
             return RedirectToAction("Index");
         }
 
@@ -699,7 +731,25 @@ namespace mInvoice.Controllers
         }
 
 
+        public JsonResult getCustomer(string customers_id)
+        {
+            if (!string.IsNullOrEmpty(customers_id))
+            {
+                Customers _customer = m_db.Customers.Find(Convert.ToInt32(customers_id));
+                if (_customer != null)
+                {
+                    Customers result = _customer;
 
+                    JsonResult _result = Json(result, JsonRequestBehavior.AllowGet );
+
+                    return _result;
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
 
     }
    

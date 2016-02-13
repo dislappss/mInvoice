@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.Security;
 using mInvoice.Models;
 
 namespace mInvoice.Controllers
@@ -53,11 +52,18 @@ namespace mInvoice.Controllers
 
             if (Session["email"] != null 
                 && Session["client_id"] != null) 
-            {               
+            {              
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name");
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name");
                 ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name");
-                return View();
+                ViewBag.payment_terms_id = new SelectList(db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description");
+                ViewBag.delivery_terms_id = new SelectList(db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description");
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
+
+                Customers _new_obj = new Customers();
+                _new_obj.clientsysid = _client_id;
+
+                return View(_new_obj);
             }   
             else 
               return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,30 +74,31 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id")] Customers customers)
+        public ActionResult Create([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id,payment_terms_id,delivery_terms_id,tax_rate_id")] Customers customers)
         {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
             try
             {
                 if (ModelState.IsValid)
-                {
-                    if (Session["client_id"] == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-
-                    customers.clientsysid = _client_id;
-
+                {                    
                     db.Customers.Add(customers);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.clientsysid = new SelectList(db.Clients.Where(s => s.Id == _client_id), "Id", "clientname", customers.clientsysid);
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
                 ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
+                ViewBag.payment_terms_id = new SelectList(db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.payment_terms_id);
+                ViewBag.delivery_terms_id = new SelectList(db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.delivery_terms_id);
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", customers.tax_rate_id );
+
                 return View(customers);
 
             }
@@ -122,10 +129,13 @@ namespace mInvoice.Controllers
                 {
                     return HttpNotFound();
                 }
-                ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
                 ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
+                ViewBag.payment_terms_id = new SelectList(db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.payment_terms_id);
+                ViewBag.delivery_terms_id = new SelectList(db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.delivery_terms_id);
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", customers.tax_rate_id);
+
                 return View(customers);
 
             }
@@ -143,7 +153,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id")] Customers customers)
+        public ActionResult Edit([Bind(Include = "Id,clientsysid,customer_name,countriesid,email,zip,city,street,CreatedAt,UpdatedAt,payment_methodid,customer_no,phone,fax,phone_2,www,ustd_id,finance_office,account_number,blz,bank_name,iban,bic,currency_id,payment_terms_id,delivery_terms_id,tax_rate_id")] Customers customers)
         {
             var _client_id = Convert.ToInt32(Session["client_id"]);
 
@@ -155,10 +165,14 @@ namespace mInvoice.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.clientsysid = Convert.ToInt32(Session["client_id"]); // new SelectList(db.Clients, "Id", "clientname", customers.clientsysid);
+
                 ViewBag.countriesid = new SelectList(db.Countries.OrderByDescending(s => s.active), "Id", "name", customers.countriesid);
                 ViewBag.payment_methodid = new SelectList(db.Payment_method.Where(k => k.clients_id == _client_id), "Id", "name", customers.payment_methodid);
                 ViewBag.currency_id = new SelectList(db.Currency.OrderBy(s => s.name), "Id", "name", customers.currency_id);
+                ViewBag.payment_terms_id = new SelectList(db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.payment_terms_id);
+                ViewBag.delivery_terms_id = new SelectList(db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", customers.delivery_terms_id);
+                ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", customers.tax_rate_id);
+
                 return View(customers);
 
             }

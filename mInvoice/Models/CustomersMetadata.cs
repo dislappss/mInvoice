@@ -85,6 +85,15 @@ namespace mInvoice.Models
          [Display(Name = "currency_id", ResourceType = typeof(Resource))]
          public int currency_id { get; set; }
 
+         [Display(Name = "payment_terms", ResourceType = typeof(Resource))]
+         public Nullable<decimal> payment_terms_id { get; set; }
+
+         [Display(Name = "delivery_terms", ResourceType = typeof(Resource))]
+         public Nullable<decimal> delivery_terms_id { get; set; }
+
+         [Display(Name = "tax_rate", ResourceType = typeof(Resource))]
+         public Nullable<decimal> tax_rate_id { get; set; }
+
         [ScaffoldColumn(false)]
         [Editable(false)]
         //[UIHint("Hidden")]

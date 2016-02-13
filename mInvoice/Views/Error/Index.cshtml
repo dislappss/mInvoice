@@ -10,7 +10,7 @@
     <div class="alert alert-error">
         @Resources.Resource.an_unexpected_error
     </div>
-    @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+    @if (Model != null)    // && HttpContext.Current.IsDebuggingEnabled)
     {
         <div>
             <p>

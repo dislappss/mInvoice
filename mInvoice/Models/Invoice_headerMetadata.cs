@@ -68,7 +68,6 @@ namespace mInvoice.Models
         //[ScaffoldColumn(false)]
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "invoice_no", ResourceType = typeof(Resource))]
         public string invoice_no { get; set; }
 
@@ -128,6 +127,9 @@ namespace mInvoice.Models
 
         [Display(Name = "currency_id", ResourceType = typeof(Resource))]
          public int currency_id { get; set; }
+
+        [Display(Name = "tax_rate", ResourceType = typeof(Resource))]
+        public Nullable<decimal> tax_rate_id { get; set; }
         
     }
 }

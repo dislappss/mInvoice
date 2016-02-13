@@ -17,6 +17,7 @@ namespace mInvoice.Models
         public Payment_terms()
         {
             this.Invoice_header = new HashSet<Invoice_header>();
+            this.Customers = new HashSet<Customers>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,6 @@ namespace mInvoice.Models
     
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
         public virtual Clients Clients { get; set; }
+        public virtual ICollection<Customers> Customers { get; set; }
     }
 }

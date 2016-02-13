@@ -89,3 +89,39 @@ function getArticleDescription(is_edit) {
         });
     //}
 }
+
+function getCustomer(is_edit) {   
+
+    var _customers_id = $('#customers_id').val();
+
+    //alert(_customers_id);
+
+
+    //var _quantity_units_id = $('#quantity_units_id').val();
+
+    //if (is_edit ||
+    //    _quantity_units_id === "" && typeof _quantity_units_id === "string") {
+
+    $.ajax({
+        url: '/Invoice_header/getCustomer',
+        type: "GET",
+        dataType: "JSON",
+        data: { customers_id: _customers_id },
+        success: function (ret_value) {
+
+            $("#countriesid").val(ret_value.countriesid);
+            $("#zip").val(ret_value.zip);
+            $("#city").val(ret_value.city);
+            $("#street").val(ret_value.street);
+            $("#payment_terms_id").val(ret_value.payment_terms_id);
+            $("#delivery_terms_id").val(ret_value.delivery_terms_id);
+            $("#tax_rate_id").val(ret_value.tax_rate_id);
+            $("#currency_id").val(ret_value.currency_id);
+        },
+        error: function (xhr, err) {
+            alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+            alert("responseText: " + xhr.responseText);
+        }
+    });
+    //}
+}
