@@ -171,7 +171,8 @@ namespace mInvoice
                 //if (CultureInfo.CurrentCulture.Name == "de" ||
                 //    CultureInfo.CurrentCulture.Name == "en")
                 //{
-                    if (!string.IsNullOrEmpty(_year.AttemptedValue)
+                    if (_year != null && 
+                        !string.IsNullOrEmpty(_year.AttemptedValue)
                         && !string.IsNullOrEmpty(_month.AttemptedValue)
                         && !string.IsNullOrEmpty(_day.AttemptedValue))
                     {

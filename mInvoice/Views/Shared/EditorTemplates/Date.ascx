@@ -23,33 +23,6 @@
         
 </style>
 
-<%--@{
-    var now = DateTime.Now;
-    var years = Enumerable.Range(0, 150).Select(x => new SelectListItem { Value = (now.Year - x).ToString(), Text = (now.Year - x).ToString() });
-    var months = Enumerable.Range(1, 12).Select(x => new SelectListItem { Value = x.ToString("00"), Text = x.ToString() });
-    var days = Enumerable.Range(1, 31).Select(x => new SelectListItem { Value = x.ToString("00"), Text = x.ToString() });
-
-    var result = ViewData.ModelState[ViewData.TemplateInfo.HtmlFieldPrefix];
-    if (result != null)
-    { 
-        var values = result.Value.RawValue as string[];
-        years = new SelectList(years, "Value", "Text", values[0]);
-        months = new SelectList(months, "Value", "Text", values[1]);
-        days = new SelectList(days, "Value", "Text", values[2]);
-        result.Value = null;
-    }
-}
-
-<div class="trippleddldatetime">
-    @Html.Label("")
-
-    @Html.DropDownList("", years, "-- year --")
-    @Html.DropDownList("", months, "-- month --")
-    @Html.DropDownList("", days, "-- day --")
-
-    @Html.ValidationMessage("")
-</div>--%>
-
 <table >
     <tr>
         <td><%= @Html.DropDownList("Day",
@@ -83,6 +56,11 @@
             }), 
             "-- " + @Resources.Resource.year + " --",  
             htmlAttributes: new { @class = "horizontal-style-cell-year form-control"}) %>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+          <%= @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { @class = "btn btn-primary btn-xs" })%>
         </td>
     </tr>
 </table>

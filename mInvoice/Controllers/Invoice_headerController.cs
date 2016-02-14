@@ -731,16 +731,25 @@ namespace mInvoice.Controllers
         }
 
 
-        public JsonResult getCustomer(string customers_id)
+        public JsonResult getCustomer(int customer_id)
         {
-            if (!string.IsNullOrEmpty(customers_id))
+            if (customer_id > 0)
             {
-                Customers _customer = m_db.Customers.Find(Convert.ToInt32(customers_id));
+                Customers _customer = m_db.Customers.Find(customer_id);
                 if (_customer != null)
-                {
-                    Customers result = _customer;
+                {                   
+                    List<string> _res_arr = new List<string>();
 
-                    JsonResult _result = Json(result, JsonRequestBehavior.AllowGet );
+                    _res_arr.Add(_customer.countriesid.ToString());
+                    _res_arr.Add(_customer.zip.ToString());
+                    _res_arr.Add(_customer.city.ToString());
+                    _res_arr.Add(_customer.street.ToString());
+                    _res_arr.Add(_customer.payment_terms_id.ToString());
+                    _res_arr.Add(_customer.delivery_terms_id.ToString());
+                    _res_arr.Add(_customer.tax_rate_id.ToString());
+                    _res_arr.Add(_customer.currency_id.ToString());                    
+
+                    JsonResult _result = Json(_res_arr, JsonRequestBehavior.AllowGet);
 
                     return _result;
                 }

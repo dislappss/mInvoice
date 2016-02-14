@@ -94,34 +94,27 @@ function getCustomer(is_edit) {
 
     var _customers_id = $('#customers_id').val();
 
-    //alert(_customers_id);
-
-
-    //var _quantity_units_id = $('#quantity_units_id').val();
-
-    //if (is_edit ||
-    //    _quantity_units_id === "" && typeof _quantity_units_id === "string") {
+    var paramters = {customer_id: _customers_id};
 
     $.ajax({
         url: '/Invoice_header/getCustomer',
-        type: "GET",
+        type: "POST",
         dataType: "JSON",
-        data: { customers_id: _customers_id },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(paramters),
         success: function (ret_value) {
-
-            $("#countriesid").val(ret_value.countriesid);
-            $("#zip").val(ret_value.zip);
-            $("#city").val(ret_value.city);
-            $("#street").val(ret_value.street);
-            $("#payment_terms_id").val(ret_value.payment_terms_id);
-            $("#delivery_terms_id").val(ret_value.delivery_terms_id);
-            $("#tax_rate_id").val(ret_value.tax_rate_id);
-            $("#currency_id").val(ret_value.currency_id);
+            $("#countriesid").val(ret_value[0]);
+            $("#zip").val(ret_value[1]);
+            $("#city").val(ret_value[2]);
+            $("#street").val(ret_value[3]);
+            $("#payment_terms_id").val(ret_value[4]);
+            $("#delivery_terms_id").val(ret_value[5]);
+            $("#tax_rate_id").val(ret_value[6]);
+            $("#currency_id").val(ret_value[7]);
         },
         error: function (xhr, err) {
             alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
             alert("responseText: " + xhr.responseText);
         }
     });
-    //}
 }
