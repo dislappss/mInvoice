@@ -403,6 +403,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete date ähnelt.
+        /// </summary>
+        public static string delete_date {
+            get {
+                return ResourceManager.GetString("delete_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delivery date ähnelt.
         /// </summary>
         public static string delivery_date {
@@ -1164,6 +1173,15 @@ namespace mInvoice.App_GlobalResources {
         public static string send_email {
             get {
                 return ResourceManager.GetString("send_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Set today ähnelt.
+        /// </summary>
+        public static string set_today {
+            get {
+                return ResourceManager.GetString("set_today", resourceCulture);
             }
         }
         

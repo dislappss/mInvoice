@@ -540,4 +540,10 @@
   <data name="max_lenght" xml:space="preserve">
     <value>Die maximale Symbollänge für {0} ist {1}.</value>
   </data>
+  <data name="delete_date" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="set_today" xml:space="preserve">
+    <value>Heute</value>
+  </data>
 </root>

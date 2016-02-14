@@ -546,4 +546,10 @@
   <data name="max_lenght" xml:space="preserve">
     <value>The maximum string for {0} length is {1} characters.</value>
   </data>
+  <data name="delete_date" xml:space="preserve">
+    <value>Delete date</value>
+  </data>
+  <data name="set_today" xml:space="preserve">
+    <value>Set today</value>
+  </data>
 </root>
