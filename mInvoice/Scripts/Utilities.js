@@ -118,3 +118,29 @@ function getCustomer(is_edit) {
         }
     });
 }
+
+function getArticle() {
+
+    var _id = $('#customers_id').val();
+
+    var paramters = { id: _id };
+
+    $.ajax({
+        url: '/Invoice_details/getArticle',
+        type: "POST",
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(paramters),
+        success: function (ret_value) {
+            $("#quantity_units_id").val(ret_value[0]);
+            $("#description").val(ret_value[1]);
+            $("#tax_rate_id").val(ret_value[2]);
+            $("#price_netto").val(ret_value[3]);
+        },
+        error: function (xhr, err) {
+            alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+            alert("responseText: " + xhr.responseText);
+        }
+    });
+}
+

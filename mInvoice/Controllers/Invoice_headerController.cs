@@ -21,6 +21,8 @@ namespace mInvoice.Controllers
 {
     public class Invoice_headerController : BaseController
     {
+    
+
         private myinvoice_dbEntities m_db = new myinvoice_dbEntities();
 
         // GET: Invoice_header
@@ -39,6 +41,8 @@ namespace mInvoice.Controllers
             ViewBag.delivery_dateSortParm = sortOrder == "delivery_date" ? "delivery_date_desc" : "delivery_date";
             ViewBag.citySortParm = sortOrder == "city" ? "city_desc" : "city";
             ViewBag.country_codeSortParm = sortOrder == "country_code" ? "country_code_desc" : "country_code";
+            ViewBag.paid_atParm = sortOrder == "paid_at" ? "paid_at_desc" : "paid_at";
+            ViewBag.IsPaid = sortOrder == "true" ? true : (sortOrder == "null" ? new bool?() : false) ;
 
             if (searchString != null)
             {
@@ -53,9 +57,22 @@ namespace mInvoice.Controllers
 
             int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
-            var _headers = from s in m_db.Invoice_header
+            IQueryable <Invoice_header> _headers = null;
+          
+            if(sortOrder != "true" && sortOrder != "false" )
+              _headers = from s in m_db.Invoice_header
                            where s.clients_id == _clientsysid
                            select s;
+            else if(sortOrder == "true")
+               _headers = from s in m_db.Invoice_header
+                           where s.clients_id == _clientsysid &&
+                                 s.paid_at != null
+                           select s;
+            else if (sortOrder == "false")
+               _headers = from s in m_db.Invoice_header
+                       where s.clients_id == _clientsysid &&
+                             s.paid_at == null
+                       select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -66,6 +83,7 @@ namespace mInvoice.Controllers
                  || s.order_date.ToString().Contains(searchString)
                  || s.delivery_date.ToString().Contains(searchString)
                  || s.city.ToString().Contains(searchString)
+                 || s.paid_at.ToString().Contains(searchString)
                  );
             }
 
@@ -82,6 +100,12 @@ namespace mInvoice.Controllers
                     break;
                 case "order_date_desc":
                     _headers = _headers.OrderByDescending(s => s.order_date);
+                    break;
+                case "paid_at_desc":
+                    _headers = _headers.OrderByDescending(s => s.paid_at);
+                    break;
+                case "paid_at":
+                    _headers = _headers.OrderBy(s => s.paid_at);
                     break;
                 case "delivery_date_desc":
                     _headers = _headers.OrderByDescending(s => s.delivery_date);
@@ -108,6 +132,24 @@ namespace mInvoice.Controllers
                 case "city":
                     _headers = _headers.OrderBy(s => s.city);
                     break;
+
+                //case "true":
+                //    _headers = from s in m_db.Invoice_header
+                //               where s.clients_id == _clientsysid &&
+                //                     s.paid_at != null
+                //               select s;
+                //    break;
+                //case "false":
+                //    _headers = from s in m_db.Invoice_header
+                //               where s.clients_id == _clientsysid &&
+                //                     s.paid_at == null
+                //               select s;
+                //    break;
+                //case "null":
+                //    _headers = _headers.Where(s => s.paid_at == null);
+                //    break;
+
+
                 default:
                     //_countries = _countries.OrderBy(s => s.name);
                     _headers = _headers.OrderBy(s => s.invoice_no);
@@ -482,18 +524,36 @@ namespace mInvoice.Controllers
             _ret_val = _ret_val + Number;
 
             return _ret_val;
-        }
+        }       
 
-        protected override void Dispose(bool disposing)
+        public ActionResult mark_as_paid(int? id)
         {
-            if (disposing)
+            if (Session["client_id"] == null)
             {
-                m_db.Dispose();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            base.Dispose(disposing);
-        }
 
-        //private string m_tmp_pdf_filename = null; //"invoice_" + Guid.NewGuid().ToString() + ".pdf";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Invoice_header invoice_header = m_db.Invoice_header.Find(id);
+
+            if (invoice_header == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (invoice_header.paid_at.HasValue)
+                invoice_header.paid_at = null;
+            else
+                invoice_header.paid_at = DateTime.Today;
+
+            m_db.SaveChanges();
+
+            return RedirectToAction("Index", new { @sortOrder = "null" });
+        }
 
         public ActionResult EmailForm(int? id, bool zugferd)
         {
@@ -759,6 +819,16 @@ namespace mInvoice.Controllers
             else
                 return null;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                m_db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
 
     }
    

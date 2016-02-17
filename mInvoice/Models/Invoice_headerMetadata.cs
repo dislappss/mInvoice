@@ -9,6 +9,8 @@ namespace mInvoice.Models
     [MetadataType(typeof(Invoice_headerMetadata))]
     public partial class Invoice_header
     {
+        public bool IsPaid { get; set; }
+
         public int BirthdateDay { get; set; }
         public int BirthdateMonth { get; set; }
         public int BirthdateYear { get; set; }

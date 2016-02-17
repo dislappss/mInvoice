@@ -552,4 +552,19 @@
   <data name="set_today" xml:space="preserve">
     <value>Set today</value>
   </data>
+  <data name="mark_as_paid" xml:space="preserve">
+    <value>Paid / Unpaid</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="not_paid" xml:space="preserve">
+    <value>Not paid</value>
+  </data>
+  <data name="paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
 </root>

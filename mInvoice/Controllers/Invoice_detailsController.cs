@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -278,6 +279,31 @@ namespace mInvoice.Controllers
                 {
                     string result = articles.quantity_units_id.ToString();
                     return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+
+        public JsonResult getArticle(int id)
+        {
+            if (id > 0)
+            {
+                Articles _item = db.Articles.Find(id);
+                if (_item != null)
+                {
+                    List<string> _res_arr = new List<string>();
+
+                    _res_arr.Add(_item.quantity_units_id.ToString());
+                    _res_arr.Add(_item.description.ToString());
+                    _res_arr.Add(_item.tax_rate_id.ToString());
+                    _res_arr.Add(_item.price.ToString());
+
+                    JsonResult _result = Json(_res_arr, JsonRequestBehavior.AllowGet);
+
+                    return _result;
                 }
                 else
                     return null;

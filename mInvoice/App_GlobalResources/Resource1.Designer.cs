@@ -79,6 +79,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die All ähnelt.
+        /// </summary>
+        public static string all {
+            get {
+                return ResourceManager.GetString("all", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die An unexpected error has occurred. Please contact the system administrator. ähnelt.
         /// </summary>
         public static string an_unexpected_error {
@@ -745,6 +754,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Paid / Unpaid ähnelt.
+        /// </summary>
+        public static string mark_as_paid {
+            get {
+                return ResourceManager.GetString("mark_as_paid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The maximum string for {0} length is {1} characters. ähnelt.
         /// </summary>
         public static string max_lenght {
@@ -759,6 +777,15 @@ namespace mInvoice.App_GlobalResources {
         public static string method_of_payment {
             get {
                 return ResourceManager.GetString("method_of_payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mode ähnelt.
+        /// </summary>
+        public static string mode {
+            get {
+                return ResourceManager.GetString("mode", resourceCulture);
             }
         }
         
@@ -817,6 +844,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Not paid ähnelt.
+        /// </summary>
+        public static string not_paid {
+            get {
+                return ResourceManager.GetString("not_paid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Optional parameters ähnelt.
         /// </summary>
         public static string optonal_parameters {
@@ -849,6 +885,15 @@ namespace mInvoice.App_GlobalResources {
         public static string owner_report {
             get {
                 return ResourceManager.GetString("owner_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Paid ähnelt.
+        /// </summary>
+        public static string paid {
+            get {
+                return ResourceManager.GetString("paid", resourceCulture);
             }
         }
         

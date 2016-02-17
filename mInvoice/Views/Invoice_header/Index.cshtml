@@ -22,11 +22,24 @@
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
             </td>
             <td>
+                &nbsp;
+                <label class="radio-inline">
+                    @Html.RadioButton("sortOrder", "true") @Resources.Resource.paid</label>
+                <label class="radio-inline">
+                    @Html.RadioButton("sortOrder", "false") @Resources.Resource.not_paid</label>
+                <label class="radio-inline">
+                    @Html.RadioButton("sortOrder", "null") @Resources.Resource.all</label>
+            </td>
+            <td>
                 <input type="submit" value=@Resources.Resource.search class="btn btn-default" style="margin-left:1em;" />
             </td>
+            
         </tr>
     </table>
 }
+
+
+   
 
 
 <table class="table">
@@ -37,10 +50,11 @@
                 new { sortOrder = ViewBag.invoice_noSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         @*<th>
-        @Html.ActionLink(@Resources.Resource.customer_no, "Index",
-            new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        *@<th>
+            @Html.ActionLink(@Resources.Resource.customer_no, "Index",
+                new { sortOrder = ViewBag.customers_idSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+        *@
+        <th>
             @Html.ActionLink(@Resources.Resource.customer, "Index",
                 new { sortOrder = ViewBag.customerSortParm })
         </th>
@@ -48,10 +62,14 @@
             @Html.ActionLink(@Resources.Resource.order_date, "Index",
                 new { sortOrder = ViewBag.order_dateSortParm })
         </th>
+        <th>
+            @Html.ActionLink(@Resources.Resource.paid_at, "Index",
+               new { sortOrder = ViewBag.paid_atParm })
+        </th>
         @*<th>
-            @Html.ActionLink(@Resources.Resource.delivery_date, "Index",
-                new { sortOrder = ViewBag.delivery_dateSortParm })
-        </th>*@
+                @Html.ActionLink(@Resources.Resource.delivery_date, "Index",
+                    new { sortOrder = ViewBag.delivery_dateSortParm })
+            </th>*@
         @*<th>
                 @Html.ActionLink(@Resources.Resource.city, "Index",
                     new { sortOrder = ViewBag.citySortParm })
@@ -60,7 +78,7 @@
                @Html.ActionLink(@Resources.Resource.country_code, "Index",
                     new { sortOrder = ViewBag.country_codeSortParm })
             </th>*@
-        <th >
+        <th>
             @*@Resources.Resource.edit_delete*@
         </th>
     </tr>
@@ -81,9 +99,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.order_date)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.paid_at )
+            </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.delivery_date)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.delivery_date)
+                </td>*@
             @*<td>
                     @Html.DisplayFor(modelItem => item.city)
                 </td>
@@ -102,6 +123,7 @@
             <td colspan="4" style="border:none ">
                 @Html.ActionLink(@Resources.Resource.positions, "Index", "Invoice_details", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.copy, "Copy_invoice", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@Resources.Resource.mark_as_paid, "mark_as_paid", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.invoice, "rp_invoice_details", "Reports", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.email, "EmailForm", "Invoice_header", new { id = item.Id, zugferd = false }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.email + " (" +@Resources.Resource.zugferd + ")", "EmailForm", "Invoice_header", new { id = item.Id, zugferd = true }, new { @class = "btn btn-primary btn-xs" })
