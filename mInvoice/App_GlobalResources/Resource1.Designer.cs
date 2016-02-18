@@ -106,6 +106,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure ? ähnelt.
+        /// </summary>
+        public static string are_you_sure {
+            get {
+                return ResourceManager.GetString("are_you_sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure you wish to change paying for this invoice? ähnelt.
+        /// </summary>
+        public static string are_you_sure_change_paying {
+            get {
+                return ResourceManager.GetString("are_you_sure_change_paying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure you want to delete this? ähnelt.
         /// </summary>
         public static string are_you_sure_delete {
@@ -246,6 +264,15 @@ namespace mInvoice.App_GlobalResources {
         public static string code {
             get {
                 return ResourceManager.GetString("code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure you wish to copy this invoice? ähnelt.
+        /// </summary>
+        public static string confirm_copy_invoice {
+            get {
+                return ResourceManager.GetString("confirm_copy_invoice", resourceCulture);
             }
         }
         

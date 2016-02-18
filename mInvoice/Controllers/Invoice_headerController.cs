@@ -26,7 +26,12 @@ namespace mInvoice.Controllers
         private myinvoice_dbEntities m_db = new myinvoice_dbEntities();
 
         // GET: Invoice_header
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(
+            string sortOrder
+            , string currentFilter
+            , string searchString
+            , int? page
+            , string radioPaid)
         {
             if (Session["client_id"] == null)
             {
@@ -42,7 +47,7 @@ namespace mInvoice.Controllers
             ViewBag.citySortParm = sortOrder == "city" ? "city_desc" : "city";
             ViewBag.country_codeSortParm = sortOrder == "country_code" ? "country_code_desc" : "country_code";
             ViewBag.paid_atParm = sortOrder == "paid_at" ? "paid_at_desc" : "paid_at";
-            ViewBag.IsPaid = sortOrder == "true" ? true : (sortOrder == "null" ? new bool?() : false) ;
+            ViewBag.IsPaid = radioPaid == "true" ? true : (radioPaid == "null" ? new bool?() : false);
 
             if (searchString != null)
             {
@@ -59,16 +64,16 @@ namespace mInvoice.Controllers
 
             IQueryable <Invoice_header> _headers = null;
           
-            if(sortOrder != "true" && sortOrder != "false" )
+            if(radioPaid != "true" && radioPaid != "false" )
               _headers = from s in m_db.Invoice_header
                            where s.clients_id == _clientsysid
                            select s;
-            else if(sortOrder == "true")
+            else if(radioPaid == "true")
                _headers = from s in m_db.Invoice_header
                            where s.clients_id == _clientsysid &&
                                  s.paid_at != null
                            select s;
-            else if (sortOrder == "false")
+            else if (radioPaid == "false")
                _headers = from s in m_db.Invoice_header
                        where s.clients_id == _clientsysid &&
                              s.paid_at == null

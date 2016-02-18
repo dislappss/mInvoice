@@ -561,4 +561,13 @@
   <data name="mode" xml:space="preserve">
     <value>Modus</value>
   </data>
+  <data name="are_you_sure" xml:space="preserve">
+    <value>Sind Sie sicher ?</value>
+  </data>
+  <data name="are_you_sure_change_paying" xml:space="preserve">
+    <value>Wollen Sie wirklich Zahlstatus ändern?</value>
+  </data>
+  <data name="confirm_copy_invoice" xml:space="preserve">
+    <value>Wollen Sie dieser Rechnung kopieren?</value>
+  </data>
 </root>

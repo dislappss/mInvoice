@@ -567,4 +567,13 @@
   <data name="paid" xml:space="preserve">
     <value>Paid</value>
   </data>
+  <data name="are_you_sure" xml:space="preserve">
+    <value>Are you sure ?</value>
+  </data>
+  <data name="are_you_sure_change_paying" xml:space="preserve">
+    <value>Are you sure you wish to change paying for this invoice?</value>
+  </data>
+  <data name="confirm_copy_invoice" xml:space="preserve">
+    <value>Are you sure you wish to copy this invoice?</value>
+  </data>
 </root>
