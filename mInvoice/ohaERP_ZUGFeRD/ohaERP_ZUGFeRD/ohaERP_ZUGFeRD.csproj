@@ -68,7 +68,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +85,7 @@
     <Compile Include="CurrencyCodes.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataSet11.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -98,9 +98,7 @@
     <Compile Include="InvoiceDescriptorReader.cs" />
     <Compile Include="InvoiceDescriptorWriter.cs" />
     <Compile Include="InvoiceType.cs" />
-    <Compile Include="main_form.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="main_form.cs" />
     <Compile Include="main_form.Designer.cs">
       <DependentUpon>main_form.cs</DependentUpon>
     </Compile>

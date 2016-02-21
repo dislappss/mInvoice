@@ -36,7 +36,6 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public int currency_id { get; set; }
     
-        public virtual Countries Countries { get; set; }
         public virtual Customers Customers { get; set; }
         public virtual Delivery_terms Delivery_terms { get; set; }
         public virtual Payment_terms Payment_terms { get; set; }

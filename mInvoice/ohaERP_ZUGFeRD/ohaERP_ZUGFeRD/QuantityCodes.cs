@@ -33,7 +33,6 @@ namespace s2industries.ZUGFeRD
     public enum QuantityCodes
     {
         Unknown,
-
         /// <summary>Kilogramm</summary>
         KGM,    // Kilogramm
         /// <summary>Quadratmeter</summary>
@@ -43,7 +42,107 @@ namespace s2industries.ZUGFeRD
         /// <summary>Meter</summary>
         MTR,    // Meter     
         /// <summary>Kubikmeter</summary>
-        MTQ     // Kubikmeter               
+        MTQ,
+        /// <summary>Tüte</summary>                   
+        BG,
+        /// <summary>Flasche</summary>                              
+        BO,
+        /// <summary>Kanister</summary>         
+        CA,
+        /// <summary>Centiliter</summary> 
+        CLT,
+        /// <summary>Quadratzentimeter</summary> 
+        CMK,
+        /// <summary>Kubikcentimeter</summary>       
+        CMQ,
+        /// <summary>Zentimeter</summary>  
+        CMT,//Zentimeter                        
+        /// <summary>Kiste</summary>         
+        CR, //Kiste                   
+        /// <summary>Kasten</summary>  
+        CS, //Kasten                  
+        /// <summary>Karton</summary>  
+        CT, //Karton                  
+        /// <summary>Trommel</summary>  
+        DR, //Trommel                                                           
+        /// <summary>Fuß</summary>   
+        FOT,//Fuß                                         
+        /// <summary>Gallone</summary>  
+        GLL,//US-Gallone              
+        /// <summary>Gramm</summary>  
+        GRM,//Gramm                             
+        /// <summary>Hektar</summary>                  
+        HAR,//Hektar                  
+        /// <summary>Hektoliter</summary>  
+        HLT,//Hektoliter                        
+        /// <summary>Stunde</summary>  
+        HUR,//Stunde                            
+        /// <summary>Zoll</summary>        
+        INH,//Zoll                    
+        /// <summary>Quadratzoll</summary>  
+        INK,//Quadratzoll            
+        /// <summary>Kubikzoll</summary>  
+        INQ,//Kubikzoll                                    
+        /// <summary>Quadrat Kilometer</summary>  
+        KMK,//Quadrat Kilometer       
+        /// <summary>Kilometer</summary>  
+        KMT,//Kilometer                         
+        /// <summary>Kilowattstunde</summary>             
+        KWH,//Kilowattstunde          
+        /// <summary>Kilowatt</summary>  
+        KWT,//Kilowatt                          
+        /// <summary>US-Pfund</summary>  
+        LBR,//US-Pfund                
+        /// <summary>Liter</summary>  
+        LTR,//Liter                             
+        /// <summary>Megawatt</summary>              
+        MAW,//Megawatt                          
+        /// <summary>Milligramm</summary>  
+        MGM,//Milligramm                        
+        /// <summary>Minute</summary>  
+        MIN,//Minute                            
+        /// <summary>Millilitre</summary>        
+        MLT,//Millilitre                        
+        /// <summary>Quadratmillimeter</summary>       
+        MMK,//Quadratmillimeter       
+        /// <summary>Kubikmillimeter</summary>  
+        MMQ,//Kubikmillimeter         
+        /// <summary>Millimeter</summary>  
+        MMT,//Millimeter                        
+        /// <summary>Monat</summary>        
+        MON,//Monat                                                           
+        /// <summary>Unze</summary>  
+        ONZ,//Unze                    
+        /// <summary>Fluid Ounce US</summary>  
+        OZA,//Fluid Ounce US                    
+        /// <summary>Paket</summary>  
+        PA,//Paket                                                      
+        /// <summary>Palette</summary>       
+        PF, //Palette                 
+        /// <summary>Packen</summary>  
+        PK, //Packen                  
+        /// <summary>Paar</summary>  
+        PR, //Paar                    
+        /// <summary>Pint, U.S. liquid</summary>  
+        PT, //Pint, U.S. liquid                 
+        /// <summary>Quart, U.S. liquid</summary>        
+        QT, //Quart, U.S. liquid      
+        /// <summary>Rolle</summary>  
+        RO, //Rolle                             
+        /// <summary>Meile</summary>                                       
+        SMI,//Meile                   
+        /// <summary>US-Tonne</summary>  
+        STN,//US-Tonne                
+        /// <summary>Tonne (1000 KG)</summary>  
+        TNE,//Tonne (1000 KG)                   
+        /// <summary>Watt</summary>  
+        WTT,//Watt                    
+        /// <summary>Quadrat Yard</summary>  
+        YDK,//Quadrat Yard            
+        /// <summary>Kubik Yard</summary>  
+        YDQ,//Kubik Yard              
+        /// <summary>Yard</summary>  
+        YRD,//Yard                    
     }
 
 

@@ -6,7 +6,7 @@
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ohaERPConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ohaERPConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ZUGFeRD_Test.Properties.Settings.GlobalReference.Default.ohaERPConnectionString" Provider="System.Data.SqlClient" />
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="myinvoice_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="myinvoice_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ZUGFeRD_Test.Properties.Settings.GlobalReference.Default.myinvoice_dbConnectionString" Provider="System.Data.SqlClient" />
-          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sumTableAdapter" GeneratorDataComponentClassName="sumTableAdapter" Name="sum" UserDataComponentName="sumTableAdapter">
@@ -34,7 +34,7 @@ FROM            (SELECT        price_netto * quantity * ISNULL(quantity_2, 1) * 
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rp_invoice_detailsTableAdapter" GeneratorDataComponentClassName="rp_invoice_detailsTableAdapter" Name="rp_invoice_details" UserDataComponentName="rp_invoice_detailsTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="myinvoice_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="myinvoice_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Clients.clientname, Clients.email AS Clients_email, Clients.owner AS Clients_owner, Clients.street AS Clients_street, Clients.zip AS Clients_zip, Clients.city AS Clients_city, Clients.phone AS Clients_phone, 
@@ -50,12 +50,12 @@ FROM            (SELECT        price_netto * quantity * ISNULL(quantity_2, 1) * 
                          Customers.bank_name AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS Customers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS Tax_rates_value, 
                          Payment_terms.description AS Payment_terms_description, Delivery_terms.description AS Delivery_terms_description, Quantity_units.description AS Quantity_units_description, Invoice_details.Id, 
                          Invoice_header.quantity_2_column_name, Invoice_header.quantity_3_column_name, Clients.tax_number, Clients.prefix_invoices, Clients.last_index_invoices, Clients.no_template_invoices, 
-                         Clients.text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold
+                         Clients.text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold, Quantity_units.code AS quantity_units_code, Quantity_units.description_en AS quantity_units_description_en
 FROM            Invoice_details WITH (nolock) INNER JOIN
                          Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN
                          Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER JOIN
                          Articles ON Articles.Id = Invoice_details.article_id INNER JOIN
-                         Countries ON Countries.Id = Invoice_header.countriesid INNER JOIN
+                         Countries ON Countries.id = Invoice_header.countriesid INNER JOIN
                          Customers ON Customers.Id = Invoice_header.customers_id INNER JOIN
                          Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN
                          Payment_terms ON Payment_terms.Id = Invoice_header.payment_terms_id INNER JOIN
@@ -139,6 +139,8 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
               <Mapping SourceColumn="text_to_table" DataSetColumn="text_to_table" />
               <Mapping SourceColumn="text_under_the_table" DataSetColumn="text_under_the_table" />
               <Mapping SourceColumn="text_under_the_table_bold" DataSetColumn="text_under_the_table_bold" />
+              <Mapping SourceColumn="quantity_units_code" DataSetColumn="quantity_units_code" />
+              <Mapping SourceColumn="quantity_units_description_en" DataSetColumn="quantity_units_description_en" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -150,7 +152,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="sum" msprop:Generator_TableClassName="sumDataTable" msprop:Generator_TableVarName="tablesum" msprop:Generator_TablePropName="sum" msprop:Generator_RowDeletingName="sumRowDeleting" msprop:Generator_RowChangingName="sumRowChanging" msprop:Generator_RowEvHandlerName="sumRowChangeEventHandler" msprop:Generator_RowDeletedName="sumRowDeleted" msprop:Generator_UserTableName="sum" msprop:Generator_RowChangedName="sumRowChanged" msprop:Generator_RowEvArgName="sumRowChangeEvent" msprop:Generator_RowClassName="sumRow">
+        <xs:element name="sum" msprop:Generator_TableClassName="sumDataTable" msprop:Generator_TableVarName="tablesum" msprop:Generator_RowChangedName="sumRowChanged" msprop:Generator_TablePropName="sum" msprop:Generator_RowDeletingName="sumRowDeleting" msprop:Generator_RowChangingName="sumRowChanging" msprop:Generator_RowEvHandlerName="sumRowChangeEventHandler" msprop:Generator_RowDeletedName="sumRowDeleted" msprop:Generator_RowClassName="sumRow" msprop:Generator_UserTableName="sum" msprop:Generator_RowEvArgName="sumRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sum_discount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnsum_discount" msprop:Generator_ColumnPropNameInRow="sum_discount" msprop:Generator_ColumnPropNameInTable="sum_discountColumn" msprop:Generator_UserColumnName="sum_discount" type="xs:decimal" minOccurs="0" />
@@ -158,7 +160,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent" msprop:Generator_RowClassName="rp_invoice_detailsRow">
+        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_RowClassName="rp_invoice_detailsRow" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="clientname" msprop:Generator_ColumnVarNameInTable="columnclientname" msprop:Generator_ColumnPropNameInRow="clientname" msprop:Generator_ColumnPropNameInTable="clientnameColumn" msprop:Generator_UserColumnName="clientname">
@@ -267,7 +269,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                 </xs:simpleType>
               </xs:element>
               <xs:element name="Clients__picture" msprop:Generator_ColumnVarNameInTable="columnClients__picture" msprop:Generator_ColumnPropNameInRow="Clients__picture" msprop:Generator_ColumnPropNameInTable="Clients__pictureColumn" msprop:Generator_UserColumnName="Clients__picture" type="xs:base64Binary" minOccurs="0" />
-              <xs:element name="invoice_no" msprop:Generator_ColumnVarNameInTable="columninvoice_no" msprop:Generator_ColumnPropNameInRow="invoice_no" msprop:Generator_ColumnPropNameInTable="invoice_noColumn" msprop:Generator_UserColumnName="invoice_no">
+              <xs:element name="invoice_no" msprop:Generator_ColumnVarNameInTable="columninvoice_no" msprop:Generator_ColumnPropNameInRow="invoice_no" msprop:Generator_ColumnPropNameInTable="invoice_noColumn" msprop:Generator_UserColumnName="invoice_no" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -562,6 +564,20 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="quantity_units_code" msprop:Generator_ColumnVarNameInTable="columnquantity_units_code" msprop:Generator_ColumnPropNameInRow="quantity_units_code" msprop:Generator_ColumnPropNameInTable="quantity_units_codeColumn" msprop:Generator_UserColumnName="quantity_units_code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="quantity_units_description_en" msprop:Generator_ColumnVarNameInTable="columnquantity_units_description_en" msprop:Generator_ColumnPropNameInRow="quantity_units_description_en" msprop:Generator_ColumnPropNameInTable="quantity_units_description_enColumn" msprop:Generator_UserColumnName="quantity_units_description_en">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

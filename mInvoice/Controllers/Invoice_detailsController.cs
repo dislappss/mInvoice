@@ -88,7 +88,7 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where (x=>x.clients_id == _client_id ), "Id", "article_no");
             ViewBag.invoice_header_id = Session["invoice_header_id"]; // new SelectList(db.Invoice_header, "Id", "invoice_no");
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description");
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description");
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description");
 
             var _new_item = new Invoice_details();
             _new_item.clients_id = _client_id;
@@ -129,7 +129,7 @@ namespace mInvoice.Controllers
                 ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
                 ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
                 ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
-                ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+                ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", invoice_details.quantity_units_id);
                 
                 return View(invoice_details);
 
@@ -154,7 +154,7 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", invoice_details.quantity_units_id);
 
             return View(invoice_details);
         }
@@ -178,7 +178,7 @@ namespace mInvoice.Controllers
             ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no", invoice_details.article_id);
             ViewBag.invoice_header_id = new SelectList(db.Invoice_header, "Id", "invoice_no", invoice_details.invoice_header_id);
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.tax_rate_id);
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(x => x.clients_id == _client_id), "Id", "description", invoice_details.quantity_units_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", invoice_details.quantity_units_id);
 
             return View(invoice_details);
         }

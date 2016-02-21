@@ -6,11 +6,11 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 namespace ZUGFeRD_Test
 {
-    public partial class main_form : Form
+    public class main_form //: Form
     {
         private string m_input_pdf_file;
         private string m_output_xml_file_name = @"ZUGFeRD-invoice.xml";
@@ -19,7 +19,7 @@ namespace ZUGFeRD_Test
 
         public main_form()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         /// <summary>
@@ -37,43 +37,56 @@ namespace ZUGFeRD_Test
            , SqlConnection Connection
            , int Clientsysid
            , int Languagesysid
-           , string Invoicenumber
            , int InvoiceHeadersysid
+             , string Invoice_no
+            , DateTime Order_date
+            , string CurrencyShortmark
+            , string CurrencyShortmark_client
+            , string Customer_name
+            , string Customers_zip
+            , string Customers_city
+            , string Customers_street
+            , string Customer_no
+            , string Tax_number
+
+            , string Clientname
+            , string Clients_zip
+            , string Clients_city
+            , string Clients_street 
            )
         {
-            //rp_invoice_headerTableAdapter.Connection = Connection;
-            rp_invoice_detailsTableAdapter.Connection = Connection;
-            //rp_invoice_header_paymentsTableAdapter.Connection = Connection;
-            //banksTableAdapter.Connection = Connection;
-            //clientTableAdapter.Connection = Connection;
-            //rp_headofletter_layoutTableAdapter.Connection = Connection;
+            
 
             string _output_file_directory = Path.GetDirectoryName(NonZUGFeRD_PDF);
             string _output_xml_file_path = Path.Combine(_output_file_directory, m_output_xml_file_name);
             string _output_pdf_file = null;
 
-            //rp_invoice_headerTableAdapter.Fill(
-            //    dataSet11.Invoice_header, InvoiceHeadersysid);
-            rp_invoice_detailsTableAdapter.Fill(
-                dataSet11.rp_invoice_details , Clientsysid, InvoiceHeadersysid);
-            //banksTableAdapter.Fill(
-            //    dataSet11.banks, Clientsysid);
-            //clientTableAdapter.Fill(
-            //    dataSet11.client, Clientsysid);
-            //rp_headofletter_layoutTableAdapter.Fill(
-            //    dataSet11.rp_headofletter_layout, Clientsysid, Languagesysid, false, false);
-
-            if (dataSet11.rp_invoice_details.Rows.Count == 1
-                //&& dataSet11.Invoice_details.Rows.Count > 0
-                //&& dataSet11.banks.Rows.Count == 1
-                //&& dataSet11.client.Rows.Count == 1
-                //&& dataSet11.rp_headofletter_layout.Count == 1
-                )
-            {
+           
                 // Generate XML                
-                generateXMLFromInvoiceInfo(_output_xml_file_path, Clientsysid, Languagesysid, InvoiceHeadersysid);
+                //generateXMLFromInvoiceInfo(
+                //    _output_xml_file_path
+                //    , Clientsysid
+                //    , Languagesysid
+                //    , InvoiceHeadersysid
+                //    ,  Invoice_no
+                //    ,  Order_date
+                //    ,  CurrencyShortmark
+                //    ,  CurrencyShortmark_client
+                //    ,  Customer_name
+                //    ,  Customers_zip
+                //    ,  Customers_city
+                //    ,  Customers_street
+                //    ,  Customer_no
+                //    ,  Tax_number
 
-                _output_pdf_file = Path.Combine(_output_file_directory, dataSet11.rp_invoice_details[0].invoice_no + "_zugferd.pdf");
+                //    ,  Clientname
+                //    ,  Clients_zip
+                //    ,  Clients_city
+                //    ,  Clients_street 
+                    
+                //    );
+
+                //_output_pdf_file = Path.Combine(_output_file_directory, dataSet11.rp_invoice_details[0].invoice_no + "_zugferd.pdf");
 
                 ConvertRegularToConformantPDF_3A(
                       _output_pdf_file
@@ -81,89 +94,108 @@ namespace ZUGFeRD_Test
                     , _output_xml_file_path);
 
                 return _output_pdf_file;
-            }
-            else
-                throw new Exception("Daten sind nicht korrekt!" + Environment.NewLine +
-                                    "rp_invoice_header.Rows.Count=" + dataSet11.rp_invoice_details.Rows.Count + Environment.NewLine 
-                                    //+ "rp_invoice_details.Rows.Count=" + dataSet11.Invoice_details.Rows.Count + Environment.NewLine                                     
-                                    );
+           }
+
+      
+        private void generateXMLFromInvoiceInfo(
+            string OutputXML
+            , int Clientsysid
+            , int Languagesysid
+            , int InvoiceHeadersysid
+             , string Invoice_no
+            , DateTime Order_date
+            , string CurrencyShortmark
+            , string CurrencyShortmark_client
+            , string Customer_name
+            , string Customers_zip
+            , string Customers_city
+            , string Customers_street
+            , string Customer_no
+            , string Tax_number
+
+            , string Clientname
+            , string Clients_zip
+            , string Clients_city
+            , string Clients_street
+            , string Clients_ustd_id
+            )
+        {
+            //InvoiceDescriptor desc = _createInvoice(
+            //    Clientsysid
+            //    , Languagesysid
+            //    , InvoiceHeadersysid
+            //     ,  Invoice_no
+            //, Order_date
+            //,  CurrencyShortmark
+            //,  CurrencyShortmark_client
+            //,  Customer_name
+            //,  Customers_zip
+            //,  Customers_city
+            //,  Customers_street
+            //,  Customer_no
+            //,  Tax_number
+
+            //,  Clientname
+            //,  Clients_zip
+            //,  Clients_city
+            //,  Clients_street 
+            //,  Clients_ustd_id
+                
+            //    );
+            //desc.Save(OutputXML);
         }
 
-        private void generate_pdfButton_Click(object sender, EventArgs e)
+        private InvoiceDescriptor _createInvoice(
+            int client_id
+            , int invoice_header_id
+            , string Invoice_no
+            , DateTime Order_date
+            , string CurrencyShortmark
+            , string CurrencyShortmark_client
+            , string Customer_name
+            , string Customers_zip
+            , string Customers_city
+            , string Customers_street
+            , string Customer_no
+            , string Tax_number
+            , string Clientname
+            , string Clients_zip
+            , string Clients_city
+            , string Clients_street 
+            , string Clients_ustd_id
+            , DateTime delivery_date
+            , decimal valueofgoods
+            , decimal valueofgoods_without_discount
+            , decimal freightcosts
+            , decimal subtotal
+            , decimal taxtotalAmount
+            , decimal total
+            , decimal taxPercent
+            , string paymentterms_description
+            , DateTime dueDate
+            , string iban_kreditor
+            , string bic_kreditor
+            , string account_number_kreditor
+            , string bank_code_kreditor
+            , string bankName_kreditor
+            )
         {
-            // TEST
-            openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.* ";
-            Exception _exception = new Exception();
+            DataSet1.rp_invoice_detailsDataTable _rp_invoice_detailsDataTable = 
+                new DataSet1.rp_invoice_detailsDataTable();
+            DataSet1TableAdapters.rp_invoice_detailsTableAdapter _rp_invoice_detailsTableAdapter =
+                new DataSet1TableAdapters.rp_invoice_detailsTableAdapter();
 
-            try
-            {
-                if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    if (!string.IsNullOrEmpty(openFileDialog1.FileName))
-                    {
-                        getZugFeRD_PDF(openFileDialog1.FileName, m_SqlConnection, 1, 9, "INV-15-000750", 2957);
-
-                        MessageBox.Show("Done");
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void folderButton_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.ShowNewFolderButton = true;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-
-            // OK button was pressed.
-            if (result == DialogResult.OK)
-            {
-                folderTextBox.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
-       
-
-        private void generateXMLFromInvoiceInfo(string OutputXML, int Clientsysid, int Languagesysid, int InvoiceHeadersysid)
-        {
-            InvoiceDescriptor desc = _createInvoice(Clientsysid, Languagesysid, InvoiceHeadersysid);
-            desc.Save(OutputXML);
-        }
-
-        private InvoiceDescriptor _createInvoice(int Clientsysid, int Languagesysid, int InvoiceHeadersysid)
-        {
-            //var _invoice_header_row = dataSet11.Invoice_header[0];
-            var _invoice_details_row = dataSet11.rp_invoice_details[0];
-            //var _banks_row = dataSet11.banks[0];
-            //var _client_row = dataSet11.client[0];
-            //var _rp_headofletter_layout_row = dataSet11.rp_headofletter_layout[0];
-            //DataSet1.Invoice_header_paymentsRow _invoice_header_paymentsRow = null;
-
-            CurrencyCodes _currenciesdescription = (CurrencyCodes)System.Enum.Parse(typeof(CurrencyCodes), 
-                "EUR" //_invoice_header_row.currenciesdescription
-                );
-            CountryCodes _invoiceadress_nationdescriptionshortmark = (CountryCodes)System.Enum.Parse(typeof(CountryCodes), "EUR"  //_invoice_details_row.currency   
-                );
-
-            //rp_invoice_header_paymentsTableAdapter.FillByrp_invoice_header_payments(
-            //    dataSet11.Invoice_header_payments,
-            //        Clientsysid, Languagesysid, InvoiceHeadersysid);
-
-            //if (dataSet11.Invoice_header_payments.Rows.Count != 1) 
-            //{ 
-            //    throw new Exception("rp_invoice_header_payments sends NULL!"); 
-            //}
-
-            //_invoice_header_paymentsRow = dataSet11.Invoice_header_payments[0];
+            _rp_invoice_detailsTableAdapter.Fill(
+                _rp_invoice_detailsDataTable,
+                client_id,
+                invoice_header_id);
+ 
+            CurrencyCodes _currenciesdescription = 
+                (CurrencyCodes)System.Enum.Parse(typeof(CurrencyCodes), CurrencyShortmark);
+            CountryCodes _invoiceadress_nationdescriptionshortmark =
+                (CountryCodes)System.Enum.Parse(typeof(CountryCodes), CurrencyShortmark);
+            CurrencyCodes _currenciesdescription_client =
+               (CurrencyCodes)System.Enum.Parse(typeof(CurrencyCodes), CurrencyShortmark_client);                       
 
             /*
                 string invoiceNo, 
@@ -172,28 +204,28 @@ namespace ZUGFeRD_Test
                 string invoiceNoAsReference = ""
              */
             InvoiceDescriptor desc = InvoiceDescriptor.CreateInvoice(
-                _invoice_details_row.invoice_no 
-                , _invoice_details_row.order_date 
-                ,  _currenciesdescription
+                Invoice_no 
+                , Order_date
+                , _currenciesdescription
                 //, "GE2020211-471102"
                 );
             desc.Profile = Profile.Comfort;
-            desc.ReferenceOrderNo = _invoice_details_row.invoice_no ;
-            desc.AddNote(_invoice_details_row.invoice_no );
+            desc.ReferenceOrderNo = Invoice_no;
+            desc.AddNote(Invoice_no);
             desc.SetBuyer(
-                  _invoice_details_row.customer_name 
-                , _invoice_details_row.Customers_zip 
-                , _invoice_details_row.Customers_city 
-                , _invoice_details_row.Customers_street 
+                  Customer_name 
+                , Customers_zip 
+                , Customers_city 
+                , Customers_street 
                 , ""  // street-no.
                 , _invoiceadress_nationdescriptionshortmark
-                , _invoice_details_row.customer_no 
+                , Customer_no 
                 //, "0088"
                 //, "4000001987658"
                 );
 
-            if (!_invoice_details_row.Istax_numberNull())
-                desc.AddBuyerTaxRegistration(_invoice_details_row.tax_number, TaxRegistrationSchemeID.VA);
+            if (!string.IsNullOrEmpty(Tax_number))
+                desc.AddBuyerTaxRegistration(Tax_number, TaxRegistrationSchemeID.VA);
 
             //if (!_invoice_details_row.Iscustomer_contacts_descriptionNull())
             //    desc.SetBuyerContact(_invoice_details_row.customer_contacts_description);
@@ -204,110 +236,115 @@ namespace ZUGFeRD_Test
 
             // Verkaeufer 
             desc.SetSeller(
-                _invoice_details_row.clientname
-                , _invoice_details_row.Clients_zip
-                , _invoice_details_row.Clients_city
-                , _invoice_details_row.Clients_street 
+                Clientname
+                , Clients_zip
+                , Clients_city
+                , Clients_street 
                 , ""
                 , CountryCodes.DE
                 , ""
                 //, "0088"
                 //, "4000001123452"
                 );
-            desc.AddSellerTaxRegistration(_invoice_details_row.tax_number, TaxRegistrationSchemeID.FC);
-            desc.AddSellerTaxRegistration(_invoice_details_row.Clients_ustd_id , TaxRegistrationSchemeID.VA);
+            desc.AddSellerTaxRegistration(Tax_number, TaxRegistrationSchemeID.FC);
+            desc.AddSellerTaxRegistration(Clients_ustd_id , TaxRegistrationSchemeID.VA);
 
             // Lieferschein
             //desc.SetDeliveryNoteReferenceDocument(_invoice_details_row.bill_of_delivery_number, _invoice_details_row.bill_of_delivery_date);
-            desc.ActualDeliveryDate = _invoice_details_row.delivery_date ;
+            desc.ActualDeliveryDate = delivery_date ;
 
-           // // value of goods - Warenwert
-           // decimal _rabatt = _invoice_details_row.valueofgoods - _invoice_header_paymentsRow.valueofgoods_without_discount;
+            // value of goods - Warenwert
+            decimal _rabatt = valueofgoods - valueofgoods_without_discount;
 
-           // // 1. "lineTotalAmount"        > Gesamtbetrag der Positionen (Warenwert)
-           // // 2. "chargeTotalAmount"      > Gesamtbetrag der Zuschläge (Versandkosten)
-           // // 3. "allowanceTotalAmount"   > Gesamtbetrag der Abschläge (Rabatt)
-           // // 4. "taxBasisAmount"         > Basisbetrag der Steuerberechnung (Zwischensumme)
-           // // 5. "taxTotalAmount"         > Steuergesamtbetrag (MwSt.)
-           // // 6. "grandTotalAmount"       > Bruttosumme (Endsumme)
-           // // 7. "totalPrepaidAmount"     > Anzahlungsbetrag (immer 0) 
-           // // 8. "duePayableAmount"       > Zahlbetrag (Endsumme)
-           // desc.SetTotals(
-           //       _invoice_header_paymentsRow.valueofgoods
-           //     , _invoice_header_paymentsRow.freightcosts
-           //     , _rabatt
-           //     , _invoice_header_paymentsRow.subtotal
-           //     , _invoice_header_paymentsRow.taxtotal
-           //     , _invoice_header_paymentsRow.total 
-           //     , 0
-           //     , _invoice_header_paymentsRow.total
-           //     );
+            // 1. "lineTotalAmount"        > Gesamtbetrag der Positionen (Warenwert)
+            // 2. "chargeTotalAmount"      > Gesamtbetrag der Zuschläge (Versandkosten)
+            // 3. "allowanceTotalAmount"   > Gesamtbetrag der Abschläge (Rabatt)
+            // 4. "taxBasisAmount"         > Basisbetrag der Steuerberechnung (Zwischensumme)
+            // 5. "taxTotalAmount"         > Steuergesamtbetrag (MwSt.)
+            // 6. "grandTotalAmount"       > Bruttosumme (Endsumme)
+            // 7. "totalPrepaidAmount"     > Anzahlungsbetrag (immer 0) 
+            // 8. "duePayableAmount"       > Zahlbetrag (Endsumme)
+            desc.SetTotals(
+                  valueofgoods
+                , freightcosts
+                , _rabatt
+                , subtotal
+                , taxtotalAmount
+                , total
+                , 0
+                , total
+                );
 
-           // // verwendbare Gewerbesteuer
-           //// desc.AddApplicableTradeTax(129.37m, 7m, TaxTypes.VAT, TaxCategoryCodes.S);
+            // verwendbare Gewerbesteuer
+            // desc.AddApplicableTradeTax(129.37m, 7m, TaxTypes.VAT, TaxCategoryCodes.S);
 
-           // // Logistikbedingungen
-           // desc.AddLogisticsServiceCharge(_invoice_header_paymentsRow.freightcosts, "Versandkosten", TaxTypes.VAT, TaxCategoryCodes.S, _invoice_header_paymentsRow.valueaddedtax);
+            // Logistikbedingungen
+            desc.AddLogisticsServiceCharge(freightcosts, "Versandkosten", TaxTypes.VAT, TaxCategoryCodes.S, taxPercent);
 
-           // // Handelsrabatt
-           
-           // if (_rabatt != 0)
-           //     desc.AddTradeAllowanceCharge(true, _rabatt, _currenciesdescription, _rabatt, "Sondernachlass", TaxTypes.VAT, TaxCategoryCodes.S, _invoice_header_paymentsRow.valueaddedtax);
+            // Handelsrabatt
 
-           // // Zahlungsbedingungen
-           // desc.SetTradePaymentTerms(_invoice_details_row.paymentterms_description, _invoice_header_paymentsRow.DaysNetDate);
+            if (_rabatt != 0)
+                desc.AddTradeAllowanceCharge(true, _rabatt, 
+                    _currenciesdescription, _rabatt, "Sondernachlass", 
+                    TaxTypes.VAT, TaxCategoryCodes.S, 
+                    taxPercent);
 
-           // // Zahlungsmittel
-           // desc.setPaymentMeans("", _invoice_details_row.paymentterms_description);
+            // Zahlungsbedingungen
+            desc.SetTradePaymentTerms(paymentterms_description, dueDate);
 
-           // // Finanzkonto des Kreditors (HAAS, ohaSys)
-           // desc.addCreditorFinancialAccount(
-           //     _banks_row.iban_code  // "DE08700901001234567890"
-           //     , _banks_row.swift_code //"GENODEF1M04"
-           //     , _banks_row.account_number 
-           //     , _banks_row.bank_code 
-           //     , _banks_row.name);
+            // Zahlungsmittel
+            desc.setPaymentMeans("", paymentterms_description);
 
-           // // Positionen
-           // foreach (var _position in dataSet11.Invoice_details)
-           // {
-           //     QuantityCodes _QuantityCodes = (QuantityCodes)System.Enum.Parse(typeof(QuantityCodes), _position.quantity_unit_descriptionshortmark_iso_code);
+            // Finanzkonto des Kreditors (HAAS, ohaSys)
+            desc.addCreditorFinancialAccount(
+                iban_kreditor  // "DE08700901001234567890"
+                , bic_kreditor //"GENODEF1M04"
+                , account_number_kreditor
+                , bank_code_kreditor
+                , bankName_kreditor);
 
-           //     desc.addTradeLineCommentItem("Wir erlauben uns Ihnen folgende Positionen aus der Lieferung Nr. 2013-51112 in Rechnung zu stellen:");
+            // Positionen
+            foreach (var _position in _rp_invoice_detailsDataTable)
+            {
+                QuantityCodes _QuantityCodes = 
+                    (QuantityCodes)System.Enum.Parse(typeof(QuantityCodes)
+                    , _position.quantity_units_code );
 
-           //     /*
-           //         string name, 
-           //         string description,                                     
-           //         QuantityCodes unitCode, 
-           //         decimal unitQuantity,                                     
-           //         decimal grossUnitPrice,     // Brutto einzelpreis                                    
-           //         decimal netUnitPrice,                                     
-           //         decimal billedQuantity,   // berechnete Menge                                  
-           //         TaxTypes taxType, 
-           //         TaxCategoryCodes categoryCode, 
-           //         decimal taxPercent,                                     
-           //         string comment = "",                                     
-           //         string globalIDSchemeID = "", 
-           //         string globalID = "",                                     
-           //         string sellerAssignedID = "", 
-           //         string buyerAssignedID = ""
-           //      */
-           //     desc.addTradeLineItem(  _position.articleid_variant,
-           //                             _position.article_text
-           //                           , _QuantityCodes
-           //                           , _position.quantity
-           //                           , _position.price
-           //                           , _position.price
-           //                           , _position.quantity
-           //                           , TaxTypes.VAT
-           //                           , TaxCategoryCodes.S
-           //                           , _invoice_header_paymentsRow.valueaddedtax
-           //                           //, "0160"
-           //                           //, "4012345001235"
-           //                           //, "KR3M"
-           //                           //, "55T01"
-           //                           );
-           // }
+                desc.addTradeLineCommentItem("Wir erlauben uns Ihnen folgende Positionen aus der Lieferung Nr. 2013-51112 in Rechnung zu stellen:");
+
+                /*
+                    string name, 
+                    string description,                                     
+                    QuantityCodes unitCode, 
+                    decimal unitQuantity,                                     
+                    decimal grossUnitPrice,     // Brutto einzelpreis                                    
+                    decimal netUnitPrice,                                     
+                    decimal billedQuantity,   // berechnete Menge                                  
+                    TaxTypes taxType, 
+                    TaxCategoryCodes categoryCode, 
+                    decimal taxPercent,                                     
+                    string comment = "",                                     
+                    string globalIDSchemeID = "", 
+                    string globalID = "",                                     
+                    string sellerAssignedID = "", 
+                    string buyerAssignedID = ""
+                 */
+                desc.addTradeLineItem(_position.Articles_article_no 
+                                      , _position.Articles_description 
+                                      , _QuantityCodes
+                                      , _position.Invoice_details_quantity 
+                                      , _position.Invoice_details_price_netto
+                                      , _position.Invoice_details_price_netto
+                                      , _position.Invoice_details_quantity
+                                      , TaxTypes.VAT
+                                      , TaxCategoryCodes.S
+                                      , taxPercent
+                    //, "0160"
+                    //, "4012345001235"
+                    //, "KR3M"
+                    //, "55T01"
+                                      );
+            }
 
           
             return desc;
@@ -398,10 +435,10 @@ namespace ZUGFeRD_Test
             }
         }      
 
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Save();
-        }
+        //private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    Properties.Settings.Default.Save();
+        //}
 
         private void main_form_Load(object sender, EventArgs e)
         {

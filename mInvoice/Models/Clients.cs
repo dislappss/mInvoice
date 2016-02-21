@@ -22,7 +22,6 @@ namespace mInvoice.Models
             this.Invoice_details = new HashSet<Invoice_details>();
             this.Invoice_header = new HashSet<Invoice_header>();
             this.Payment_terms = new HashSet<Payment_terms>();
-            this.Quantity_units = new HashSet<Quantity_units>();
             this.Tax_rates = new HashSet<Tax_rates>();
         }
     
@@ -63,14 +62,13 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual ICollection<Articles> Articles { get; set; }
-        public virtual Countries Countries { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual ICollection<Customers> Customers { get; set; }
         public virtual ICollection<Delivery_terms> Delivery_terms { get; set; }
         public virtual ICollection<Invoice_details> Invoice_details { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
         public virtual ICollection<Payment_terms> Payment_terms { get; set; }
-        public virtual ICollection<Quantity_units> Quantity_units { get; set; }
         public virtual ICollection<Tax_rates> Tax_rates { get; set; }
+        public virtual Countries Countries { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace mInvoice.Controllers
             int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
             var _list = from cust in db.Quantity_units
-                        where cust.clients_id == _clientsysid
+                        //where cust.clients_id == _clientsysid
                         select cust;
 
             return View(_list.ToList());
@@ -60,7 +60,7 @@ namespace mInvoice.Controllers
             //ViewBag.clients_id = new SelectList(db.Clients, "Id", "clientname");
 
             Quantity_units _item = new Quantity_units();
-            _item.clients_id = Convert.ToInt32(Session["client_id"]);
+            //_item.clients_id = Convert.ToInt32(Session["client_id"]);
 
             return View(_item);
         }
@@ -79,7 +79,7 @@ namespace mInvoice.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                quantity_units.clients_id = Convert.ToInt32(Session["client_id"]);
+                //quantity_units.clients_id = Convert.ToInt32(Session["client_id"]);
 
                 db.Quantity_units.Add(quantity_units);
                 db.SaveChanges();
@@ -117,7 +117,7 @@ namespace mInvoice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.clients_id = new SelectList(db.Clients, "Id", "clientname", quantity_units.clients_id);
+            //ViewBag.clients_id = new SelectList(db.Clients, "Id", "clientname", quantity_units.clients_id);
             return View(quantity_units);
         }
 

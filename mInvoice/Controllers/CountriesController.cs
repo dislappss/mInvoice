@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -115,7 +116,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,code,name")] Countries countries)
+        public ActionResult Create([Bind(Include = "Id,code,name,active,numcode,phonecode,iso")] Countries countries)
         {
             if (ModelState.IsValid)
             {
@@ -152,15 +153,30 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,code,name,active")] Countries countries)
+        public ActionResult Edit([Bind(Include = "Id,code,name,active,numcode,phonecode,iso")] Countries countries)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(countries).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(countries).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(countries);
             }
-            return View(countries);
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex    )
+            {
+                return View(countries);
+            }
+            catch (SqlException ex)
+            {
+                return View(countries);
+            }
+            catch (Exception ex)
+            {
+                return View(countries);
+            }
         }
 
         // GET: Countries/Delete/5

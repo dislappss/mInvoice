@@ -51,8 +51,6 @@ namespace mInvoice.Models
         public Nullable<int> delivery_terms_id { get; set; }
         public Nullable<int> tax_rate_id { get; set; }
     
-        public virtual Countries Countries { get; set; }
-        public virtual Countries Countries1 { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual Payment_method Payment_method { get; set; }
         public virtual ICollection<Invoice_header> Invoice_header { get; set; }
@@ -60,5 +58,6 @@ namespace mInvoice.Models
         public virtual Delivery_terms Delivery_terms { get; set; }
         public virtual Payment_terms Payment_terms { get; set; }
         public virtual Tax_rates Tax_rates { get; set; }
+        public virtual Countries Countries { get; set; }
     }
 }

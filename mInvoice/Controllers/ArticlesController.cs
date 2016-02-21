@@ -64,7 +64,7 @@ namespace mInvoice.Controllers
                 Session["client_id"] != null)
             {
                 ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description");
-                ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description");
+                ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description");
 
                 Articles _new_item = new Articles();
 
@@ -101,7 +101,7 @@ namespace mInvoice.Controllers
             }
 
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id  );
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", articles.quantity_units_id  );
 
             return View(articles);
         }
@@ -122,7 +122,7 @@ namespace mInvoice.Controllers
             }
             
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", articles.quantity_units_id);
 
 
             return View(articles);
@@ -145,7 +145,7 @@ namespace mInvoice.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.tax_rate_id = new SelectList(db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", articles.tax_rate_id);
-            ViewBag.quantity_units_id = new SelectList(db.Quantity_units.Where(s => s.clients_id == _client_id), "Id", "description", articles.quantity_units_id);
+            ViewBag.quantity_units_id = new SelectList(db.Quantity_units, "Id", "description", articles.quantity_units_id);
 
             return View(articles);
         }
