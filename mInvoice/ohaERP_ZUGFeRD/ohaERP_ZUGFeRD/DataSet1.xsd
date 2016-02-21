@@ -50,12 +50,13 @@ FROM            (SELECT        price_netto * quantity * ISNULL(quantity_2, 1) * 
                          Customers.bank_name AS Customers_bank_name, Customers.iban AS Customers_iban, Customers.bic AS Customers_bic, Tax_rates.description AS Tax_rates_description, Tax_rates.value AS Tax_rates_value, 
                          Payment_terms.description AS Payment_terms_description, Delivery_terms.description AS Delivery_terms_description, Quantity_units.description AS Quantity_units_description, Invoice_details.Id, 
                          Invoice_header.quantity_2_column_name, Invoice_header.quantity_3_column_name, Clients.tax_number, Clients.prefix_invoices, Clients.last_index_invoices, Clients.no_template_invoices, 
-                         Clients.text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold, Quantity_units.code AS quantity_units_code, Quantity_units.description_en AS quantity_units_description_en
+                         Clients.text_to_table, Clients.text_under_the_table, Clients.text_under_the_table_bold, Quantity_units.code AS quantity_units_code, Quantity_units.description_en AS quantity_units_description_en, 
+                         Countries.iso AS Countries_iso, Invoice_header.due_date, Invoice_header.discount, Invoice_header.paid_at, Invoice_header.freight_costs
 FROM            Invoice_details WITH (nolock) INNER JOIN
                          Clients ON Clients.Id = Invoice_details.clients_id INNER JOIN
                          Invoice_header WITH (nolock) ON Invoice_header.Id = Invoice_details.invoice_header_id INNER JOIN
                          Articles ON Articles.Id = Invoice_details.article_id INNER JOIN
-                         Countries ON Countries.id = Invoice_header.countriesid INNER JOIN
+                         Countries ON Countries.Id = Invoice_header.countriesid INNER JOIN
                          Customers ON Customers.Id = Invoice_header.customers_id INNER JOIN
                          Tax_rates ON Tax_rates.Id = Invoice_details.tax_rate_id INNER JOIN
                          Payment_terms ON Payment_terms.Id = Invoice_header.payment_terms_id INNER JOIN
@@ -141,6 +142,11 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
               <Mapping SourceColumn="text_under_the_table_bold" DataSetColumn="text_under_the_table_bold" />
               <Mapping SourceColumn="quantity_units_code" DataSetColumn="quantity_units_code" />
               <Mapping SourceColumn="quantity_units_description_en" DataSetColumn="quantity_units_description_en" />
+              <Mapping SourceColumn="Countries_iso" DataSetColumn="Countries_iso" />
+              <Mapping SourceColumn="due_date" DataSetColumn="due_date" />
+              <Mapping SourceColumn="discount" DataSetColumn="discount" />
+              <Mapping SourceColumn="paid_at" DataSetColumn="paid_at" />
+              <Mapping SourceColumn="freight_costs" DataSetColumn="freight_costs" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -152,7 +158,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="sum" msprop:Generator_TableClassName="sumDataTable" msprop:Generator_TableVarName="tablesum" msprop:Generator_RowChangedName="sumRowChanged" msprop:Generator_TablePropName="sum" msprop:Generator_RowDeletingName="sumRowDeleting" msprop:Generator_RowChangingName="sumRowChanging" msprop:Generator_RowEvHandlerName="sumRowChangeEventHandler" msprop:Generator_RowDeletedName="sumRowDeleted" msprop:Generator_RowClassName="sumRow" msprop:Generator_UserTableName="sum" msprop:Generator_RowEvArgName="sumRowChangeEvent">
+        <xs:element name="sum" msprop:Generator_TableClassName="sumDataTable" msprop:Generator_TableVarName="tablesum" msprop:Generator_TablePropName="sum" msprop:Generator_RowDeletingName="sumRowDeleting" msprop:Generator_RowChangingName="sumRowChanging" msprop:Generator_RowEvHandlerName="sumRowChangeEventHandler" msprop:Generator_RowDeletedName="sumRowDeleted" msprop:Generator_UserTableName="sum" msprop:Generator_RowChangedName="sumRowChanged" msprop:Generator_RowEvArgName="sumRowChangeEvent" msprop:Generator_RowClassName="sumRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sum_discount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnsum_discount" msprop:Generator_ColumnPropNameInRow="sum_discount" msprop:Generator_ColumnPropNameInTable="sum_discountColumn" msprop:Generator_UserColumnName="sum_discount" type="xs:decimal" minOccurs="0" />
@@ -160,7 +166,7 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_RowClassName="rp_invoice_detailsRow" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent">
+        <xs:element name="rp_invoice_details" msprop:Generator_TableClassName="rp_invoice_detailsDataTable" msprop:Generator_TableVarName="tablerp_invoice_details" msprop:Generator_TablePropName="rp_invoice_details" msprop:Generator_RowDeletingName="rp_invoice_detailsRowDeleting" msprop:Generator_RowChangingName="rp_invoice_detailsRowChanging" msprop:Generator_RowEvHandlerName="rp_invoice_detailsRowChangeEventHandler" msprop:Generator_RowDeletedName="rp_invoice_detailsRowDeleted" msprop:Generator_UserTableName="rp_invoice_details" msprop:Generator_RowChangedName="rp_invoice_detailsRowChanged" msprop:Generator_RowEvArgName="rp_invoice_detailsRowChangeEvent" msprop:Generator_RowClassName="rp_invoice_detailsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="clientname" msprop:Generator_ColumnVarNameInTable="columnclientname" msprop:Generator_ColumnPropNameInRow="clientname" msprop:Generator_ColumnPropNameInTable="clientnameColumn" msprop:Generator_UserColumnName="clientname">
@@ -581,6 +587,17 @@ WHERE        (Invoice_details.clients_id = @client_id) AND (Invoice_header.Id = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Countries_iso" msprop:Generator_ColumnVarNameInTable="columnCountries_iso" msprop:Generator_ColumnPropNameInRow="Countries_iso" msprop:Generator_ColumnPropNameInTable="Countries_isoColumn" msprop:Generator_UserColumnName="Countries_iso">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="due_date" msprop:Generator_ColumnVarNameInTable="columndue_date" msprop:Generator_ColumnPropNameInRow="due_date" msprop:Generator_ColumnPropNameInTable="due_dateColumn" msprop:Generator_UserColumnName="due_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="discount" msprop:Generator_ColumnVarNameInTable="columndiscount" msprop:Generator_ColumnPropNameInRow="discount" msprop:Generator_ColumnPropNameInTable="discountColumn" msprop:Generator_UserColumnName="discount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="paid_at" msprop:Generator_ColumnVarNameInTable="columnpaid_at" msprop:Generator_ColumnPropNameInRow="paid_at" msprop:Generator_ColumnPropNameInTable="paid_atColumn" msprop:Generator_UserColumnName="paid_at" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="freight_costs" msprop:Generator_ColumnVarNameInTable="columnfreight_costs" msprop:Generator_ColumnPropNameInRow="freight_costs" msprop:Generator_ColumnPropNameInTable="freight_costsColumn" msprop:Generator_UserColumnName="freight_costs" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

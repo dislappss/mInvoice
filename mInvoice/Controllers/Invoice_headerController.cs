@@ -623,10 +623,6 @@ namespace mInvoice.Controllers
                     string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                     string pathDownload = Path.Combine(pathUser, "Downloads");
 
-                    //string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
-                    //string _file_path = Path.Combine(pathDownload, PDFFileName);
-
-
                     MailMessage msg = new MailMessage();
 
                     msg.From = new MailAddress("dnepr65@gmail.com"); //EmailForm.From);
@@ -650,7 +646,7 @@ namespace mInvoice.Controllers
                         if (System.IO.File.Exists(_pdf_tmp_file))
                             System.IO.File.Delete(_pdf_tmp_file);
 
-                        byte[] buffer = new byte[20480]; 
+                        byte[] buffer = new byte[20480];
 
                         using (System.IO.FileStream output = new FileStream(_pdf_tmp_file, FileMode.OpenOrCreate))
                         {
@@ -661,19 +657,77 @@ namespace mInvoice.Controllers
                             }
                         }
 
-                        //ZUGFeRD_Test.main_form _zugferd = new ZUGFeRD_Test.main_form();
+                        Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter
+                            _rp_invoice_detailsTableAdapter = new Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter();
+                        Reports.reportsDataSet _reportsDataSet = new Reports.reportsDataSet();
 
-                        //_zugferd_file_path = _zugferd.getZugFeRD_PDF(
-                        //    _pdf_tmp_file,
-                        //    _connection,
-                        //    _client_id,
-                        //    //g_current_culture_sysid,
-                        //    //m_document_number,
-                        //    EmailForm.ID);
+                        _rp_invoice_detailsTableAdapter.Fill(
+                            _reportsDataSet.rp_invoice_details,
+                            _client_id,
+                            EmailForm.ID);
+
+                        //if (_reportsDataSet.rp_invoice_details.Rows.Count == 0)
+                        //{
+                        //    return Content("<script language='javascript' type='text/javascript'>alert('" +
+                        //        Resource.invoice_not_found + "');</script>");
+                        //}
+
+                        Reports.reportsDataSet.rp_invoice_detailsRow _row = _reportsDataSet.rp_invoice_details[0];
+
+                        ZUGFeRD_Test.main_form _zugferd = new ZUGFeRD_Test.main_form();
+
+                        TotalInvoiceInfo _total_info = getTotalInvoiceInfo(_reportsDataSet.rp_invoice_details);
+
+                        _zugferd_file_path = _zugferd.getZugFeRD_PDF(
+                              _pdf_tmp_file
+                            , _connection
+                            , _client_id
+                            , EmailForm.ID  // invoice_header_id ?
+                            , _row.invoice_no
+                            , _row.order_date
+                            , _row.Currency_customer_code
+                            , _row.currency_code   //CurrencyShortmark_client
+                            , _row.customer_name
+                            , _row.Customers_zip
+                            , _row.Customers_city
+                            , _row.Customers_street
+                            , _row.customer_no
+                            , _row.tax_number
+                            , _row.clientname
+                            , _row.Clients_zip
+                            , _row.Customers_city
+                            , _row.Customers_street
+                            , _row.Clients_ustd_id
+                            , _row.Countries_iso  //Clients_country_code
+                            , _row.delivery_date
+                            , _total_info.valueofgoods
+                            , _total_info.valueofgoods_without_discount
+                            , _row.freight_costs
+                            , _total_info.subtotal
+                            , _total_info.taxtotalAmount
+                            , _total_info.total
+                            , _row.Tax_rates_value
+                            , _row.Payment_terms_description                            
+                            , _row.Isdue_dateNull () ? new DateTime? () : _row.due_date
+                            , _row.Clients_iban
+                            , _row.Clients_bic
+                            , _row.Clients_account_number
+                            , _row.Clients_bic
+                            , _row.Clients_bank_name
+                            , _reportsDataSet.rp_invoice_details                            
+                            , Resource.TradeLineCommentItem
+                            , Server.MapPath("~/images/profile") //ZugFERDResourceDirectory
+                            , Resource.LogisticsServiceChargeDescription //= "Versandkosten"
+                            , Resource.TradeAllowanceChargeDescription //= "Sondernachlass"
+                            );
+
+                        //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
+                        Attachment att1 = new Attachment(_zugferd_file_path);
+                        msg.Attachments.Add(att1);
                     }
                     else
                     {
-                        ContentType ct = new ContentType(MediaTypeNames.Text.Html);
+                        //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
                         Attachment att1 = new Attachment(stream, EmailForm.Attachment);
                         msg.Attachments.Add(att1);
                     }
@@ -712,10 +766,59 @@ namespace mInvoice.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error");
+                ModelState.AddModelError(null, ex);             
             }
+            return View();
         }
 
+        private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)
+        {
+            TotalInvoiceInfo _totalInvoiceInfo = new TotalInvoiceInfo();
+
+             decimal _valueofgoods_without_discount = rp_invoice_detailsDataTable.Sum(
+                pos => pos.Invoice_details_price_netto * 
+                    pos.Invoice_details_quantity *
+                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
+                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+                    (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) 
+                );
+
+            decimal _valueofgoods = rp_invoice_detailsDataTable.Sum(
+                pos => pos.Invoice_details_price_netto * 
+                    pos.Invoice_details_quantity *
+                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
+                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+                    (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
+                    (pos.IsInvoice_details_discountNull () ? 1 :  (100 - pos.Invoice_details_discount) / 100 )
+                );
+
+            decimal _vat = rp_invoice_detailsDataTable.Sum(
+                pos => pos.Invoice_details_price_netto *
+                    pos.Invoice_details_quantity *
+                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) *
+                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+                     (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
+                    (pos.IsInvoice_details_discountNull() ? 1 : (100 - pos.Invoice_details_discount) / 100) *
+                    (pos.IsTax_rates_valueNull() ? 0 : pos.Tax_rates_value)
+                );
+
+            _totalInvoiceInfo.valueofgoods = _valueofgoods;
+            _totalInvoiceInfo.valueofgoods_without_discount = _valueofgoods_without_discount;
+            _totalInvoiceInfo.subtotal = _valueofgoods;
+            _totalInvoiceInfo.taxtotalAmount = _vat;
+            _totalInvoiceInfo.total = _valueofgoods + _vat;
+
+            return _totalInvoiceInfo;
+        }
+
+        public class TotalInvoiceInfo
+        {
+            public decimal valueofgoods { get; set; }
+            public decimal valueofgoods_without_discount { get; set; }
+            public decimal subtotal { get; set; }
+            public decimal taxtotalAmount { get; set; }
+            public decimal total { get; set; }
+        }
 
         private rp_invoice_detailsModel GetData_invoice(int id)
         {

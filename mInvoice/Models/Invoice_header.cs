@@ -35,11 +35,14 @@ namespace mInvoice.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public int currency_id { get; set; }
+        public Nullable<System.DateTime> due_date { get; set; }
+        public Nullable<decimal> freight_costs { get; set; }
     
         public virtual Customers Customers { get; set; }
         public virtual Delivery_terms Delivery_terms { get; set; }
         public virtual Payment_terms Payment_terms { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual Currency Currency { get; set; }
+        public virtual Countries Countries { get; set; }
     }
 }

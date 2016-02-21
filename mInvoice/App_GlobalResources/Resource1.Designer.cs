@@ -745,6 +745,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoice not found ähnelt.
+        /// </summary>
+        public static string invoice_not_found {
+            get {
+                return ResourceManager.GetString("invoice_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invoices ähnelt.
         /// </summary>
         public static string invoices {
@@ -777,6 +786,15 @@ namespace mInvoice.App_GlobalResources {
         public static string login {
             get {
                 return ResourceManager.GetString("login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shipping costs ähnelt.
+        /// </summary>
+        public static string LogisticsServiceChargeDescription {
+            get {
+                return ResourceManager.GetString("LogisticsServiceChargeDescription", resourceCulture);
             }
         }
         
@@ -1344,6 +1362,24 @@ namespace mInvoice.App_GlobalResources {
         public static string total_amount {
             get {
                 return ResourceManager.GetString("total_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Special allowance ähnelt.
+        /// </summary>
+        public static string TradeAllowanceChargeDescription {
+            get {
+                return ResourceManager.GetString("TradeAllowanceChargeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die We invoice the following services. ähnelt.
+        /// </summary>
+        public static string TradeLineCommentItem {
+            get {
+                return ResourceManager.GetString("TradeLineCommentItem", resourceCulture);
             }
         }
         

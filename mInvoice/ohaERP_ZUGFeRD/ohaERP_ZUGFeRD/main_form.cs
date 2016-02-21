@@ -6,6 +6,8 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
+using System.Data;
+using System.Web;
 //using System.Windows.Forms;
 
 namespace ZUGFeRD_Test
@@ -16,10 +18,22 @@ namespace ZUGFeRD_Test
         private string m_output_xml_file_name = @"ZUGFeRD-invoice.xml";
         private SqlConnection m_SqlConnection = new SqlConnection(
             "Data Source=v-srv-sql.haas.de;Initial Catalog=ohaERP;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=60");
+        public DataTable PositionsTable = new DataTable();
 
         public main_form()
         {
             //InitializeComponent();
+
+            DataColumn _row_1 = new DataColumn("Articles_article_no", typeof(string));
+            DataColumn _row_2 = new DataColumn("Articles_description", typeof(string));
+            DataColumn _row_3 = new DataColumn("Invoice_details_quantity", typeof(decimal));
+            DataColumn _row_4 = new DataColumn("Invoice_details_price_netto", typeof(decimal));
+            
+
+            PositionsTable.Columns.Add(_row_1);
+            PositionsTable.Columns.Add(_row_2);
+            PositionsTable.Columns.Add(_row_3);
+            PositionsTable.Columns.Add(_row_4);
         }
 
         /// <summary>
@@ -35,10 +49,9 @@ namespace ZUGFeRD_Test
         public string getZugFeRD_PDF(
            string NonZUGFeRD_PDF
            , SqlConnection Connection
-           , int Clientsysid
-           , int Languagesysid
-           , int InvoiceHeadersysid
-             , string Invoice_no
+           , int client_id
+            , int invoice_header_id
+            , string Invoice_no
             , DateTime Order_date
             , string CurrencyShortmark
             , string CurrencyShortmark_client
@@ -48,11 +61,32 @@ namespace ZUGFeRD_Test
             , string Customers_street
             , string Customer_no
             , string Tax_number
-
             , string Clientname
             , string Clients_zip
             , string Clients_city
-            , string Clients_street 
+            , string Clients_street
+            , string Clients_ustd_id
+            , string Clients_country_code
+            , DateTime delivery_date
+            , decimal valueofgoods
+            , decimal valueofgoods_without_discount
+            , decimal? freightcosts
+            , decimal subtotal
+            , decimal taxtotalAmount
+            , decimal total
+            , decimal taxPercent
+            , string paymentterms_description
+            , DateTime? dueDate
+            , string iban_kreditor
+            , string bic_kreditor
+            , string account_number_kreditor
+            , string bank_code_kreditor
+            , string bankName_kreditor
+            , DataTable positionsTable
+            , string TradeLineCommentItem
+            , string ZugFERDResourceDirectory
+            , string LogisticsServiceChargeDescription = "Versandkosten"
+            , string TradeAllowanceChargeDescription = "Sondernachlass"
            )
         {
             
@@ -63,35 +97,56 @@ namespace ZUGFeRD_Test
 
            
                 // Generate XML                
-                //generateXMLFromInvoiceInfo(
-                //    _output_xml_file_path
-                //    , Clientsysid
-                //    , Languagesysid
-                //    , InvoiceHeadersysid
-                //    ,  Invoice_no
-                //    ,  Order_date
-                //    ,  CurrencyShortmark
-                //    ,  CurrencyShortmark_client
-                //    ,  Customer_name
-                //    ,  Customers_zip
-                //    ,  Customers_city
-                //    ,  Customers_street
-                //    ,  Customer_no
-                //    ,  Tax_number
+                generateXMLFromInvoiceInfo(
+                    _output_xml_file_path
+                    , client_id 
+                    , invoice_header_id
+                    , Invoice_no
+                    , Order_date
+                    , CurrencyShortmark
+                    , CurrencyShortmark_client
+                    , Customer_name
+                    , Customers_zip
+                    , Customers_city
+                    , Customers_street
+                    , Customer_no
+                    , Tax_number
+                    , Clientname
+                    , Clients_zip
+                    , Clients_city
+                    , Clients_street 
+                    , Clients_ustd_id
+                    , Clients_country_code
+                    , delivery_date
+                    , valueofgoods
+                    , valueofgoods_without_discount
+                    , freightcosts == null ? 0 : (decimal)freightcosts
+                    , subtotal
+                    , taxtotalAmount
+                    , total
+                    , taxPercent
+                    , paymentterms_description
+                    , dueDate
+                    , iban_kreditor
+                    , bic_kreditor
+                    , account_number_kreditor
+                    , bank_code_kreditor
+                    , bankName_kreditor
+                    , positionsTable
+                    , TradeLineCommentItem
+                    , LogisticsServiceChargeDescription 
+                    , TradeAllowanceChargeDescription 
+                    );
 
-                //    ,  Clientname
-                //    ,  Clients_zip
-                //    ,  Clients_city
-                //    ,  Clients_street 
-                    
-                //    );
-
-                //_output_pdf_file = Path.Combine(_output_file_directory, dataSet11.rp_invoice_details[0].invoice_no + "_zugferd.pdf");
+                _output_pdf_file = Path.Combine(_output_file_directory, Invoice_no + "_zugferd.pdf");
 
                 ConvertRegularToConformantPDF_3A(
                       _output_pdf_file
                     , NonZUGFeRD_PDF
-                    , _output_xml_file_path);
+                    , _output_xml_file_path
+                    , Clientname
+                    , ZugFERDResourceDirectory
+                    );
 
                 return _output_pdf_file;
            }
@@ -99,10 +154,9 @@ namespace ZUGFeRD_Test
       
         private void generateXMLFromInvoiceInfo(
             string OutputXML
-            , int Clientsysid
-            , int Languagesysid
-            , int InvoiceHeadersysid
-             , string Invoice_no
+            , int client_id
+            , int invoice_header_id
+            , string Invoice_no
             , DateTime Order_date
             , string CurrencyShortmark
             , string CurrencyShortmark_client
@@ -112,37 +166,73 @@ namespace ZUGFeRD_Test
             , string Customers_street
             , string Customer_no
             , string Tax_number
-
             , string Clientname
             , string Clients_zip
             , string Clients_city
-            , string Clients_street
+            , string Clients_street 
             , string Clients_ustd_id
+            , string Clients_country_code
+            , DateTime delivery_date
+            , decimal valueofgoods
+            , decimal valueofgoods_without_discount
+            , decimal freightcosts
+            , decimal subtotal
+            , decimal taxtotalAmount
+            , decimal total
+            , decimal taxPercent
+            , string paymentterms_description
+            , DateTime? dueDate
+            , string iban_kreditor
+            , string bic_kreditor
+            , string account_number_kreditor
+            , string bank_code_kreditor
+            , string bankName_kreditor
+            , DataTable positionsTable
+            , string TradeLineCommentItem
+            , string LogisticsServiceChargeDescription = "Versandkosten"
+            , string TradeAllowanceChargeDescription = "Sondernachlass"
             )
         {
-            //InvoiceDescriptor desc = _createInvoice(
-            //    Clientsysid
-            //    , Languagesysid
-            //    , InvoiceHeadersysid
-            //     ,  Invoice_no
-            //, Order_date
-            //,  CurrencyShortmark
-            //,  CurrencyShortmark_client
-            //,  Customer_name
-            //,  Customers_zip
-            //,  Customers_city
-            //,  Customers_street
-            //,  Customer_no
-            //,  Tax_number
-
-            //,  Clientname
-            //,  Clients_zip
-            //,  Clients_city
-            //,  Clients_street 
-            //,  Clients_ustd_id
-                
-            //    );
-            //desc.Save(OutputXML);
+            InvoiceDescriptor desc = _createInvoice(
+                  client_id 
+                , invoice_header_id
+                , Invoice_no
+                , Order_date
+                , CurrencyShortmark
+                , CurrencyShortmark_client
+                , Customer_name
+                , Customers_zip
+                , Customers_city
+                , Customers_street
+                , Customer_no
+                , Tax_number
+                , Clientname
+                , Clients_zip
+                , Clients_city
+                , Clients_street 
+                , Clients_ustd_id
+                , Clients_country_code
+                , delivery_date
+                , valueofgoods
+                , valueofgoods_without_discount
+                , freightcosts
+                , subtotal
+                , taxtotalAmount
+                , total
+                , taxPercent
+                , paymentterms_description
+                , dueDate
+                , iban_kreditor
+                , bic_kreditor
+                , account_number_kreditor
+                , bank_code_kreditor
+                , bankName_kreditor
+                , positionsTable
+                , TradeLineCommentItem
+                , LogisticsServiceChargeDescription 
+                , TradeAllowanceChargeDescription 
+                );
+            desc.Save(OutputXML);
         }
 
         private InvoiceDescriptor _createInvoice(
@@ -163,6 +253,7 @@ namespace ZUGFeRD_Test
             , string Clients_city
             , string Clients_street 
             , string Clients_ustd_id
+            , string Clients_country_code
             , DateTime delivery_date
             , decimal valueofgoods
             , decimal valueofgoods_without_discount
@@ -172,28 +263,22 @@ namespace ZUGFeRD_Test
             , decimal total
             , decimal taxPercent
             , string paymentterms_description
-            , DateTime dueDate
+            , DateTime? dueDate
             , string iban_kreditor
             , string bic_kreditor
             , string account_number_kreditor
             , string bank_code_kreditor
             , string bankName_kreditor
+            , DataTable positionsTable
+            , string TradeLineCommentItem
+            , string LogisticsServiceChargeDescription = "Versandkosten"
+            , string TradeAllowanceChargeDescription = "Sondernachlass"
             )
-        {
-            DataSet1.rp_invoice_detailsDataTable _rp_invoice_detailsDataTable = 
-                new DataSet1.rp_invoice_detailsDataTable();
-            DataSet1TableAdapters.rp_invoice_detailsTableAdapter _rp_invoice_detailsTableAdapter =
-                new DataSet1TableAdapters.rp_invoice_detailsTableAdapter();
-
-            _rp_invoice_detailsTableAdapter.Fill(
-                _rp_invoice_detailsDataTable,
-                client_id,
-                invoice_header_id);
- 
+        {         
             CurrencyCodes _currenciesdescription = 
                 (CurrencyCodes)System.Enum.Parse(typeof(CurrencyCodes), CurrencyShortmark);
             CountryCodes _invoiceadress_nationdescriptionshortmark =
-                (CountryCodes)System.Enum.Parse(typeof(CountryCodes), CurrencyShortmark);
+                (CountryCodes)System.Enum.Parse(typeof(CountryCodes), Clients_country_code);
             CurrencyCodes _currenciesdescription_client =
                (CurrencyCodes)System.Enum.Parse(typeof(CurrencyCodes), CurrencyShortmark_client);                       
 
@@ -241,7 +326,7 @@ namespace ZUGFeRD_Test
                 , Clients_city
                 , Clients_street 
                 , ""
-                , CountryCodes.DE
+                , (CountryCodes)Enum.Parse (typeof(CountryCodes), Clients_country_code, true)   //. .  CountryCodes.DE
                 , ""
                 //, "0088"
                 //, "4000001123452"
@@ -279,17 +364,18 @@ namespace ZUGFeRD_Test
             // desc.AddApplicableTradeTax(129.37m, 7m, TaxTypes.VAT, TaxCategoryCodes.S);
 
             // Logistikbedingungen
-            desc.AddLogisticsServiceCharge(freightcosts, "Versandkosten", TaxTypes.VAT, TaxCategoryCodes.S, taxPercent);
+            desc.AddLogisticsServiceCharge(freightcosts, LogisticsServiceChargeDescription, TaxTypes.VAT, TaxCategoryCodes.S, taxPercent);
 
             // Handelsrabatt
 
             if (_rabatt != 0)
-                desc.AddTradeAllowanceCharge(true, _rabatt, 
-                    _currenciesdescription, _rabatt, "Sondernachlass", 
+                desc.AddTradeAllowanceCharge(true, _rabatt,
+                    _currenciesdescription, _rabatt, TradeAllowanceChargeDescription, 
                     TaxTypes.VAT, TaxCategoryCodes.S, 
                     taxPercent);
 
             // Zahlungsbedingungen
+
             desc.SetTradePaymentTerms(paymentterms_description, dueDate);
 
             // Zahlungsmittel
@@ -304,13 +390,13 @@ namespace ZUGFeRD_Test
                 , bankName_kreditor);
 
             // Positionen
-            foreach (var _position in _rp_invoice_detailsDataTable)
+            foreach (DataRow _position in positionsTable.Rows)
             {
                 QuantityCodes _QuantityCodes = 
                     (QuantityCodes)System.Enum.Parse(typeof(QuantityCodes)
-                    , _position.quantity_units_code );
+                    , _position["quantity_units_code"].ToString () );
 
-                desc.addTradeLineCommentItem("Wir erlauben uns Ihnen folgende Positionen aus der Lieferung Nr. 2013-51112 in Rechnung zu stellen:");
+                desc.addTradeLineCommentItem(TradeLineCommentItem);
 
                 /*
                     string name, 
@@ -329,16 +415,16 @@ namespace ZUGFeRD_Test
                     string sellerAssignedID = "", 
                     string buyerAssignedID = ""
                  */
-                desc.addTradeLineItem(_position.Articles_article_no 
-                                      , _position.Articles_description 
-                                      , _QuantityCodes
-                                      , _position.Invoice_details_quantity 
-                                      , _position.Invoice_details_price_netto
-                                      , _position.Invoice_details_price_netto
-                                      , _position.Invoice_details_quantity
-                                      , TaxTypes.VAT
-                                      , TaxCategoryCodes.S
-                                      , taxPercent
+                desc.addTradeLineItem(_position["Articles_article_no"].ToString ()
+                                    , _position["Articles_description"].ToString()
+                                    , _QuantityCodes
+                                    , Convert.ToDecimal (_position["Invoice_details_quantity"])
+                                    , Convert.ToDecimal (_position["Invoice_details_price_netto"])
+                                    , Convert.ToDecimal (_position["Invoice_details_price_netto"])
+                                    , Convert.ToDecimal (_position["Invoice_details_quantity"])
+                                    , TaxTypes.VAT
+                                    , TaxCategoryCodes.S
+                                    , taxPercent
                     //, "0160"
                     //, "4012345001235"
                     //, "KR3M"
@@ -351,7 +437,13 @@ namespace ZUGFeRD_Test
 
         }
 
-        public void ConvertRegularToConformantPDF_3A(string PDF_WithXML, string PDF_start, string XMLFile)
+        public void ConvertRegularToConformantPDF_3A(
+            string PDF_WithXML
+            , string PDF_start
+            , string XMLFile
+            , string Autor
+            , string ZugFERD_ResourcesDirectory
+            )
         {
             if (System.IO.File.Exists(PDF_WithXML))
                 System.IO.File.Delete(PDF_WithXML);
@@ -372,16 +464,29 @@ namespace ZUGFeRD_Test
                     document.Open();
 
                     // Attributes
-                    document.AddAuthor("Otto Haas KG");
+                    document.AddAuthor(Autor);
                     document.AddCreationDate();
-                    document.AddCreator("Otto Haas KG");
+                    document.AddCreator(Autor);
                     document.AddTitle(Path.GetFileName (PDF_WithXML));
                     document.AddSubject(Path.GetFileName(PDF_WithXML)); 
                    
                     // Set output intent. PDF/A requirement.
-                    string _rgb_color_profile = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) 
-                        + @"\resources\", "sRGB Color Space Profile.icm");
-                    ICC_Profile icc = ICC_Profile.GetInstance(_rgb_color_profile); 
+
+                    //Uri baseUri = new Uri(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())));
+                    //Uri rgbURI = new Uri(baseUri, "resources/sRGB Color Space Profile.icm");
+
+                    //string _rgb_color_profile = Path.Combine(
+                    //    System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+                    //Uri _rgb_color_profile_uri = new Uri(_rgb_color_profile);
+                    //_rgb_color_profile_uri = new Uri(_rgb_color_profile_uri,  @"resources\sRGBColorSpaceProfile.icm");
+
+                    string _bin_dir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(main_form)).CodeBase);
+
+                    string _rgb_color_profile = Path.Combine(_bin_dir, "sRGBColorSpaceProfile.icm");
+
+                    _rgb_color_profile = _rgb_color_profile.Replace(@"file:\", "");
+
+                    ICC_Profile icc = ICC_Profile.GetInstance(_rgb_color_profile); //_rgb_color_profile_uri.AbsoluteUri); 
 
                     _new_pdf_writer.SetOutputIntents("Custom", "", "http://www.color.org", "sRGB IEC61966-2.1", icc);
 

@@ -277,7 +277,7 @@ namespace s2industries.ZUGFeRD
         } // !AddTradeAllowanceCharge()
 
 
-        public void SetTradePaymentTerms(string description, DateTime dueDate)
+        public void SetTradePaymentTerms(string description, DateTime? dueDate)
         {
             this.PaymentTerms = new PaymentTerms()
             {

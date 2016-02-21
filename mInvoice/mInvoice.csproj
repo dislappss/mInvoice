@@ -322,7 +322,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\reportsDataSet.Designer.cs">
+    <Compile Include="Reports\reportsDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>reportsDataSet.xsd</DependentUpon>
@@ -386,7 +386,7 @@
     <None Include="Reports\reportsDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>reportsDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>reportsDataSet1.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Reports\reportsDataSet.xss">
       <DependentUpon>reportsDataSet.xsd</DependentUpon>
@@ -517,6 +517,7 @@
     <EmbeddedResource Include="App_GlobalResources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601141917262_Init.resx">
       <DependentUpon>201601141917262_Init.cs</DependentUpon>

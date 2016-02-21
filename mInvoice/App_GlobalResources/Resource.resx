@@ -576,4 +576,16 @@
   <data name="confirm_copy_invoice" xml:space="preserve">
     <value>Are you sure you wish to copy this invoice?</value>
   </data>
+  <data name="invoice_not_found" xml:space="preserve">
+    <value>Invoice not found</value>
+  </data>
+  <data name="LogisticsServiceChargeDescription" xml:space="preserve">
+    <value>Shipping costs</value>
+  </data>
+  <data name="TradeAllowanceChargeDescription" xml:space="preserve">
+    <value>Special allowance</value>
+  </data>
+  <data name="TradeLineCommentItem" xml:space="preserve">
+    <value>We invoice the following services.</value>
+  </data>
 </root>

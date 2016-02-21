@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,15 +84,6 @@
     <Compile Include="Contact.cs" />
     <Compile Include="CountryCodes.cs" />
     <Compile Include="CurrencyCodes.cs" />
-    <Compile Include="DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DataSet11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="GlobalID.cs" />
     <Compile Include="IllegalStreamException.cs" />
     <Compile Include="InvoiceDescriptor.cs" />
@@ -131,17 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet11.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="FreeSans.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -161,10 +142,13 @@
     <None Include="resources\FreeSansBold.ttf" />
     <None Include="resources\Helvetica.ttf" />
     <None Include="resources\INV-15-000735.pdf" />
-    <None Include="resources\sRGB Color Space Profile.icm">
+    <None Include="resources\sRGBColorSpaceProfile.icm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="resources\zugferd_out.pdf" />
+    <None Include="sRGBColorSpaceProfile.icm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="itextsharp.pdfa.dll" />

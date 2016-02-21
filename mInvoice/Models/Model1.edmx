@@ -154,6 +154,7 @@
           <Property Name="invoice_no" Type="nvarchar" MaxLength="50" />
           <Property Name="order_date" Type="smalldatetime" Nullable="false" />
           <Property Name="delivery_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="due_date" Type="smalldatetime" />
           <Property Name="customers_id" Type="int" Nullable="false" />
           <Property Name="customer_reference" Type="nvarchar" MaxLength="50" />
           <Property Name="countriesid" Type="int" Nullable="false" />
@@ -168,6 +169,7 @@
           <Property Name="delivery_terms_id" Type="int" />
           <Property Name="paid_at" Type="smalldatetime" />
           <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="freight_costs" Type="numeric" Precision="15" Scale="2" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -231,12 +233,6 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
         <EntityType Name="v_AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="EmailConfirmed" />
-            <PropertyRef Name="PhoneNumberConfirmed" />
-            <PropertyRef Name="TwoFactorEnabled" />
-            <PropertyRef Name="LockoutEnabled" />
-            <PropertyRef Name="AccessFailedCount" />
-            <PropertyRef Name="UserName" />
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
@@ -479,6 +475,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_invoice_header_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invoice_header_Currency">
           <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
           <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
@@ -657,6 +665,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
           </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Countries" Association="Self.FK_invoice_header_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_header_Currency" Association="Self.FK_Invoice_header_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
@@ -800,6 +812,10 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Countries" Association="myinvoice_dbModel.FK_invoice_header_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Currency">
           <Key>
@@ -924,6 +940,9 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Invoice_header_Clients" FromRole="Invoice_header" ToRole="Clients" />
           <Property Name="currency_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Currency" Relationship="myinvoice_dbModel.FK_Invoice_header_Currency" FromRole="Invoice_header" ToRole="Currency" />
+          <Property Name="due_date" Type="DateTime" Precision="0" Nullable="true" />
+          <Property Name="freight_costs" Type="Decimal" Nullable="true" Precision="15" Scale="2" />
+          <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
         </EntityType>
         <EntityType Name="Payment_method">
           <Key>
@@ -1327,12 +1346,6 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
         <EntityType Name="v_AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="EmailConfirmed" />
-            <PropertyRef Name="PhoneNumberConfirmed" />
-            <PropertyRef Name="TwoFactorEnabled" />
-            <PropertyRef Name="LockoutEnabled" />
-            <PropertyRef Name="AccessFailedCount" />
-            <PropertyRef Name="UserName" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -1360,6 +1373,7 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Countries" ToRole="Clients" />
           <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_header" Relationship="myinvoice_dbModel.FK_invoice_header_Countries" FromRole="Countries" ToRole="Invoice_header" />
         </EntityType>
         <Association Name="FK_Clients_Countries">
           <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="0..1" />
@@ -1381,6 +1395,18 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Customers">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_header_Countries">
+          <End Type="myinvoice_dbModel.Countries" Role="Countries" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Invoice_header" Role="Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
               <PropertyRef Name="countriesid" />
             </Dependent>
           </ReferentialConstraint>
@@ -1472,6 +1498,8 @@ Warnung 6002: F√ºr Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim√
           <EntitySetMapping Name="Invoice_header">
             <EntityTypeMapping TypeName="myinvoice_dbModel.Invoice_header">
               <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="freight_costs" ColumnName="freight_costs" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
                 <ScalarProperty Name="currency_id" ColumnName="currency_id" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
