@@ -207,11 +207,53 @@
 
         (function ($) {
             $("input[type = 'radio']").click(function () {
-                $(this).parents("form").submit(); // post form
+                $(this).parents("form").submit(); // post form               
+            });
+
+            //$("input[type = 'radio']").change(function () {
+            //    if ($(this).val() == "Required Date" || $(this).val() == "Submitted Date") {
+            //        $("#txtSearch").datepicker();
+            //    }
+            //    else {
+            //        $("#txtSearch").datepicker("destroy");
+            //    }
+            //}).change();
+
+            Cookie = {
+                get: function (name) {
+                    var data = document.cookie.split(";");
+                    var cookies = {};
+                    for (var i = 0; i < data.length; ++i) {
+                        var tmp = data[i].split("=");
+                        cookies[tmp[0]] = tmp[1];
+                    }
+                    if (name) {
+                        return (cookies[name] || null);
+                    } else {
+                        return cookies;
+                    }
+                },
+
+                set: function (name, value) {
+                    document.cookie = name + "=" + value;
+                }
+            };
+
+
+            $('.datepicker').datepicker({
+                weekStart: 1,
+                language: Cookie.get('_culture')
             });
 
         })(jQuery);
 
+
+       
+
+   
+    //$(function () { // will trigger when the document is ready
+      
+    //});
 
 
     </script>

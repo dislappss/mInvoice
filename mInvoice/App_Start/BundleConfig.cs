@@ -21,6 +21,9 @@ namespace mInvoice
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/locales/bootstrap-datepicker.de.min.js",
+                      "~/Scripts/locales/bootstrap-datepicker.en-GB.min.js",
                       "~/Scripts/respond.js"));
 
             //bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/bootstrap.min.css", 
@@ -28,6 +31,7 @@ namespace mInvoice
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker.css",
                       "~/Content/site.css"));
         }
     }

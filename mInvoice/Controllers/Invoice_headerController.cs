@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using mInvoice.App_GlobalResources;
@@ -220,7 +219,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id,tax_rate_id")] Invoice_header invoice_header)
+        public ActionResult Create([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,due_date,paid_at,customers_id,customer_reference,countriesid,zip,city,street,quantity_2_column_name,quantity_3_column_name,tax_rate_id,discount,payment_terms_id,delivery_terms_id,currency_id,freight_costs")] Invoice_header invoice_header)
         {
             int _client_id = -1;
 
@@ -275,7 +274,7 @@ namespace mInvoice.Controllers
             ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
             ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
             ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
-            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
+            ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);        
 
             return View(invoice_header);
         }
@@ -285,11 +284,16 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,customers_id,customer_reference,countriesid,zip,city,street,CreatedAt,UpdatedAt,quantity_2_column_name,quantity_3_column_name,discount,delivery_terms_id,payment_terms_id,paid_at,currency_id,tax_rate_id")] Invoice_header invoice_header)
+        public ActionResult Edit([Bind(Include = "Id,clients_id,invoice_no,order_date,delivery_date,due_date,paid_at,customers_id,customer_reference,countriesid,zip,city,street,quantity_2_column_name,quantity_3_column_name,tax_rate_id,discount,payment_terms_id,delivery_terms_id,currency_id,freight_costs")] Invoice_header invoice_header)
         {
             if (ModelState.IsValid)
             {
                 m_db.Entry(invoice_header).State = EntityState.Modified;
+
+                //var _due_date = invoice_header.due_date;
+                //var _paid_at = invoice_header.paid_at;
+                //invoice_header.delivery_date = new DateTime(2016, 3, 3);
+                //var _order_date = invoice_header.order_date;
 
                 m_db.SaveChanges();
                 return RedirectToAction("Index");

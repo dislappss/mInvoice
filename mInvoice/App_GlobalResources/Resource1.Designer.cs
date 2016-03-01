@@ -520,6 +520,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Due date ähnelt.
+        /// </summary>
+        public static string due_date {
+            get {
+                return ResourceManager.GetString("due_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
         /// </summary>
         public static string edit {
@@ -597,6 +606,15 @@ namespace mInvoice.App_GlobalResources {
         public static string email_to {
             get {
                 return ResourceManager.GetString("email_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter date here ähnelt.
+        /// </summary>
+        public static string enter_date {
+            get {
+                return ResourceManager.GetString("enter_date", resourceCulture);
             }
         }
         

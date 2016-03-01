@@ -11,57 +11,57 @@ namespace mInvoice.Models
     {
         public bool IsPaid { get; set; }
 
-        public int BirthdateDay { get; set; }
-        public int BirthdateMonth { get; set; }
-        public int BirthdateYear { get; set; }
+        //public int BirthdateDay { get; set; }
+        //public int BirthdateMonth { get; set; }
+        //public int BirthdateYear { get; set; }
 
-        public IEnumerable<SelectListItem>order_dateDaySelectList 
-        {
-            get
-            {
-                for (int i = 1; i < 32; i++)
-                {
-                    yield return new SelectListItem
-                    {
-                        Value = i.ToString(),
-                        Text = i.ToString(),
-                        Selected = BirthdateDay == i
-                    };
-                }
-            }
-        }
+    //    public IEnumerable<SelectListItem>order_dateDaySelectList 
+    //    {
+    //        get
+    //        {
+    //            for (int i = 1; i < 32; i++)
+    //            {
+    //                yield return new SelectListItem
+    //                {
+    //                    Value = i.ToString(),
+    //                    Text = i.ToString(),
+    //                    Selected = BirthdateDay == i
+    //                };
+    //            }
+    //        }
+    //    }
 
-        public IEnumerable<SelectListItem> order_dateMonthSelectList
-        {
-            get
-            {
-                for (int i = 1; i < 13; i++)
-                {
-                    yield return new SelectListItem
-                    {
-                        Value = i.ToString(),
-                        Text = new DateTime(2000, i, 1).ToString("MMMM"),
-                        Selected = BirthdateMonth == i
-                    };
-                }
-            }
-        }
+    //    public IEnumerable<SelectListItem> order_dateMonthSelectList
+    //    {
+    //        get
+    //        {
+    //            for (int i = 1; i < 13; i++)
+    //            {
+    //                yield return new SelectListItem
+    //                {
+    //                    Value = i.ToString(),
+    //                    Text = new DateTime(2000, i, 1).ToString("MMMM"),
+    //                    Selected = BirthdateMonth == i
+    //                };
+    //            }
+    //        }
+    //    }
 
-        public IEnumerable<SelectListItem> order_dateYearSelectList
-        {
-            get
-            {
-                for (int i = 1910; i < DateTime.Now.Year; i++)
-                {
-                    yield return new SelectListItem
-                    {
-                        Value = i.ToString(),
-                        Text = i.ToString(),
-                        Selected = BirthdateYear == i
-                    };
-                }
-            }
-        }
+    //    public IEnumerable<SelectListItem> order_dateYearSelectList
+    //    {
+    //        get
+    //        {
+    //            for (int i = 1910; i < DateTime.Now.Year; i++)
+    //            {
+    //                yield return new SelectListItem
+    //                {
+    //                    Value = i.ToString(),
+    //                    Text = i.ToString(),
+    //                    Selected = BirthdateYear == i
+    //                };
+    //            }
+    //        }
+    //    }
 
     }
 
@@ -81,7 +81,16 @@ namespace mInvoice.Models
         [Display(Name = "delivery_date", ResourceType = typeof(Resource))]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Required]
-        public DateTime delivery_date  {  get;  set; }
+        public DateTime delivery_date { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [Display(Name = "paid_at", ResourceType = typeof(Resource))]
+        public Nullable<DateTime> paid_at { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [Display(Name = "due_date", ResourceType = typeof(Resource))]
+        public Nullable<DateTime> due_date { get; set; }
+
 
         [Display(Name = "customer", ResourceType = typeof(Resource))]
         public int customers_id { get; set; }
@@ -90,8 +99,6 @@ namespace mInvoice.Models
         public string customer_reference { get; set; }
 
         [Required]
-        //[LocalizedDisplayName("country_code")]
-
         [Display(Name = "countriesid", ResourceType = typeof(Resource))]
         public int countriesid { get; set; }
 
@@ -122,11 +129,7 @@ namespace mInvoice.Models
 
         [Display(Name = "delivery_terms", ResourceType = typeof(Resource))]
         public Nullable<decimal> delivery_terms_id { get; set; }
-
-         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        [Display(Name = "paid_at", ResourceType = typeof(Resource))]
-        public Nullable<DateTime> paid_at { get; set; }
-
+       
         [Display(Name = "currency_id", ResourceType = typeof(Resource))]
          public int currency_id { get; set; }
 

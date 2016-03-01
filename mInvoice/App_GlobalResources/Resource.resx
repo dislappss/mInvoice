@@ -588,4 +588,10 @@
   <data name="TradeLineCommentItem" xml:space="preserve">
     <value>We invoice the following services.</value>
   </data>
+  <data name="due_date" xml:space="preserve">
+    <value>Due date</value>
+  </data>
+  <data name="enter_date" xml:space="preserve">
+    <value>Enter date here</value>
+  </data>
 </root>

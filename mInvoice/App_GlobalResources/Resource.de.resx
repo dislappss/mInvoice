@@ -582,4 +582,10 @@
   <data name="TradeLineCommentItem" xml:space="preserve">
     <value>Wir stellen Ihnen folgende Leistungen in Rechnung.</value>
   </data>
+  <data name="due_date" xml:space="preserve">
+    <value>Fälligkeitsdatum</value>
+  </data>
+  <data name="enter_date" xml:space="preserve">
+    <value>Datum eingeben</value>
+  </data>
 </root>

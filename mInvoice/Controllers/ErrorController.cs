@@ -5,7 +5,7 @@ namespace mInvoice.Controllers
     public class ErrorController : BaseController
     {
         public ViewResult Index()
-        {
+        {            
             return View("Index");
         }
         public ViewResult NotFound()
