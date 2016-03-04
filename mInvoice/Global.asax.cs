@@ -20,7 +20,7 @@ namespace mInvoice
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+          
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
 
             //ModelBinders.Binders.Add(typeof(Nullable<DateTime>), new DateTimeModelBinder()
@@ -54,7 +54,7 @@ namespace mInvoice
             DataAnnotationsModelValidatorProvider.RegisterAdapter(
                 typeof(DateRequiredAttribute), typeof(SplittedDateRequiredValidator));
         }
-        
+
         private void Application_BeginRequest(Object source, EventArgs e)
         {
             HttpApplication application = (HttpApplication)source;
@@ -68,7 +68,37 @@ namespace mInvoice
             //Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             //}
 
+            //if user is changing language
+            //if (!String.IsNullOrEmpty(HttpContext.Current.Request["lang"]))
+            //{
+            //    String sLang = HttpContext.Current.Request["lang"] as String;
+            //    //change the language of the application to the chosen
+            //    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(sLang);
+            //    //save it to cookie
+            //    HttpCookie myCookie = new HttpCookie("Language");
+            //    myCookie.Value = sLang;
+            //    myCookie.Expires = DateTime.Now.AddDays(1d);
+            //    HttpContext.Current.Response.Cookies.Add(myCookie);
+            //}
+            ////setting as been preserved in cookie
+            //else
 
+            //if (HttpContext.Current.Request.Cookies["_culture"] != null)
+            //{
+            //    //change the language of the application to the preserved
+            //    String sLang = HttpContext.Current.Request.Cookies["_culture"].ToString ();
+            //    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(sLang);
+            //}
+            if (HttpContext.Current.Request.Cookies["_culture"] == null)
+            {
+                //change the language of the application to the default
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+                //set cookie to the default
+                HttpCookie myCookie = new HttpCookie("_culture");
+                myCookie.Value = "en";
+                myCookie.Expires = DateTime.Now.AddDays(1d);
+                HttpContext.Current.Response.Cookies.Add(myCookie);
+            }
         }
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)

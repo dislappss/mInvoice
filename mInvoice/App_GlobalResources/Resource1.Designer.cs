@@ -610,6 +610,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die English ähnelt.
+        /// </summary>
+        public static string english {
+            get {
+                return ResourceManager.GetString("english", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Enter date here ähnelt.
         /// </summary>
         public static string enter_date {
@@ -678,6 +687,15 @@ namespace mInvoice.App_GlobalResources {
         public static string find_by_name {
             get {
                 return ResourceManager.GetString("find_by_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die German ähnelt.
+        /// </summary>
+        public static string german {
+            get {
+                return ResourceManager.GetString("german", resourceCulture);
             }
         }
         

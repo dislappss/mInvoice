@@ -5,6 +5,9 @@
 
     bool _show_menu = Request.IsAuthenticated;
     bool _is_admin = Session["email"] != null && Session["email"].ToString ()  == "dnepr5555@gmail.com";
+
+    string _language = culture == "en-us" ? Resources.Resource.english :
+                       culture == "de" ? Resources.Resource.german : Resources.Resource.english;
 }
 
 @helper selected(string c, string culture)
@@ -143,7 +146,7 @@
                         {
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    Languages
+                                    @_language
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -206,18 +209,10 @@
         });
 
         (function ($) {
+
             $("input[type = 'radio']").click(function () {
                 $(this).parents("form").submit(); // post form               
             });
-
-            //$("input[type = 'radio']").change(function () {
-            //    if ($(this).val() == "Required Date" || $(this).val() == "Submitted Date") {
-            //        $("#txtSearch").datepicker();
-            //    }
-            //    else {
-            //        $("#txtSearch").datepicker("destroy");
-            //    }
-            //}).change();
 
             Cookie = {
                 get: function (name) {
@@ -239,21 +234,29 @@
                 }
             };
 
+            if (Cookie.get('_culture') == null)
+            {
+                $('.datepicker').datepicker({
+                    weekStart: 0,
+                    language: 'en'
+                });
 
-            $('.datepicker').datepicker({
-                weekStart: 1,
-                language: Cookie.get('_culture')
-            });
+            }
+            else {
+                $('.datepicker').datepicker({
+                    weekStart: Cookie.get('_culture') === 'de' ? 1 : 0,
+                    language: Cookie.get('_culture')
+                });
 
+            }
+            
         })(jQuery);
 
 
        
 
    
-    //$(function () { // will trigger when the document is ready
-      
-    //});
+   
 
 
     </script>
