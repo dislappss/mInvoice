@@ -583,11 +583,38 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The message [{0}] was canceled. ähnelt.
+        /// </summary>
+        public static string email_canceled {
+            get {
+                return ResourceManager.GetString("email_canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die From ähnelt.
         /// </summary>
         public static string email_from {
             get {
                 return ResourceManager.GetString("email_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred sending message [{0}]. {1} ähnelt.
+        /// </summary>
+        public static string email_message_error {
+            get {
+                return ResourceManager.GetString("email_message_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die E-Mail wurde erfolgreich gesendet. ähnelt.
+        /// </summary>
+        public static string email_message_sent {
+            get {
+                return ResourceManager.GetString("email_message_sent", resourceCulture);
             }
         }
         

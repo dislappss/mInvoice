@@ -9,8 +9,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    @Html.HiddenFor(model => model.ID  )
+
+    @Html.HiddenFor(model => model.ID)
     @Html.HiddenFor(model => model.Zugferd)
 
     <div class="form-horizontal">
@@ -70,3 +70,6 @@
 <div>
     @Html.ActionLink(@Resources.Resource.back_to_list, "Index", null, new { @class = "btn btn-default" })
 </div>
+
+
+

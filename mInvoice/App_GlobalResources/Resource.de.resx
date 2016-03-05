@@ -436,7 +436,7 @@
     <value>Rechnung</value>
   </data>
   <data name="sum_price" xml:space="preserve">
-    <value>Gesamtpreis</value>
+    <value>Gesamt</value>
   </data>
   <data name="net_amount" xml:space="preserve">
     <value>Nettobetrag</value>
@@ -593,5 +593,14 @@
   </data>
   <data name="german" xml:space="preserve">
     <value>Deutsch</value>
+  </data>
+  <data name="email_message_error" xml:space="preserve">
+    <value>Beim senden von EMail [{0}] wurde ein Fehler  aufgetreten; {1}</value>
+  </data>
+  <data name="email_message_sent" xml:space="preserve">
+    <value>E-Mail wurde erfolgreich gesendet.</value>
+  </data>
+  <data name="email_canceled" xml:space="preserve">
+    <value>EMail-Nachricht  [{0}] ist abgebrochen!</value>
   </data>
 </root>

@@ -132,6 +132,11 @@
 
 </table>
 
+@if (TempData["result_message"] != null)
+{
+    @Html.Raw(TempData["result_message"])
+}
+
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 

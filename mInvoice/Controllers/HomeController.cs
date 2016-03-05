@@ -19,7 +19,7 @@ namespace mInvoice.Controllers
 
             // Set "Session(client_id)"
             Session.Add("client_id", null);
-            var client_id = Helpers.AccountHelper.getClientIDByUserName(User.Identity.Name, ref _AspNetUsers_id);            
+            var client_id = Helpers.AccountHelper.getClientIDByUserName(User.Identity.Name, ref _AspNetUsers_id);
             if (client_id == -2) // need to create customer
                 RedirectToAction("Create", "Customers");
             Session.Add("client_id", client_id);
@@ -28,10 +28,10 @@ namespace mInvoice.Controllers
             if (!string.IsNullOrEmpty(email) && Session["email"] == null)
                 Session["email"] = email;
 
-           ShowMenu = User.Identity.IsAuthenticated;
+            ShowMenu = User.Identity.IsAuthenticated;
 
-           //  Admin ?
-           //ViewBag.IsAdmin = email == "dnepr5555@gmail.com";
+            //  Admin ?
+            //ViewBag.IsAdmin = email == "dnepr5555@gmail.com";
 
             return View();
         }
@@ -63,28 +63,32 @@ namespace mInvoice.Controllers
             }
 
             // Validate input
-            var culture = CultureHelper.GetImplementedCulture(culture_str);
+            //var culture = CultureHelper.GetImplementedCulture(culture_str);
 
             // Save culture in a cookie
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
+            {
                 cookie.Value = culture_str;   // update cookie value
+                Response.Cookies.Set(cookie);
+            }
             else
             {
-
                 cookie = new HttpCookie("_culture");
                 cookie.Value = culture_str;
-                cookie.Expires = DateTime.Now.AddYears(1);
+                Response.Cookies.Add(cookie);
             }
-            Response.Cookies.Add(cookie);
+            cookie.Expires = DateTime.Now.AddYears(1);
+
+
 
             return Redirect(Request.UrlReferrer.ToString());
             //return RedirectToAction("Index", "Home");
         }
 
-      
 
-       
+
+
     }
 
 

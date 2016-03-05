@@ -57,8 +57,8 @@ namespace mInvoice
 
         private void Application_BeginRequest(Object source, EventArgs e)
         {
-            HttpApplication application = (HttpApplication)source;
-            HttpContext context = application.Context;
+            //HttpApplication application = (HttpApplication)source;
+            //HttpContext context = application.Context;
 
             //string culture = null;
             //if (context.Request.UserLanguages != null && Request.UserLanguages.Length > 0)
@@ -83,13 +83,15 @@ namespace mInvoice
             ////setting as been preserved in cookie
             //else
 
-            //if (HttpContext.Current.Request.Cookies["_culture"] != null)
-            //{
-            //    //change the language of the application to the preserved
-            //    String sLang = HttpContext.Current.Request.Cookies["_culture"].ToString ();
-            //    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(sLang);
-            //}
-            if (HttpContext.Current.Request.Cookies["_culture"] == null)
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+            {
+                //change the language of the application to the preserved
+                String sLang = cookie.Value;
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(sLang);
+
+            }
+            else 
             {
                 //change the language of the application to the default
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");

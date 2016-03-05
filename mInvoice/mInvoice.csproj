@@ -238,6 +238,7 @@
     </Compile>
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\FlashHelpers.cs" />
     <Compile Include="LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Migrations\201601141917262_Init.cs" />
     <Compile Include="Migrations\201601141917262_Init.Designer.cs">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using mInvoice.App_GlobalResources;
@@ -20,7 +22,7 @@ namespace mInvoice.Controllers
 {
     public class Invoice_headerController : BaseController
     {
-    
+        string m_zugferd_file_path = null;
 
         private myinvoice_dbEntities m_db = new myinvoice_dbEntities();
 
@@ -603,7 +605,7 @@ namespace mInvoice.Controllers
         {
             try
             {
-                string _zugferd_file_path = null;
+               
                 var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(connectionString);
 
@@ -682,7 +684,7 @@ namespace mInvoice.Controllers
 
                         TotalInvoiceInfo _total_info = getTotalInvoiceInfo(_reportsDataSet.rp_invoice_details);
 
-                        _zugferd_file_path = _zugferd.getZugFeRD_PDF(
+                        m_zugferd_file_path = _zugferd.getZugFeRD_PDF(
                               _pdf_tmp_file
                             , _connection
                             , _client_id
@@ -706,7 +708,7 @@ namespace mInvoice.Controllers
                             , _row.delivery_date
                             , _total_info.valueofgoods
                             , _total_info.valueofgoods_without_discount
-                            , _row.freight_costs
+                            , _row.Isfreight_costsNull() ? new decimal? () :  _row.freight_costs
                             , _total_info.subtotal
                             , _total_info.taxtotalAmount
                             , _total_info.total
@@ -726,7 +728,7 @@ namespace mInvoice.Controllers
                             );
 
                         //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
-                        Attachment att1 = new Attachment(_zugferd_file_path);
+                        Attachment att1 = new Attachment(m_zugferd_file_path);
                         msg.Attachments.Add(att1);
                     }
                     else
@@ -756,13 +758,15 @@ namespace mInvoice.Controllers
                             smtp.Credentials = credential;
                             smtp.Timeout = 20000;
 
-                            await smtp.SendMailAsync(msg);
+                            smtp.SendCompleted += new SendCompletedEventHandler(SendCompleted);
+
+                            await smtp.SendMailAsync(msg);                           
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
-                              ex.ToString());
+                        ModelState.AddModelError(null, ex);
+                        return View();
                     }
                 }
 
@@ -773,6 +777,39 @@ namespace mInvoice.Controllers
                 ModelState.AddModelError(null, ex);             
             }
             return View();
+        }
+
+        private void SendCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                Console.WriteLine("The message [{0}] was canceled.", e.UserState.ToString());
+
+                FlashHelpers.FlashWarning(this, string.Format(Resource.email_canceled, e.UserState.ToString()));
+            }
+
+            if (e.Error != null)
+            {
+                StringBuilder errorMsg = new StringBuilder();
+                errorMsg.Append(string.Format(Resource.email_message_error, e.UserState.ToString(), e.Error.Message));
+
+                if (e.Error.InnerException != null)
+                    errorMsg.Append(Environment.NewLine + "Inner exception message: " + e.Error.InnerException.Message);
+
+                FlashHelpers.FlashError(this, errorMsg.ToString ());
+            }
+            else
+            {
+                Response.Write("<script>alert('" + Resource.email_message_sent + "');</script>");
+                Console.WriteLine("Message [{0}] sent.", e.UserState.ToString());
+
+                FlashHelpers.FlashSuccess(this, Resource.email_message_sent);
+            }
+        }
+
+        public void CancelMail(SmtpClient client)
+        {
+            client.SendAsyncCancel();
         }
 
         private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)

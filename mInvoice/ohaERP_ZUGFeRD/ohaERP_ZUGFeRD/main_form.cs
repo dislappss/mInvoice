@@ -88,13 +88,10 @@ namespace ZUGFeRD_Test
             , string LogisticsServiceChargeDescription = "Versandkosten"
             , string TradeAllowanceChargeDescription = "Sondernachlass"
            )
-        {
-            
-
+        {           
             string _output_file_directory = Path.GetDirectoryName(NonZUGFeRD_PDF);
             string _output_xml_file_path = Path.Combine(_output_file_directory, m_output_xml_file_name);
             string _output_pdf_file = null;
-
            
                 // Generate XML                
                 generateXMLFromInvoiceInfo(
@@ -138,7 +135,12 @@ namespace ZUGFeRD_Test
                     , TradeAllowanceChargeDescription 
                     );
 
-                _output_pdf_file = Path.Combine(_output_file_directory, Invoice_no + "_zugferd.pdf");
+
+
+                _output_pdf_file = Path.Combine(_output_file_directory, Invoice_no + "_" + Guid.NewGuid ().ToString() +  "_zugferd.pdf");
+
+                if (File.Exists(_output_pdf_file))
+                    File.Delete(_output_pdf_file);
 
                 ConvertRegularToConformantPDF_3A(
                       _output_pdf_file

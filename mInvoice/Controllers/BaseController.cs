@@ -6,6 +6,7 @@ using System.Threading;
 using mInvoice.Helpers;
 using System.Text;
 using mInvoice.Properties;
+using System.Web.UI;
 
 namespace mInvoice.Controllers
 {
@@ -19,6 +20,13 @@ namespace mInvoice.Controllers
     public class BaseController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
+        public enum MessageType { Success, Error, Info, Warning };
+
+        protected void ShowMessage(string Message, MessageType type)
+        {
+           
+        }
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {

@@ -4,7 +4,7 @@
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 
     bool _show_menu = Request.IsAuthenticated;
-    bool _is_admin = Session["email"] != null && Session["email"].ToString ()  == "dnepr5555@gmail.com";
+    bool _is_admin = Session["email"] != null && Session["email"].ToString() == "dnepr5555@gmail.com";
 
     string _language = culture == "en-us" ? Resources.Resource.english :
                        culture == "de" ? Resources.Resource.german : Resources.Resource.english;
@@ -119,10 +119,10 @@
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                               @if (_is_admin) 
-                               {
-                                   <li class="menu-item ">@Html.ActionLink(@Resources.Resource.currency_id, "Index", "Currency")</li>
-                               }
+                                @if (_is_admin)
+                                {
+                                    <li class="menu-item ">@Html.ActionLink(@Resources.Resource.currency_id, "Index", "Currency")</li>
+                                }
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.rates_of_taxes, "Index", "tax_rates")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.quantity_units, "Index", "Quantity_units")</li>
@@ -163,6 +163,12 @@
             </div>
         </div>
     </div>
+
+
+  @Html.RenderAlert()
+
+  @*<div class="messagealert" id="alert_container" />*@
+  
 
     <div class="container body-content">
         @RenderBody()
@@ -211,7 +217,7 @@
         (function ($) {
 
             $("input[type = 'radio']").click(function () {
-                $(this).parents("form").submit(); // post form               
+                $(this).parents("form").submit(); // post form
             });
 
             Cookie = {
@@ -234,29 +240,32 @@
                 }
             };
 
-            if (Cookie.get('_culture') == null)
-            {
+            if (Cookie.get('_culture') == null) {
                 $('.datepicker').datepicker({
                     weekStart: 0,
-                    language: 'en'
+                    language: 'en',
+                    todayBtn: true,
+                    todayHighlight: true
                 });
 
             }
             else {
                 $('.datepicker').datepicker({
                     weekStart: Cookie.get('_culture') === 'de' ? 1 : 0,
-                    language: Cookie.get('_culture')
+                    language: Cookie.get('_culture'),
+                    todayBtn: true,
+                    todayHighlight: true
                 });
 
             }
-            
+
         })(jQuery);
 
 
-       
 
-   
-   
+
+
+
 
 
     </script>
