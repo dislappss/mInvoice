@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -116,6 +117,11 @@ namespace mInvoice.Controllers
 
                 db.Clients.Add(clients);
                 db.SaveChanges();
+
+                // Create Invoice-Directory
+                var path = Server.MapPath("~/Invoices/" + Session ["AspNetUsers_id"]);
+                Directory.CreateDirectory(path);
+
                 return RedirectToAction("Index");
             }
 

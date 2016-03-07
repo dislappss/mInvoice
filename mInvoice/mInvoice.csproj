@@ -602,6 +602,7 @@
     <Content Include="Views\Currency\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Invoices\" />
     <Folder Include="Temp\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

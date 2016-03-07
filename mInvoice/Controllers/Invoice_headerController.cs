@@ -584,10 +584,12 @@ namespace mInvoice.Controllers
             Customers _customer = m_db.Customers.Find(_invoice_header.customers_id);
 
             _email_form.ID = (int)id;
+            _email_form.Invoice_No = _invoice_header.invoice_no;
             _email_form.From = _client.email;
             _email_form.Subject = _client.email_subject.Replace("%1", _invoice_header.invoice_no);
             _email_form.Message = _client.email_message.Replace("%1", _invoice_header.invoice_no);
             _email_form.To = _customer.email;
+
 
             string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathDownload = Path.Combine(pathUser, "Downloads");
@@ -603,9 +605,11 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
         {
+            string _pdf_tmp_file = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
+            // string _pdf_tmp_file_zugferd = HttpContext.Server.MapPath("~/App_Data/invoice_zugferd.pdf");
+
             try
             {
-               
                 var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(connectionString);
 
@@ -636,7 +640,8 @@ namespace mInvoice.Controllers
                     msg.Subject = EmailForm.Subject;
                     msg.Body = EmailForm.Message;
 
-                    Stream stream = this.Report(
+                    // Create PDF-File
+                    Stream _stream = this.Report(
                         ReportFormat.Pdf
                         , "Reports/invoice.rdlc"
                         , localReportDataSources: _localReportDataSources
@@ -644,25 +649,25 @@ namespace mInvoice.Controllers
                         , filename: EmailForm.Attachment
                         ).FileStream;
 
+                    Attachment att1 = null;
+
+                    if (System.IO.File.Exists(_pdf_tmp_file))
+                        System.IO.File.Delete(_pdf_tmp_file);
+
+                    byte[] buffer = new byte[20480];
+
+                    using (System.IO.FileStream output = new FileStream(_pdf_tmp_file, FileMode.OpenOrCreate))
+                    {
+                        int readBytes = 0;
+                        while ((readBytes = _stream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, readBytes);
+                        }
+                    }
+
+                    // ZUGFeRD
                     if (EmailForm.Zugferd)
                     {
-                        string _pdf_tmp_file = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
-                        string _pdf_tmp_file_zugferd = HttpContext.Server.MapPath("~/App_Data/invoice_zugferd.pdf");
-
-                        if (System.IO.File.Exists(_pdf_tmp_file))
-                            System.IO.File.Delete(_pdf_tmp_file);
-
-                        byte[] buffer = new byte[20480];
-
-                        using (System.IO.FileStream output = new FileStream(_pdf_tmp_file, FileMode.OpenOrCreate))
-                        {
-                            int readBytes = 0;
-                            while ((readBytes = stream.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                output.Write(buffer, 0, readBytes);
-                            }
-                        }
-
                         Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter
                             _rp_invoice_detailsTableAdapter = new Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter();
                         Reports.reportsDataSet _reportsDataSet = new Reports.reportsDataSet();
@@ -671,12 +676,6 @@ namespace mInvoice.Controllers
                             _reportsDataSet.rp_invoice_details,
                             _client_id,
                             EmailForm.ID);
-
-                        //if (_reportsDataSet.rp_invoice_details.Rows.Count == 0)
-                        //{
-                        //    return Content("<script language='javascript' type='text/javascript'>alert('" +
-                        //        Resource.invoice_not_found + "');</script>");
-                        //}
 
                         Reports.reportsDataSet.rp_invoice_detailsRow _row = _reportsDataSet.rp_invoice_details[0];
 
@@ -708,19 +707,19 @@ namespace mInvoice.Controllers
                             , _row.delivery_date
                             , _total_info.valueofgoods
                             , _total_info.valueofgoods_without_discount
-                            , _row.Isfreight_costsNull() ? new decimal? () :  _row.freight_costs
+                            , _row.Isfreight_costsNull() ? new decimal?() : _row.freight_costs
                             , _total_info.subtotal
                             , _total_info.taxtotalAmount
                             , _total_info.total
                             , _row.Tax_rates_value
-                            , _row.Payment_terms_description                            
-                            , _row.Isdue_dateNull () ? new DateTime? () : _row.due_date
+                            , _row.Payment_terms_description
+                            , _row.Isdue_dateNull() ? new DateTime?() : _row.due_date
                             , _row.Clients_iban
                             , _row.Clients_bic
                             , _row.Clients_account_number
                             , _row.Clients_bic
                             , _row.Clients_bank_name
-                            , _reportsDataSet.rp_invoice_details                            
+                            , _reportsDataSet.rp_invoice_details
                             , Resource.TradeLineCommentItem
                             , Server.MapPath("~/images/profile") //ZugFERDResourceDirectory
                             , Resource.LogisticsServiceChargeDescription //= "Versandkosten"
@@ -728,17 +727,51 @@ namespace mInvoice.Controllers
                             );
 
                         //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
-                        Attachment att1 = new Attachment(m_zugferd_file_path);
+                        att1 = new Attachment(m_zugferd_file_path);
                         msg.Attachments.Add(att1);
                     }
                     else
                     {
                         //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
-                        Attachment att1 = new Attachment(stream, EmailForm.Attachment);
+                        att1 = new Attachment(_stream, EmailForm.Attachment);
                         msg.Attachments.Add(att1);
                     }
 
+                    // Save invoice file
+                    if (Session["invoicesPath"] != null)
+                    {
+                        var _invoiceDirectory = Session["invoicesPath"].ToString();
 
+                        //tring targetFolder = HttpContext.Current.Server.MapPath("~/uploads/logo"); 
+                       DateTime _now = DateTime.Now ; 
+
+                        string targetPath = Path.Combine(_invoiceDirectory, 
+                            EmailForm.Invoice_No  +  "_"
+                            + _now.Year 
+                            + (_now.Month.ToString ().Length == 1 ? "0" + _now.Month.ToString () : _now.Month.ToString ())
+                            + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
+                            + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
+                            + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
+                            + ".pdf"
+                            );
+
+
+                        if (!Directory.Exists(_invoiceDirectory))
+                            Directory.CreateDirectory(_invoiceDirectory); 
+
+                        if (EmailForm.Zugferd)
+                        {
+                            System.IO.File.Copy(m_zugferd_file_path, targetPath);                            
+                        }
+                        else
+                        {
+                            System.IO.File.Copy(_pdf_tmp_file, targetPath);
+                        }
+
+                        System.IO.File.SetCreationTime(targetPath, _now);
+                    }
+
+                    // Send E-Mail
                     var _client = m_db.Clients.Find(_client_id);
 
                     try
@@ -760,7 +793,7 @@ namespace mInvoice.Controllers
 
                             smtp.SendCompleted += new SendCompletedEventHandler(SendCompleted);
 
-                            await smtp.SendMailAsync(msg);                           
+                            await smtp.SendMailAsync(msg);
                         }
                     }
                     catch (Exception ex)
@@ -774,7 +807,7 @@ namespace mInvoice.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(null, ex);             
+                ModelState.AddModelError(null, ex);
             }
             return View();
         }

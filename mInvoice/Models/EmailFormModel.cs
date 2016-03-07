@@ -11,6 +11,10 @@ namespace mInvoice.Models
     {
         public int ID { get; set; }
 
+        [Required]
+        [Display(Name = "invoice_no", ResourceType = typeof(Resource))]
+        public string Invoice_No { get; set; }
+
         [Required, EmailAddress]
         [Display(Name = "email_from", ResourceType = typeof(Resource))]
         public string From { get; set; }
