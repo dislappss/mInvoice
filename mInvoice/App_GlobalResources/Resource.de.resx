@@ -603,4 +603,19 @@
   <data name="email_canceled" xml:space="preserve">
     <value>EMail-Nachricht  [{0}] ist abgebrochen!</value>
   </data>
+  <data name="archive" xml:space="preserve">
+    <value>Archiv</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>Pfad</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>Anzeigen</value>
+  </data>
 </root>

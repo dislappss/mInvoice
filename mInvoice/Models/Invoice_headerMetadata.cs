@@ -10,59 +10,6 @@ namespace mInvoice.Models
     public partial class Invoice_header
     {
         public bool IsPaid { get; set; }
-
-        //public int BirthdateDay { get; set; }
-        //public int BirthdateMonth { get; set; }
-        //public int BirthdateYear { get; set; }
-
-    //    public IEnumerable<SelectListItem>order_dateDaySelectList 
-    //    {
-    //        get
-    //        {
-    //            for (int i = 1; i < 32; i++)
-    //            {
-    //                yield return new SelectListItem
-    //                {
-    //                    Value = i.ToString(),
-    //                    Text = i.ToString(),
-    //                    Selected = BirthdateDay == i
-    //                };
-    //            }
-    //        }
-    //    }
-
-    //    public IEnumerable<SelectListItem> order_dateMonthSelectList
-    //    {
-    //        get
-    //        {
-    //            for (int i = 1; i < 13; i++)
-    //            {
-    //                yield return new SelectListItem
-    //                {
-    //                    Value = i.ToString(),
-    //                    Text = new DateTime(2000, i, 1).ToString("MMMM"),
-    //                    Selected = BirthdateMonth == i
-    //                };
-    //            }
-    //        }
-    //    }
-
-    //    public IEnumerable<SelectListItem> order_dateYearSelectList
-    //    {
-    //        get
-    //        {
-    //            for (int i = 1910; i < DateTime.Now.Year; i++)
-    //            {
-    //                yield return new SelectListItem
-    //                {
-    //                    Value = i.ToString(),
-    //                    Text = i.ToString(),
-    //                    Selected = BirthdateYear == i
-    //                };
-    //            }
-    //        }
-    //    }
-
     }
 
     public class Invoice_headerMetadata

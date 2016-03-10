@@ -609,4 +609,19 @@
   <data name="email_canceled" xml:space="preserve">
     <value>The message [{0}] was canceled.</value>
   </data>
+  <data name="archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Create date</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>File path</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>Show</value>
+  </data>
 </root>

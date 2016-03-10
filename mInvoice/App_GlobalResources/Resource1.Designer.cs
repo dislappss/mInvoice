@@ -106,6 +106,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Archive ähnelt.
+        /// </summary>
+        public static string archive {
+            get {
+                return ResourceManager.GetString("archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure ? ähnelt.
         /// </summary>
         public static string are_you_sure {
@@ -363,6 +372,15 @@ namespace mInvoice.App_GlobalResources {
         public static string create_new {
             get {
                 return ResourceManager.GetString("create_new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create date ähnelt.
+        /// </summary>
+        public static string CreateDate {
+            get {
+                return ResourceManager.GetString("CreateDate", resourceCulture);
             }
         }
         
@@ -696,6 +714,24 @@ namespace mInvoice.App_GlobalResources {
         public static string fax_report {
             get {
                 return ResourceManager.GetString("fax_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die File ähnelt.
+        /// </summary>
+        public static string FileName {
+            get {
+                return ResourceManager.GetString("FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die File path ähnelt.
+        /// </summary>
+        public static string FilePath {
+            get {
+                return ResourceManager.GetString("FilePath", resourceCulture);
             }
         }
         
@@ -1344,6 +1380,15 @@ namespace mInvoice.App_GlobalResources {
         public static string shortmark {
             get {
                 return ResourceManager.GetString("shortmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show ähnelt.
+        /// </summary>
+        public static string show {
+            get {
+                return ResourceManager.GetString("show", resourceCulture);
             }
         }
         

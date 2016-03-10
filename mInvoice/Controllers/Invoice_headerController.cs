@@ -755,10 +755,9 @@ namespace mInvoice.Controllers
                             + ".pdf"
                             );
 
-
+                        // Archive
                         if (!Directory.Exists(_invoiceDirectory))
                             Directory.CreateDirectory(_invoiceDirectory); 
-
                         if (EmailForm.Zugferd)
                         {
                             System.IO.File.Copy(m_zugferd_file_path, targetPath);                            
@@ -843,6 +842,73 @@ namespace mInvoice.Controllers
         public void CancelMail(SmtpClient client)
         {
             client.SendAsyncCancel();
+        }
+
+        public ActionResult Archive(int? id)
+        {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Invoice_header _invoice_header = m_db.Invoice_header.Find(id);
+
+            if (_invoice_header == null)
+            {
+                return HttpNotFound();
+            }
+
+            var invoice_nr = _invoice_header.invoice_no;
+            var _invoiceDirectory = Session["invoicesPath"].ToString();
+
+            var _files = Directory.GetFiles(_invoiceDirectory, invoice_nr + "*.pdf").ToList();
+
+            List<Models.Archive> _list = new List<Models.Archive> ();
+
+            foreach (string _file in _files)
+            {
+                _list.Add(
+                    new Archive(
+                        _file
+                        , Path.GetFileName(_file).Replace (".pdf", "")
+                        , System.IO.File.GetCreationTime(_file)
+                    ));
+            }
+            return View(_list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Archive([Bind(Include = "Id,FilePath,CreateDate")] Archive archive)
+        {
+            if (ModelState.IsValid)
+            {
+                //m_db.Entry(invoice_header).State = EntityState.Modified;
+                //m_db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            //if (invoice_header == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            //ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
+            //ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
+            //ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
+            //ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
+            //ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
+            //ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
+
+            return View();
         }
 
         private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)
@@ -972,7 +1038,6 @@ namespace mInvoice.Controllers
             };
             return model;
         }
-
 
         public JsonResult getCustomer(int customer_id)
         {
