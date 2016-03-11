@@ -15,14 +15,20 @@ namespace mInvoice.Models
         public string FilePath { get; set; }
         
         [Display(Name = "CreateDate", ResourceType = typeof(Resource))]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:g}")]
         public DateTime CreateDate { get; set; }
 
-        public Archive(string FilePath, string FileName, DateTime CreateDate)
+        public enum archiveType { Mail, Report, Unknown}
+
+        [Display(Name = "type", ResourceType = typeof(Resource))]
+        public archiveType Type { get; set; }
+
+        public Archive(string FilePath, string FileName, DateTime CreateDate, archiveType ArchiveType)
         {
             this.Id = FileName;
             this.FilePath = FilePath;            
             this.CreateDate = CreateDate;
+            this.Type = ArchiveType;
         }
 
        

@@ -64,21 +64,36 @@ namespace mInvoice.Controllers
             int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
             IQueryable <Invoice_header> _headers = null;
-          
-            if(radioPaid != "true" && radioPaid != "false" )
-              _headers = from s in m_db.Invoice_header
-                           where s.clients_id == _clientsysid
-                           select s;
-            else if(radioPaid == "true")
-               _headers = from s in m_db.Invoice_header
+
+            if (String.IsNullOrEmpty(radioPaid))
+            {
+                _headers = from s in m_db.Invoice_header
                            where s.clients_id == _clientsysid &&
-                                 s.paid_at != null
+                                 s.paid_at == null
                            select s;
-            else if (radioPaid == "false")
-               _headers = from s in m_db.Invoice_header
-                       where s.clients_id == _clientsysid &&
-                             s.paid_at == null
-                       select s;
+
+
+            }
+            else
+            {
+                if (radioPaid != "true" && radioPaid != "false")
+                {
+                    _headers = from s in m_db.Invoice_header
+                               where s.clients_id == _clientsysid
+                               select s;
+
+                }
+                else if (radioPaid == "true")
+                    _headers = from s in m_db.Invoice_header
+                               where s.clients_id == _clientsysid &&
+                                     s.paid_at != null
+                               select s;
+                else if (radioPaid == "false")
+                    _headers = from s in m_db.Invoice_header
+                               where s.clients_id == _clientsysid &&
+                                     s.paid_at == null
+                               select s;
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -138,36 +153,15 @@ namespace mInvoice.Controllers
                 case "city":
                     _headers = _headers.OrderBy(s => s.city);
                     break;
-
-                //case "true":
-                //    _headers = from s in m_db.Invoice_header
-                //               where s.clients_id == _clientsysid &&
-                //                     s.paid_at != null
-                //               select s;
-                //    break;
-                //case "false":
-                //    _headers = from s in m_db.Invoice_header
-                //               where s.clients_id == _clientsysid &&
-                //                     s.paid_at == null
-                //               select s;
-                //    break;
-                //case "null":
-                //    _headers = _headers.Where(s => s.paid_at == null);
-                //    break;
-
-
+                
                 default:
-                    //_countries = _countries.OrderBy(s => s.name);
                     _headers = _headers.OrderBy(s => s.invoice_no);
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(_headers.ToPagedList(pageNumber, pageSize));
-
-            //var invoice_header = db.Invoice_header.Include(i => i.Countries).Include(i => i.Customers);
-            //return View(invoice_header.ToList());
         }
 
         // GET: Invoice_header/Details/5
@@ -851,6 +845,11 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            if (Session["invoicesPath"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -877,38 +876,29 @@ namespace mInvoice.Controllers
                         _file
                         , Path.GetFileName(_file).Replace (".pdf", "")
                         , System.IO.File.GetCreationTime(_file)
+                        , Models.Archive.archiveType.Mail 
                     ));
             }
-            return View(_list);
-        }
+            return View(_list.OrderByDescending (p=>p.CreateDate ));
+        }        
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Archive([Bind(Include = "Id,FilePath,CreateDate")] Archive archive)
+        public ActionResult GetFile(string Id)
         {
-            if (ModelState.IsValid)
+            var _invoiceDirectory = Session["invoicesPath"].ToString();
+            var _filePath = Path.Combine(_invoiceDirectory, Id + ".pdf");
+
+            //return File(_filePath, "application/pdf");
+
+            if (System.IO.File.Exists(_filePath))
             {
-                //m_db.Entry(invoice_header).State = EntityState.Modified;
-                //m_db.SaveChanges();
-
-                return RedirectToAction("Index");
+                return File(_filePath, "application/pdf", Path.GetFileName (_filePath)); // Here is where I want to cause the download, but this isn't working
             }
+            else
+            {
+                FlashHelpers.FlashError(this, Resource.file_not_exists);
 
-            //if (invoice_header == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
-            //var _client_id = Convert.ToInt32(Session["client_id"]);
-
-            //ViewBag.countriesid = new SelectList(m_db.Countries.OrderByDescending(s => s.active), "Id", "name", invoice_header.countriesid);
-            //ViewBag.customers_id = new SelectList(m_db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no", invoice_header.customers_id);
-            //ViewBag.payment_terms_id = new SelectList(m_db.Payment_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.payment_terms_id);
-            //ViewBag.delivery_terms_id = new SelectList(m_db.Delivery_terms.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.delivery_terms_id);
-            //ViewBag.currency_id = new SelectList(m_db.Currency, "Id", "name", invoice_header.currency_id);
-            //ViewBag.tax_rate_id = new SelectList(m_db.Tax_rates.Where(s => s.clients_id == _client_id), "Id", "description", invoice_header.tax_rate_id);
-
-            return View();
+                return RedirectToAction("Edit", "Editor"); // Goes back to the editing page
+            }           
         }
 
         private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)

@@ -115,6 +115,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Archive type ähnelt.
+        /// </summary>
+        public static string archive_type {
+            get {
+                return ResourceManager.GetString("archive_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure ? ähnelt.
         /// </summary>
         public static string are_you_sure {
@@ -714,6 +723,15 @@ namespace mInvoice.App_GlobalResources {
         public static string fax_report {
             get {
                 return ResourceManager.GetString("fax_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die File not exists. ähnelt.
+        /// </summary>
+        public static string file_not_exists {
+            get {
+                return ResourceManager.GetString("file_not_exists", resourceCulture);
             }
         }
         
@@ -1366,6 +1384,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Send per EMail ähnelt.
+        /// </summary>
+        public static string send_per_email {
+            get {
+                return ResourceManager.GetString("send_per_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set today ähnelt.
         /// </summary>
         public static string set_today {
@@ -1488,6 +1515,15 @@ namespace mInvoice.App_GlobalResources {
         public static string TradeLineCommentItem {
             get {
                 return ResourceManager.GetString("TradeLineCommentItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type ähnelt.
+        /// </summary>
+        public static string type {
+            get {
+                return ResourceManager.GetString("type", resourceCulture);
             }
         }
         

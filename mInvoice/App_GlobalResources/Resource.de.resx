@@ -618,4 +618,16 @@
   <data name="show" xml:space="preserve">
     <value>Anzeigen</value>
   </data>
+  <data name="archive_type" xml:space="preserve">
+    <value>Archivtyp</value>
+  </data>
+  <data name="file_not_exists" xml:space="preserve">
+    <value>Datei nicht existiert.</value>
+  </data>
+  <data name="send_per_email" xml:space="preserve">
+    <value>Per EMail senden</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
 </root>

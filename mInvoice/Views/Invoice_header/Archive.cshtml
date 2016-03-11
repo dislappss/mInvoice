@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<mInvoice.Models.Archive>
 
-@{
-    ViewBag.Title = @Resources.Resource.archive;
-}
-
 <h2>@Resources.Resource.archive</h2>
 
     <div class="form-horizontal">
-        <h4>@Resources.Resource.optonal_parameters</h4>
-        <hr />
+        <h4>@Resources.Resource.archive</h4>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })      
 
         <table class="table">
@@ -18,6 +14,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)                                                                                       
                 </th>
                 <th></th>
             </tr>
@@ -31,9 +30,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateDate)
                     </td>
+                    <td>                      
+                        @Html.DisplayFor(modelItem => item.Type)                            
+                    </td>
                     <td>
-                        @*@Html.ActionLink(@Resources.Resource.show, "Archive", new { id = item.FileName }, new { @class = "btn btn-default" })*@
-                        @Html.ActionLink(@Resources.Resource.show, "Archive", new { @id = item.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink(@Resources.Resource.show, "GetFile", new { @id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                     </td>
                 </tr>
             }
