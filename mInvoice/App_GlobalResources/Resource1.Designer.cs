@@ -1231,6 +1231,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Print ähnelt.
+        /// </summary>
+        public static string print {
+            get {
+                return ResourceManager.GetString("print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Quantity ähnelt.
         /// </summary>
         public static string quantity {

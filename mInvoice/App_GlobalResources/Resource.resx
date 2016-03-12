@@ -636,4 +636,7 @@
   <data name="type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="print" xml:space="preserve">
+    <value>Print</value>
+  </data>
 </root>

@@ -16,8 +16,6 @@ using mInvoice.Models;
 using MvcReportViewer;
 using PagedList;
 
-
-
 namespace mInvoice.Controllers
 {
     public class Invoice_headerController : BaseController
@@ -584,7 +582,6 @@ namespace mInvoice.Controllers
             _email_form.Message = _client.email_message.Replace("%1", _invoice_header.invoice_no);
             _email_form.To = _customer.email;
 
-
             string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathDownload = Path.Combine(pathUser, "Downloads");
             string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
@@ -634,30 +631,10 @@ namespace mInvoice.Controllers
                     msg.Subject = EmailForm.Subject;
                     msg.Body = EmailForm.Message;
 
-                    // Create PDF-File
-                    Stream _stream = this.Report(
-                        ReportFormat.Pdf
-                        , "Reports/invoice.rdlc"
-                        , localReportDataSources: _localReportDataSources
-                        , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
-                        , filename: EmailForm.Attachment
-                        ).FileStream;
-
                     Attachment att1 = null;
 
-                    if (System.IO.File.Exists(_pdf_tmp_file))
-                        System.IO.File.Delete(_pdf_tmp_file);
-
-                    byte[] buffer = new byte[20480];
-
-                    using (System.IO.FileStream output = new FileStream(_pdf_tmp_file, FileMode.OpenOrCreate))
-                    {
-                        int readBytes = 0;
-                        while ((readBytes = _stream.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            output.Write(buffer, 0, readBytes);
-                        }
-                    }
+                    // Create PDF-File
+                    Stream _stream = CreateInvoicePDFFile(EmailForm.Attachment, _pdf_tmp_file, _localReportDataSources);
 
                     // ZUGFeRD
                     if (EmailForm.Zugferd)
@@ -751,7 +728,11 @@ namespace mInvoice.Controllers
 
                         // Archive
                         if (!Directory.Exists(_invoiceDirectory))
-                            Directory.CreateDirectory(_invoiceDirectory); 
+                            Directory.CreateDirectory(_invoiceDirectory);
+
+                        if (System.IO.File.Exists(targetPath))
+                            System.IO.File.Delete(targetPath);
+
                         if (EmailForm.Zugferd)
                         {
                             System.IO.File.Copy(m_zugferd_file_path, targetPath);                            
@@ -803,6 +784,104 @@ namespace mInvoice.Controllers
                 ModelState.AddModelError(null, ex);
             }
             return View();
+        }
+
+        public ActionResult Print(int id)
+        {
+            string targetPath = null;
+            string _output_full_file_path = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
+
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _client_id = Convert.ToInt32(Session["client_id"]);
+
+            var model = GetData_invoice(id);
+
+            Dictionary<string, System.Data.DataTable> _localReportDataSources =
+                       new Dictionary<string, System.Data.DataTable>();
+
+            _localReportDataSources.Add("labels", model.labels);
+            _localReportDataSources.Add("data", model.data);
+
+            // Create PDF-File
+            string _file_name = model.data[0].invoice_no;
+
+            if (System.IO.File.Exists(_output_full_file_path))
+                System.IO.File.Delete(_output_full_file_path);
+
+            Stream _stream = CreateInvoicePDFFile(_file_name, _output_full_file_path, _localReportDataSources);
+
+            // Archive
+            if (Session["invoicesPath"] != null)
+            {
+                var _invoiceDirectory = Session["invoicesPath"].ToString();
+
+                DateTime _now = DateTime.Now;
+
+                targetPath = Path.Combine(_invoiceDirectory,
+                           _file_name + "_"
+                           + _now.Year
+                           + (_now.Month.ToString().Length == 1 ? "0" + _now.Month.ToString() : _now.Month.ToString())
+                           + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
+                           + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
+                           + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
+                           + ".pdf"
+                           );
+
+                if (!Directory.Exists(_invoiceDirectory))
+                    Directory.CreateDirectory(_invoiceDirectory);
+
+                if (System.IO.File.Exists(targetPath))
+                    System.IO.File.Delete(targetPath);
+
+                System.IO.File.Copy(_output_full_file_path, targetPath);
+                System.IO.File.SetCreationTime(_output_full_file_path, _now);
+            }
+
+            // Open PDF-File
+            return File(targetPath, "application/pdf", Path.GetFileName(targetPath));
+        }
+
+        private Stream CreateInvoicePDFFile(
+            string TmpFileName
+            , string OutputFileName
+            , Dictionary<string, System.Data.DataTable> _localReportDataSources)
+        {
+            Stream _stream = null;
+
+            if(!string.IsNullOrEmpty (TmpFileName))
+                _stream = this.Report(
+                    ReportFormat.Pdf
+                    , "Reports/invoice.rdlc"
+                    , localReportDataSources: _localReportDataSources
+                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                    , filename: TmpFileName
+                    ).FileStream;
+            else
+                _stream = this.Report(
+                    ReportFormat.Pdf
+                    , "Reports/invoice.rdlc"
+                    , localReportDataSources: _localReportDataSources
+                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                    ).FileStream;
+
+            if (System.IO.File.Exists(OutputFileName))
+                System.IO.File.Delete(OutputFileName);
+
+            byte[] buffer = new byte[20480];
+
+            using (System.IO.FileStream output = new FileStream(OutputFileName, FileMode.OpenOrCreate))
+            {
+                int readBytes = 0;
+                while ((readBytes = _stream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    output.Write(buffer, 0, readBytes);
+                }
+            }
+            return _stream;
         }
 
         private void SendCompleted(object sender, AsyncCompletedEventArgs e)

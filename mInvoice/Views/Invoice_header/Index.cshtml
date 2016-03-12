@@ -124,6 +124,7 @@
                           @class = "btn btn-primary btn-xs" }                    
                 )
                 @Html.ActionLink(@Resources.Resource.show, "rp_invoice_details", "Reports", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@Resources.Resource.print, "Print", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.send_per_email, "EmailForm", "Invoice_header", new { id = item.Id, zugferd = false }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.archive, "Archive", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
 

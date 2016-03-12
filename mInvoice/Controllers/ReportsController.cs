@@ -179,11 +179,7 @@ namespace mInvoice.Controllers
                 , localReportDataSources: _localReportDataSources
                 , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
                 , filename: FileName
-                );
-
-            //Email email = new Email("Example");
-            //email.Attach(new Attachment(_report_stream.FileStream.));
-            //email.Send();                  
+                );              
         }
 
     }
