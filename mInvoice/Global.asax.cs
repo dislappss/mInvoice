@@ -23,6 +23,9 @@ namespace mInvoice
           
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
 
+
+            MvcHandler.DisableMvcResponseHeader = true;
+
             //ModelBinders.Binders.Add(typeof(Nullable<DateTime>), new DateTimeModelBinder()
             //{
             //    //Date = DateTime.Now, // Date parts are not splitted in the View

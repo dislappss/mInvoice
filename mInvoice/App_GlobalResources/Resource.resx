@@ -639,4 +639,7 @@
   <data name="print" xml:space="preserve">
     <value>Print</value>
   </data>
+  <data name="cant_open_file" xml:space="preserve">
+    <value>Can*t open file.</value>
+  </data>
 </root>

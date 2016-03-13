@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using mInvoice.App_GlobalResources;
 using mInvoice.Models;
@@ -700,6 +701,8 @@ namespace mInvoice.Controllers
                         //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
                         att1 = new Attachment(m_zugferd_file_path);
                         msg.Attachments.Add(att1);
+
+                        System.IO.File.Delete(m_zugferd_file_path);
                     }
                     else
                     {
@@ -714,12 +717,12 @@ namespace mInvoice.Controllers
                         var _invoiceDirectory = Session["invoicesPath"].ToString();
 
                         //tring targetFolder = HttpContext.Current.Server.MapPath("~/uploads/logo"); 
-                       DateTime _now = DateTime.Now ; 
+                        DateTime _now = DateTime.Now;
 
-                        string targetPath = Path.Combine(_invoiceDirectory, 
-                            EmailForm.Invoice_No  +  "_"
-                            + _now.Year 
-                            + (_now.Month.ToString ().Length == 1 ? "0" + _now.Month.ToString () : _now.Month.ToString ())
+                        string targetPath = Path.Combine(_invoiceDirectory,
+                            EmailForm.Invoice_No + "_"
+                            + _now.Year
+                            + (_now.Month.ToString().Length == 1 ? "0" + _now.Month.ToString() : _now.Month.ToString())
                             + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
                             + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
                             + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
@@ -735,7 +738,7 @@ namespace mInvoice.Controllers
 
                         if (EmailForm.Zugferd)
                         {
-                            System.IO.File.Copy(m_zugferd_file_path, targetPath);                            
+                            System.IO.File.Copy(m_zugferd_file_path, targetPath);
                         }
                         else
                         {
@@ -748,32 +751,24 @@ namespace mInvoice.Controllers
                     // Send E-Mail
                     var _client = m_db.Clients.Find(_client_id);
 
-                    try
+                    using (var smtp = new SmtpClient())
                     {
-                        using (var smtp = new SmtpClient())
+                        var credential = new NetworkCredential
                         {
-                            var credential = new NetworkCredential
-                            {
-                                UserName = _client.email_user_name,
-                                Password = _client.email_password
-                            };
-                            smtp.Host = _client.email_host;
-                            smtp.Port = (int)_client.email_port;
-                            smtp.EnableSsl = true;
-                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = credential;
-                            smtp.Timeout = 20000;
+                            UserName = _client.email_user_name,
+                            Password = _client.email_password
+                        };
+                        smtp.Host = _client.email_host;
+                        smtp.Port = (int)_client.email_port;
+                        smtp.EnableSsl = true;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = credential;
+                        smtp.Timeout = 20000;
 
-                            smtp.SendCompleted += new SendCompletedEventHandler(SendCompleted);
+                        smtp.SendCompleted += new SendCompletedEventHandler(SendCompleted);
 
-                            await smtp.SendMailAsync(msg);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ModelState.AddModelError(null, ex);
-                        return View();
+                        await smtp.SendMailAsync(msg);
                     }
                 }
 
@@ -786,9 +781,9 @@ namespace mInvoice.Controllers
             return View();
         }
 
-        public ActionResult Print(int id)
+        public ActionResult  PrintHeader(int id)
         {
-            string targetPath = null;
+            string _targetPath = null;
             string _output_full_file_path = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
 
             if (Session["client_id"] == null)
@@ -821,7 +816,7 @@ namespace mInvoice.Controllers
 
                 DateTime _now = DateTime.Now;
 
-                targetPath = Path.Combine(_invoiceDirectory,
+                _targetPath = Path.Combine(_invoiceDirectory,
                            _file_name + "_"
                            + _now.Year
                            + (_now.Month.ToString().Length == 1 ? "0" + _now.Month.ToString() : _now.Month.ToString())
@@ -834,15 +829,29 @@ namespace mInvoice.Controllers
                 if (!Directory.Exists(_invoiceDirectory))
                     Directory.CreateDirectory(_invoiceDirectory);
 
-                if (System.IO.File.Exists(targetPath))
-                    System.IO.File.Delete(targetPath);
+                if (System.IO.File.Exists(_targetPath))
+                    System.IO.File.Delete(_targetPath);
 
-                System.IO.File.Copy(_output_full_file_path, targetPath);
                 System.IO.File.SetCreationTime(_output_full_file_path, _now);
+
+                System.IO.File.Copy(_output_full_file_path, _targetPath);
+               
+                System.IO.File.Delete(_output_full_file_path);
             }
 
-            // Open PDF-File
-            return File(targetPath, "application/pdf", Path.GetFileName(targetPath));
+            // Open PDF-File       
+            if (!string.IsNullOrEmpty(_targetPath))
+            {
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + _targetPath);
+
+                return File(_targetPath, "application/pdf", Path.GetFileName(_targetPath));
+            }
+            else
+            {
+                FlashHelpers.FlashError(this, Resource.cant_open_file);
+
+                return RedirectToAction("Index");
+            }
         }
 
         private Stream CreateInvoicePDFFile(
@@ -970,14 +979,14 @@ namespace mInvoice.Controllers
 
             if (System.IO.File.Exists(_filePath))
             {
-                return File(_filePath, "application/pdf", Path.GetFileName (_filePath)); // Here is where I want to cause the download, but this isn't working
+                return File(_filePath, "application/pdf", Path.GetFileName(_filePath)); // Here is where I want to cause the download, but this isn't working
             }
             else
             {
                 FlashHelpers.FlashError(this, Resource.file_not_exists);
 
                 return RedirectToAction("Edit", "Editor"); // Goes back to the editing page
-            }           
+            }
         }
 
         private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)

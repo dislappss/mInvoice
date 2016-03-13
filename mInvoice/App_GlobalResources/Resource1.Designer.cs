@@ -232,6 +232,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Can*t open file. ähnelt.
+        /// </summary>
+        public static string cant_open_file {
+            get {
+                return ResourceManager.GetString("cant_open_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cash discount ähnelt.
         /// </summary>
         public static string cash_discount {

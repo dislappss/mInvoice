@@ -633,4 +633,7 @@
   <data name="print" xml:space="preserve">
     <value>Drucken</value>
   </data>
+  <data name="cant_open_file" xml:space="preserve">
+    <value>Datei kann nicht geöffnet werden.</value>
+  </data>
 </root>
