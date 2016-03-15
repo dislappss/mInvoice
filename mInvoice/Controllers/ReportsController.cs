@@ -77,7 +77,7 @@ namespace mInvoice.Controllers
             return View(model);
         }
 
-        public ActionResult rp_invoice_details(int id, bool ShowPrintButton)
+        public ActionResult invoice(int id, bool ShowPrintButton)
         {
             var model = GetData_invoice(id);
 

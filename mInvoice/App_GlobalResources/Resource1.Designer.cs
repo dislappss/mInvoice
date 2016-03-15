@@ -466,6 +466,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date, from ähnelt.
+        /// </summary>
+        public static string date_from {
+            get {
+                return ResourceManager.GetString("date_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date, to ähnelt.
+        /// </summary>
+        public static string date_to {
+            get {
+                return ResourceManager.GetString("date_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Day ähnelt.
         /// </summary>
         public static string day {
@@ -1398,6 +1416,15 @@ namespace mInvoice.App_GlobalResources {
         public static string remember_this_browser {
             get {
                 return ResourceManager.GetString("remember_this_browser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report parameters ähnelt.
+        /// </summary>
+        public static string ReportParameters {
+            get {
+                return ResourceManager.GetString("ReportParameters", resourceCulture);
             }
         }
         

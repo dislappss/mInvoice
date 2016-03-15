@@ -294,6 +294,7 @@
     <Compile Include="Models\Quantity_units.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportParametersModel.cs" />
     <Compile Include="Models\ReportsModels.cs" />
     <Compile Include="Models\SplittedDateRequiredValidator.cs">
       <SubType>Code</SubType>
@@ -602,7 +603,8 @@
     <Content Include="Views\Currency\Edit.cshtml" />
     <Content Include="Views\Currency\Index.cshtml" />
     <Content Include="Views\Invoice_header\Archive.cshtml" />
-    <Content Include="Views\Reports\rp_invoice_details - Kopieren.cshtml" />
+    <Content Include="Views\Reports\invoice.cshtml" />
+    <Content Include="Views\Invoice_header\ReportParameters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Invoices\" />

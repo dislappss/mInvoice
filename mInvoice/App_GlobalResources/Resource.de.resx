@@ -556,7 +556,7 @@
     <value>Nicht bezahlte</value>
   </data>
   <data name="paid" xml:space="preserve">
-    <value>Bezalte</value>
+    <value>Bezahlte</value>
   </data>
   <data name="mode" xml:space="preserve">
     <value>Modus</value>
@@ -671,5 +671,14 @@
   </data>
   <data name="sales_details" xml:space="preserve">
     <value>Einzelheiten zum Verkauf</value>
+  </data>
+  <data name="date_from" xml:space="preserve">
+    <value>Datum, von</value>
+  </data>
+  <data name="date_to" xml:space="preserve">
+    <value>Datum, bis</value>
+  </data>
+  <data name="ReportParameters" xml:space="preserve">
+    <value>Berichtsparameter</value>
   </data>
 </root>

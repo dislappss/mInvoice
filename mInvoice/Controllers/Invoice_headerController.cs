@@ -593,6 +593,18 @@ namespace mInvoice.Controllers
             return View(_email_form);
         }
 
+        public ActionResult ReportParameters()
+        {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }            
+
+            ReportParametersModel  _form = new ReportParametersModel ();        
+
+            return View(_form);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
@@ -776,9 +788,9 @@ namespace mInvoice.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(null, ex);
+                FlashHelpers.FlashError(this, ex.Message );
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult  PrintHeader(int id)
@@ -846,7 +858,7 @@ namespace mInvoice.Controllers
                 //return File(_targetPath, "application/pdf");
 
 
-                return RedirectToAction("rp_invoice_details", "Reports", new { id = id, ShowPrintButton = true });
+                return RedirectToAction("invoice", "Reports", new { id = id, ShowPrintButton = true });
             }
             else
             {

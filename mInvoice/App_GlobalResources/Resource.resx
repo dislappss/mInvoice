@@ -678,4 +678,13 @@
   <data name="sales_details" xml:space="preserve">
     <value>Sales details</value>
   </data>
+  <data name="date_from" xml:space="preserve">
+    <value>Date, from</value>
+  </data>
+  <data name="date_to" xml:space="preserve">
+    <value>Date, to</value>
+  </data>
+  <data name="ReportParameters" xml:space="preserve">
+    <value>Report parameters</value>
+  </data>
 </root>

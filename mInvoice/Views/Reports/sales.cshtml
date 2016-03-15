@@ -14,6 +14,7 @@
     var settings = new ControlSettings
         {
             ShowParameterPrompts = true,
+            ShowToolBar = true,
             ShowFindControls = true,
             //BackColor = System.Drawing.Color.LightBlue ,
             KeepSessionAlive = true,
@@ -26,4 +27,5 @@
 }
 
 @Html.MvcReportViewerFluent("Reports/sales.rdlc").ProcessingMode(ProcessingMode.Local).LocalDataSource("labels", Model.labels).LocalDataSource("data", Model.data).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
+
 
