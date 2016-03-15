@@ -15,8 +15,13 @@
 
         public class rp_invoice_detailsModel
         {
-            public Reports.reportsDataSet.rp_invoice_detailsDataTable data { get; set; }
+            public Reports.reportsDataSet.rp_invoice_detailsDataTable  data { get; set; }
             public Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable  labels { get; set; }
         }
-    
+
+        public class rp_salesModel
+        {
+            public Reports.reportsDataSet.rp_salesDataTable data { get; set; }
+            public Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable  labels { get; set; }
+        }
 }

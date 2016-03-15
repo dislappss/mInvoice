@@ -6,6 +6,7 @@
 
 @{
     ViewBag.Title = @Resources.Resource.invoice;
+    
 }
 
 <h2>@Resources.Resource.invoice </h2>
@@ -19,7 +20,9 @@
             KeepSessionAlive = true,
             //Width = new System.Web.UI.WebControls.Unit("100%"),
             //Height = new System.Web.UI.WebControls.Unit("800px"),
-            AsyncRendering = false
+            AsyncRendering = false,
+            ShowPrintButton = ViewBag.ShowPrintButton,
+            ShowExportControls = ViewBag.ShowPrintButton
         };
 }
 

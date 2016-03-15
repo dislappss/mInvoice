@@ -636,4 +636,40 @@
   <data name="cant_open_file" xml:space="preserve">
     <value>Datei kann nicht geöffnet werden.</value>
   </data>
+  <data name="country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="margin" xml:space="preserve">
+    <value>Marge</value>
+  </data>
+  <data name="percent_of_total_sales" xml:space="preserve">
+    <value>Gesamtumsatz, %</value>
+  </data>
+  <data name="product" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="product_costs" xml:space="preserve">
+    <value>Produktkosten</value>
+  </data>
+  <data name="quarter" xml:space="preserve">
+    <value>Quartal</value>
+  </data>
+  <data name="total_sales" xml:space="preserve">
+    <value>Gesamtumsatz</value>
+  </data>
+  <data name="total_sales_by_quarter" xml:space="preserve">
+    <value>Gesamtumsatz pro Quartal</value>
+  </data>
+  <data name="total_sales_by_year" xml:space="preserve">
+    <value>Gesamtumsatz pro Jahr</value>
+  </data>
+  <data name="total_value" xml:space="preserve">
+    <value>Gesamtwert</value>
+  </data>
+  <data name="sales" xml:space="preserve">
+    <value>Verkäufe</value>
+  </data>
+  <data name="sales_details" xml:space="preserve">
+    <value>Einzelheiten zum Verkauf</value>
+  </data>
 </root>

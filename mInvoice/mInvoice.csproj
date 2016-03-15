@@ -586,7 +586,7 @@
     <Content Include="Views\Quantity_units\Delete.cshtml" />
     <Content Include="Views\Quantity_units\Edit.cshtml" />
     <Content Include="Views\Quantity_units\Index.cshtml" />
-    <Content Include="Views\Reports\rp_invoice_details.cshtml" />
+    <Content Include="Views\Reports\sales.cshtml" />
     <Content Include="Views\Payment_terms\Create.cshtml" />
     <Content Include="Views\Payment_terms\Delete.cshtml" />
     <Content Include="Views\Payment_terms\Edit.cshtml" />
@@ -602,6 +602,7 @@
     <Content Include="Views\Currency\Edit.cshtml" />
     <Content Include="Views\Currency\Index.cshtml" />
     <Content Include="Views\Invoice_header\Archive.cshtml" />
+    <Content Include="Views\Reports\rp_invoice_details - Kopieren.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Invoices\" />
@@ -626,6 +627,7 @@
       <DependentUpon>201601141917262_Init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\invoice.rdlc" />
+    <EmbeddedResource Include="Reports\sales.rdlc" />
     <None Include="Models\AspNetDataClasses.dbml.layout">
       <DependentUpon>AspNetDataClasses.dbml</DependentUpon>
     </None>

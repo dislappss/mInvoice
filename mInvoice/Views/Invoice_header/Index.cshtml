@@ -123,7 +123,7 @@
                     new { onclick = "return confirm('" + @Resources.Resource.are_you_sure_change_paying + "');", 
                           @class = "btn btn-primary btn-xs" }                    
                 )
-                @Html.ActionLink(@Resources.Resource.show, "rp_invoice_details", "Reports", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@Resources.Resource.show, "rp_invoice_details", "Reports", new { id = item.Id, ShowPrintButton = false  }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.print, "PrintHeader", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.send_per_email, "EmailForm", "Invoice_header", new { id = item.Id, zugferd = false }, new { @class = "btn btn-primary btn-xs" })
                 @Html.ActionLink(@Resources.Resource.archive, "Archive", "Invoice_header", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" })

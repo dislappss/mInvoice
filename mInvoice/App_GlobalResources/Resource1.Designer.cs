@@ -351,6 +351,15 @@ namespace mInvoice.App_GlobalResources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Country ähnelt.
         /// </summary>
+        public static string country {
+            get {
+                return ResourceManager.GetString("country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Country ähnelt.
+        /// </summary>
         public static string country_code {
             get {
                 return ResourceManager.GetString("country_code", resourceCulture);
@@ -925,6 +934,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Margin ähnelt.
+        /// </summary>
+        public static string margin {
+            get {
+                return ResourceManager.GetString("margin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Paid / Unpaid ähnelt.
         /// </summary>
         public static string mark_as_paid {
@@ -1150,6 +1168,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die % of total sales ähnelt.
+        /// </summary>
+        public static string percent_of_total_sales {
+            get {
+                return ResourceManager.GetString("percent_of_total_sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Phone ähnelt.
         /// </summary>
         public static string phone {
@@ -1249,6 +1276,24 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Product ähnelt.
+        /// </summary>
+        public static string product {
+            get {
+                return ResourceManager.GetString("product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Product costs ähnelt.
+        /// </summary>
+        public static string product_costs {
+            get {
+                return ResourceManager.GetString("product_costs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Quantity ähnelt.
         /// </summary>
         public static string quantity {
@@ -1321,6 +1366,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quarter ähnelt.
+        /// </summary>
+        public static string quarter {
+            get {
+                return ResourceManager.GetString("quarter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Rates of taxes ähnelt.
         /// </summary>
         public static string rates_of_taxes {
@@ -1353,6 +1407,24 @@ namespace mInvoice.App_GlobalResources {
         public static string reports {
             get {
                 return ResourceManager.GetString("reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sales ähnelt.
+        /// </summary>
+        public static string sales {
+            get {
+                return ResourceManager.GetString("sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sales details ähnelt.
+        /// </summary>
+        public static string sales_details {
+            get {
+                return ResourceManager.GetString("sales_details", resourceCulture);
             }
         }
         
@@ -1515,6 +1587,42 @@ namespace mInvoice.App_GlobalResources {
         public static string total_amount {
             get {
                 return ResourceManager.GetString("total_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total sales ähnelt.
+        /// </summary>
+        public static string total_sales {
+            get {
+                return ResourceManager.GetString("total_sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total sales by quarter ähnelt.
+        /// </summary>
+        public static string total_sales_by_quarter {
+            get {
+                return ResourceManager.GetString("total_sales_by_quarter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total sales by year ähnelt.
+        /// </summary>
+        public static string total_sales_by_year {
+            get {
+                return ResourceManager.GetString("total_sales_by_year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total value ähnelt.
+        /// </summary>
+        public static string total_value {
+            get {
+                return ResourceManager.GetString("total_value", resourceCulture);
             }
         }
         

@@ -842,15 +842,31 @@ namespace mInvoice.Controllers
             // Open PDF-File       
             if (!string.IsNullOrEmpty(_targetPath))
             {
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + _targetPath);
+                //Response.AppendHeader("Content-Disposition", "inline; filename=" + Path.GetFileName(_targetPath));
+                //return File(_targetPath, "application/pdf");
 
-                return File(_targetPath, "application/pdf", Path.GetFileName(_targetPath));
+
+                return RedirectToAction("rp_invoice_details", "Reports", new { id = id, ShowPrintButton = true });
             }
             else
             {
                 FlashHelpers.FlashError(this, Resource.cant_open_file);
 
                 return RedirectToAction("Index");
+            }
+        }
+
+        public static byte[] Stream2ByteArray(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
             }
         }
 
@@ -1038,7 +1054,7 @@ namespace mInvoice.Controllers
             public decimal total { get; set; }
         }
 
-        private rp_invoice_detailsModel GetData_invoice(int id)
+        private mInvoice.Models.rp_invoice_detailsModel GetData_invoice(int id)
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
 
@@ -1106,7 +1122,21 @@ namespace mInvoice.Controllers
                         Resource.owner_report,
                         Resource.delivery_date_report,
                         Resource.payment_terms,
-                        Resource.delivery_terms
+                        Resource.delivery_terms,
+                        Resource.sales,
+                        Resource.month,
+                        Resource.year,
+                        Resource.quarter,
+                        Resource.country,
+                        Resource.product,
+                        Resource.product_costs,
+                        Resource.margin,
+                        Resource.total_sales,
+                        Resource.total_sales_by_year,
+                        Resource.total_sales_by_quarter,
+                        Resource.percent_of_total_sales,
+                        Resource.total_value,
+                        Resource.sales_details
                         );
 
             var model = new mInvoice.Models.rp_invoice_detailsModel()

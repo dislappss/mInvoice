@@ -642,4 +642,40 @@
   <data name="cant_open_file" xml:space="preserve">
     <value>Can*t open file.</value>
   </data>
+  <data name="country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="margin" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="percent_of_total_sales" xml:space="preserve">
+    <value>% of total sales</value>
+  </data>
+  <data name="product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="product_costs" xml:space="preserve">
+    <value>Product costs</value>
+  </data>
+  <data name="quarter" xml:space="preserve">
+    <value>Quarter</value>
+  </data>
+  <data name="total_sales" xml:space="preserve">
+    <value>Total sales</value>
+  </data>
+  <data name="total_sales_by_quarter" xml:space="preserve">
+    <value>Total sales by quarter</value>
+  </data>
+  <data name="total_sales_by_year" xml:space="preserve">
+    <value>Total sales by year</value>
+  </data>
+  <data name="total_value" xml:space="preserve">
+    <value>Total value</value>
+  </data>
+  <data name="sales" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="sales_details" xml:space="preserve">
+    <value>Sales details</value>
+  </data>
 </root>
