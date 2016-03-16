@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 using mInvoice.App_GlobalResources;
 using mInvoice.Models;
 using MvcReportViewer;
+using System.Linq;
 
 namespace mInvoice.Controllers
 {
     public class ReportsController : BaseController
     {
+        private myinvoice_dbEntities db = new myinvoice_dbEntities ();
+
         // GET: Reports
         public ActionResult articles()
         {
@@ -86,9 +90,13 @@ namespace mInvoice.Controllers
             return View(model);
         }
 
-        public ActionResult sales()
+        public ActionResult sales(
+            DateTime? Date_from
+            , DateTime? Date_to
+            , int? Article_id
+            , int? Customers_id)
         {
-            var model = GetData_sales ();
+            var model = GetData_sales(Date_from, Date_to, Article_id, Customers_id);
 
             ViewBag.ShowPrintButton = true;
 
@@ -178,7 +186,9 @@ namespace mInvoice.Controllers
                         Resource.total_sales_by_quarter, 
                         Resource.percent_of_total_sales, 
                         Resource.total_value,
-                        Resource.sales_details
+                        Resource.sales_details,
+                        Resource.total_sales_by_month ,
+                        Resource.due_date  
                         );
 
             var model = new mInvoice.Models.rp_invoice_detailsModel()
@@ -189,7 +199,12 @@ namespace mInvoice.Controllers
             return model;
         }
 
-        public mInvoice.Models.rp_salesModel GetData_sales()
+        public mInvoice.Models.rp_salesModel GetData_sales(
+            DateTime? Date_from
+            , DateTime? Date_to
+            , int? Article_id
+            , int? Customers_id
+            )
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
 
@@ -271,12 +286,14 @@ namespace mInvoice.Controllers
                         Resource.total_sales_by_quarter,
                         Resource.percent_of_total_sales,
                         Resource.total_value,
-                        Resource.sales_details
+                        Resource.sales_details,
+                        Resource.total_sales_by_month,
+                        Resource.due_date  
                         );
 
             var model = new mInvoice.Models.rp_salesModel()
             {
-                data = LocalData.GetSales(_client_id),
+                data = LocalData.GetSales(_client_id, Date_from, Date_to, Article_id, Customers_id),
                 labels = _labelsDataTable
             };
             return model;
@@ -301,6 +318,51 @@ namespace mInvoice.Controllers
                 , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
                 , filename: FileName
                 );              
+        }
+
+        public ActionResult ReportParameters()
+        {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int _client_id = Convert.ToInt32(Session["client_id"]);
+
+            ViewBag.customers_id = new SelectList(db.Customers.Where(s => s.clientsysid == _client_id), "Id", "customer_no");
+            ViewBag.article_id = new SelectList(db.Articles.Where(x => x.clients_id == _client_id), "Id", "article_no");
+
+            ReportParametersModel _form = new ReportParametersModel();           
+
+            return View(_form);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReportParameters(ReportParametersModel ReportParameters)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["client_id"] == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                int _client_id = Convert.ToInt32(Session["client_id"]);
+
+                return RedirectToAction("sales", "Reports", 
+                    new { date_from = ReportParameters.date_from
+                        , date_to = ReportParameters.date_to
+                        , article_id = ReportParameters.article_id
+                        , customers_id = ReportParameters.customers_id 
+                    });
+            }
+            else
+            {
+
+
+                return RedirectToAction("Index");
+            }
         }
 
     }

@@ -593,24 +593,11 @@ namespace mInvoice.Controllers
             return View(_email_form);
         }
 
-        public ActionResult ReportParameters()
-        {
-            if (Session["client_id"] == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }            
-
-            ReportParametersModel  _form = new ReportParametersModel ();        
-
-            return View(_form);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
         {
-            string _pdf_tmp_file = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
-            // string _pdf_tmp_file_zugferd = HttpContext.Server.MapPath("~/App_Data/invoice_zugferd.pdf");
+            string _pdf_output_file = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
 
             try
             {
@@ -647,7 +634,11 @@ namespace mInvoice.Controllers
                     Attachment att1 = null;
 
                     // Create PDF-File
-                    Stream _stream = CreateInvoicePDFFile(EmailForm.Attachment, _pdf_tmp_file, _localReportDataSources);
+                    //Stream _stream = 
+                    CreateInvoicePDFFile(
+                        EmailForm.Attachment, 
+                       _pdf_output_file, 
+                        _localReportDataSources);
 
                     // ZUGFeRD
                     if (EmailForm.Zugferd)
@@ -668,7 +659,7 @@ namespace mInvoice.Controllers
                         TotalInvoiceInfo _total_info = getTotalInvoiceInfo(_reportsDataSet.rp_invoice_details);
 
                         m_zugferd_file_path = _zugferd.getZugFeRD_PDF(
-                              _pdf_tmp_file
+                              _pdf_output_file
                             , _connection
                             , _client_id
                             , EmailForm.ID  // invoice_header_id ?
@@ -710,16 +701,16 @@ namespace mInvoice.Controllers
                             , Resource.TradeAllowanceChargeDescription //= "Sondernachlass"
                             );
 
-                        //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
                         att1 = new Attachment(m_zugferd_file_path);
+                        att1.Name = Path.GetFileName(EmailForm.Attachment);
                         msg.Attachments.Add(att1);
 
                         System.IO.File.Delete(m_zugferd_file_path);
                     }
                     else
                     {
-                        //ContentType ct = new ContentType(MediaTypeNames.Text.Html);
-                        att1 = new Attachment(_stream, EmailForm.Attachment);
+                        att1 = new Attachment(_pdf_output_file);
+                        att1.Name = Path.GetFileName(EmailForm.Attachment);
                         msg.Attachments.Add(att1);
                     }
 
@@ -754,7 +745,7 @@ namespace mInvoice.Controllers
                         }
                         else
                         {
-                            System.IO.File.Copy(_pdf_tmp_file, targetPath);
+                            System.IO.File.Copy(_pdf_output_file, targetPath);
                         }
 
                         System.IO.File.SetCreationTime(targetPath, _now);
@@ -785,6 +776,10 @@ namespace mInvoice.Controllers
                 }
 
                 return RedirectToAction("Index");
+            }
+            catch (FormatException ex)
+            {
+                FlashHelpers.FlashError(this, ex.Message);
             }
             catch (Exception ex)
             {
@@ -1148,7 +1143,9 @@ namespace mInvoice.Controllers
                         Resource.total_sales_by_quarter,
                         Resource.percent_of_total_sales,
                         Resource.total_value,
-                        Resource.sales_details
+                        Resource.sales_details,
+                        Resource.total_sales_by_month,
+                        Resource.due_date  
                         );
 
             var model = new mInvoice.Models.rp_invoice_detailsModel()

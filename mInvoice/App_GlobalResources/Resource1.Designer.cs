@@ -1537,6 +1537,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show report ähnelt.
+        /// </summary>
+        public static string show_report {
+            get {
+                return ResourceManager.GetString("show_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Street ähnelt.
         /// </summary>
         public static string street {
@@ -1623,6 +1632,15 @@ namespace mInvoice.App_GlobalResources {
         public static string total_sales {
             get {
                 return ResourceManager.GetString("total_sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total sales by month ähnelt.
+        /// </summary>
+        public static string total_sales_by_month {
+            get {
+                return ResourceManager.GetString("total_sales_by_month", resourceCulture);
             }
         }
         

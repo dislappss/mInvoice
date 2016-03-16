@@ -4112,6 +4112,10 @@ namespace mInvoice.Reports {
             
             private global::System.Data.DataColumn columnsales_details;
             
+            private global::System.Data.DataColumn columntotal_sales_by_month;
+            
+            private global::System.Data.DataColumn columndue_date;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public rp_invoice_detailsLabelsDataTable() {
@@ -4747,6 +4751,22 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn total_sales_by_monthColumn {
+                get {
+                    return this.columntotal_sales_by_month;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn due_dateColumn {
+                get {
+                    return this.columndue_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4857,7 +4877,9 @@ namespace mInvoice.Reports {
                         string total_sales_by_quarter, 
                         string percent_of_total_sales, 
                         string total_value, 
-                        string sales_details) {
+                        string sales_details, 
+                        string total_sales_by_month, 
+                        string due_date) {
                 rp_invoice_detailsLabelsRow rowrp_invoice_detailsLabelsRow = ((rp_invoice_detailsLabelsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -4934,7 +4956,9 @@ namespace mInvoice.Reports {
                         total_sales_by_quarter,
                         percent_of_total_sales,
                         total_value,
-                        sales_details};
+                        sales_details,
+                        total_sales_by_month,
+                        due_date};
                 rowrp_invoice_detailsLabelsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrp_invoice_detailsLabelsRow);
                 return rowrp_invoice_detailsLabelsRow;
@@ -5032,6 +5056,8 @@ namespace mInvoice.Reports {
                 this.columnpercent_of_total_sales = base.Columns["percent_of_total_sales"];
                 this.columntotal_value = base.Columns["total_value"];
                 this.columnsales_details = base.Columns["sales_details"];
+                this.columntotal_sales_by_month = base.Columns["total_sales_by_month"];
+                this.columndue_date = base.Columns["due_date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5187,6 +5213,10 @@ namespace mInvoice.Reports {
                 base.Columns.Add(this.columntotal_value);
                 this.columnsales_details = new global::System.Data.DataColumn("sales_details", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsales_details);
+                this.columntotal_sales_by_month = new global::System.Data.DataColumn("total_sales_by_month", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_sales_by_month);
+                this.columndue_date = new global::System.Data.DataColumn("due_date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndue_date);
                 this.columninvoice_no.AllowDBNull = false;
                 this.columninvoice_no.MaxLength = 50;
                 this.columnorder_date.AllowDBNull = false;
@@ -11365,6 +11395,39 @@ namespace mInvoice.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string total_sales_by_month {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_detailsLabels.total_sales_by_monthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte total_sales_by_month in Tabelle rp_invoice_detailsLabels ist " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_detailsLabels.total_sales_by_monthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string due_date {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_invoice_detailsLabels.due_dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte due_date in Tabelle rp_invoice_detailsLabels ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_invoice_detailsLabels.due_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Iscustomer_referenceNull() {
                 return this.IsNull(this.tablerp_invoice_detailsLabels.customer_referenceColumn);
             }
@@ -12117,6 +12180,30 @@ namespace mInvoice.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setsales_detailsNull() {
                 this[this.tablerp_invoice_detailsLabels.sales_detailsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Istotal_sales_by_monthNull() {
+                return this.IsNull(this.tablerp_invoice_detailsLabels.total_sales_by_monthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Settotal_sales_by_monthNull() {
+                this[this.tablerp_invoice_detailsLabels.total_sales_by_monthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isdue_dateNull() {
+                return this.IsNull(this.tablerp_invoice_detailsLabels.due_dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setdue_dateNull() {
+                this[this.tablerp_invoice_detailsLabels.due_dateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -17005,13 +17092,15 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@client_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_from", global::System.Data.SqlDbType.SmallDateTime, 4, global::System.Data.ParameterDirection.Input, 16, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_to", global::System.Data.SqlDbType.SmallDateTime, 4, global::System.Data.ParameterDirection.Input, 16, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@article_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@customers_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(reportsDataSet.rp_salesDataTable dataTable, global::System.Nullable<int> client_id, global::System.Nullable<global::System.DateTime> date_from, global::System.Nullable<global::System.DateTime> date_to) {
+        public virtual int Fill(reportsDataSet.rp_salesDataTable dataTable, global::System.Nullable<int> client_id, global::System.Nullable<global::System.DateTime> date_from, global::System.Nullable<global::System.DateTime> date_to, global::System.Nullable<int> article_id, global::System.Nullable<int> customers_id) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((client_id.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((int)(client_id.Value));
@@ -17030,6 +17119,18 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             }
             else {
                 this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((article_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((int)(article_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((customers_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((int)(customers_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -17042,7 +17143,7 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual reportsDataSet.rp_salesDataTable GetData(global::System.Nullable<int> client_id, global::System.Nullable<global::System.DateTime> date_from, global::System.Nullable<global::System.DateTime> date_to) {
+        public virtual reportsDataSet.rp_salesDataTable GetData(global::System.Nullable<int> client_id, global::System.Nullable<global::System.DateTime> date_from, global::System.Nullable<global::System.DateTime> date_to, global::System.Nullable<int> article_id, global::System.Nullable<int> customers_id) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((client_id.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((int)(client_id.Value));
@@ -17061,6 +17162,18 @@ namespace mInvoice.Reports.reportsDataSetTableAdapters {
             }
             else {
                 this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((article_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((int)(article_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((customers_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((int)(customers_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             reportsDataSet.rp_salesDataTable dataTable = new reportsDataSet.rp_salesDataTable();
             this.Adapter.Fill(dataTable);

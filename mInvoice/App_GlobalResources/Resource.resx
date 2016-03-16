@@ -687,4 +687,10 @@
   <data name="ReportParameters" xml:space="preserve">
     <value>Report parameters</value>
   </data>
+  <data name="show_report" xml:space="preserve">
+    <value>Show report</value>
+  </data>
+  <data name="total_sales_by_month" xml:space="preserve">
+    <value>Total sales by month</value>
+  </data>
 </root>

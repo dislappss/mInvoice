@@ -509,6 +509,7 @@
     <Content Include="Scripts\Utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Home\EditorTemplates\Hidden.ascx" />
+    <Content Include="Views\Reports\sales.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -587,7 +588,6 @@
     <Content Include="Views\Quantity_units\Delete.cshtml" />
     <Content Include="Views\Quantity_units\Edit.cshtml" />
     <Content Include="Views\Quantity_units\Index.cshtml" />
-    <Content Include="Views\Reports\sales.cshtml" />
     <Content Include="Views\Payment_terms\Create.cshtml" />
     <Content Include="Views\Payment_terms\Delete.cshtml" />
     <Content Include="Views\Payment_terms\Edit.cshtml" />
@@ -604,7 +604,7 @@
     <Content Include="Views\Currency\Index.cshtml" />
     <Content Include="Views\Invoice_header\Archive.cshtml" />
     <Content Include="Views\Reports\invoice.cshtml" />
-    <Content Include="Views\Invoice_header\ReportParameters.cshtml" />
+    <Content Include="Views\Reports\ReportParameters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Invoices\" />
