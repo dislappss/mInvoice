@@ -1,0 +1,1688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="article_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="tax_rate_id" Type="int" Nullable="false" />
+          <Property Name="quantity_units_id" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUsers_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="clientname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="countriesid" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="www" Type="nvarchar" MaxLength="250" />
+          <Property Name="ustd_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="tax_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="finance_office" Type="nvarchar" MaxLength="50" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="bic" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture" Type="image" />
+          <Property Name="prefix_invoices" Type="nvarchar" MaxLength="10" />
+          <Property Name="last_index_invoices" Type="int" Nullable="false" />
+          <Property Name="no_template_invoices" Type="nvarchar" MaxLength="50" />
+          <Property Name="text_to_table" Type="nvarchar" MaxLength="500" />
+          <Property Name="text_under_the_table_bold" Type="nvarchar" MaxLength="500" />
+          <Property Name="text_under_the_table" Type="nvarchar" MaxLength="500" />
+          <Property Name="email_subject" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_message" Type="nvarchar" MaxLength="500" />
+          <Property Name="email_user_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_password" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_host" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_port" Type="int" />
+          <Property Name="currency_id" Type="int" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iso" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="3" />
+          <Property Name="numcode" Type="int" />
+          <Property Name="phonecode" Type="int" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientsysid" Type="int" Nullable="false" />
+          <Property Name="payment_methodid" Type="int" />
+          <Property Name="customer_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="countriesid" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="countriesid_invoice" Type="int" />
+          <Property Name="email_invoice" Type="nvarchar" MaxLength="255" />
+          <Property Name="zip_invoice" Type="nvarchar" MaxLength="50" />
+          <Property Name="city_invoice" Type="nvarchar" MaxLength="50" />
+          <Property Name="street_invoice" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="www" Type="nvarchar" MaxLength="100" />
+          <Property Name="ustd_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="finance_office" Type="nvarchar" MaxLength="50" />
+          <Property Name="account_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="bic" Type="nvarchar" MaxLength="50" />
+          <Property Name="currency_id" Type="int" />
+          <Property Name="payment_terms_id" Type="int" />
+          <Property Name="delivery_terms_id" Type="int" />
+          <Property Name="tax_rate_id" Type="int" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Delivery_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Invoice_details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="invoice_header_id" Type="int" Nullable="false" />
+          <Property Name="article_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="tax_rate_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="quantity_2" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="quantity_3" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="quantity_units_id" Type="int" Nullable="false" />
+          <Property Name="price_netto" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Invoice_header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="invoice_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="order_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="delivery_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="due_date" Type="smalldatetime" />
+          <Property Name="customers_id" Type="int" Nullable="false" />
+          <Property Name="customer_reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="countriesid" Type="int" Nullable="false" />
+          <Property Name="zip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="quantity_2_column_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity_3_column_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="tax_rate_id" Type="int" />
+          <Property Name="discount" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="payment_terms_id" Type="int" />
+          <Property Name="delivery_terms_id" Type="int" />
+          <Property Name="paid_at" Type="smalldatetime" />
+          <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="freight_costs" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Payment_method">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Payment_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Quantity_units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="description_en" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Tax_rates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="value" Type="numeric" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="v_AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Articles_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_articles_tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="clientsysid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Delivery_terms">
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="delivery_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_payment_method">
+          <End Role="Payment_method" Type="Self.Payment_method" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_method">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_methodid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Payment_terms">
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_terms_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery_terms">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_articles">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_invoice_header">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_header_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_header_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="customers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Delivery_terms">
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="0..1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="delivery_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Payment_terms">
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="0..1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="payment_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_terms_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment_terms">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tax_rates_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax_rates">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myinvoice_dbModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery_terms" EntityType="Self.Delivery_terms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice_header" EntityType="Self.Invoice_header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_terms" EntityType="Self.Payment_terms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quantity_units" EntityType="Self.Quantity_units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_AspNetUsers" EntityType="Self.v_AspNetUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[v_AspNetUsers].[Id] AS [Id], 
+[v_AspNetUsers].[Email] AS [Email], 
+[v_AspNetUsers].[EmailConfirmed] AS [EmailConfirmed], 
+[v_AspNetUsers].[PasswordHash] AS [PasswordHash], 
+[v_AspNetUsers].[SecurityStamp] AS [SecurityStamp], 
+[v_AspNetUsers].[PhoneNumber] AS [PhoneNumber], 
+[v_AspNetUsers].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed], 
+[v_AspNetUsers].[TwoFactorEnabled] AS [TwoFactorEnabled], 
+[v_AspNetUsers].[LockoutEndDateUtc] AS [LockoutEndDateUtc], 
+[v_AspNetUsers].[LockoutEnabled] AS [LockoutEnabled], 
+[v_AspNetUsers].[AccessFailedCount] AS [AccessFailedCount], 
+[v_AspNetUsers].[UserName] AS [UserName]
+FROM [dbo].[v_AspNetUsers] AS [v_AspNetUsers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_Quantity_units" Association="Self.FK_Articles_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Currency" Association="Self.FK_Clients_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Clients" Association="Self.FK_Customers_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Countries" Association="Self.FK_Customers_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currency" Association="Self.FK_Customers_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Delivery_terms" Association="Self.FK_Customers_Delivery_terms">
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_payment_method" Association="Self.FK_Customers_payment_method">
+            <End Role="Payment_method" EntitySet="Payment_method" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Payment_terms" Association="Self.FK_Customers_Payment_terms">
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Tax_rates" Association="Self.FK_Customers_Tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_terms_Clients" Association="Self.FK_Delivery_terms_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_articles" Association="Self.FK_invoice_details_articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Clients" Association="Self.FK_Invoice_details_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_invoice_header" Association="Self.FK_invoice_details_invoice_header">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Quantity_units" Association="Self.FK_Invoice_details_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_tax_rates" Association="Self.FK_invoice_details_tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Clients" Association="Self.FK_Invoice_header_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Countries" Association="Self.FK_invoice_header_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Currency" Association="Self.FK_Invoice_header_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Customers" Association="Self.FK_invoice_header_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Delivery_terms" Association="Self.FK_Invoice_header_Delivery_terms">
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Payment_terms" Association="Self.FK_Invoice_header_Payment_terms">
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_terms_Clients" Association="Self.FK_Payment_terms_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_rates_Clients" Association="Self.FK_Tax_rates_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myinvoice_api" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="article_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
+          <NavigationProperty Name="Quantity_units" Relationship="Self.FK_Articles_Quantity_units" FromRole="Articles" ToRole="Quantity_units" />
+          <NavigationProperty Name="Tax_rates" Relationship="Self.FK_articles_tax_rates" FromRole="Articles" ToRole="Tax_rates" />
+          <NavigationProperty Name="Invoice_details" Relationship="Self.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUsers_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countriesid" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="www" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tax_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="prefix_invoices" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="last_index_invoices" Type="Int32" Nullable="false" />
+          <Property Name="no_template_invoices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="text_to_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table_bold" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="text_under_the_table" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="email_subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="email_user_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_host" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_port" Type="Int32" />
+          <Property Name="currency_id" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_Clients" FromRole="Clients" ToRole="Articles" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Clients_Currency" FromRole="Clients" ToRole="Currency" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Clients" FromRole="Clients" ToRole="Customers" />
+          <NavigationProperty Name="Delivery_terms" Relationship="Self.FK_Delivery_terms_Clients" FromRole="Clients" ToRole="Delivery_terms" />
+          <NavigationProperty Name="Invoice_details" Relationship="Self.FK_Invoice_details_Clients" FromRole="Clients" ToRole="Invoice_details" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_Invoice_header_Clients" FromRole="Clients" ToRole="Invoice_header" />
+          <NavigationProperty Name="Payment_terms" Relationship="Self.FK_Payment_terms_Clients" FromRole="Clients" ToRole="Payment_terms" />
+          <NavigationProperty Name="Tax_rates" Relationship="Self.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iso" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="numcode" Type="Int32" />
+          <Property Name="phonecode" Type="Int32" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Countries" FromRole="Countries" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Countries" FromRole="Countries" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_invoice_header_Countries" FromRole="Countries" ToRole="Invoice_header" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Currency" FromRole="Currency" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Currency" FromRole="Currency" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_Invoice_header_Currency" FromRole="Currency" ToRole="Invoice_header" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientsysid" Type="Int32" Nullable="false" />
+          <Property Name="payment_methodid" Type="Int32" />
+          <Property Name="customer_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countriesid" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countriesid_invoice" Type="Int32" />
+          <Property Name="email_invoice" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="zip_invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city_invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street_invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="www" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ustd_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finance_office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="currency_id" Type="Int32" />
+          <Property Name="payment_terms_id" Type="Int32" />
+          <Property Name="delivery_terms_id" Type="Int32" />
+          <Property Name="tax_rate_id" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Customers_Clients" FromRole="Customers" ToRole="Clients" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Customers_Currency" FromRole="Customers" ToRole="Currency" />
+          <NavigationProperty Name="Delivery_terms" Relationship="Self.FK_Customers_Delivery_terms" FromRole="Customers" ToRole="Delivery_terms" />
+          <NavigationProperty Name="Payment_method" Relationship="Self.FK_Customers_payment_method" FromRole="Customers" ToRole="Payment_method" />
+          <NavigationProperty Name="Payment_terms" Relationship="Self.FK_Customers_Payment_terms" FromRole="Customers" ToRole="Payment_terms" />
+          <NavigationProperty Name="Tax_rates" Relationship="Self.FK_Customers_Tax_rates" FromRole="Customers" ToRole="Tax_rates" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_invoice_header_Customers" FromRole="Customers" ToRole="Invoice_header" />
+        </EntityType>
+        <EntityType Name="Delivery_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Delivery_terms_Clients" FromRole="Delivery_terms" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Delivery_terms" FromRole="Delivery_terms" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_Invoice_header_Delivery_terms" FromRole="Delivery_terms" ToRole="Invoice_header" />
+        </EntityType>
+        <EntityType Name="Invoice_details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_header_id" Type="Int32" Nullable="false" />
+          <Property Name="article_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tax_rate_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="quantity_2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="quantity_3" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="quantity_units_id" Type="Int32" Nullable="false" />
+          <Property Name="price_netto" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_invoice_details_articles" FromRole="Invoice_details" ToRole="Articles" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Invoice_details_Clients" FromRole="Invoice_details" ToRole="Clients" />
+          <NavigationProperty Name="Tax_rates" Relationship="Self.FK_invoice_details_invoice_header" FromRole="Invoice_details" ToRole="Tax_rates" />
+          <NavigationProperty Name="Quantity_units" Relationship="Self.FK_Invoice_details_Quantity_units" FromRole="Invoice_details" ToRole="Quantity_units" />
+          <NavigationProperty Name="Tax_rates1" Relationship="Self.FK_invoice_details_tax_rates" FromRole="Invoice_details" ToRole="Tax_rates" />
+        </EntityType>
+        <EntityType Name="Invoice_header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="delivery_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="due_date" Type="DateTime" Precision="0" />
+          <Property Name="customers_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countriesid" Type="Int32" Nullable="false" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity_2_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity_3_column_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tax_rate_id" Type="Int32" />
+          <Property Name="discount" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="payment_terms_id" Type="Int32" />
+          <Property Name="delivery_terms_id" Type="Int32" />
+          <Property Name="paid_at" Type="DateTime" Precision="0" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="freight_costs" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Invoice_header_Clients" FromRole="Invoice_header" ToRole="Clients" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_invoice_header_Countries" FromRole="Invoice_header" ToRole="Countries" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Invoice_header_Currency" FromRole="Invoice_header" ToRole="Currency" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_invoice_header_Customers" FromRole="Invoice_header" ToRole="Customers" />
+          <NavigationProperty Name="Delivery_terms" Relationship="Self.FK_Invoice_header_Delivery_terms" FromRole="Invoice_header" ToRole="Delivery_terms" />
+          <NavigationProperty Name="Payment_terms" Relationship="Self.FK_Invoice_header_Payment_terms" FromRole="Invoice_header" ToRole="Payment_terms" />
+        </EntityType>
+        <EntityType Name="Payment_method">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_payment_method" FromRole="Payment_method" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Payment_terms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Payment_terms_Clients" FromRole="Payment_terms" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Payment_terms" FromRole="Payment_terms" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_header" Relationship="Self.FK_Invoice_header_Payment_terms" FromRole="Payment_terms" ToRole="Invoice_header" />
+        </EntityType>
+        <EntityType Name="Quantity_units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description_en" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_Quantity_units" FromRole="Quantity_units" ToRole="Articles" />
+          <NavigationProperty Name="Invoice_details" Relationship="Self.FK_Invoice_details_Quantity_units" FromRole="Quantity_units" ToRole="Invoice_details" />
+        </EntityType>
+        <EntityType Name="Tax_rates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="value" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_articles_tax_rates" FromRole="Tax_rates" ToRole="Articles" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Tax_rates_Clients" FromRole="Tax_rates" ToRole="Clients" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Tax_rates" FromRole="Tax_rates" ToRole="Customers" />
+          <NavigationProperty Name="Invoice_details" Relationship="Self.FK_invoice_details_invoice_header" FromRole="Tax_rates" ToRole="Invoice_details" />
+          <NavigationProperty Name="Invoice_details1" Relationship="Self.FK_invoice_details_tax_rates" FromRole="Tax_rates" ToRole="Invoice_details" />
+        </EntityType>
+        <EntityType Name="v_AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="PhoneNumberConfirmed" />
+            <PropertyRef Name="TwoFactorEnabled" />
+            <PropertyRef Name="LockoutEnabled" />
+            <PropertyRef Name="AccessFailedCount" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Articles_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_articles_tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_articles">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="clientsysid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_terms_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery_terms">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_terms_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment_terms">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tax_rates_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax_rates">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_header_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="countriesid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Delivery_terms">
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="delivery_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_payment_method">
+          <End Role="Payment_method" Type="Self.Payment_method" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_method">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_methodid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Payment_terms">
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="payment_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_header_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="customers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Delivery_terms">
+          <End Role="Delivery_terms" Type="Self.Delivery_terms" Multiplicity="0..1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="delivery_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_invoice_header">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_details_Quantity_units">
+          <End Role="Quantity_units" Type="Self.Quantity_units" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quantity_units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="quantity_units_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_details_tax_rates">
+          <End Role="Tax_rates" Type="Self.Tax_rates" Multiplicity="1" />
+          <End Role="Invoice_details" Type="Self.Invoice_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax_rates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_details">
+              <PropertyRef Name="tax_rate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_header_Payment_terms">
+          <End Role="Payment_terms" Type="Self.Payment_terms" Multiplicity="0..1" />
+          <End Role="Invoice_header" Type="Self.Invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_terms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice_header">
+              <PropertyRef Name="payment_terms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articles" EntityType="Self.Articles" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Delivery_terms" EntityType="Self.Delivery_terms" />
+          <EntitySet Name="Invoice_details" EntityType="Self.Invoice_details" />
+          <EntitySet Name="Invoice_header" EntityType="Self.Invoice_header" />
+          <EntitySet Name="Payment_method" EntityType="Self.Payment_method" />
+          <EntitySet Name="Payment_terms" EntityType="Self.Payment_terms" />
+          <EntitySet Name="Quantity_units" EntityType="Self.Quantity_units" />
+          <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" />
+          <EntitySet Name="v_AspNetUsers" EntityType="Self.v_AspNetUsers" />
+          <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_Quantity_units" Association="Self.FK_Articles_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_articles_tax_rates" Association="Self.FK_articles_tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_articles" Association="Self.FK_invoice_details_articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Currency" Association="Self.FK_Clients_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Clients" Association="Self.FK_Customers_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_terms_Clients" Association="Self.FK_Delivery_terms_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Clients" Association="Self.FK_Invoice_details_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Clients" Association="Self.FK_Invoice_header_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_terms_Clients" Association="Self.FK_Payment_terms_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_rates_Clients" Association="Self.FK_Tax_rates_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Countries" Association="Self.FK_Customers_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Countries" Association="Self.FK_invoice_header_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currency" Association="Self.FK_Customers_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Currency" Association="Self.FK_Invoice_header_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Delivery_terms" Association="Self.FK_Customers_Delivery_terms">
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_payment_method" Association="Self.FK_Customers_payment_method">
+            <End Role="Payment_method" EntitySet="Payment_method" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Payment_terms" Association="Self.FK_Customers_Payment_terms">
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Tax_rates" Association="Self.FK_Customers_Tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_header_Customers" Association="Self.FK_invoice_header_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Delivery_terms" Association="Self.FK_Invoice_header_Delivery_terms">
+            <End Role="Delivery_terms" EntitySet="Delivery_terms" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_invoice_header" Association="Self.FK_invoice_details_invoice_header">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_details_Quantity_units" Association="Self.FK_Invoice_details_Quantity_units">
+            <End Role="Quantity_units" EntitySet="Quantity_units" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_details_tax_rates" Association="Self.FK_invoice_details_tax_rates">
+            <End Role="Tax_rates" EntitySet="Tax_rates" />
+            <End Role="Invoice_details" EntitySet="Invoice_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_header_Payment_terms" Association="Self.FK_Invoice_header_Payment_terms">
+            <End Role="Payment_terms" EntitySet="Payment_terms" />
+            <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myinvoice_dbModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="myinvoice_api.Articles">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="article_no" ColumnName="article_no" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="myinvoice_api.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AspNetUsers_id" ColumnName="AspNetUsers_id" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="www" ColumnName="www" />
+                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
+                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
+                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bic" ColumnName="bic" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="prefix_invoices" ColumnName="prefix_invoices" />
+                <ScalarProperty Name="last_index_invoices" ColumnName="last_index_invoices" />
+                <ScalarProperty Name="no_template_invoices" ColumnName="no_template_invoices" />
+                <ScalarProperty Name="text_to_table" ColumnName="text_to_table" />
+                <ScalarProperty Name="text_under_the_table_bold" ColumnName="text_under_the_table_bold" />
+                <ScalarProperty Name="text_under_the_table" ColumnName="text_under_the_table" />
+                <ScalarProperty Name="email_subject" ColumnName="email_subject" />
+                <ScalarProperty Name="email_message" ColumnName="email_message" />
+                <ScalarProperty Name="email_user_name" ColumnName="email_user_name" />
+                <ScalarProperty Name="email_password" ColumnName="email_password" />
+                <ScalarProperty Name="email_host" ColumnName="email_host" />
+                <ScalarProperty Name="email_port" ColumnName="email_port" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="myinvoice_api.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="iso" ColumnName="iso" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="numcode" ColumnName="numcode" />
+                <ScalarProperty Name="phonecode" ColumnName="phonecode" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="myinvoice_api.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="myinvoice_api.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clientsysid" ColumnName="clientsysid" />
+                <ScalarProperty Name="payment_methodid" ColumnName="payment_methodid" />
+                <ScalarProperty Name="customer_no" ColumnName="customer_no" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="countriesid_invoice" ColumnName="countriesid_invoice" />
+                <ScalarProperty Name="email_invoice" ColumnName="email_invoice" />
+                <ScalarProperty Name="zip_invoice" ColumnName="zip_invoice" />
+                <ScalarProperty Name="city_invoice" ColumnName="city_invoice" />
+                <ScalarProperty Name="street_invoice" ColumnName="street_invoice" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone_2" ColumnName="phone_2" />
+                <ScalarProperty Name="www" ColumnName="www" />
+                <ScalarProperty Name="ustd_id" ColumnName="ustd_id" />
+                <ScalarProperty Name="finance_office" ColumnName="finance_office" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bic" ColumnName="bic" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="payment_terms_id" ColumnName="payment_terms_id" />
+                <ScalarProperty Name="delivery_terms_id" ColumnName="delivery_terms_id" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery_terms">
+            <EntityTypeMapping TypeName="myinvoice_api.Delivery_terms">
+              <MappingFragment StoreEntitySet="Delivery_terms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_details">
+            <EntityTypeMapping TypeName="myinvoice_api.Invoice_details">
+              <MappingFragment StoreEntitySet="Invoice_details">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="invoice_header_id" ColumnName="invoice_header_id" />
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="quantity_2" ColumnName="quantity_2" />
+                <ScalarProperty Name="quantity_3" ColumnName="quantity_3" />
+                <ScalarProperty Name="quantity_units_id" ColumnName="quantity_units_id" />
+                <ScalarProperty Name="price_netto" ColumnName="price_netto" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_header">
+            <EntityTypeMapping TypeName="myinvoice_api.Invoice_header">
+              <MappingFragment StoreEntitySet="Invoice_header">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="customers_id" ColumnName="customers_id" />
+                <ScalarProperty Name="customer_reference" ColumnName="customer_reference" />
+                <ScalarProperty Name="countriesid" ColumnName="countriesid" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="quantity_2_column_name" ColumnName="quantity_2_column_name" />
+                <ScalarProperty Name="quantity_3_column_name" ColumnName="quantity_3_column_name" />
+                <ScalarProperty Name="tax_rate_id" ColumnName="tax_rate_id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="payment_terms_id" ColumnName="payment_terms_id" />
+                <ScalarProperty Name="delivery_terms_id" ColumnName="delivery_terms_id" />
+                <ScalarProperty Name="paid_at" ColumnName="paid_at" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="freight_costs" ColumnName="freight_costs" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_method">
+            <EntityTypeMapping TypeName="myinvoice_api.Payment_method">
+              <MappingFragment StoreEntitySet="Payment_method">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_terms">
+            <EntityTypeMapping TypeName="myinvoice_api.Payment_terms">
+              <MappingFragment StoreEntitySet="Payment_terms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quantity_units">
+            <EntityTypeMapping TypeName="myinvoice_api.Quantity_units">
+              <MappingFragment StoreEntitySet="Quantity_units">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="description_en" ColumnName="description_en" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tax_rates">
+            <EntityTypeMapping TypeName="myinvoice_api.Tax_rates">
+              <MappingFragment StoreEntitySet="Tax_rates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_AspNetUsers">
+            <EntityTypeMapping TypeName="myinvoice_api.v_AspNetUsers">
+              <MappingFragment StoreEntitySet="v_AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

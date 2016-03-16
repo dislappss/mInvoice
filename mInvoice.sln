@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mInvoice", "mInvoice\mInvoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ohaERP_ZUGFeRD", "mInvoice\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD.csproj", "{1FF5A300-0D7A-4C87-9785-D9C5483DB301}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mInvoice_api", "mInvoice_api\mInvoice_api.csproj", "{0F122198-0E80-4BA3-A439-4FF1C5FE4080}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|x86.ActiveCfg = Release|x86
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|x86.Build.0 = Release|x86
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0F122198-0E80-4BA3-A439-4FF1C5FE4080}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

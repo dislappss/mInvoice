@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="account_number" xml:space="preserve">
+    <value>Konto-Nr.</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="an_unexpected_error" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten. Bitte wenden Sie sich an den Systemadministrator.</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>mInvoices</value>
+  </data>
+  <data name="archive" xml:space="preserve">
+    <value>Archiv</value>
+  </data>
+  <data name="archive_type" xml:space="preserve">
+    <value>Archivtyp</value>
+  </data>
+  <data name="are_you_sure" xml:space="preserve">
+    <value>Sind Sie sicher ?</value>
+  </data>
+  <data name="are_you_sure_change_paying" xml:space="preserve">
+    <value>Wollen Sie wirklich Zahlstatus ändern?</value>
+  </data>
+  <data name="are_you_sure_delete" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie Daten löschen möchten?</value>
+  </data>
+  <data name="article" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="article_id" xml:space="preserve">
+    <value>Artikel-Nr.</value>
+  </data>
+  <data name="article_no" xml:space="preserve">
+    <value>Artikel-Nr.</value>
+  </data>
+  <data name="attention_delete" xml:space="preserve">
+    <value>Achtung! Alle Transaktionen und Einträge werden gelöscht!</value>
+  </data>
+  <data name="back_to_list" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="bank_name" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="basic_claims_data" xml:space="preserve">
+    <value>Stammdaten</value>
+  </data>
+  <data name="bic" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="bic_report" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="cant_open_file" xml:space="preserve">
+    <value>Datei kann nicht geöffnet werden.</value>
+  </data>
+  <data name="cash_discount" xml:space="preserve">
+    <value>Skonto</value>
+  </data>
+  <data name="choose_file" xml:space="preserve">
+    <value>Datei auswählen</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="client" xml:space="preserve">
+    <value>Mandant</value>
+  </data>
+  <data name="clients" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="code" xml:space="preserve">
+    <value>Kürzel</value>
+  </data>
+  <data name="confirm_copy_invoice" xml:space="preserve">
+    <value>Wollen Sie dieser Rechnung kopieren?</value>
+  </data>
+  <data name="confirm_password" xml:space="preserve">
+    <value>Kennwort bestätigen</value>
+  </data>
+  <data name="copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="copy_invoice" xml:space="preserve">
+    <value>Rechnung kopieren</value>
+  </data>
+  <data name="countries" xml:space="preserve">
+    <value>Länder</value>
+  </data>
+  <data name="countriesid" xml:space="preserve">
+    <value>Länder</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="country_code" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="country_name" xml:space="preserve">
+    <value>Landesname</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="create_at" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="create_a_new_account" xml:space="preserve">
+    <value>Neues Konto erstellen.</value>
+  </data>
+  <data name="create_new" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="currency_id" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="customer" xml:space="preserve">
+    <value>Kunde</value>
+  </data>
+  <data name="customers" xml:space="preserve">
+    <value>Kunden</value>
+  </data>
+  <data name="customer_no" xml:space="preserve">
+    <value>Kund.-Nr.</value>
+  </data>
+  <data name="customer_reference" xml:space="preserve">
+    <value>Kunden-Ref.-Nr.</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="date_from" xml:space="preserve">
+    <value>Datum, von</value>
+  </data>
+  <data name="date_to" xml:space="preserve">
+    <value>Datum, bis</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="delete_date" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="delivery_date" xml:space="preserve">
+    <value>Leistungs- Datum</value>
+  </data>
+  <data name="delivery_date_report" xml:space="preserve">
+    <value>Leistungsdatum</value>
+  </data>
+  <data name="delivery_term" xml:space="preserve">
+    <value>Lieferbedingung</value>
+  </data>
+  <data name="delivery_terms" xml:space="preserve">
+    <value>Lieferbedingungen</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="discount" xml:space="preserve">
+    <value>Rabatt, %</value>
+  </data>
+  <data name="discount_report" xml:space="preserve">
+    <value>Rabatt, %</value>
+  </data>
+  <data name="due_date" xml:space="preserve">
+    <value>Fälligkeitsdatum</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="edit_delete" xml:space="preserve">
+    <value>Bearbeten | Löschen</value>
+  </data>
+  <data name="edit_h2" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="email_attachment" xml:space="preserve">
+    <value>Anlage</value>
+  </data>
+  <data name="email_body" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="email_canceled" xml:space="preserve">
+    <value>EMail-Nachricht  [{0}] ist abgebrochen!</value>
+  </data>
+  <data name="email_from" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="email_message_error" xml:space="preserve">
+    <value>Beim senden von EMail [{0}] wurde ein Fehler  aufgetreten; {1}</value>
+  </data>
+  <data name="email_message_sent" xml:space="preserve">
+    <value>E-Mail wurde erfolgreich gesendet.</value>
+  </data>
+  <data name="email_subject" xml:space="preserve">
+    <value>Betreff</value>
+  </data>
+  <data name="email_to" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="english" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="enter_date" xml:space="preserve">
+    <value>Datum eingeben</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="err_email" xml:space="preserve">
+    <value>Das ist keine gültige E-Mail Adresse.</value>
+  </data>
+  <data name="err_range" xml:space="preserve">
+    <value>Der Wert {0} muss zwischen {1} und {2} sein.</value>
+  </data>
+  <data name="fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="fax_report" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>Pfad</value>
+  </data>
+  <data name="file_not_exists" xml:space="preserve">
+    <value>Datei nicht existiert.</value>
+  </data>
+  <data name="finance_office" xml:space="preserve">
+    <value>Finanzamt</value>
+  </data>
+  <data name="find_by_name" xml:space="preserve">
+    <value>Suchen nach Name:</value>
+  </data>
+  <data name="german" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="get_descriptions" xml:space="preserve">
+    <value>Beschreibung abrufen</value>
+  </data>
+  <data name="get_prices" xml:space="preserve">
+    <value>Preis abrufen</value>
+  </data>
+  <data name="get_quantity_unit" xml:space="preserve">
+    <value>Mengeneinheit abrufen</value>
+  </data>
+  <data name="get_tax_rates" xml:space="preserve">
+    <value>Steuersatz abrufen</value>
+  </data>
+  <data name="home_site" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="iban" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="iban_report" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="invoice" xml:space="preserve">
+    <value>Rechnung</value>
+  </data>
+  <data name="invoices" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
+  <data name="invoice_no" xml:space="preserve">
+    <value>Rechnungs- Nr.</value>
+  </data>
+  <data name="invoice_not_found" xml:space="preserve">
+    <value>Die Rechnung wurde nicht gefunden!</value>
+  </data>
+  <data name="is_save" xml:space="preserve">
+    <value>Speichern?</value>
+  </data>
+  <data name="last_index_invoices" xml:space="preserve">
+    <value>Lätzter Index (Rechnungen)</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="LogisticsServiceChargeDescription" xml:space="preserve">
+    <value>Versandkosten</value>
+  </data>
+  <data name="margin" xml:space="preserve">
+    <value>Marge</value>
+  </data>
+  <data name="mark_as_paid" xml:space="preserve">
+    <value>Bezahlt / Unbezahlt</value>
+  </data>
+  <data name="max_lenght" xml:space="preserve">
+    <value>Die maximale Symbollänge für {0} ist {1}.</value>
+  </data>
+  <data name="method_of_payment" xml:space="preserve">
+    <value>Zahlungsarten</value>
+  </data>
+  <data name="mode" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="month" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="must_be_at_least" xml:space="preserve">
+    <value>"\"{0}\" muss mindestens {2} Zeichen lang sein."</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="net_amount" xml:space="preserve">
+    <value>Nettobetrag</value>
+  </data>
+  <data name="not_paid" xml:space="preserve">
+    <value>Nicht bezahlte</value>
+  </data>
+  <data name="no_template_invoices" xml:space="preserve">
+    <value>Rechn.-Nr. Schablone</value>
+  </data>
+  <data name="no_template_invoices_info" xml:space="preserve">
+    <value>z.B. "%P%Y-%N", %P-Prefix, %Y-Jahr, %N-Nummer ("INV16-000101")</value>
+  </data>
+  <data name="optonal_parameters" xml:space="preserve">
+    <value>Optionale Parameter</value>
+  </data>
+  <data name="order_date" xml:space="preserve">
+    <value>Rechn.- Datum</value>
+  </data>
+  <data name="owner" xml:space="preserve">
+    <value>Besitzer</value>
+  </data>
+  <data name="owner_report" xml:space="preserve">
+    <value>Besitzer</value>
+  </data>
+  <data name="paid" xml:space="preserve">
+    <value>Bezahlte</value>
+  </data>
+  <data name="paid_at" xml:space="preserve">
+    <value>Bezahlt am</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="password_does_not_match" xml:space="preserve">
+    <value>Das Kennwort entspricht nicht dem Bestätigungskennwort.</value>
+  </data>
+  <data name="payment_method" xml:space="preserve">
+    <value>Zahlungsmethoden</value>
+  </data>
+  <data name="payment_methodid" xml:space="preserve">
+    <value>Zahlungsart</value>
+  </data>
+  <data name="payment_method_code" xml:space="preserve">
+    <value>Zahlungscode</value>
+  </data>
+  <data name="payment_term" xml:space="preserve">
+    <value>Zahlungsbedingung</value>
+  </data>
+  <data name="payment_terms" xml:space="preserve">
+    <value>Zahlungsbedingungen</value>
+  </data>
+  <data name="percent_of_total_sales" xml:space="preserve">
+    <value>Gesamtumsatz, %</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="phone_2" xml:space="preserve">
+    <value>Telefon 2</value>
+  </data>
+  <data name="phone_report" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="picture" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="plus_vat" xml:space="preserve">
+    <value>zzgl. %1% MwSt.</value>
+  </data>
+  <data name="positions" xml:space="preserve">
+    <value>Positionen</value>
+  </data>
+  <data name="positions_short" xml:space="preserve">
+    <value>Pos.</value>
+  </data>
+  <data name="prefix_invoices" xml:space="preserve">
+    <value>Prefix (Rechnungen)</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="price_netto" xml:space="preserve">
+    <value>Preis (netto)</value>
+  </data>
+  <data name="print" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="product" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="product_costs" xml:space="preserve">
+    <value>Produktkosten</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="quantity_2" xml:space="preserve">
+    <value>Menge (2)</value>
+  </data>
+  <data name="quantity_2_column_name" xml:space="preserve">
+    <value>"Menge 2" Spaltenname</value>
+  </data>
+  <data name="quantity_3" xml:space="preserve">
+    <value>Menge (3)</value>
+  </data>
+  <data name="quantity_3_column_name" xml:space="preserve">
+    <value>"Menge 3" Spaltenname</value>
+  </data>
+  <data name="quantity_report" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="quantity_units" xml:space="preserve">
+    <value>Mengen einheit</value>
+  </data>
+  <data name="quantity_units_id" xml:space="preserve">
+    <value>Mengen einheit</value>
+  </data>
+  <data name="quarter" xml:space="preserve">
+    <value>Quartal</value>
+  </data>
+  <data name="rates_of_taxes" xml:space="preserve">
+    <value>Steuersätze</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="remember_this_browser" xml:space="preserve">
+    <value>Remember this browser?</value>
+  </data>
+  <data name="ReportParameters" xml:space="preserve">
+    <value>Berichtsparameter</value>
+  </data>
+  <data name="reports" xml:space="preserve">
+    <value>Berichte</value>
+  </data>
+  <data name="sales" xml:space="preserve">
+    <value>Verkäufe</value>
+  </data>
+  <data name="sales_details" xml:space="preserve">
+    <value>Einzelheiten zum Verkauf</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="select_Item" xml:space="preserve">
+    <value>-- Element auswählen --</value>
+  </data>
+  <data name="send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="send_email" xml:space="preserve">
+    <value>EMail senden</value>
+  </data>
+  <data name="send_per_email" xml:space="preserve">
+    <value>Per EMail senden</value>
+  </data>
+  <data name="set_today" xml:space="preserve">
+    <value>Heute</value>
+  </data>
+  <data name="shortmark" xml:space="preserve">
+    <value>Kurzzeichen</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>Anzeigen</value>
+  </data>
+  <data name="show_report" xml:space="preserve">
+    <value>Bericht anzeigen</value>
+  </data>
+  <data name="street" xml:space="preserve">
+    <value>Strasse</value>
+  </data>
+  <data name="subtotal" xml:space="preserve">
+    <value>Zwischensumme</value>
+  </data>
+  <data name="sum_price" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="tax_number" xml:space="preserve">
+    <value>Steuer-Nr.</value>
+  </data>
+  <data name="tax_rate" xml:space="preserve">
+    <value>Steuersatz</value>
+  </data>
+  <data name="text_to_table" xml:space="preserve">
+    <value>Text vor der Tabelle</value>
+  </data>
+  <data name="text_under_the_table" xml:space="preserve">
+    <value>Text nach der Tabelle</value>
+  </data>
+  <data name="text_under_the_table_bold" xml:space="preserve">
+    <value>Text nach der Tabelle (bold)</value>
+  </data>
+  <data name="total_amount" xml:space="preserve">
+    <value>Gesamtbetrag</value>
+  </data>
+  <data name="total_sales" xml:space="preserve">
+    <value>Gesamtumsatz</value>
+  </data>
+  <data name="total_sales_by_month" xml:space="preserve">
+    <value>Gesamtumsatz pro Monat</value>
+  </data>
+  <data name="total_sales_by_quarter" xml:space="preserve">
+    <value>Gesamtumsatz pro Quartal</value>
+  </data>
+  <data name="total_sales_by_year" xml:space="preserve">
+    <value>Gesamtumsatz pro Jahr</value>
+  </data>
+  <data name="total_value" xml:space="preserve">
+    <value>Gesamtwert</value>
+  </data>
+  <data name="TradeAllowanceChargeDescription" xml:space="preserve">
+    <value>Sondernachlass</value>
+  </data>
+  <data name="TradeLineCommentItem" xml:space="preserve">
+    <value>Wir stellen Ihnen folgende Leistungen in Rechnung.</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="unit" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="update_at" xml:space="preserve">
+    <value>Geändert am</value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>Hochladen</value>
+  </data>
+  <data name="upload_image" xml:space="preserve">
+    <value>Bild hochladen</value>
+  </data>
+  <data name="ustd_id" xml:space="preserve">
+    <value>Ust.-Id.</value>
+  </data>
+  <data name="value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="year" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="zip" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="zugferd" xml:space="preserve">
+    <value>ZUGFeRD</value>
+  </data>
+</root>

@@ -11,6 +11,8 @@ namespace mInvoice.Controllers
     {
         private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
+        //private mInvoice_api.Controllers.Tax_ratesController _controller = new mInvoice_api.Controllers.Tax_ratesController ();
+
         // GET: Tax_rates
         public ActionResult Index()
         {
@@ -21,9 +23,12 @@ namespace mInvoice.Controllers
 
             int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
+
+           // var _list = _controller.GetTax_rates(_clientsysid);
+
             var _list = from cust in db.Tax_rates
-                                              where cust.clients_id == _clientsysid
-                                              select cust;
+                        where cust.clients_id == _clientsysid
+                        select cust;
 
             return View(_list.ToList());
         }
