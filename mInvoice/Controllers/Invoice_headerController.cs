@@ -641,78 +641,78 @@ namespace mInvoice.Controllers
                         _localReportDataSources);
 
                     // ZUGFeRD
-                    if (EmailForm.Zugferd)
-                    {
-                        Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter
-                            _rp_invoice_detailsTableAdapter = new Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter();
-                        Reports.reportsDataSet _reportsDataSet = new Reports.reportsDataSet();
+                    //if (EmailForm.Zugferd)
+                    //{
+                    //    Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter
+                    //        _rp_invoice_detailsTableAdapter = new Reports.reportsDataSetTableAdapters.rp_invoice_detailsTableAdapter();
+                    //    Reports.reportsDataSet _reportsDataSet = new Reports.reportsDataSet();
 
-                        _rp_invoice_detailsTableAdapter.Fill(
-                            _reportsDataSet.rp_invoice_details,
-                            _client_id,
-                            EmailForm.ID);
+                    //    _rp_invoice_detailsTableAdapter.Fill(
+                    //        _reportsDataSet.rp_invoice_details,
+                    //        _client_id,
+                    //        EmailForm.ID);
 
-                        Reports.reportsDataSet.rp_invoice_detailsRow _row = _reportsDataSet.rp_invoice_details[0];
+                    //    Reports.reportsDataSet.rp_invoice_detailsRow _row = _reportsDataSet.rp_invoice_details[0];
 
-                        ZUGFeRD_Test.main_form _zugferd = new ZUGFeRD_Test.main_form();
+                    //    ZUGFeRD_Test.main_form _zugferd = new ZUGFeRD_Test.main_form();
 
-                        TotalInvoiceInfo _total_info = getTotalInvoiceInfo(_reportsDataSet.rp_invoice_details);
+                    //    TotalInvoiceInfo _total_info = getTotalInvoiceInfo(_reportsDataSet.rp_invoice_details);
 
-                        m_zugferd_file_path = _zugferd.getZugFeRD_PDF(
-                              _pdf_output_file
-                            , _connection
-                            , _client_id
-                            , EmailForm.ID  // invoice_header_id ?
-                            , _row.invoice_no
-                            , _row.order_date
-                            , _row.Currency_customer_code
-                            , _row.currency_code   //CurrencyShortmark_client
-                            , _row.customer_name
-                            , _row.Customers_zip
-                            , _row.Customers_city
-                            , _row.Customers_street
-                            , _row.customer_no
-                            , _row.tax_number
-                            , _row.clientname
-                            , _row.Clients_zip
-                            , _row.Customers_city
-                            , _row.Customers_street
-                            , _row.Clients_ustd_id
-                            , _row.Countries_iso  //Clients_country_code
-                            , _row.delivery_date
-                            , _total_info.valueofgoods
-                            , _total_info.valueofgoods_without_discount
-                            , _row.Isfreight_costsNull() ? new decimal?() : _row.freight_costs
-                            , _total_info.subtotal
-                            , _total_info.taxtotalAmount
-                            , _total_info.total
-                            , _row.Tax_rates_value
-                            , _row.Payment_terms_description
-                            , _row.Isdue_dateNull() ? new DateTime?() : _row.due_date
-                            , _row.Clients_iban
-                            , _row.Clients_bic
-                            , _row.Clients_account_number
-                            , _row.Clients_bic
-                            , _row.Clients_bank_name
-                            , _reportsDataSet.rp_invoice_details
-                            , Resource.TradeLineCommentItem
-                            , Server.MapPath("~/images/profile") //ZugFERDResourceDirectory
-                            , Resource.LogisticsServiceChargeDescription //= "Versandkosten"
-                            , Resource.TradeAllowanceChargeDescription //= "Sondernachlass"
-                            );
+                    //    m_zugferd_file_path = _zugferd.getZugFeRD_PDF(
+                    //          _pdf_output_file
+                    //        , _connection
+                    //        , _client_id
+                    //        , EmailForm.ID  // invoice_header_id ?
+                    //        , _row.invoice_no
+                    //        , _row.order_date
+                    //        , _row.Currency_customer_code
+                    //        , _row.currency_code   //CurrencyShortmark_client
+                    //        , _row.customer_name
+                    //        , _row.Customers_zip
+                    //        , _row.Customers_city
+                    //        , _row.Customers_street
+                    //        , _row.customer_no
+                    //        , _row.tax_number
+                    //        , _row.clientname
+                    //        , _row.Clients_zip
+                    //        , _row.Customers_city
+                    //        , _row.Customers_street
+                    //        , _row.Clients_ustd_id
+                    //        , _row.Countries_iso  //Clients_country_code
+                    //        , _row.delivery_date
+                    //        , _total_info.valueofgoods
+                    //        , _total_info.valueofgoods_without_discount
+                    //        , _row.Isfreight_costsNull() ? new decimal?() : _row.freight_costs
+                    //        , _total_info.subtotal
+                    //        , _total_info.taxtotalAmount
+                    //        , _total_info.total
+                    //        , _row.Tax_rates_value
+                    //        , _row.Payment_terms_description
+                    //        , _row.Isdue_dateNull() ? new DateTime?() : _row.due_date
+                    //        , _row.Clients_iban
+                    //        , _row.Clients_bic
+                    //        , _row.Clients_account_number
+                    //        , _row.Clients_bic
+                    //        , _row.Clients_bank_name
+                    //        , _reportsDataSet.rp_invoice_details
+                    //        , Resource.TradeLineCommentItem
+                    //        , Server.MapPath("~/images/profile") //ZugFERDResourceDirectory
+                    //        , Resource.LogisticsServiceChargeDescription //= "Versandkosten"
+                    //        , Resource.TradeAllowanceChargeDescription //= "Sondernachlass"
+                    //        );
 
-                        att1 = new Attachment(m_zugferd_file_path);
-                        att1.Name = Path.GetFileName(EmailForm.Attachment);
-                        msg.Attachments.Add(att1);
+                    //    att1 = new Attachment(m_zugferd_file_path);
+                    //    att1.Name = Path.GetFileName(EmailForm.Attachment);
+                    //    msg.Attachments.Add(att1);
 
-                        System.IO.File.Delete(m_zugferd_file_path);
-                    }
-                    else
-                    {
+                    //    System.IO.File.Delete(m_zugferd_file_path);
+                    //}
+                    //else
+                    //{
                         att1 = new Attachment(_pdf_output_file);
                         att1.Name = Path.GetFileName(EmailForm.Attachment);
                         msg.Attachments.Add(att1);
-                    }
+                    //}
 
                     // Save invoice file
                     if (Session["invoicesPath"] != null)

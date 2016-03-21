@@ -880,6 +880,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid login attempt ähnelt.
+        /// </summary>
+        public static string invalid_login_attempt {
+            get {
+                return ResourceManager.GetString("invalid_login_attempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invoice ähnelt.
         /// </summary>
         public static string invoice {

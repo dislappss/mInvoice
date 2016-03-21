@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using mInvoice.Controllers;
 using mInvoice.Models;
 using System.Data.SqlClient;
+using System.Data.Entity.Core;
 
 namespace mInvoice.Helpers
 {
@@ -16,8 +17,8 @@ namespace mInvoice.Helpers
             string _AspNetUsers_id = null;
             myinvoice_dbEntities _db = new myinvoice_dbEntities();
 
-            try
-            {
+            //try
+            //{
                 if (!string.IsNullOrWhiteSpace(UserName))
                 {                   
                     if (string.IsNullOrEmpty(AspNetUsers_id))
@@ -43,15 +44,15 @@ namespace mInvoice.Helpers
                 }
                 else
                     return null;
-            }
-            catch (SqlException ex)
-            {
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            //}
+            //catch (EntityException ex)
+            //{
+            //    return null;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return null;
+            //}
         }
 
         public static string getClientEMailByUserName(string UserName, ref string AspNetUsers_id)

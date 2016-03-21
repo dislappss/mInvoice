@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using mInvoice.App_GlobalResources;
 using mInvoice.Models;
 
 namespace mInvoice.Controllers
@@ -91,6 +93,11 @@ namespace mInvoice.Controllers
 
                         var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
+                        if (_AspNetUsers_id == null || client_id == null)
+                        {
+                            throw new Exception(Resource.invalid_login_attempt);
+                        }
+
                         Session.Add("AspNetUsers_id", _AspNetUsers_id); 
 
                         var _invoicesPath = Server.MapPath("~/Invoices/" + _AspNetUsers_id);
@@ -112,7 +119,7 @@ namespace mInvoice.Controllers
                         return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                     case SignInStatus.Failure:
                     default:
-                        ModelState.AddModelError("", "Ungültiger Anmeldeversuch.");
+                        ModelState.AddModelError("", Resource.invalid_login_attempt + ": ");
                         return View(model);
                 }
             }
@@ -120,10 +127,10 @@ namespace mInvoice.Controllers
             {
                 Console.WriteLine(ex.Message);
 
-                ModelState.AddModelError("", "Ungültiger Anmeldeversuch: " + ex.Message);
+                ModelState.AddModelError("", Resource.invalid_login_attempt + ": " + ex.Message);
                 return View(model);
             }
-        }
+        }       
 
         //
         // GET: /Account/VerifyCode
@@ -184,6 +191,7 @@ namespace mInvoice.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             string _AspNetUsers_id = null;
+            int? client_id = null;
 
             try
             {
@@ -191,6 +199,8 @@ namespace mInvoice.Controllers
                 {
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                     var result = await UserManager.CreateAsync(user, model.Password);
+
+
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -201,9 +211,20 @@ namespace mInvoice.Controllers
                         //  Admin ?
                         Session.Add("is_admin", model.Email == "dnepr65@gmail.com");
 
-                        var client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
+                        client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
-                        Session.Add("AspNetUsers_id", user.Id ); // _AspNetUsers_id);
+                        if (_AspNetUsers_id == null || client_id == null)
+                        {
+                            mInvoice.Models.ApplicationDbContext context = new ApplicationDbContext();
+                            context.Users.Add(user);
+                            AddUserAndRole(context, model.Password);
+
+                            client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
+
+                            //throw new Exception(Resource.invalid_login_attempt);
+                        }
+
+                        Session.Add("AspNetUsers_id", user.Id); // _AspNetUsers_id);
                         var _invoicesPath = Server.MapPath("~/Invoices/" + _AspNetUsers_id);
                         Session.Add("invoicesPath", _invoicesPath);
 
@@ -232,9 +253,26 @@ namespace mInvoice.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("Ungültiger Anmeldeversuch.", ex);
+                ModelState.AddModelError(Resource.invalid_login_attempt, ex);
             }
             return View();
+        }
+
+        bool AddUserAndRole(mInvoice.Models.ApplicationDbContext context, string Pass)
+        {
+            IdentityResult ir;
+            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            ir = rm.Create(new IdentityRole("canEdit"));
+            var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var user = new ApplicationUser()
+            {
+                UserName = context.Users.FirstOrDefault ().Email 
+            };
+            ir = um.Create(user, Pass);
+            if (ir.Succeeded == false)
+                return ir.Succeeded;
+            ir = um.AddToRole(user.Id, "canEdit");
+            return ir.Succeeded;
         }
 
         //

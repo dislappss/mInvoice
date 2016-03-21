@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -40,6 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataAnnotationsExtensions">
@@ -200,11 +201,13 @@
       <DependentUpon>Resource.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_GlobalResources\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -344,6 +347,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\logError.txt" />
+    <Content Include="azurewebsites.net.html" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -416,6 +420,12 @@
       <LastGenOutput>AspNetDataClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\mInvoice - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mInvoice - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mInvoiceAPI20160318073529 - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\mInvoiceAPI20160318073529 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mInvoiceAPI20160318073529 - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\mInvoiceAPI20160318073529 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -605,6 +615,7 @@
     <Content Include="Views\Invoice_header\Archive.cshtml" />
     <Content Include="Views\Reports\invoice.cshtml" />
     <Content Include="Views\Reports\ReportParameters.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Invoices\" />
@@ -624,6 +635,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601141917262_Init.resx">
       <DependentUpon>201601141917262_Init.cs</DependentUpon>
@@ -640,13 +652,8 @@
     <EmbeddedResource Include="App_GlobalResources\Resource.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="ohaERP_ZUGFeRD\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD.csproj">
-      <Project>{1ff5a300-0d7a-4c87-9785-d9c5483db301}</Project>
-      <Name>ohaERP_ZUGFeRD</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -666,7 +673,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65228</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:65228/</IISUrl>
+          <IISUrl>https://localhost:44300/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

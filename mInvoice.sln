@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mInvoice", "mInvoice\mInvoice.csproj", "{EC44D8AF-231B-43C4-99F7-7EF7EDEA1070}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ohaERP_ZUGFeRD", "mInvoice\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD\ohaERP_ZUGFeRD.csproj", "{1FF5A300-0D7A-4C87-9785-D9C5483DB301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mInvoiceAPI", "mInvoiceAPI\mInvoiceAPI.csproj", "{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,16 @@ Global
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|x86.ActiveCfg = Release|x86
 		{1FF5A300-0D7A-4C87-9785-D9C5483DB301}.Release|x86.Build.0 = Release|x86
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31D5C5D4-37FD-4DA8-AAF5-28DFAC3D03FF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
