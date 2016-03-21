@@ -95,7 +95,13 @@ namespace mInvoice.Controllers
 
                         if (_AspNetUsers_id == null || client_id == null)
                         {
-                            throw new Exception(Resource.invalid_login_attempt);
+                            //throw new Exception(Resource.invalid_login_attempt);
+
+                            // Create the custom role and user.
+                            RoleActions roleActions = new RoleActions();
+                            roleActions.AddUserAndRole(model.Email, model.Password);
+
+                            client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
                         }
 
                         Session.Add("AspNetUsers_id", _AspNetUsers_id); 
@@ -203,6 +209,11 @@ namespace mInvoice.Controllers
 
                     if (result.Succeeded)
                     {
+                        // Create the custom role and user.
+                        RoleActions roleActions = new RoleActions();
+                        roleActions.AddUserAndRole(model.Email, model.Password);
+
+
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         Session.Add("email", model.Email);
@@ -213,11 +224,19 @@ namespace mInvoice.Controllers
 
                         client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
+
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
                         if (_AspNetUsers_id == null || client_id == null)
                         {
-                            mInvoice.Models.ApplicationDbContext context = new ApplicationDbContext();
-                            context.Users.Add(user);
-                            AddUserAndRole(context, model.Password);
+                            //mInvoice.Models.ApplicationDbContext context = new ApplicationDbContext();
+                            //context.Users.Add(user);
+                            //AddUserAndRole(context, model.Password);
+
+                            //// Create the custom role and user.
+                            //RoleActions roleActions = new RoleActions();
+                            //roleActions.AddUserAndRole(model.Email, model.Password);
 
                             client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 

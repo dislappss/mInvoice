@@ -36,7 +36,6 @@ namespace mInvoice.Models
         public virtual DbSet<Articles> Articles { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Quantity_units> Quantity_units { get; set; }
-        public virtual DbSet<v_AspNetUsers> v_AspNetUsers { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
     }
 }

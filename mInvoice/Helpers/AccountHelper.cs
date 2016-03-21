@@ -12,19 +12,22 @@ namespace mInvoice.Helpers
 {
     public static class AccountHelper 
     {
+        static myinvoice_dbEntities _db = new myinvoice_dbEntities();
+        static AspNetDataClassesDataContext _db_users = new AspNetDataClassesDataContext();
+
         public static int? getClientIDByUserName(string UserName, ref string AspNetUsers_id)
         {
             string _AspNetUsers_id = null;
-            myinvoice_dbEntities _db = new myinvoice_dbEntities();
+            
 
-            //try
-            //{
+            try
+            {
                 if (!string.IsNullOrWhiteSpace(UserName))
                 {                   
                     if (string.IsNullOrEmpty(AspNetUsers_id))
                     {
-                        var _list = _db.v_AspNetUsers;
-                        _AspNetUsers_id = _list.FirstOrDefault(x => x.UserName == UserName).Id;
+                        //var _list = _db.v_AspNetUsers;
+                        _AspNetUsers_id = _db_users.AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
                         AspNetUsers_id = _AspNetUsers_id;
                     }
                     else
@@ -44,15 +47,15 @@ namespace mInvoice.Helpers
                 }
                 else
                     return null;
-            //}
-            //catch (EntityException ex)
-            //{
-            //    return null;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return null;
-            //}
+            }
+            catch (EntityException ex)
+            {
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public static string getClientEMailByUserName(string UserName, ref string AspNetUsers_id)
@@ -66,7 +69,7 @@ namespace mInvoice.Helpers
                 {
                     if (string.IsNullOrEmpty(AspNetUsers_id))
                     {
-                        _AspNetUsers_id = _db.v_AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
+                        _AspNetUsers_id = _db_users.AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
                         AspNetUsers_id = _AspNetUsers_id;
                     }
                     else

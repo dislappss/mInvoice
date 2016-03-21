@@ -15,6 +15,7 @@ namespace mInvoice.Controllers
     public class ClientsController : BaseController
     {
         private myinvoice_dbEntities db = new myinvoice_dbEntities();
+        
 
         // GET: Clients
         public ActionResult Index()
@@ -369,11 +370,13 @@ namespace mInvoice.Controllers
 
         public static int? getClientIDByUserName(string UserName, ref string AspNetUsers_id)
         {
+            AspNetDataClassesDataContext _db_users = new AspNetDataClassesDataContext();
+
             if (!string.IsNullOrWhiteSpace(UserName))
             {
                 myinvoice_dbEntities _db = new myinvoice_dbEntities();
 
-                string _AspNetUsers_id = _db.v_AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
+                string _AspNetUsers_id = _db_users.AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
 
                 AspNetUsers_id = _AspNetUsers_id;
 

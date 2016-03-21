@@ -56,6 +56,10 @@ namespace mInvoice
 
             DataAnnotationsModelValidatorProvider.RegisterAdapter(
                 typeof(DateRequiredAttribute), typeof(SplittedDateRequiredValidator));
+
+            //// Create the custom role and user.
+            //RoleActions roleActions = new RoleActions();
+            //roleActions.AddUserAndRole();
         }
 
         private void Application_BeginRequest(Object source, EventArgs e)

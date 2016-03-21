@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="60">
+      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="117">
         <EntityTypeShape EntityType="myinvoice_dbModel.Currency" Width="1.5" PointX="0.5" PointY="4.25" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="8" PointY="5.5" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Delivery_terms" Width="1.5" PointX="5" PointY="2.75" />
@@ -39,7 +39,6 @@
         <EntityTypeShape EntityType="myinvoice_dbModel.Quantity_units" Width="1.5" PointX="9.375" PointY="1" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Articles_Quantity_units" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Invoice_details_Quantity_units" />
-        <EntityTypeShape EntityType="myinvoice_dbModel.v_AspNetUsers" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Countries" Width="1.5" PointX="10.375" PointY="6" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Clients_Countries" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_Countries" />

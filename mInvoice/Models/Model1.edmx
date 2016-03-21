@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articles">
           <Key>
             <PropertyRef Name="Id" />
@@ -206,16 +206,6 @@
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tax_rates">
           <Key>
             <PropertyRef Name="Id" />
@@ -229,24 +219,7 @@
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
-        <EntityType Name="v_AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
+Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
         <Association Name="FK_Articles_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
@@ -571,24 +544,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim�
           <EntitySet Name="Payment_method" EntityType="Self.Payment_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment_terms" EntityType="Self.Payment_terms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quantity_units" EntityType="Self.Quantity_units" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="v_AspNetUsers" EntityType="Self.v_AspNetUsers" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [v_AspNetUsers].[Id] AS [Id], 
-    [v_AspNetUsers].[Email] AS [Email], 
-    [v_AspNetUsers].[EmailConfirmed] AS [EmailConfirmed], 
-    [v_AspNetUsers].[PasswordHash] AS [PasswordHash], 
-    [v_AspNetUsers].[SecurityStamp] AS [SecurityStamp], 
-    [v_AspNetUsers].[PhoneNumber] AS [PhoneNumber], 
-    [v_AspNetUsers].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed], 
-    [v_AspNetUsers].[TwoFactorEnabled] AS [TwoFactorEnabled], 
-    [v_AspNetUsers].[LockoutEndDateUtc] AS [LockoutEndDateUtc], 
-    [v_AspNetUsers].[LockoutEnabled] AS [LockoutEnabled], 
-    [v_AspNetUsers].[AccessFailedCount] AS [AccessFailedCount], 
-    [v_AspNetUsers].[UserName] AS [UserName]
-    FROM [dbo].[v_AspNetUsers] AS [v_AspNetUsers]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Articles" EntitySet="Articles" />
@@ -802,7 +758,6 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim�
             <End Role="Quantity_units" EntitySet="Quantity_units" />
             <End Role="Invoice_details" EntitySet="Invoice_details" />
           </AssociationSet>
-          <EntitySet Name="v_AspNetUsers" EntityType="myinvoice_dbModel.v_AspNetUsers" />
           <EntitySet Name="Countries" EntityType="myinvoice_dbModel.Countries" />
           <AssociationSet Name="FK_Clients_Countries" Association="myinvoice_dbModel.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -1343,23 +1298,6 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim�
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="v_AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="Id" />
@@ -1625,24 +1563,6 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoice_db.dbo.v_AspNetUsers' ist kein Prim�
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="description_en" ColumnName="description_en" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="v_AspNetUsers">
-            <EntityTypeMapping TypeName="myinvoice_dbModel.v_AspNetUsers">
-              <MappingFragment StoreEntitySet="v_AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
