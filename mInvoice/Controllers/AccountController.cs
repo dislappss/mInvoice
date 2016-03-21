@@ -95,13 +95,13 @@ namespace mInvoice.Controllers
 
                         if (_AspNetUsers_id == null || client_id == null)
                         {
-                            //throw new Exception(Resource.invalid_login_attempt);
+                            throw new Exception(Resource.invalid_login_attempt);
 
-                            // Create the custom role and user.
-                            RoleActions roleActions = new RoleActions();
-                            roleActions.AddUserAndRole(model.Email, model.Password);
+                            //// Create the custom role and user.
+                            //RoleActions roleActions = new RoleActions();
+                            //roleActions.AddUserAndRole(model.Email, model.Password);
 
-                            client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
+                            //client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
                         }
 
                         Session.Add("AspNetUsers_id", _AspNetUsers_id); 
@@ -210,8 +210,8 @@ namespace mInvoice.Controllers
                     if (result.Succeeded)
                     {
                         // Create the custom role and user.
-                        RoleActions roleActions = new RoleActions();
-                        roleActions.AddUserAndRole(model.Email, model.Password);
+                        //RoleActions roleActions = new RoleActions();
+                        //roleActions.AddUserAndRole(model.Email, model.Password);
 
 
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -238,9 +238,9 @@ namespace mInvoice.Controllers
                             //RoleActions roleActions = new RoleActions();
                             //roleActions.AddUserAndRole(model.Email, model.Password);
 
-                            client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
+                            //client_id = Helpers.AccountHelper.getClientIDByUserName(model.Email, ref _AspNetUsers_id);
 
-                            //throw new Exception(Resource.invalid_login_attempt);
+                            throw new Exception(Resource.invalid_login_attempt);
                         }
 
                         Session.Add("AspNetUsers_id", user.Id); // _AspNetUsers_id);
