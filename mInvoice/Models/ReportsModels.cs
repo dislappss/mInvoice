@@ -5,6 +5,15 @@
         {
             public Reports.reportsDataSet.ArticlesDataTable data { get; set; }
             public Reports.reportsDataSet.ArticlesLabelsDataTable labels { get; set; }
+
+            public ArticlesModel() { }
+
+            public ArticlesModel( Reports.reportsDataSet.ArticlesDataTable Data, Reports.reportsDataSet.ArticlesLabelsDataTable Labels)
+            {
+                this.data = Data;
+                this.labels = Labels;
+            }
+
         }
 
         public class CustomersModel

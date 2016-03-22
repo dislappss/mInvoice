@@ -18,10 +18,10 @@ namespace mInvoice.Controllers
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
                 
-            Reports.reportsDataSet.ArticlesLabelsDataTable _labelsDataTable =
+            Reports.reportsDataSet.ArticlesLabelsDataTable _labels =
                 new Reports.reportsDataSet.ArticlesLabelsDataTable();
 
-            _labelsDataTable.AddArticlesLabelsRow(
+            _labels.AddArticlesLabelsRow(
                     Resource.article_no,
                     Resource.price,
                     Resource.description,
@@ -30,11 +30,19 @@ namespace mInvoice.Controllers
                     Resource.update_at,
                     Resource.article  );
 
-            var model = new mInvoice.Models.ArticlesModel()
-            {
-                data = LocalData.GetArticles(_client_id),
-                labels = _labelsDataTable
-            };
+            var _data = LocalData.GetArticles(_client_id);
+
+            mInvoice.Models.ArticlesModel model = new mInvoice.Models.ArticlesModel(_data, _labels);
+
+            //model.labels = _labelsDataTable;
+            //model.data =_data ;
+            
+            
+            //{
+            //    data = LocalData.GetArticles(_client_id),
+            //    labels = _labelsDataTable
+            //};
+
             return View(model);
         }
 
