@@ -323,7 +323,7 @@ namespace mInvoice.Controllers
                 ReportFormat.Pdf
                 , "Reports/invoice.rdlc"
                 , localReportDataSources: _localReportDataSources
-                , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                , mode: Microsoft.Reporting.WebForms.ProcessingMode.Remote 
                 , filename: FileName
                 );              
         }

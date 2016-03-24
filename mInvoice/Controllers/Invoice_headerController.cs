@@ -889,7 +889,7 @@ namespace mInvoice.Controllers
                     ReportFormat.Pdf
                     , "Reports/invoice.rdlc"
                     , localReportDataSources: _localReportDataSources
-                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Remote
                     , filename: TmpFileName
                     ).FileStream;
             else
@@ -897,7 +897,7 @@ namespace mInvoice.Controllers
                     ReportFormat.Pdf
                     , "Reports/invoice.rdlc"
                     , localReportDataSources: _localReportDataSources
-                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Local
+                    , mode: Microsoft.Reporting.WebForms.ProcessingMode.Remote
                     ).FileStream;
 
             if (System.IO.File.Exists(OutputFileName))
