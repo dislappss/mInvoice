@@ -6,6 +6,7 @@ using mInvoice.App_GlobalResources;
 using mInvoice.Models;
 using MvcReportViewer;
 using System.Linq;
+using System.Threading;
 
 namespace mInvoice.Controllers
 {
@@ -18,30 +19,23 @@ namespace mInvoice.Controllers
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
                 
-            Reports.reportsDataSet.ArticlesLabelsDataTable _labels =
-                new Reports.reportsDataSet.ArticlesLabelsDataTable();
+            //Reports.reportsDataSet.ArticlesLabelsDataTable _labels =
+            //    new Reports.reportsDataSet.ArticlesLabelsDataTable();
 
-            _labels.AddArticlesLabelsRow(
-                    Resource.article_no,
-                    Resource.price,
-                    Resource.description,
-                    Resource.tax_rate,
-                    Resource.create_at,
-                    Resource.update_at,
-                    Resource.article  );
+            //_labels.AddArticlesLabelsRow(
+            //        Resource.article_no,
+            //        Resource.price,
+            //        Resource.description,
+            //        Resource.tax_rate,
+            //        Resource.create_at,
+            //        Resource.update_at,
+            //        Resource.article  );
 
-            var _data = LocalData.GetArticles(_client_id);
+            //var _data = LocalData.GetArticles(_client_id);
 
-            mInvoice.Models.ArticlesModel model = new mInvoice.Models.ArticlesModel(_data, _labels);
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
 
-            //model.labels = _labelsDataTable;
-            //model.data =_data ;
-            
-            
-            //{
-            //    data = LocalData.GetArticles(_client_id),
-            //    labels = _labelsDataTable
-            //};
+            mInvoice.Models.ArticlesModel model = new mInvoice.Models.ArticlesModel(_client_id, _lang);           
 
             return View(model);
         }
@@ -50,42 +44,10 @@ namespace mInvoice.Controllers
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
 
-            Reports.reportsDataSet.CustomersLabelsDataTable _labelsDataTable =
-                new Reports.reportsDataSet.CustomersLabelsDataTable ();
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
 
-            _labelsDataTable.AddCustomersLabelsRow(
-                        Resource.payment_method,
-                        Resource.customer_no,
-                        Resource.description,
-                        Resource.countries,
-                        Resource.email,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.street,
-                        Resource.countries,
-                        Resource.email,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.street,
-                        Resource.phone,
-                        Resource.fax,
-                        Resource.phone_2,
-                        "WWW",
-                        Resource.ustd_id,
-                        Resource.finance_office,
-                        Resource.account_number,
-                        Resource.bank_name,
-                        Resource.iban,
-                        Resource.bic,
-                        Resource.create_at,
-                        Resource.update_at,
-                        Resource.customers);
+            mInvoice.Models.CustomersModel model = new mInvoice.Models.CustomersModel(_client_id, _lang);      
 
-            var model = new mInvoice.Models.CustomersModel ()
-            {
-                data  = LocalData.GetCustomers(_client_id),
-                labels = _labelsDataTable
-            };
             return View(model);
         }
 
@@ -215,99 +177,11 @@ namespace mInvoice.Controllers
             )
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
 
-            Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable _labelsDataTable =
-                new Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable();
-
-            _labelsDataTable.Addrp_invoice_detailsLabelsRow(
-                                        Resource.invoice_no,
-                        Resource.order_date,
-                        Resource.delivery_date,
-                        Resource.customer_reference,
-                        Resource.description,
-                        Resource.country_name,
-                        Resource.customer_no,
-                        Resource.customer,
-                        Resource.email,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.street,
-                        Resource.tax_rate,
-                        Resource.client,
-                        Resource.email,
-                        Resource.owner,
-                        Resource.street,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.phone,
-                        Resource.fax,
-                        "WWW",
-                        Resource.ustd_id,
-                        Resource.finance_office,
-                        Resource.account_number,
-                        Resource.bank_name,
-                        Resource.iban,
-                        Resource.bic,
-                        Resource.picture,
-                        Resource.phone_2,
-                        Resource.description,
-                        Resource.quantity,
-                        Resource.quantity_2,
-                        Resource.quantity_3,
-                        Resource.price_netto,
-                        Resource.discount,
-                        Resource.article_no,
-                        Resource.invoice,
-                        Resource.date,
-                        Resource.positions_short,
-                        Resource.price,
-                        Resource.sum_price,
-                        Resource.quantity_units,
-                        Resource.description,
-                        Resource.net_amount,
-                        Resource.subtotal,
-                        Resource.plus_vat,
-                        Resource.total_amount,
-                        Resource.positions_short,
-                        Resource.unit,
-                        Resource.quantity_report,
-                        Resource.discount_report,
-                        Resource.phone_report,
-                        Resource.fax_report,
-                        Resource.tax_number,
-                        Resource.bic_report,
-                        Resource.iban_report,
-                        Resource.owner_report,
-                        Resource.delivery_date_report,
-                        Resource.payment_terms,
-                        Resource.delivery_terms,
-                        Resource.sales,
-                        Resource.month,
-                        Resource.year,
-                        Resource.quarter,
-                        Resource.country,
-                        Resource.product,
-                        Resource.product_costs,
-                        Resource.margin,
-                        Resource.total_sales,
-                        Resource.total_sales_by_year,
-                        Resource.total_sales_by_quarter,
-                        Resource.percent_of_total_sales,
-                        Resource.total_value,
-                        Resource.sales_details,
-                        Resource.total_sales_by_month,
-                        Resource.due_date  
-                        );
-
-            var model = new mInvoice.Models.rp_salesModel()
-            {
-                data = LocalData.GetSales(_client_id, Date_from, Date_to, Article_id, Customers_id),
-                labels = _labelsDataTable
-            };
+            var model = new mInvoice.Models.rp_salesModel(_client_id, Date_from, Date_to, Article_id, Customers_id, _lang);
             return model;
         }
-
-
 
         public ActionResult DownloadPDF(int id, string FileName)
         {

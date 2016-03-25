@@ -6,7 +6,9 @@
 
 @{
     ViewBag.Title = @Resources.Resource.invoice;
-    
+    string _culture =
+       System.Threading.Thread.CurrentThread.CurrentCulture.Name + "-" +
+       System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToUpper();
 }
 
 <h2>@Resources.Resource.invoice </h2>

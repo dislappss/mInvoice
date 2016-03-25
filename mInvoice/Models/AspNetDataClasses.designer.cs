@@ -22,7 +22,7 @@ namespace mInvoice.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="myinvoice_db")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="myinvoiceDB")]
 	public partial class AspNetDataClassesDataContext : System.Data.Linq.DataContext
 	{
 		

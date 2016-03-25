@@ -1,25 +1,30 @@
-﻿namespace mInvoice.Models
+﻿using System;
+namespace mInvoice.Models
 {
     
         public class ArticlesModel
         {
-            public Reports.reportsDataSet.ArticlesDataTable data { get; set; }
-            public Reports.reportsDataSet.ArticlesLabelsDataTable labels { get; set; }
+            public int client_id = -3;
+            public string language = null;
 
-            public ArticlesModel() { }
-
-            public ArticlesModel( Reports.reportsDataSet.ArticlesDataTable Data, Reports.reportsDataSet.ArticlesLabelsDataTable Labels)
+            public ArticlesModel(int Client_id, string Language) //, Reports.reportsDataSet.ArticlesLabelsDataTable Labels)
             {
-                this.data = Data;
-                this.labels = Labels;
+                this.client_id = Client_id;
+                this.language = Language;
             }
 
         }
 
         public class CustomersModel
         {
-            public Reports.reportsDataSet.CustomersDataTable data { get; set; }
-            public Reports.reportsDataSet.CustomersLabelsDataTable labels { get; set; }
+            public int client_id = -3;
+            public string language = null;
+
+            public CustomersModel(int Client_id, string Language) 
+            {
+                this.client_id = Client_id;
+                this.language = Language;
+            }
         }
 
         public class rp_invoice_detailsModel
@@ -30,7 +35,21 @@
 
         public class rp_salesModel
         {
-            public Reports.reportsDataSet.rp_salesDataTable data { get; set; }
-            public Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable  labels { get; set; }
+            public int client_id = -3;
+            public DateTime? date_from = null;
+            public DateTime? date_to = null;
+            public int? article_id = -3;
+            public int? customers_id = -3;
+            public string language = null;
+
+            public rp_salesModel(int Client_id, DateTime? date_from, DateTime? date_to, int? article_id, int? customers_id, string Language)
+            {
+                this.client_id = Client_id;
+                this.date_from = date_from;
+                this.date_to = date_to;
+                this.article_id = article_id;
+                this.customers_id = customers_id ;
+                this.language = Language;
+            }
         }
 }

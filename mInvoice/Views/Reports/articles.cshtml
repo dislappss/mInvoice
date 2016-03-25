@@ -6,6 +6,9 @@
 
 @{
     ViewBag.Title = @Resources.Resource.article;
+    string _culture =
+         System.Threading.Thread.CurrentThread.CurrentCulture.Name + "-" +
+         System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToUpper();
 }
 
 <h2>@Resources.Resource.article</h2>
@@ -13,15 +16,19 @@
 @{
     var settings = new ControlSettings
         {
-            ShowParameterPrompts = true,
+            ShowParameterPrompts = false,
             ShowFindControls = true,
             //BackColor = System.Drawing.Color.LightBlue ,
             KeepSessionAlive = true,
             //Width = new System.Web.UI.WebControls.Unit("100%"),
             //Height = new System.Web.UI.WebControls.Unit("800px"),
-            AsyncRendering = false
+            AsyncRendering = true
         };
 }
 
-@Html.MvcReportViewerFluent("Reports/articles.rdlc").ProcessingMode(ProcessingMode.Remote).LocalDataSource("labels", Model.labels).LocalDataSource("data", Model.data).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
+@Html.MvcReportViewerFluent("/mInvoiceReports/articles").ReportParameters(new { 
+        clientid = Model.client_id, 
+        language = Model.language,
+        culture = _culture }).Attributes(new { Height = 900, Width = 650, style = "border: none" }).ControlSettings(settings);
+
 

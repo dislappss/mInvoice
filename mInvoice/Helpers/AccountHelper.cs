@@ -19,14 +19,12 @@ namespace mInvoice.Helpers
         {
             string _AspNetUsers_id = null;
             
-
             try
             {
                 if (!string.IsNullOrWhiteSpace(UserName))
                 {                   
                     if (string.IsNullOrEmpty(AspNetUsers_id))
                     {
-                        //var _list = _db.v_AspNetUsers;
                         _AspNetUsers_id = _db_users.AspNetUsers.FirstOrDefault(x => x.UserName == UserName).Id;
                         AspNetUsers_id = _AspNetUsers_id;
                     }

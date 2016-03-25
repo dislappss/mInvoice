@@ -272,7 +272,7 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>data</DataSetName>
-        <Top>0.07056cm</Top>
+        <Top>0.10583cm</Top>
         <Height>6.05833cm</Height>
         <Width>18.1798cm</Width>
         <Style>
@@ -1403,7 +1403,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2468,7 +2467,7 @@
         <DataSetName>data</DataSetName>
         <Top>17.99703cm</Top>
         <Height>2.69104cm</Height>
-        <Width>18.1798cm</Width>
+        <Width>18.17978cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
