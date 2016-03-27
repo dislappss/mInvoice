@@ -2,7 +2,7 @@
 @using mInvoice.Models;
 @using Microsoft.Reporting.WebForms;
 
-@model rp_invoice_detailsModel 
+@model InvoiceModel  
 
 @{
     ViewBag.Title = @Resources.Resource.invoice;
@@ -16,17 +16,20 @@
 @{
     var settings = new ControlSettings
         {
-            ShowParameterPrompts = true,
+            ShowParameterPrompts = false,
             ShowFindControls = true,
             //BackColor = System.Drawing.Color.LightBlue ,
             KeepSessionAlive = true,
             //Width = new System.Web.UI.WebControls.Unit("100%"),
             //Height = new System.Web.UI.WebControls.Unit("800px"),
-            AsyncRendering = false,
-            ShowPrintButton = ViewBag.ShowPrintButton,
-            ShowExportControls = ViewBag.ShowPrintButton
+            AsyncRendering = true
         };
 }
 
-@Html.MvcReportViewerFluent("Reports/invoice.rdlc").ProcessingMode(ProcessingMode.Remote).LocalDataSource("labels", Model.labels).LocalDataSource("data", Model.data).Attributes(new { Height = 900, Width = 900, style = "border: none" }).ControlSettings(settings);
-
+@Html.MvcReportViewerFluent("/mInvoiceReports/invoice").ReportParameters(new
+{    
+    clientid = Model.client_id,
+    language = Model.language,
+    culture = _culture,
+    invoiceheaderid = Model.Invoice_header_id  
+}).Attributes(new { Height = 900, Width = 800, style = "border: none" }).ControlSettings(settings);

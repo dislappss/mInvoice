@@ -51,9 +51,13 @@ namespace mInvoice.Controllers
             return View(model);
         }
 
-        public ActionResult invoice(int id, bool ShowPrintButton)
+        public ActionResult invoice(int id, string Invoice_no, bool ShowPrintButton)
         {
-            var model = GetData_invoice(id);
+            int _client_id = Convert.ToInt32(Session["client_id"]);
+
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
+
+            mInvoice.Models.InvoiceModel model = new mInvoice.Models.InvoiceModel(_client_id, _lang, id, Invoice_no);      
 
             ViewBag.ShowPrintButton = ShowPrintButton;
 

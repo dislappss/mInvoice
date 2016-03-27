@@ -345,11 +345,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Reports\reportsDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>reportsDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="RoleActions.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -420,9 +415,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Reports\reportsDataSet.xsc">
-      <DependentUpon>reportsDataSet.xsd</DependentUpon>
-    </Content>
     <Content Include="Models\AspNetDataClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>AspNetDataClasses.designer.cs</LastGenOutput>
@@ -439,14 +431,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="read.me" />
-    <None Include="Reports\reportsDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>reportsDataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Reports\reportsDataSet.xss">
-      <DependentUpon>reportsDataSet.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cssmenu.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -649,13 +633,9 @@
     <EmbeddedResource Include="Migrations\201601141917262_Init.resx">
       <DependentUpon>201601141917262_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\invoice.rdlc" />
-    <EmbeddedResource Include="Reports\sales.rdlc" />
     <None Include="Models\AspNetDataClasses.dbml.layout">
       <DependentUpon>AspNetDataClasses.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Reports\customers.rdlc" />
-    <EmbeddedResource Include="Reports\articles.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\Resource.de.resx">

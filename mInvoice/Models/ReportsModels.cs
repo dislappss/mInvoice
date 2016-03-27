@@ -27,6 +27,24 @@ namespace mInvoice.Models
             }
         }
 
+        public class InvoiceModel
+        {
+            public int client_id = -3;
+            public string language = null;
+            public int Invoice_header_id = -3;
+            public string Invoice_no = null;
+
+            public InvoiceModel(int Client_id, string Language, int Invoice_header_id, string Invoice_no)
+            {
+                this.client_id = Client_id;
+                this.language = Language;
+                this.Invoice_header_id = Invoice_header_id;
+                this.Invoice_no = Invoice_no;
+            }
+        }
+
+
+
         public class rp_invoice_detailsModel
         {
             public Reports.reportsDataSet.rp_invoice_detailsDataTable  data { get; set; }

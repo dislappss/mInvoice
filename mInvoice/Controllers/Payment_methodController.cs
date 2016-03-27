@@ -46,7 +46,18 @@ namespace mInvoice.Controllers
         // GET: Payment_method/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
+            Payment_method _new_item = new Payment_method();
+
+            _new_item.clients_id = _client_id;
+
+            return View(_new_item);
         }
 
         // POST: Payment_method/Create
@@ -55,14 +66,17 @@ namespace mInvoice.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,clients_id,name,code,CreatedAt,UpdatedAt")] Payment_method payment_method)
-        {            
+        {
+            if (Session["client_id"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var _client_id = Convert.ToInt32(Session["client_id"]);
+
             if (ModelState.IsValid)
             {
-                if (Session["client_id"] == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                payment_method.clients_id = Convert.ToInt32(Session["client_id"]); 
+                payment_method.clients_id = _client_id; 
 
                 db.Payment_method.Add(payment_method);
                 db.SaveChanges();

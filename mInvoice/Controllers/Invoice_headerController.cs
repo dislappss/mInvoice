@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -613,13 +614,23 @@ namespace mInvoice.Controllers
 
                     int _client_id = Convert.ToInt32(Session["client_id"]);
 
-                    var model = GetData_invoice(EmailForm.ID);
+                    var model = GetData_invoice(EmailForm.ID, EmailForm.Invoice_No);
 
-                    Dictionary<string, System.Data.DataTable> _localReportDataSources =
-                        new Dictionary<string, System.Data.DataTable>();
+                    //List<Dictionary<string, string>> _localReportDataSources_arr = new List<Dictionary<string, string>>();
+                    //Dictionary<string, string> _localReportDataSources = new Dictionary<string, string>();
 
-                    _localReportDataSources.Add("labels", model.labels);
-                    _localReportDataSources.Add("data", model.data);
+                    //_localReportDataSources = new Dictionary<string, string>();
+                    //_localReportDataSources.Add("clientid", model.client_id.ToString());
+                    //_localReportDataSources_arr.Add(_localReportDataSources);
+
+                    //_localReportDataSources = new Dictionary<string, string>();
+                    //_localReportDataSources.Add("invoiceheaderid", model.Invoice_header_id.ToString());
+                    //_localReportDataSources_arr.Add(_localReportDataSources);
+
+                    //_localReportDataSources = new Dictionary<string, string>();
+                    //_localReportDataSources.Add("language", model.language);
+                    //_localReportDataSources_arr.Add(_localReportDataSources);
+
 
                     string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                     string pathDownload = Path.Combine(pathUser, "Downloads");
@@ -636,9 +647,9 @@ namespace mInvoice.Controllers
                     // Create PDF-File
                     //Stream _stream = 
                     CreateInvoicePDFFile(
-                        EmailForm.Attachment, 
-                       _pdf_output_file, 
-                        _localReportDataSources);
+                        EmailForm.Attachment,
+                       _pdf_output_file,
+                        model);
 
                     // ZUGFeRD
                     //if (EmailForm.Zugferd)
@@ -709,9 +720,9 @@ namespace mInvoice.Controllers
                     //}
                     //else
                     //{
-                        att1 = new Attachment(_pdf_output_file);
-                        att1.Name = Path.GetFileName(EmailForm.Attachment);
-                        msg.Attachments.Add(att1);
+                    att1 = new Attachment(_pdf_output_file);
+                    att1.Name = Path.GetFileName(EmailForm.Attachment);
+                    msg.Attachments.Add(att1);
                     //}
 
                     // Save invoice file
@@ -729,6 +740,7 @@ namespace mInvoice.Controllers
                             + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
                             + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
                             + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
+                             + "_email_"
                             + ".pdf"
                             );
 
@@ -783,12 +795,12 @@ namespace mInvoice.Controllers
             }
             catch (Exception ex)
             {
-                FlashHelpers.FlashError(this, ex.Message );
+                FlashHelpers.FlashError(this, ex.Message);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult  PrintHeader(int id)
+        public ActionResult PrintHeader(int id, string invoice_no)
         {
             string _targetPath = null;
             string _output_full_file_path = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
@@ -800,21 +812,15 @@ namespace mInvoice.Controllers
 
             int _client_id = Convert.ToInt32(Session["client_id"]);
 
-            var model = GetData_invoice(id);
-
-            Dictionary<string, System.Data.DataTable> _localReportDataSources =
-                       new Dictionary<string, System.Data.DataTable>();
-
-            _localReportDataSources.Add("labels", model.labels);
-            _localReportDataSources.Add("data", model.data);
+            var model = GetData_invoice(id, invoice_no);         
 
             // Create PDF-File
-            string _file_name = model.data[0].invoice_no;
+            string _file_name = model.Invoice_no ;
 
             if (System.IO.File.Exists(_output_full_file_path))
                 System.IO.File.Delete(_output_full_file_path);
 
-            Stream _stream = CreateInvoicePDFFile(_file_name, _output_full_file_path, _localReportDataSources);
+            Stream _stream = CreateInvoicePDFFile(_file_name, _output_full_file_path, model);
 
             // Archive
             if (Session["invoicesPath"] != null)
@@ -824,12 +830,13 @@ namespace mInvoice.Controllers
                 DateTime _now = DateTime.Now;
 
                 _targetPath = Path.Combine(_invoiceDirectory,
-                           _file_name + "_"
+                           _file_name + "_" 
                            + _now.Year
                            + (_now.Month.ToString().Length == 1 ? "0" + _now.Month.ToString() : _now.Month.ToString())
                            + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
                            + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
                            + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
+                           + "_print_"
                            + ".pdf"
                            );
 
@@ -840,19 +847,13 @@ namespace mInvoice.Controllers
                     System.IO.File.Delete(_targetPath);
 
                 System.IO.File.SetCreationTime(_output_full_file_path, _now);
-
-                System.IO.File.Copy(_output_full_file_path, _targetPath);
-               
+                System.IO.File.Copy(_output_full_file_path, _targetPath);               
                 System.IO.File.Delete(_output_full_file_path);
             }
 
             // Open PDF-File       
             if (!string.IsNullOrEmpty(_targetPath))
             {
-                //Response.AppendHeader("Content-Disposition", "inline; filename=" + Path.GetFileName(_targetPath));
-                //return File(_targetPath, "application/pdf");
-
-
                 return RedirectToAction("invoice", "Reports", new { id = id, ShowPrintButton = true });
             }
             else
@@ -880,15 +881,28 @@ namespace mInvoice.Controllers
         private Stream CreateInvoicePDFFile(
             string TmpFileName
             , string OutputFileName
-            , Dictionary<string, System.Data.DataTable> _localReportDataSources)
+            , InvoiceModel _localReportDataSources)
         {
             Stream _stream = null;
+
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
+            string _culture =
+               System.Threading.Thread.CurrentThread.CurrentCulture.Name + "-" +
+               System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToUpper();
 
             if(!string.IsNullOrEmpty (TmpFileName))
                 _stream = this.Report(
                     ReportFormat.Pdf
-                    , "Reports/invoice.rdlc"
-                    , localReportDataSources: _localReportDataSources
+                    , "/mInvoiceReports/invoice"
+                    , reportParameters: 
+                            new
+                            {
+                                clientid = _localReportDataSources.client_id,
+                                language = _localReportDataSources.language,
+                                culture = _culture,
+                                invoiceheaderid = _localReportDataSources.Invoice_header_id  
+                            }
+                    //, localReportDataSources: _localReportDataSources
                     , mode: Microsoft.Reporting.WebForms.ProcessingMode.Remote
                     , filename: TmpFileName
                     ).FileStream;
@@ -896,7 +910,8 @@ namespace mInvoice.Controllers
                 _stream = this.Report(
                     ReportFormat.Pdf
                     , "Reports/invoice.rdlc"
-                    , localReportDataSources: _localReportDataSources
+                    , reportParameters: _localReportDataSources
+                    //, localReportDataSources: _localReportDataSources
                     , mode: Microsoft.Reporting.WebForms.ProcessingMode.Remote
                     ).FileStream;
 
@@ -978,20 +993,24 @@ namespace mInvoice.Controllers
 
             var _files = Directory.GetFiles(_invoiceDirectory, invoice_nr + "*.pdf").ToList();
 
-            List<Models.Archive> _list = new List<Models.Archive> ();
+            List<Models.Archive> _list = new List<Models.Archive>();
 
             foreach (string _file in _files)
             {
+                string _filename = Path.GetFileNameWithoutExtension(_file);
+
+                //if (_filename.
+
                 _list.Add(
                     new Archive(
                         _file
-                        , Path.GetFileName(_file).Replace (".pdf", "")
+                        , Path.GetFileName(_file).Replace(".pdf", "")
                         , System.IO.File.GetCreationTime(_file)
-                        , Models.Archive.archiveType.Mail 
+                        ,  Models.Archive.archiveType.Mail
                     ));
             }
-            return View(_list.OrderByDescending (p=>p.CreateDate ));
-        }        
+            return View(_list.OrderByDescending(p => p.CreateDate));
+        }
 
         public ActionResult GetFile(string Id)
         {
@@ -1061,98 +1080,12 @@ namespace mInvoice.Controllers
             public decimal total { get; set; }
         }
 
-        private mInvoice.Models.rp_invoice_detailsModel GetData_invoice(int id)
+        private mInvoice.Models.InvoiceModel GetData_invoice(int id, string Invoice_no)
         {
             int _client_id = Convert.ToInt32(Session["client_id"]);
+            string _lang = Thread.CurrentThread.CurrentCulture.EnglishName == "German" ? "de" : "en";
 
-            Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable _labelsDataTable =
-                new Reports.reportsDataSet.rp_invoice_detailsLabelsDataTable();
-
-            _labelsDataTable.Addrp_invoice_detailsLabelsRow(
-                                        Resource.invoice_no,
-                        Resource.order_date,
-                        Resource.delivery_date,
-                        Resource.customer_reference,
-                        Resource.description,
-                        Resource.country_name,
-                        Resource.customer_no,
-                        Resource.customer,
-                        Resource.email,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.street,
-                        Resource.tax_rate,
-                        Resource.client,
-                        Resource.email,
-                        Resource.owner,
-                        Resource.street,
-                        Resource.zip,
-                        Resource.city,
-                        Resource.phone,
-                        Resource.fax,
-                        "WWW",
-                        Resource.ustd_id,
-                        Resource.finance_office,
-                        Resource.account_number,
-                        Resource.bank_name,
-                        Resource.iban,
-                        Resource.bic,
-                        Resource.picture,
-                        Resource.phone_2,
-                        Resource.description,
-                        Resource.quantity,
-                        Resource.quantity_2,
-                        Resource.quantity_3,
-                        Resource.price_netto,
-                        Resource.discount,
-                        Resource.article_no,
-                        Resource.invoice,
-                        Resource.date,
-                        Resource.positions_short,
-                        Resource.price,
-                        Resource.sum_price,
-                        Resource.quantity_units,
-                        Resource.description,
-                        Resource.net_amount,
-                        Resource.subtotal,
-                        Resource.plus_vat,
-                        Resource.total_amount,
-                        Resource.positions_short,
-                        Resource.unit,
-                        Resource.quantity_report,
-                        Resource.discount_report,
-                        Resource.phone_report,
-                        Resource.fax_report,
-                        Resource.tax_number,
-                        Resource.bic_report,
-                        Resource.iban_report,
-                        Resource.owner_report,
-                        Resource.delivery_date_report,
-                        Resource.payment_terms,
-                        Resource.delivery_terms,
-                        Resource.sales,
-                        Resource.month,
-                        Resource.year,
-                        Resource.quarter,
-                        Resource.country,
-                        Resource.product,
-                        Resource.product_costs,
-                        Resource.margin,
-                        Resource.total_sales,
-                        Resource.total_sales_by_year,
-                        Resource.total_sales_by_quarter,
-                        Resource.percent_of_total_sales,
-                        Resource.total_value,
-                        Resource.sales_details,
-                        Resource.total_sales_by_month,
-                        Resource.due_date  
-                        );
-
-            var model = new mInvoice.Models.rp_invoice_detailsModel()
-            {
-                data = LocalData.GetInvoice(_client_id, id),
-                labels = _labelsDataTable
-            };
+            var model = new mInvoice.Models.InvoiceModel (_client_id, _lang, id, Invoice_no);
             return model;
         }
 

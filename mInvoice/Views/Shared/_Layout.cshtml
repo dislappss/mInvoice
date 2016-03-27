@@ -119,9 +119,9 @@
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.client, "Index", "Clients")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.customers, "Index", "Customers")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.article, "Index", "Articles")</li>
-                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>
-                                @if (_is_admin)
-                                {
+                               @if (_is_admin)
+                               {
+                                    <li class="menu-item ">@Html.ActionLink(@Resources.Resource.countries, "Index", "Countries")</li>                              
                                     <li class="menu-item ">@Html.ActionLink(@Resources.Resource.currency_id, "Index", "Currency")</li>
                                 }
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.method_of_payment, "Index", "Payment_method")</li>

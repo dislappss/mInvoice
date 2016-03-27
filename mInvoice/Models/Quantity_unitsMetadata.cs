@@ -21,6 +21,10 @@ namespace mInvoice.Models
         public string description { get; set; }
 
         [Required]
+        [Display(Name = "description_en", ResourceType = typeof(Resource))]
+        public string description_en { get; set; }
+
+        [Required]
         [Display(Name = "code", ResourceType = typeof(Resource))]
         public string code { get; set; }       
 

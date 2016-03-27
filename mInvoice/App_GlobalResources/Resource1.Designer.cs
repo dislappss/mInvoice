@@ -556,6 +556,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description (EN) ähnelt.
+        /// </summary>
+        public static string description_en {
+            get {
+                return ResourceManager.GetString("description_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Details ähnelt.
         /// </summary>
         public static string details {

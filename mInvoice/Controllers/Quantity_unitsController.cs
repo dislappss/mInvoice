@@ -22,7 +22,7 @@ namespace mInvoice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            int _clientsysid = Convert.ToInt32(Session["client_id"]);
+            //int _clientsysid = Convert.ToInt32(Session["client_id"]);
 
             var _list = from cust in db.Quantity_units
                         //where cust.clients_id == _clientsysid
@@ -70,7 +70,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,clients_id,description,code,CreatedAt,UpdatedAt")] Quantity_units quantity_units)
+        public ActionResult Create([Bind(Include = "Id,description,description_en,code,CreatedAt,UpdatedAt")] Quantity_units quantity_units)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace mInvoice.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clients_id,description,code,CreatedAt,UpdatedAt")] Quantity_units quantity_units)
+        public ActionResult Edit([Bind(Include = "Id,description_en,description,code,CreatedAt,UpdatedAt")] Quantity_units quantity_units)
         {
             if (ModelState.IsValid)
             {
