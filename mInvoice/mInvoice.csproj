@@ -57,9 +57,8 @@
       <HintPath>..\..\..\..\..\Downloads\MvcReportViewer-master\MvcReportViewer-master\MvcReportViewerExample\bin\Microsoft.ReportViewer.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvcReportViewer, Version=0.8.5816.27247, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>obj\Release\Package\PackageTmp\bin\MvcReportViewer.dll</HintPath>
+    <Reference Include="MvcReportViewer">
+      <HintPath>..\packages\MvcReportViewer.0.8.3\lib\net45\MvcReportViewer.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common">
       <HintPath>..\..\..\..\..\Downloads\MvcReportViewer-master\MvcReportViewer-master\MvcReportViewerExample\bin\Ninject.Web.Common.dll</HintPath>
@@ -295,7 +294,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Invoice_headerMetadata.cs" />
-    <Compile Include="Models\LocalData.cs" />
     <Compile Include="Models\Delivery_termsMetadata.cs" />
     <Compile Include="Models\Payment_method.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -384,8 +382,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Images\invoice_32_32.png" />
-    <Content Include="MvcReportViewer.aspx" />
-    <Content Include="MvcReportViewerErrorPage.html" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker3.min.css.map" />
@@ -395,6 +391,8 @@
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="nlog.config" />
+    <Content Include="MvcReportViewer.aspx" />
+    <Content Include="MvcReportViewerErrorPage.html" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />

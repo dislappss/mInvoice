@@ -998,15 +998,21 @@ namespace mInvoice.Controllers
             foreach (string _file in _files)
             {
                 string _filename = Path.GetFileNameWithoutExtension(_file);
+                Models.Archive.archiveType _type = Models.Archive.archiveType.Unknown;
 
-                //if (_filename.
+                if (_filename.Contains("email"))
+                    _type = Models.Archive.archiveType.Mail;
+                else if (_filename.Contains("print"))
+                    _type = Models.Archive.archiveType.Report;
+                else
+                    _type = Models.Archive.archiveType.Unknown;
 
                 _list.Add(
                     new Archive(
                         _file
                         , Path.GetFileName(_file).Replace(".pdf", "")
                         , System.IO.File.GetCreationTime(_file)
-                        ,  Models.Archive.archiveType.Mail
+                        , _type
                     ));
             }
             return View(_list.OrderByDescending(p => p.CreateDate));
@@ -1031,54 +1037,54 @@ namespace mInvoice.Controllers
             }
         }
 
-        private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)
-        {
-            TotalInvoiceInfo _totalInvoiceInfo = new TotalInvoiceInfo();
+        //private TotalInvoiceInfo getTotalInvoiceInfo(Reports.reportsDataSet.rp_invoice_detailsDataTable rp_invoice_detailsDataTable)
+        //{
+        //    TotalInvoiceInfo _totalInvoiceInfo = new TotalInvoiceInfo();
 
-             decimal _valueofgoods_without_discount = rp_invoice_detailsDataTable.Sum(
-                pos => pos.Invoice_details_price_netto * 
-                    pos.Invoice_details_quantity *
-                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
-                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
-                    (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) 
-                );
+        //     decimal _valueofgoods_without_discount = rp_invoice_detailsDataTable.Sum(
+        //        pos => pos.Invoice_details_price_netto * 
+        //            pos.Invoice_details_quantity *
+        //            (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
+        //            (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+        //            (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) 
+        //        );
 
-            decimal _valueofgoods = rp_invoice_detailsDataTable.Sum(
-                pos => pos.Invoice_details_price_netto * 
-                    pos.Invoice_details_quantity *
-                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
-                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
-                    (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
-                    (pos.IsInvoice_details_discountNull () ? 1 :  (100 - pos.Invoice_details_discount) / 100 )
-                );
+        //    decimal _valueofgoods = rp_invoice_detailsDataTable.Sum(
+        //        pos => pos.Invoice_details_price_netto * 
+        //            pos.Invoice_details_quantity *
+        //            (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) * 
+        //            (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+        //            (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
+        //            (pos.IsInvoice_details_discountNull () ? 1 :  (100 - pos.Invoice_details_discount) / 100 )
+        //        );
 
-            decimal _vat = rp_invoice_detailsDataTable.Sum(
-                pos => pos.Invoice_details_price_netto *
-                    pos.Invoice_details_quantity *
-                    (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) *
-                    (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
-                     (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
-                    (pos.IsInvoice_details_discountNull() ? 1 : (100 - pos.Invoice_details_discount) / 100) *
-                    (pos.IsTax_rates_valueNull() ? 0 : pos.Tax_rates_value)
-                );
+        //    decimal _vat = rp_invoice_detailsDataTable.Sum(
+        //        pos => pos.Invoice_details_price_netto *
+        //            pos.Invoice_details_quantity *
+        //            (pos.IsInvoice_details_quantity_2Null() ? 1 : pos.Invoice_details_quantity_2) *
+        //            (pos.IsInvoice_details_quantity_3Null() ? 1 : pos.Invoice_details_quantity_3) *
+        //             (pos.Isfreight_costsNull() ? 1 : pos.freight_costs > 0 ? pos.freight_costs : 1) *
+        //            (pos.IsInvoice_details_discountNull() ? 1 : (100 - pos.Invoice_details_discount) / 100) *
+        //            (pos.IsTax_rates_valueNull() ? 0 : pos.Tax_rates_value)
+        //        );
 
-            _totalInvoiceInfo.valueofgoods = _valueofgoods;
-            _totalInvoiceInfo.valueofgoods_without_discount = _valueofgoods_without_discount;
-            _totalInvoiceInfo.subtotal = _valueofgoods;
-            _totalInvoiceInfo.taxtotalAmount = _vat;
-            _totalInvoiceInfo.total = _valueofgoods + _vat;
+        //    _totalInvoiceInfo.valueofgoods = _valueofgoods;
+        //    _totalInvoiceInfo.valueofgoods_without_discount = _valueofgoods_without_discount;
+        //    _totalInvoiceInfo.subtotal = _valueofgoods;
+        //    _totalInvoiceInfo.taxtotalAmount = _vat;
+        //    _totalInvoiceInfo.total = _valueofgoods + _vat;
 
-            return _totalInvoiceInfo;
-        }
+        //    return _totalInvoiceInfo;
+        //}
 
-        public class TotalInvoiceInfo
-        {
-            public decimal valueofgoods { get; set; }
-            public decimal valueofgoods_without_discount { get; set; }
-            public decimal subtotal { get; set; }
-            public decimal taxtotalAmount { get; set; }
-            public decimal total { get; set; }
-        }
+        //public class TotalInvoiceInfo
+        //{
+        //    public decimal valueofgoods { get; set; }
+        //    public decimal valueofgoods_without_discount { get; set; }
+        //    public decimal subtotal { get; set; }
+        //    public decimal taxtotalAmount { get; set; }
+        //    public decimal total { get; set; }
+        //}
 
         private mInvoice.Models.InvoiceModel GetData_invoice(int id, string Invoice_no)
         {
