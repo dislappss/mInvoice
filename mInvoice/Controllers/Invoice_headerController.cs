@@ -25,6 +25,7 @@ namespace mInvoice.Controllers
         string m_zugferd_file_path = null;
 
         private myinvoice_dbEntities m_db = new myinvoice_dbEntities();
+        private string m_pdf_output_file;
 
         // GET: Invoice_header
         public ActionResult Index(
@@ -598,7 +599,10 @@ namespace mInvoice.Controllers
         [ValidateAntiForgeryToken]
         async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
         {
-            string _pdf_output_file = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
+            string _guid = Guid.NewGuid().ToString();
+            string _pdf_output_file = HttpContext.Server.MapPath("~/App_Data/invoice_" + _guid + ".pdf");
+
+            m_pdf_output_file = null;
 
             try
             {
@@ -614,23 +618,7 @@ namespace mInvoice.Controllers
 
                     int _client_id = Convert.ToInt32(Session["client_id"]);
 
-                    var model = GetData_invoice(EmailForm.ID, EmailForm.Invoice_No);
-
-                    //List<Dictionary<string, string>> _localReportDataSources_arr = new List<Dictionary<string, string>>();
-                    //Dictionary<string, string> _localReportDataSources = new Dictionary<string, string>();
-
-                    //_localReportDataSources = new Dictionary<string, string>();
-                    //_localReportDataSources.Add("clientid", model.client_id.ToString());
-                    //_localReportDataSources_arr.Add(_localReportDataSources);
-
-                    //_localReportDataSources = new Dictionary<string, string>();
-                    //_localReportDataSources.Add("invoiceheaderid", model.Invoice_header_id.ToString());
-                    //_localReportDataSources_arr.Add(_localReportDataSources);
-
-                    //_localReportDataSources = new Dictionary<string, string>();
-                    //_localReportDataSources.Add("language", model.language);
-                    //_localReportDataSources_arr.Add(_localReportDataSources);
-
+                    var model = GetData_invoice(EmailForm.ID, EmailForm.Invoice_No);               
 
                     string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                     string pathDownload = Path.Combine(pathUser, "Downloads");
@@ -763,6 +751,11 @@ namespace mInvoice.Controllers
                         System.IO.File.SetCreationTime(targetPath, _now);
                     }
 
+                    if (!string.IsNullOrEmpty(_pdf_output_file))
+                        m_pdf_output_file = _pdf_output_file;
+                    else
+                        m_pdf_output_file = m_zugferd_file_path;
+
                     // Send E-Mail
                     var _client = m_db.Clients.Find(_client_id);
 
@@ -785,7 +778,7 @@ namespace mInvoice.Controllers
 
                         await smtp.SendMailAsync(msg);
                     }
-                }
+                }             
 
                 return RedirectToAction("Index");
             }
@@ -803,7 +796,8 @@ namespace mInvoice.Controllers
         public ActionResult PrintHeader(int id, string invoice_no)
         {
             string _targetPath = null;
-            string _output_full_file_path = HttpContext.Server.MapPath("~/App_Data/invoice.pdf");
+            string _guid = Guid.NewGuid().ToString(); 
+            string _output_full_file_path = HttpContext.Server.MapPath("~/App_Data/invoice_" + _guid + ".pdf");
 
             if (Session["client_id"] == null)
             {
@@ -815,10 +809,7 @@ namespace mInvoice.Controllers
             var model = GetData_invoice(id, invoice_no);         
 
             // Create PDF-File
-            string _file_name = model.Invoice_no ;
-
-            if (System.IO.File.Exists(_output_full_file_path))
-                System.IO.File.Delete(_output_full_file_path);
+            string _file_name = model.Invoice_no ;           
 
             Stream _stream = CreateInvoicePDFFile(_file_name, _output_full_file_path, model);
 
@@ -956,6 +947,18 @@ namespace mInvoice.Controllers
                 Console.WriteLine("Message [{0}] sent.", e.UserState.ToString());
 
                 FlashHelpers.FlashSuccess(this, Resource.email_message_sent);
+            }
+
+            try
+            {
+                if (!string.IsNullOrEmpty(m_pdf_output_file) &&
+                    System.IO.File.Exists(m_pdf_output_file))
+
+                    System.IO.File.Delete(m_pdf_output_file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.InnerException   ); 
             }
         }
 
