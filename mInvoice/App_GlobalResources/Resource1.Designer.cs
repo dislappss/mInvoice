@@ -889,6 +889,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Incorrect CAPTCHA code! ähnelt.
+        /// </summary>
+        public static string incorrect_captcha_code {
+            get {
+                return ResourceManager.GetString("incorrect_captcha_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invalid login attempt ähnelt.
         /// </summary>
         public static string invalid_login_attempt {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BotDetect.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -69,6 +70,7 @@ namespace mInvoice.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CaptchaValidation("CaptchaCode", "ExampleCaptcha", "Incorrect CAPTCHA code!")]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             string _AspNetUsers_id = null;
@@ -77,6 +79,9 @@ namespace mInvoice.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    if(ModelState["CaptchaCode"].Errors.Count > 0)
+                        FlashHelpers.FlashError(this, Resource.incorrect_captcha_code);
+       
                     return View(model);
                 }
 

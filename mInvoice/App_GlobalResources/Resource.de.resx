@@ -693,4 +693,7 @@
   <data name="description_en" xml:space="preserve">
     <value>Beschreibung (EN)</value>
   </data>
+  <data name="incorrect_captcha_code" xml:space="preserve">
+    <value>Der CAPTCHA-Kode ist falsch!</value>
+  </data>
 </root>
