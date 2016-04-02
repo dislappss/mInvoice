@@ -385,7 +385,7 @@
     <Content Include="Images\add_48.png" />
     <Content Include="Images\delete_48.png" />
     <Content Include="Images\edit_48.png" />
-    <Content Include="Images\table.JPG" />
+    <Content Include="Images\table.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
