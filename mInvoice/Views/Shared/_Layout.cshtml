@@ -33,6 +33,10 @@
     <link href="~/Content/jquery-filestyle.min.css" rel="stylesheet" />
 
     <style>
+        .glyphicon {
+            font-size: 20px;
+        }
+
         .jumbotron  {
                 /*position: relative;*/
                 background: #000 url("../../Images/table.png") center center;
@@ -40,11 +44,6 @@
                 height: 100%;
                 background-size: cover;
                 overflow: hidden;
-
-            /*-webkit-background-size: 100% 100%;
-            -moz-background-size: 100% 100%;
-            -o-background-size: 100% 100%;
-            background-size: 100% 100%;*/
         }
 
 
@@ -144,6 +143,8 @@
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.quantity_units, "Index", "Quantity_units")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.payment_terms, "Index", "Payment_terms")</li>
                                 <li class="menu-item ">@Html.ActionLink(@Resources.Resource.delivery_terms, "Index", "Delivery_terms")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.type_of_costs, "Index", "Type_of_costs")</li>
+                                <li class="menu-item ">@Html.ActionLink(@Resources.Resource.costs, "Index", "Costs")</li>
                             </ul>
                         </li>
                         <li class="menu-item ">@Html.ActionLink(@Resources.Resource.invoices, "Index", "Invoice_header")</li>

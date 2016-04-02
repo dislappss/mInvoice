@@ -17,6 +17,7 @@ namespace mInvoice.Models
         public Customers()
         {
             this.Invoice_header = new HashSet<Invoice_header>();
+            this.Costs = new HashSet<Costs>();
         }
     
         public int Id { get; set; }
@@ -59,5 +60,6 @@ namespace mInvoice.Models
         public virtual Payment_terms Payment_terms { get; set; }
         public virtual Tax_rates Tax_rates { get; set; }
         public virtual Countries Countries { get; set; }
+        public virtual ICollection<Costs> Costs { get; set; }
     }
 }

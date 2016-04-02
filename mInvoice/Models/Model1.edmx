@@ -304,6 +304,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Costs_Articles">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="0..1" />
+          <End Role="Costs" Type="Self.Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="articles_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_costs_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Costs" Type="Self.Costs" Multiplicity="*" />
@@ -313,6 +325,18 @@
             </Principal>
             <Dependent Role="Costs">
               <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costs_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Costs" Type="Self.Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="customers_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -627,8 +651,16 @@
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
+          <AssociationSet Name="FK_Costs_Articles" Association="Self.FK_Costs_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
           <AssociationSet Name="FK_costs_Clients" Association="Self.FK_costs_Clients">
             <End Role="Clients" EntitySet="Clients" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costs_Customers" Association="Self.FK_Costs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
             <End Role="Costs" EntitySet="Costs" />
           </AssociationSet>
           <AssociationSet Name="FK_costs_Type_of_costs" Association="Self.FK_costs_Type_of_costs">
@@ -859,6 +891,14 @@
             <End Role="Type_of_costs" EntitySet="Type_of_costs" />
             <End Role="Costs" EntitySet="Costs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Costs_Articles" Association="myinvoice_dbModel.FK_Costs_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costs_Customers" Association="myinvoice_dbModel.FK_Costs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Currency">
           <Key>
@@ -914,6 +954,7 @@
           <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Customers_Payment_terms" FromRole="Customers" ToRole="Payment_terms" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Customers_Tax_rates" FromRole="Customers" ToRole="Tax_rates" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Customers_Countries" FromRole="Customers" ToRole="Countries" />
+          <NavigationProperty Name="Costs" Relationship="myinvoice_dbModel.FK_Costs_Customers" FromRole="Customers" ToRole="Costs" />
           </EntityType>
         <EntityType Name="Delivery_terms">
           <Key>
@@ -1131,6 +1172,7 @@
           <NavigationProperty Name="Invoice_details" Relationship="myinvoice_dbModel.FK_invoice_details_articles" FromRole="Articles" ToRole="Invoice_details" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Articles_Clients" FromRole="Articles" ToRole="Clients" />
           <NavigationProperty Name="Quantity_units" Relationship="myinvoice_dbModel.FK_Articles_Quantity_units" FromRole="Articles" ToRole="Quantity_units" />
+          <NavigationProperty Name="Costs" Relationship="myinvoice_dbModel.FK_Costs_Articles" FromRole="Articles" ToRole="Costs" />
         </EntityType>
         <Association Name="FK_articles_tax_rates">
           <End Type="myinvoice_dbModel.Tax_rates" Role="Tax_rates" Multiplicity="1" />
@@ -1455,6 +1497,8 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_costs_Clients" FromRole="Costs" ToRole="Clients" />
           <NavigationProperty Name="Type_of_costs" Relationship="myinvoice_dbModel.FK_costs_Type_of_costs" FromRole="Costs" ToRole="Type_of_costs" />
+          <NavigationProperty Name="Articles" Relationship="myinvoice_dbModel.FK_Costs_Articles" FromRole="Costs" ToRole="Articles" />
+          <NavigationProperty Name="Customers" Relationship="myinvoice_dbModel.FK_Costs_Customers" FromRole="Costs" ToRole="Customers" />
         </EntityType>
         <EntityType Name="Type_of_costs">
           <Key>
@@ -1502,6 +1546,30 @@
             </Principal>
             <Dependent Role="Costs">
               <PropertyRef Name="type_of_costs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costs_Articles">
+          <End Type="myinvoice_dbModel.Articles" Role="Articles" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Costs" Role="Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="articles_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costs_Customers">
+          <End Type="myinvoice_dbModel.Customers" Role="Customers" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Costs" Role="Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="customers_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

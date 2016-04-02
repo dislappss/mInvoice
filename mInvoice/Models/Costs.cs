@@ -27,5 +27,7 @@ namespace mInvoice.Models
     
         public virtual Clients Clients { get; set; }
         public virtual Type_of_costs Type_of_costs { get; set; }
+        public virtual Articles Articles { get; set; }
+        public virtual Customers Customers { get; set; }
     }
 }

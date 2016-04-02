@@ -232,6 +232,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Booking date ähnelt.
+        /// </summary>
+        public static string booking_date {
+            get {
+                return ResourceManager.GetString("booking_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Can*t open file. ähnelt.
         /// </summary>
         public static string cant_open_file {
@@ -327,6 +336,15 @@ namespace mInvoice.App_GlobalResources {
         public static string copy_invoice {
             get {
                 return ResourceManager.GetString("copy_invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Costs ähnelt.
+        /// </summary>
+        public static string costs {
+            get {
+                return ResourceManager.GetString("costs", resourceCulture);
             }
         }
         
