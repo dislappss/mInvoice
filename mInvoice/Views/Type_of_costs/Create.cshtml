@@ -1,13 +1,14 @@
 ﻿@model mInvoice.Models.Type_of_costs
 
-
-<h2>@Resources.Resource.type_of_costs </h2>
+<h2>@Resources.Resource.create_new </h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+
+        <h4>@Resources.Resource.type_of_costs </h4>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
        
