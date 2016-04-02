@@ -702,13 +702,13 @@
   <data name="incorrect_captcha_code" xml:space="preserve">
     <value>Incorrect CAPTCHA code!</value>
   </data>
-  <data name="type_of_costs" xml:space="preserve">
-    <value>Type of costs</value>
+  <data name="booking_date" xml:space="preserve">
+    <value>Booking date</value>
   </data>
   <data name="costs" xml:space="preserve">
     <value>Costs</value>
   </data>
-  <data name="booking_date" xml:space="preserve">
-    <value>Booking date</value>
+  <data name="type_of_costs" xml:space="preserve">
+    <value>Type of costs</value>
   </data>
 </root>

@@ -696,13 +696,13 @@
   <data name="incorrect_captcha_code" xml:space="preserve">
     <value>Der CAPTCHA-Kode ist falsch!</value>
   </data>
-  <data name="type_of_costs" xml:space="preserve">
-    <value>Kostentyp</value>
+  <data name="booking_date" xml:space="preserve">
+    <value>Buchungs-datum</value>
   </data>
   <data name="costs" xml:space="preserve">
     <value>Kosten</value>
   </data>
-  <data name="booking_date" xml:space="preserve">
-    <value>Buchungs-datum</value>
+  <data name="type_of_costs" xml:space="preserve">
+    <value>Kostentyp</value>
   </data>
 </root>
