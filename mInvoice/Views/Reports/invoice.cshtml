@@ -19,10 +19,12 @@
             ShowParameterPrompts = false,
             ShowFindControls = true,
             //BackColor = System.Drawing.Color.LightBlue ,
-            KeepSessionAlive = true,
+            //KeepSessionAlive = true,
             //Width = new System.Web.UI.WebControls.Unit("100%"),
             //Height = new System.Web.UI.WebControls.Unit("800px"),
-            AsyncRendering = true
+            AsyncRendering = false,
+            ZoomMode = ZoomMode.PageWidth,
+            SizeToReportContent = false 
         };
 }
 
@@ -32,4 +34,4 @@
     language = Model.language,
     culture = _culture,
     invoiceheaderid = Model.Invoice_header_id  
-}).Attributes(new { Height = 900, Width = 800, style = "border: none" }).ControlSettings(settings);
+}).Attributes(new { Height = 900, Width = "100%", style = "border: none" }).ControlSettings(settings);

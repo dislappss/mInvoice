@@ -702,4 +702,7 @@
   <data name="incorrect_captcha_code" xml:space="preserve">
     <value>Incorrect CAPTCHA code!</value>
   </data>
+  <data name="type_of_costs" xml:space="preserve">
+    <value>Type of costs</value>
+  </data>
 </root>

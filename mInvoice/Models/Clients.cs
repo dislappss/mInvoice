@@ -23,6 +23,8 @@ namespace mInvoice.Models
             this.Invoice_header = new HashSet<Invoice_header>();
             this.Payment_terms = new HashSet<Payment_terms>();
             this.Tax_rates = new HashSet<Tax_rates>();
+            this.Costs = new HashSet<Costs>();
+            this.Type_of_costs = new HashSet<Type_of_costs>();
         }
     
         public int Id { get; set; }
@@ -70,5 +72,7 @@ namespace mInvoice.Models
         public virtual ICollection<Payment_terms> Payment_terms { get; set; }
         public virtual ICollection<Tax_rates> Tax_rates { get; set; }
         public virtual Countries Countries { get; set; }
+        public virtual ICollection<Costs> Costs { get; set; }
+        public virtual ICollection<Type_of_costs> Type_of_costs { get; set; }
     }
 }

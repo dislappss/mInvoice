@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ac1562887a94c27b8276d400b00aba7" Name="Diagram1">
+        <EntityTypeShape EntityType="myinvoiceDBModel.Articles" Width="1.5" PointX="7.5" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Clients" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Costs" Width="1.5" PointX="7.5" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Countries" Width="1.5" PointX="0.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Currency" Width="1.5" PointX="0.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Customers" Width="1.5" PointX="10.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Delivery_terms" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Invoice_details" Width="1.5" PointX="12.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Invoice_header" Width="1.5" PointX="15.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Payment_method" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Payment_terms" Width="1.5" PointX="5.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Quantity_units" Width="1.5" PointX="5.25" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Tax_rates" Width="1.5" PointX="5.25" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myinvoiceDBModel.Type_of_costs" Width="1.5" PointX="5.25" PointY="40.5" IsExpanded="true" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Articles_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Articles_Quantity_units" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_articles_tax_rates" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_invoice_details_articles" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Clients_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Clients_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Clients_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_costs_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Delivery_terms_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_details_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_header_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Payment_terms_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Tax_rates_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Type_of_costs_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_costs_Type_of_costs" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_invoice_header_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_header_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Delivery_terms" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_payment_method" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Payment_terms" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Customers_Tax_rates" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_invoice_header_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_header_Delivery_terms" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_invoice_details_invoice_header" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_details_Quantity_units" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_invoice_details_tax_rates" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.FK_Invoice_header_Payment_terms" ManuallyRouted="false" />
+        <AssociationConnector Association="myinvoiceDBModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

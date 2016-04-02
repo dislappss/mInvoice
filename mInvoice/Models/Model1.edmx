@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="myinvoice_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articles">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,6 +56,21 @@
           <Property Name="email_host" Type="nvarchar" MaxLength="250" />
           <Property Name="email_port" Type="int" />
           <Property Name="currency_id" Type="int" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Costs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="type_of_costs_id" Type="int" />
+          <Property Name="articles_id" Type="int" />
+          <Property Name="customers_id" Type="int" />
+          <Property Name="booking_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="value" Type="numeric" Precision="15" Scale="2" Nullable="false" />
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
@@ -218,8 +233,17 @@
           <Property Name="CreatedAt" Type="smalldatetime" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="Type_of_costs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clients_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="shortmark" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+        </EntityType>
         <Association Name="FK_Articles_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
@@ -277,6 +301,30 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_costs_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Costs" Type="Self.Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_costs_Type_of_costs">
+          <End Role="Type_of_costs" Type="Self.Type_of_costs" Multiplicity="0..1" />
+          <End Role="Costs" Type="Self.Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_costs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="type_of_costs_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -532,9 +580,22 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Type_of_costs_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Type_of_costs" Type="Self.Type_of_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type_of_costs">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="myinvoice_dbModelStoreContainer">
           <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Costs" EntityType="Self.Costs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
@@ -545,6 +606,7 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
           <EntitySet Name="Payment_terms" EntityType="Self.Payment_terms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quantity_units" EntityType="Self.Quantity_units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax_rates" EntityType="Self.Tax_rates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_of_costs" EntityType="Self.Type_of_costs" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Articles_Clients" Association="Self.FK_Articles_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Articles" EntitySet="Articles" />
@@ -564,6 +626,14 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
           <AssociationSet Name="FK_Clients_Currency" Association="Self.FK_Clients_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_costs_Clients" Association="Self.FK_costs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_costs_Type_of_costs" Association="Self.FK_costs_Type_of_costs">
+            <End Role="Type_of_costs" EntitySet="Type_of_costs" />
+            <End Role="Costs" EntitySet="Costs" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_Clients" Association="Self.FK_Customers_Clients">
             <End Role="Clients" EntitySet="Clients" />
@@ -648,6 +718,10 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
           <AssociationSet Name="FK_Tax_rates_Clients" Association="Self.FK_Tax_rates_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Tax_rates" EntitySet="Tax_rates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_of_costs_Clients" Association="Self.FK_Type_of_costs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Type_of_costs" EntitySet="Type_of_costs" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -770,6 +844,20 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
           <AssociationSet Name="FK_invoice_header_Countries" Association="myinvoice_dbModel.FK_invoice_header_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Invoice_header" EntitySet="Invoice_header" />
+          </AssociationSet>
+          <EntitySet Name="Costs" EntityType="myinvoice_dbModel.Costs" />
+          <EntitySet Name="Type_of_costs" EntityType="myinvoice_dbModel.Type_of_costs" />
+          <AssociationSet Name="FK_costs_Clients" Association="myinvoice_dbModel.FK_costs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Costs" EntitySet="Costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_of_costs_Clients" Association="myinvoice_dbModel.FK_Type_of_costs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Type_of_costs" EntitySet="Type_of_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_costs_Type_of_costs" Association="myinvoice_dbModel.FK_costs_Type_of_costs">
+            <End Role="Type_of_costs" EntitySet="Type_of_costs" />
+            <End Role="Costs" EntitySet="Costs" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Currency">
@@ -1116,6 +1204,8 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
           <NavigationProperty Name="Payment_terms" Relationship="myinvoice_dbModel.FK_Payment_terms_Clients" FromRole="Clients" ToRole="Payment_terms" />
           <NavigationProperty Name="Tax_rates" Relationship="myinvoice_dbModel.FK_Tax_rates_Clients" FromRole="Clients" ToRole="Tax_rates" />
           <NavigationProperty Name="Countries" Relationship="myinvoice_dbModel.FK_Clients_Countries" FromRole="Clients" ToRole="Countries" />
+          <NavigationProperty Name="Costs" Relationship="myinvoice_dbModel.FK_costs_Clients" FromRole="Clients" ToRole="Costs" />
+          <NavigationProperty Name="Type_of_costs" Relationship="myinvoice_dbModel.FK_Type_of_costs_Clients" FromRole="Clients" ToRole="Type_of_costs" />
           </EntityType>
         <Association Name="FK_Articles_Clients">
           <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
@@ -1349,6 +1439,72 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Costs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="type_of_costs_id" Type="Int32" />
+          <Property Name="articles_id" Type="Int32" />
+          <Property Name="customers_id" Type="Int32" />
+          <Property Name="booking_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="value" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_costs_Clients" FromRole="Costs" ToRole="Clients" />
+          <NavigationProperty Name="Type_of_costs" Relationship="myinvoice_dbModel.FK_costs_Type_of_costs" FromRole="Costs" ToRole="Type_of_costs" />
+        </EntityType>
+        <EntityType Name="Type_of_costs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clients_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="shortmark" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="myinvoice_dbModel.FK_Type_of_costs_Clients" FromRole="Type_of_costs" ToRole="Clients" />
+          <NavigationProperty Name="Costs" Relationship="myinvoice_dbModel.FK_costs_Type_of_costs" FromRole="Type_of_costs" ToRole="Costs" />
+        </EntityType>
+        <Association Name="FK_costs_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Costs" Role="Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type_of_costs_Clients">
+          <End Type="myinvoice_dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="myinvoice_dbModel.Type_of_costs" Role="Type_of_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Type_of_costs">
+              <PropertyRef Name="clients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_costs_Type_of_costs">
+          <End Type="myinvoice_dbModel.Type_of_costs" Role="Type_of_costs" Multiplicity="0..1" />
+          <End Type="myinvoice_dbModel.Costs" Role="Costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_costs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Costs">
+              <PropertyRef Name="type_of_costs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1576,6 +1732,34 @@ Warnung 6002: Für Tabelle/Sicht 'myinvoiceDB.dbo.v_AspNetUsers' ist kein Primä
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="iso" ColumnName="iso" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Costs">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Costs">
+              <MappingFragment StoreEntitySet="Costs">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="booking_date" ColumnName="booking_date" />
+                <ScalarProperty Name="customers_id" ColumnName="customers_id" />
+                <ScalarProperty Name="articles_id" ColumnName="articles_id" />
+                <ScalarProperty Name="type_of_costs_id" ColumnName="type_of_costs_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_of_costs">
+            <EntityTypeMapping TypeName="myinvoice_dbModel.Type_of_costs">
+              <MappingFragment StoreEntitySet="Type_of_costs">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="shortmark" ColumnName="shortmark" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clients_id" ColumnName="clients_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

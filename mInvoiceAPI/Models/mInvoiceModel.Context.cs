@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mInvoice.Models
+namespace mInvoiceAPI.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class myinvoice_dbEntities : DbContext
+    public partial class myinvoiceDBEntities : DbContext
     {
-        public myinvoice_dbEntities()
-            : base("name=myinvoice_dbEntities")
+        public myinvoiceDBEntities()
+            : base("name=myinvoiceDBEntities")
         {
         }
     
@@ -25,6 +25,14 @@ namespace mInvoice.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Articles> Articles { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Costs> Costs { get; set; }
+        public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Delivery_terms> Delivery_terms { get; set; }
@@ -32,12 +40,8 @@ namespace mInvoice.Models
         public virtual DbSet<Invoice_header> Invoice_header { get; set; }
         public virtual DbSet<Payment_method> Payment_method { get; set; }
         public virtual DbSet<Payment_terms> Payment_terms { get; set; }
-        public virtual DbSet<Tax_rates> Tax_rates { get; set; }
-        public virtual DbSet<Articles> Articles { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Quantity_units> Quantity_units { get; set; }
-        public virtual DbSet<Countries> Countries { get; set; }
-        public virtual DbSet<Costs> Costs { get; set; }
+        public virtual DbSet<Tax_rates> Tax_rates { get; set; }
         public virtual DbSet<Type_of_costs> Type_of_costs { get; set; }
     }
 }

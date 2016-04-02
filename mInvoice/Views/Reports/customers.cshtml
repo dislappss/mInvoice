@@ -19,15 +19,17 @@
             ShowParameterPrompts = false,
             ShowFindControls = true,
             //BackColor = System.Drawing.Color.LightBlue ,
-            KeepSessionAlive = true,
+            //KeepSessionAlive = true,
             //Width = new System.Web.UI.WebControls.Unit("100%"),
             //Height = new System.Web.UI.WebControls.Unit("800px"),
-            AsyncRendering = true
+            AsyncRendering = false,
+            ZoomMode = ZoomMode.PageWidth,
+            SizeToReportContent = false 
         };
 }
 
 @Html.MvcReportViewerFluent("/mInvoiceReports/customers").ReportParameters(new { 
             clientid = Model.client_id, 
             language = Model.language,
-            culture = _culture }).Attributes(new { Height = 900, Width = 800, style = "border: none" }).ControlSettings(settings);
+            culture = _culture }).Attributes(new { Height = 900, Width = "100%", style = "border: none" }).ControlSettings(settings);
 

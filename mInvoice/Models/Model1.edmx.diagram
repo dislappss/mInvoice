@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="117">
+      <Diagram DiagramId="007a45cd3fc84186a990b2d0c2c5e9a7" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="myinvoice_dbModel.Currency" Width="1.5" PointX="0.5" PointY="4.25" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Customers" Width="1.5" PointX="8" PointY="5.5" />
         <EntityTypeShape EntityType="myinvoice_dbModel.Delivery_terms" Width="1.5" PointX="5" PointY="2.75" />
@@ -43,6 +43,11 @@
         <AssociationConnector Association="myinvoice_dbModel.FK_Clients_Countries" />
         <AssociationConnector Association="myinvoice_dbModel.FK_Customers_Countries" />
         <AssociationConnector Association="myinvoice_dbModel.FK_invoice_header_Countries" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Costs" Width="1.5" PointX="13.25" PointY="8.625" />
+        <EntityTypeShape EntityType="myinvoice_dbModel.Type_of_costs" Width="1.5" PointX="5" PointY="13.375" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_costs_Clients" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_Type_of_costs_Clients" />
+        <AssociationConnector Association="myinvoice_dbModel.FK_costs_Type_of_costs" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

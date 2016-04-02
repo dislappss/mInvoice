@@ -1726,6 +1726,15 @@ namespace mInvoice.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type of costs ähnelt.
+        /// </summary>
+        public static string type_of_costs {
+            get {
+                return ResourceManager.GetString("type_of_costs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Unit ähnelt.
         /// </summary>
         public static string unit {
