@@ -51,11 +51,12 @@
 
 
         a.logo {
-            background: url(../Images/invoice_32_32.png) no-repeat bottom center;
+            background: url(../Images/invoice_32_32.png) no-repeat center center;
             display: block;
             width: 32px;
             height: 32px;
             text-indent: -9999px; /* hides the link text */
+            margin-top: 10px;
         }
 
         .dropdown-submenu {
@@ -122,8 +123,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(@Resources.Resource.app_name, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @*<a class="navbar-brand" href="http://bootply.com"><i class="icon-home icon-white"> </i> Lorem Ipsum blog</a>*@
+                @*@Html.ActionLink(@Resources.Resource.app_name, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                @Html.ActionLink("logo", "Index", null, new { @class="logo" })
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
