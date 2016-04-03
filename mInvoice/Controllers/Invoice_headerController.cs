@@ -587,7 +587,7 @@ namespace mInvoice.Controllers
 
             string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathDownload = Path.Combine(pathUser, "Downloads");
-            string _filename = "invoice_" + Guid.NewGuid().ToString() + ".pdf";
+            string _filename = ("invoice_" + "_em_" + _email_form.To.Replace(".", "___") + "_em_" + Guid.NewGuid().ToString()).Replace(".", "___") + ".pdf";
             string _file_path = Path.Combine(pathDownload, _filename);
 
             _email_form.Attachment = _file_path;
@@ -600,7 +600,7 @@ namespace mInvoice.Controllers
         async public Task<ActionResult> EmailForm(EmailFormModel EmailForm)
         {
             string _guid = Guid.NewGuid().ToString();
-            string _pdf_output_file = HttpContext.Server.MapPath("~/App_Data/invoice_" + _guid + ".pdf");
+            string _pdf_output_file = HttpContext.Server.MapPath("~/App_Data/invoice_em_" + EmailForm.To.Replace(".", "___") + "_em_" + _guid + ".pdf");
 
             m_pdf_output_file = null;
 
@@ -639,6 +639,7 @@ namespace mInvoice.Controllers
                        _pdf_output_file,
                         model);
 
+                    #region ZUGFeRD
                     // ZUGFeRD
                     //if (EmailForm.Zugferd)
                     //{
@@ -708,6 +709,9 @@ namespace mInvoice.Controllers
                     //}
                     //else
                     //{
+
+                    #endregion
+
                     att1 = new Attachment(_pdf_output_file);
                     att1.Name = Path.GetFileName(EmailForm.Attachment);
                     msg.Attachments.Add(att1);
@@ -728,7 +732,8 @@ namespace mInvoice.Controllers
                             + (_now.Day.ToString().Length == 1 ? "0" + _now.Day.ToString() : _now.Day.ToString())
                             + (_now.Hour.ToString().Length == 1 ? "0" + _now.Hour.ToString() : _now.Hour.ToString())
                             + (_now.Minute.ToString().Length == 1 ? "0" + _now.Minute.ToString() : _now.Minute.ToString())
-                             + "_email_"
+                            + "_email_"
+                            + "_em_" + EmailForm.To.Replace(".", "___") + "_em_"
                             + ".pdf"
                             );
 
@@ -969,6 +974,8 @@ namespace mInvoice.Controllers
 
         public ActionResult Archive(int? id)
         {
+            string _email = null;
+
             if (Session["client_id"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -1003,6 +1010,10 @@ namespace mInvoice.Controllers
                 string _filename = Path.GetFileNameWithoutExtension(_file);
                 Models.Archive.archiveType _type = Models.Archive.archiveType.Unknown;
 
+                // ...._em_dnepr65@gmail.com_em_.....
+
+               _email = mInvoice.Helpers.Utilities.getSearchedStringFromStringBetween2Target("_em_", _filename);
+                
                 if (_filename.Contains("email"))
                     _type = Models.Archive.archiveType.Mail;
                 else if (_filename.Contains("print"))
@@ -1016,6 +1027,7 @@ namespace mInvoice.Controllers
                         , Path.GetFileName(_file).Replace(".pdf", "")
                         , System.IO.File.GetCreationTime(_file)
                         , _type
+                        , _email != null ? _email.Replace("___", ".") : null
                     ));
             }
             return View(_list.OrderByDescending(p => p.CreateDate));

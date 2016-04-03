@@ -23,12 +23,17 @@ namespace mInvoice.Models
         [Display(Name = "type", ResourceType = typeof(Resource))]
         public archiveType Type { get; set; }
 
-        public Archive(string FilePath, string FileName, DateTime CreateDate, archiveType ArchiveType)
+        [Display(Name = "email", ResourceType = typeof(Resource))]
+        public string Email { get; set; }
+
+        public Archive(string FilePath, string FileName, DateTime CreateDate, archiveType ArchiveType, string Email)
         {
             this.Id = FileName;
             this.FilePath = FilePath;            
             this.CreateDate = CreateDate;
             this.Type = ArchiveType;
+            this.Email = Email;
+
         }
 
        

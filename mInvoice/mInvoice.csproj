@@ -259,6 +259,7 @@
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\FlashHelpers.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Migrations\201601141917262_Init.cs" />
     <Compile Include="Migrations\201601141917262_Init.Designer.cs">
@@ -380,7 +381,9 @@
     <Content Include="Content\jquery-filestyle.css" />
     <Content Include="Content\jquery-filestyle.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
+    <EmbeddedResource Include="favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
