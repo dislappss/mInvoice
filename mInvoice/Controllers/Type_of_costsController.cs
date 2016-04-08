@@ -7,7 +7,7 @@ using mInvoice.Models;
 
 namespace mInvoice.Controllers
 {
-    public class Type_of_costsController : Controller
+    public class Type_of_costsController : BaseController
     {
         private myinvoice_dbEntities db = new myinvoice_dbEntities();
 
